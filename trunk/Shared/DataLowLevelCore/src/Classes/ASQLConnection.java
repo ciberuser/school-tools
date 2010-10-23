@@ -7,22 +7,32 @@ public class ASQLConnection {
 	protected String m_password;
 	protected String m_connectionString;
 	
-	public String getM_username() {
+	public ASQLConnection(){}
+	
+	public ASQLConnection(String username,String password,String connectionString )
+	{
+		setUsername(username);
+		setPassword(password);
+		setConnectionString(connectionString);
+	}
+	
+	
+	public String getUsername() {
 		return m_username;
 	}
-	public void setM_username(String m_username) {
+	public void setUsername(String m_username) {
 		this.m_username = m_username;
 	}
-	public String getM_password() {
+	public String getPassword() {
 		return m_password;
 	}
-	public void setM_password(String m_password) {
+	public void setPassword(String m_password) {
 		this.m_password = m_password;
 	}
-	public String getM_connectionString() {
+	public String getConnectionString() {
 		return m_connectionString;
 	}
-	public void setM_connectionString(String string) {
+	public void setConnectionString(String string) {
 		m_connectionString = string;
 	}
 	
