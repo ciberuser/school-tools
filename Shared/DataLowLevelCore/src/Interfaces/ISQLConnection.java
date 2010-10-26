@@ -7,6 +7,7 @@ public interface ISQLConnection {
 
 	Connection GetConnection();
 	void Connect();
+	void Close();
 	void Connect(String connectionString,String userName,String Password);
 	void Connect(String userName,String Password);
 	void Reconnect(String userName,String Password);
