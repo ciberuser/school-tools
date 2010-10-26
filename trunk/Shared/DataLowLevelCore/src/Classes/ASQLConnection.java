@@ -1,21 +1,34 @@
 package Classes;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 
 public class ASQLConnection {
 	
-	protected String m_username;
-	protected String m_password;
-	protected String m_connectionString;
+	
 	
 	public ASQLConnection(){}
 	
-	public ASQLConnection(String username,String password,String connectionString )
+	public ASQLConnection(String username,String password,String connectionString ) 
 	{
 		setUsername(username);
 		setPassword(password);
 		setConnectionString(connectionString);
+		
 	}
 	
+	protected void Connect()throws Exception
+	{
+		if (getConnectionString().isEmpty() || getUsername().isEmpty() || getPassword().isEmpty()) throw (new Exception("check connection string ,user name and password "));
+		m_connection = DriverManager.getConnection(getConnectionString(),getUsername() ,getPassword());
+	}
+	
+	protected void Close() throws SQLException
+	{
+		m_connection.close();
+	}
 	
 	public String getUsername() {
 		return m_username;
@@ -36,6 +49,10 @@ public class ASQLConnection {
 		m_connectionString = string;
 	}
 	
+	protected String m_username;
+	protected String m_password;
+	protected String m_connectionString;
+	protected Connection m_connection; 
 
 	
 }
