@@ -22,6 +22,7 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 	
 		try 
 		{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			super.Connect();
 		}
 		catch (Exception ex) {
