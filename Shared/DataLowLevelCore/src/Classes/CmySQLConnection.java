@@ -40,15 +40,14 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 		super.setUsername(userName);
 		super.setPassword(Password);
 		Connect();
-		
-		
-		
+
 	}
 
 	@Override
 	public void Connect(String userName, String Password) {
-		// TODO Auto-generated method stub
-		
+		super.setUsername(userName);
+		super.setPassword(Password);
+		Connect();
 	}
 
 	@Override
@@ -64,30 +63,22 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 	}
 
 	@Override
-	public Connection GetConnection() {
-		// TODO Auto-generated method stub
-		return null;
+	public Connection GetConnection() 
+	{
+		return super.getConnection();
 	}
 
-	@Override
-	public void LoadDriver(String driver) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void Reconnect(String userName, String Password) {
 		// TODO Auto-generated method stub
-		
+		Connect(userName,Password);
 	}
 
-	@Override
-	public void SetDriver(String driver) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
-	@Override
+	
 	public void Close() 
 	{
 		try
