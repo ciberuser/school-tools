@@ -12,8 +12,6 @@ public interface ISQLConnection {
 	void Connect(String userName,String Password);
 	void Reconnect(String userName,String Password);
 	
-	void SetDriver(String driver);
-	void LoadDriver(String driver);
 	ResultSet ExcuteQurey(String sqlQurey);
 	ResultSet ExcuteStoredProcedures(String procdureName);
 	

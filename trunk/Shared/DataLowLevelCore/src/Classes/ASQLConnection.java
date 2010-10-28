@@ -16,18 +16,18 @@ public class ASQLConnection {
 		setUsername(username);
 		setPassword(password);
 		setConnectionString(connectionString);
-		
 	}
 	
 	protected void Connect()throws Exception
 	{
 		if (getConnectionString().isEmpty() || getUsername().isEmpty() || getPassword().isEmpty()) throw (new Exception("check connection string ,user name and password "));
-		m_connection = DriverManager.getConnection(getConnectionString(),getUsername() ,getPassword());
+		setM_connection(DriverManager.getConnection(getConnectionString(),getUsername() ,getPassword()));
 	}
+	
 	
 	protected void Close() throws SQLException
 	{
-		m_connection.close();
+		getConnection().close();
 	}
 	
 	public String getUsername() {
@@ -45,6 +45,15 @@ public class ASQLConnection {
 	public String getConnectionString() {
 		return m_connectionString;
 	}
+	
+	private void setM_connection(Connection m_connection) {
+		this.m_connection = m_connection;
+	}
+
+	protected Connection getConnection() {
+		return m_connection;
+	}
+
 	public void setConnectionString(String string) {
 		m_connectionString = string;
 	}
@@ -52,7 +61,7 @@ public class ASQLConnection {
 	protected String m_username;
 	protected String m_password;
 	protected String m_connectionString;
-	protected Connection m_connection; 
+	private Connection m_connection; 
 
 	
 }
