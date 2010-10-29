@@ -5,9 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import Interfaces.*;
 
+
+
 public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 {
-
+	final String  DRIVER_STRING = "com.mysql.jdbc.Driver";
 	public CmySQLConnection(){}
 	
 	public CmySQLConnection(String userName,String password,String connectionString) throws SQLException
@@ -15,6 +17,10 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 		super(userName,password,connectionString);
 	}
 	
+	public CmySQLConnection(String connectionString)
+	{
+		super(connectionString);
+	}
 	
 	@Override
 	public void Connect() {
@@ -22,7 +28,7 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 	
 		try 
 		{
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName(DRIVER_STRING).newInstance();
 			super.Connect();
 		}
 		catch (Exception ex) {
@@ -51,15 +57,14 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 	}
 
 	@Override
-	public ResultSet ExcuteQurey(String sqlQurey) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultSet ExcuteQurey(String sqlQurey) throws SQLException {
+		return super.ExcuteQurey(sqlQurey);
 	}
 
-	@Override
-	public ResultSet ExcuteStoredProcedures(String procdureName) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ResultSet ExcuteStoredProceduresOutParm(String procdureName,int[] dataType) throws Exception
+	{
+		return super.ExcuteStoredProceduresOutParm(procdureName,dataType);
 	}
 
 	@Override
@@ -77,7 +82,6 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 	}
 
 	
-
 	
 	public void Close() 
 	{
@@ -92,5 +96,11 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 		}
 		
 		}
+
+	@Override
+	public ResultSet ExcuteStoredProceduresInParm(String procdureName,Object[] dataType) throws Exception {
+		
+		return super.ExcuteStoredProceduresInParm(procdureName,dataType);
+	}
 
 }

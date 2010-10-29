@@ -1,6 +1,8 @@
 package Interfaces;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 
 public interface ISQLConnection {
@@ -12,7 +14,8 @@ public interface ISQLConnection {
 	void Connect(String userName,String Password);
 	void Reconnect(String userName,String Password);
 	
-	ResultSet ExcuteQurey(String sqlQurey);
-	ResultSet ExcuteStoredProcedures(String procdureName);
-	
+	ResultSet ExcuteQurey(String sqlQurey) throws SQLException;
+	ResultSet ExcuteStoredProceduresOutParm(String procdureName,int[] dataType) throws Exception;
+	ResultSet ExcuteStoredProceduresInParm(String procdureName,Object[] dataType) throws Exception;
 }
+
