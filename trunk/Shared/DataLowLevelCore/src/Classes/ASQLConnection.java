@@ -37,6 +37,14 @@ public class ASQLConnection {
 		setConnection(DriverManager.getConnection(getConnectionString(),getUsername() ,getPassword()));
 	}
 
+	protected void Connect(String connectionString,String userName, String Password) throws Exception
+	{
+		setConnectionString(connectionString);
+		setUsername(userName);
+		setPassword(Password);
+		Connect();
+	}
+	
 	private String questionMarkReturn(int parmNumber)
 	{
 		String returnString = "";
@@ -88,10 +96,6 @@ public class ASQLConnection {
 				if (dataType[i] instanceof Integer )
 				{
 					cs.setInt(i+1, (int)(Integer)dataType[i]);
-				}
-				if (dataType[i] instanceof Byte);
-				{
-					cs.setByte(i+1, (Byte)dataType[i]);
 				}
 				if (dataType[i] instanceof Boolean)
 				{

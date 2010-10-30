@@ -1,5 +1,8 @@
 package DataCoreSrc;
 import java.util.HashMap;
+
+import com.apple.mrj.macos.carbon.CarbonAccess;
+
 import Classes.*;
 
 
@@ -22,12 +25,18 @@ public class CDataCoreAppi
 	
 	public DataBaseType SetSQLTarget(EDataBaseType databaseType,String databaseURL) throws Exception
 	{
+		DataBaseType temp = null;
 		switch (databaseType)
 		{
+			
 			case eMYSQL:
-			DataBaseType temp = new DataBaseType(new CmySQLConnection(databaseURL),databaseType,databaseURL);
-			m_SQLTarget.put(databaseURL,temp);
-			return GetSQLTarget(databaseURL);
+				temp = new DataBaseType(new CmySQLConnection(databaseURL),databaseType,databaseURL);
+				m_SQLTarget.put(databaseURL,temp);
+				return GetSQLTarget(databaseURL);
+			case eACCESS:
+				temp = new DataBaseType(new CAccessSQLConnection(databaseURL),databaseType,databaseURL);
+				m_SQLTarget.put(databaseURL,temp);
+				return GetSQLTarget(databaseURL);
 			default:
 				throw (new Exception("not supported yet"));
 		}

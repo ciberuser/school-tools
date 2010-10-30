@@ -3,43 +3,53 @@ package Classes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Interfaces.*;
 
+import Interfaces.ISQLConnection;
 
+public class CAccessSQLConnection extends ASQLConnection implements ISQLConnection {
 
-public class CmySQLConnection extends ASQLConnection implements ISQLConnection
-{
-	final String  DRIVER_STRING = "com.mysql.jdbc.Driver";
-	public CmySQLConnection(){}
+	final String  DRIVER_STRING = "sun.jdbc.odbc.JdbcOdbcDriver";
+		
+	public CAccessSQLConnection(){}
 	
-	public CmySQLConnection(String userName,String password,String connectionString) throws SQLException
+	public CAccessSQLConnection(String userName,String password,String connectionString)
 	{
 		super(userName,password,connectionString);
 	}
 	
-	public CmySQLConnection(String connectionString)
+	public CAccessSQLConnection(String connectionString)
 	{
 		super(connectionString);
 	}
 	
+	public void Close()  {
+		try
+		{
+			super.Close();
+		}	 catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void Connect() {
-		// TODO Auto-generated method stub
-	
 		try 
 		{
 			Class.forName(DRIVER_STRING).newInstance();
 			super.Connect();
 		}
 		catch (Exception ex) {
-			// TODO Auto-generated catch block
+			
 			ex.printStackTrace();
 		}
+
 	}
 
 	@Override
 	public void Connect(String connectionString, String userName,
-			String Password)
+			String Password) 
 	{
 		super.setConnectionString(connectionString);
 		super.setUsername(userName);
@@ -60,45 +70,28 @@ public class CmySQLConnection extends ASQLConnection implements ISQLConnection
 		return super.ExcuteQurey(sqlQurey);
 	}
 
-	
-	public ResultSet ExcuteStoredProceduresOutParm(String procdureName,int[] dataType) throws Exception
-	{
-		return super.ExcuteStoredProceduresOutParm(procdureName,dataType);
+	@Override
+	public ResultSet ExcuteStoredProceduresInParm(String procdureName,
+			Object[] dataType) throws Exception {
+		throw (new Exception("can't implmented in Access..."));
+		
 	}
 
 	@Override
-	public Connection GetConnection() 
-	{
-		return super.getConnection();
+	public ResultSet ExcuteStoredProceduresOutParm(String procdureName,
+			int[] dataType) throws Exception {
+		throw (new Exception("can't implmented in Access..."));
 	}
 
-	
+	@Override
+	public Connection GetConnection() {
+		return super.getConnection();
+	}
 
 	@Override
 	public void Reconnect(String userName, String Password) {
 		Connect(userName,Password);
-	}
 
-	
-	
-	public void Close() 
-	{
-		try
-		{
-			super.Close();	
-		}
-		
-		catch(SQLException ex)
-		{
-			
-		}
-		
-		}
-
-	@Override
-	public ResultSet ExcuteStoredProceduresInParm(String procdureName,Object[] dataType) throws Exception {
-		
-		return super.ExcuteStoredProceduresInParm(procdureName,dataType);
 	}
 
 }
