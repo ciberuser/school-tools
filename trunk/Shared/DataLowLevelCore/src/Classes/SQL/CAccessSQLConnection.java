@@ -1,4 +1,4 @@
-package Classes;
+package Classes.SQL;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

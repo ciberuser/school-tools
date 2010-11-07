@@ -1,4 +1,4 @@
-package Classes;
+package Classes.SQL;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
-import com.sun.org.apache.xml.internal.security.encryption.Reference;
 
 
 
