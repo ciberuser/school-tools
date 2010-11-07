@@ -1,9 +1,9 @@
 package DataCoreSrc;
 import java.util.HashMap;
 
-import com.apple.mrj.macos.carbon.CarbonAccess;
 
-import Classes.*;
+import Classes.SQL.CAccessSQLConnection;
+import Classes.SQL.CmySQLConnection;
 
 
 public class CDataCoreAppi
