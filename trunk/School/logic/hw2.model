@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE focus-model [
+<!ELEMENT focus-model (attribute*,restriction*)>
+<!ELEMENT attribute (value*,attr-coding*)>
+<!ATTLIST attribute
+ name CDATA #REQUIRED
+ type CDATA "int">
+<!ELEMENT value EMPTY>
+<!ATTLIST value
+ name CDATA #REQUIRED>
+<!ELEMENT attr-coding (coding-info,case*)>
+<!ELEMENT coding-info EMPTY>
+<!ATTLIST coding-info
+ language CDATA #REQUIRED
+ attr-type CDATA #REQUIRED
+ attr-exp CDATA #REQUIRED
+ group-num CDATA "1">
+<!ELEMENT case (value*)>
+<!ATTLIST case
+ case-exp CDATA #REQUIRED
+ case-print CDATA #IMPLIED>
+<!ELEMENT restriction EMPTY>
+<!ATTLIST restriction
+ name CDATA ""
+ type (Allowed|NotAllowed) "NotAllowed"
+ expression CDATA #REQUIRED>
+ ]>
+
+<!---->
+<focus-model manual="true" inputOutput="false">
+  <attribute name="State1" type="STRING" iotype="NEITHER" description="">
+    <value name="idle" description=""/>
+    <value name="running" description=""/>
+    <value name="running_backup" description=""/>
+  </attribute>
+  <attribute name="failReasons1" type="STRING" iotype="NEITHER" description="">
+    <value name="hardware" description=""/>
+    <value name="software" description=""/>
+    <value name="backup" description=""/>
+    <value name="notFail" description=""/>
+  </attribute>
+  <attribute name="state2" type="STRING" iotype="NEITHER" description="">
+    <value name="idle" description=""/>
+    <value name="running" description=""/>
+    <value name="runingBackup" description=""/>
+  </attribute>
+  <attribute name="failReasons2" type="STRING" iotype="NEITHER" description="">
+    <value name="hardware" description=""/>
+    <value name="software" description=""/>
+    <value name="backup" description=""/>
+    <value name="notFailed" description=""/>
+  </attribute>
+</focus-model>
