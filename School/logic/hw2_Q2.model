@@ -39,19 +39,10 @@
     <value name="backup" description=""/>
     <value name="notFail" description=""/>
   </attribute>
-  <attribute name="state2" type="STRING" iotype="NEITHER" description="">
-    <value name="idle" description=""/>
-    <value name="running" description=""/>
-    <value name="runingBackup" description=""/>
-  </attribute>
-  <attribute name="failReasons2" type="STRING" iotype="NEITHER" description="">
-    <value name="hardware" description=""/>
-    <value name="software" description=""/>
-    <value name="backup" description=""/>
-    <value name="notFailed" description=""/>
+  <attribute name="OS" type="STRING" iotype="NEITHER" description="">
+    <value name="windows" description=""/>
+    <value name="linux" description=""/>
   </attribute>
   <restriction name="" type="NotAllowed" expression="State1.equals(&#34;idle&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
   <restriction name="" type="NotAllowed" expression="State1.equals(&#34;running&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
-  <restriction name="" type="NotAllowed" expression="state2.equals(&#34;running&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
-  <restriction name="" type="NotAllowed" expression="state2.equals(&#34;idle&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
 </focus-model>
