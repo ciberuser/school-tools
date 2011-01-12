@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2010-12-18T23:56:06">
+<FamilysTbl>
+<FamilyID>9</FamilyID>
+<FamilyName>sharifi</FamilyName>
+<Address>haifa</Address>
+<PhoneNumber>0524452185</PhoneNumber>
+<Sector>ערבי</Sector>
+<Active>0</Active>
+<FamilyMembersTbl>
+<MemberID>13</MemberID>
+<DOB>1985-11-23T00:00:00</DOB>
+<Gender>man</Gender>
+<FirstName>dudi</FirstName>
+<SureName>shapira</SureName>
+<Fk_FamilyID>9</Fk_FamilyID>
+</FamilyMembersTbl>
+<FamilyMembersTbl>
+<MemberID>14</MemberID>
+<DOB>2010-11-02T00:00:00</DOB>
+<Gender>man</Gender>
+<FirstName>or</FirstName>
+<SureName>sharif</SureName>
+<Fk_FamilyID>9</Fk_FamilyID>
+</FamilyMembersTbl>
+</FamilysTbl>
+</dataroot>
