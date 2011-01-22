@@ -28,7 +28,13 @@
 
 <!---->
 <focus-model manual="true" inputOutput="false">
-  <attribute name="State1" type="STRING" iotype="NEITHER" description="">
+  <attribute name="CasesOfFailures" type="STRING" iotype="NEITHER" description="">
+    <value name="None" description=""/>
+    <value name="1_Failure_on_one_machine" description=""/>
+    <value name="2_Failures_on_different_machines" description=""/>
+    <value name="2_Failures_on_the_same_machine" description=""/>
+  </attribute>
+  <attribute name="SystemState1" type="STRING" iotype="NEITHER" description="">
     <value name="idle" description=""/>
     <value name="running" description=""/>
     <value name="running_backup" description=""/>
@@ -37,21 +43,26 @@
     <value name="hardware" description=""/>
     <value name="software" description=""/>
     <value name="backup" description=""/>
-    <value name="notFail" description=""/>
+    <value name="N/A" description=""/>
   </attribute>
-  <attribute name="state2" type="STRING" iotype="NEITHER" description="">
+  <attribute name="SystemState2" type="STRING" iotype="NEITHER" description="">
     <value name="idle" description=""/>
     <value name="running" description=""/>
     <value name="runingBackup" description=""/>
+    <value name="N/A" description=""/>
   </attribute>
   <attribute name="failReasons2" type="STRING" iotype="NEITHER" description="">
     <value name="hardware" description=""/>
     <value name="software" description=""/>
     <value name="backup" description=""/>
-    <value name="notFailed" description=""/>
+    <value name="N/A" description=""/>
   </attribute>
-  <restriction name="" type="NotAllowed" expression="State1.equals(&#34;idle&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
-  <restriction name="" type="NotAllowed" expression="State1.equals(&#34;running&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
-  <restriction name="" type="NotAllowed" expression="state2.equals(&#34;running&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
-  <restriction name="" type="NotAllowed" expression="state2.equals(&#34;idle&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
+  <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;None&#34;) &#38;&#38; ( !failReasons1.equals(&#34;N/A&#34;) || !failReasons2.equals(&#34;N/A&#34;)|| !SystemState2.equals(&#34;N/A&#34;)  )"/>
+  <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;1_Failure_on_one_machine&#34;) &#38;&#38; ( failReasons1.equals(&#34;N/A&#34;) || !failReasons2.equals(&#34;N/A&#34;)|| !SystemState2.equals(&#34;N/A&#34;) )"/>
+  <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;2_Failures_on_different_machines&#34;) &#38;&#38;( failReasons1.equals(&#34;N/A&#34;) || failReasons2.equals(&#34;N/A&#34;)|| SystemState2.equals(&#34;N/A&#34;)  )"/>
+  <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;2_Failures_on_the_same_machine&#34;) &#38;&#38;( failReasons1.equals(&#34;N/A&#34;) || failReasons2.equals(&#34;N/A&#34;)|| !SystemState2.equals(&#34;N/A&#34;)  )"/>
+  <restriction name="" type="NotAllowed" expression="SystemState1.equals(&#34;idle&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
+  <restriction name="" type="NotAllowed" expression="SystemState1.equals(&#34;running&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
+  <restriction name="" type="NotAllowed" expression="SystemState2.equals(&#34;running&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
+  <restriction name="" type="NotAllowed" expression="SystemState2.equals(&#34;idle&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;)"/>
 </focus-model>
