@@ -43,6 +43,7 @@
     <value name="hardware_failure" description=""/>
     <value name="software_failure" description=""/>
     <value name="backup_failure" description=""/>
+    <value name="no_failure" description=""/>
   </attribute>
   <restriction name="" type="NotAllowed" expression="!SystemState.equals(&#34;running_backup&#34;) &#38;&#38; FailReasons.equals(&#34;backup_failure&#34;)"/>
 </focus-model>
