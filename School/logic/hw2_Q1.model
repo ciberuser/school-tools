@@ -64,4 +64,5 @@
   <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;1_Failure_on_one_machine&#34;) &#38;&#38; !SystemState1.equals(&#34;running_backup&#34;) &#38;&#38; failReasons1.equals(&#34;backup&#34;)"/>
   <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;2_Failures_on_the_same_machine&#34;) &#38;&#38; !SystemState1.equals(&#34;running_backup&#34;) &#38;&#38; ( failReasons1.equals(&#34;backup&#34;) ||  failReasons2.equals(&#34;backup&#34;))"/>
   <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;2_Failures_on_different_machines&#34;) &#38;&#38; ( ( !SystemState1.equals(&#34;running_backup&#34;) &#38;&#38;  failReasons1.equals(&#34;backup&#34;) ) || ( !SystemState2.equals(&#34;running_backup&#34;) &#38;&#38; failReasons2.equals(&#34;backup&#34;) ) )"/>
+  <restriction name="" type="NotAllowed" expression="CasesOfFailures.equals(&#34;2_Failures_on_the_same_machine&#34;) &#38;&#38;  failReasons1.equals(failReasons2.toString())"/>
 </focus-model>
