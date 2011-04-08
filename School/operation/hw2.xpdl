@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="Reception" Name="קבלת מועמד" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>Together</Vendor>
+        <Created>2011-04-08 19:35:32</Created>
+    </PackageHeader>
+    <Participants>
+        <Participant Id="classhead" Name="ראש חוג">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+    </Participants>
+    <WorkflowProcesses>
+        <WorkflowProcess Id="Reception_wp1" Name="Reception_wp1">
+            <ProcessHeader>
+                <Created>2011-04-08 20:15:12</Created>
+            </ProcessHeader>
+            <Participants>
+                <Participant Id="Reception_wp1_par1" Name="מועמד">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="Reception_wp1_par2" Name="ראש חוג">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="Reception_wp1_par3" Name="חבר סגל">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="Reception_wp1_act1" Name="הגשת קור&quot;ח">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par1</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act2" Name="רשימת פרסומים">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par1</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act3" Name="שמות של ממליצים">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par1</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act4" Name="הצהרת הוראה">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par1</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act5" Name="AND">
+                    <Route/>
+                    <SimulationInformation Instantiation="MULTIPLE">
+                        <Cost/>
+                        <TimeEstimation/>
+                    </SimulationInformation>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="AND"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="k"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reception_wp1_act6">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par2</Performer>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="Reception_wp1_act1" Id="Reception_wp1_tra1" To="Reception_wp1_act5"/>
+                <Transition From="Reception_wp1_act2" Id="Reception_wp1_tra2" To="Reception_wp1_act5"/>
+                <Transition From="Reception_wp1_act3" Id="Reception_wp1_tra3" To="Reception_wp1_act5"/>
+                <Transition From="Reception_wp1_act4" Id="Reception_wp1_tra4" To="Reception_wp1_act5"/>
+            </Transitions>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+</Package>
