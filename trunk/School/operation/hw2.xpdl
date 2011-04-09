@@ -222,9 +222,9 @@
                         <TransitionRestriction>
                             <Split Type="XOR">
                                 <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra24"/>
                                     <TransitionRef Id="Reception_wp1_tra25"/>
                                     <TransitionRef Id="Reception_wp1_tra27"/>
+                                    <TransitionRef Id="Reception_wp1_tra24"/>
                                 </TransitionRefs>
                             </Split>
                         </TransitionRestriction>
@@ -374,7 +374,6 @@
                 <Transition From="Reception_wp1_act11" Id="Reception_wp1_tra19" To="Reception_wp1_act20"/>
                 <Transition From="Reception_wp1_act17" Id="Reception_wp1_tra21" To="Reception_wp1_act12"/>
                 <Transition From="Reception_wp1_act15" Id="Reception_wp1_tra22" To="Reception_wp1_act16"/>
-                <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra24" To="Reception_wp1_act23"/>
                 <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra25" To="Reception_wp1_act22"/>
                 <Transition From="Reception_wp1_act10" Id="Reception_wp1_tra23" To="Reception_wp1_act21"/>
                 <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra26" To="Reception_wp1_act24"/>
@@ -395,6 +394,7 @@
                 <Transition From="Reception_wp1_act22" Id="Reception_wp1_tra31" To="Reception_wp1_act30"/>
                 <Transition From="Reception_wp1_act30" Id="Reception_wp1_tra38" To="Reception_wp1_act29"/>
                 <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra39" To="Reception_wp1_act12"/>
+                <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra24" To="Reception_wp1_act23"/>
             </Transitions>
         </WorkflowProcess>
         <WorkflowProcess Id="estimation_wp1" Name="החלטת חבר סגל">
