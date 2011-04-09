@@ -111,7 +111,7 @@
                     <Implementation>
                         <No/>
                     </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
+                    <Performer>Reception_wp1_par1</Performer>
                 </Activity>
                 <Activity Id="Reception_wp1_act14" Name="XOR">
                     <Route/>
@@ -241,6 +241,16 @@
                         <No/>
                     </Implementation>
                     <Performer>Reception_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Reception_wp1_tra29"/>
+                                    <TransitionRef Id="Reception_wp1_tra28"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="Reception_wp1_act21" Name="ראיון">
                     <Implementation>
@@ -264,30 +274,6 @@
                     <TransitionRestrictions>
                         <TransitionRestriction>
                             <Join Type="AND"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act25" Name="AND">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="AND"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act26" Name="הערכת סמינר">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra31"/>
-                                    <TransitionRef Id="Reception_wp1_tra40"/>
-                                </TransitionRefs>
-                            </Split>
                         </TransitionRestriction>
                     </TransitionRestrictions>
                 </Activity>
@@ -334,14 +320,6 @@
                     </Implementation>
                     <Performer>Reception_wp1_par3</Performer>
                 </Activity>
-                <Activity Id="Reception_wp1_act33">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
                 <Activity Id="Reception_wp1_act34" Name="הכנת המלצה">
                     <Implementation>
                         <SubFlow Id="recommendation_wp1"/>
@@ -353,8 +331,8 @@
                         <TransitionRestriction>
                             <Split Type="XOR">
                                 <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra44"/>
                                     <TransitionRef Id="Reception_wp1_tra43"/>
+                                    <TransitionRef Id="Reception_wp1_tra39"/>
                                 </TransitionRefs>
                             </Split>
                         </TransitionRestriction>
@@ -401,25 +379,22 @@
                 <Transition From="Reception_wp1_act10" Id="Reception_wp1_tra23" To="Reception_wp1_act21"/>
                 <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra26" To="Reception_wp1_act24"/>
                 <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra27" To="Reception_wp1_act24"/>
-                <Transition From="Reception_wp1_act23" Id="Reception_wp1_tra28" To="Reception_wp1_act25"/>
-                <Transition From="Reception_wp1_act22" Id="Reception_wp1_tra29" To="Reception_wp1_act25"/>
-                <Transition From="Reception_wp1_act25" Id="Reception_wp1_tra30" To="Reception_wp1_act26"/>
-                <Transition From="Reception_wp1_act26" Id="Reception_wp1_tra31" To="Reception_wp1_act10"/>
                 <Transition From="Reception_wp1_act24" Id="Reception_wp1_tra32" To="Reception_wp1_act27"/>
                 <Transition From="Reception_wp1_act28" Id="Reception_wp1_tra33" To="Reception_wp1_act27"/>
                 <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra34" To="Reception_wp1_act31"/>
                 <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra35" To="Reception_wp1_act32"/>
                 <Transition From="Reception_wp1_act31" Id="Reception_wp1_tra36" To="Reception_wp1_act30"/>
                 <Transition From="Reception_wp1_act32" Id="Reception_wp1_tra37" To="Reception_wp1_act30"/>
-                <Transition From="Reception_wp1_act27" Id="Reception_wp1_tra38" To="Reception_wp1_act33"/>
-                <Transition From="Reception_wp1_act30" Id="Reception_wp1_tra39" To="Reception_wp1_act33"/>
-                <Transition From="Reception_wp1_act26" Id="Reception_wp1_tra40" To="Reception_wp1_act33"/>
-                <Transition From="Reception_wp1_act33" Id="Reception_wp1_tra41" To="Reception_wp1_act29"/>
                 <Transition From="Reception_wp1_act29" Id="Reception_wp1_tra42" To="Reception_wp1_act35"/>
                 <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra43" To="Reception_wp1_act34"/>
-                <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra44" To="Reception_wp1_act12"/>
                 <Transition From="Reception_wp1_act34" Id="Reception_wp1_tra45" To="Reception_wp1_act36"/>
                 <Transition From="Reception_wp1_act36" Id="Reception_wp1_tra46" To="Reception_wp1_act37"/>
+                <Transition From="Reception_wp1_act23" Id="Reception_wp1_tra28" To="Reception_wp1_act30"/>
+                <Transition From="Reception_wp1_act23" Id="Reception_wp1_tra29" To="Reception_wp1_act10"/>
+                <Transition From="Reception_wp1_act27" Id="Reception_wp1_tra30" To="Reception_wp1_act30"/>
+                <Transition From="Reception_wp1_act22" Id="Reception_wp1_tra31" To="Reception_wp1_act30"/>
+                <Transition From="Reception_wp1_act30" Id="Reception_wp1_tra38" To="Reception_wp1_act29"/>
+                <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra39" To="Reception_wp1_act12"/>
             </Transitions>
         </WorkflowProcess>
         <WorkflowProcess Id="estimation_wp1" Name="החלטת חבר סגל">
