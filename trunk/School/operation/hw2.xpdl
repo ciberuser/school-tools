@@ -25,7 +25,7 @@
                 <Participant Id="Reception_wp1_par2" Name="ראש חוג">
                     <ParticipantType Type="HUMAN"/>
                 </Participant>
-                <Participant Id="Reception_wp1_par3" Name="חבר סגל">
+                <Participant Id="Reception_wp1_par3" Name="חברh סגל">
                     <ParticipantType Type="ROLE"/>
                 </Participant>
                 <Participant Id="Reception_wp1_par4" Name="אחראית סמנרים">
@@ -78,28 +78,11 @@
                     </Implementation>
                     <Performer>Reception_wp1_par2</Performer>
                 </Activity>
-                <Activity Id="Reception_wp1_act7" Name="ISI Journal Citation Report">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                </Activity>
                 <Activity Id="Reception_wp1_act8" Name="בדיקה הערכה">
                     <Implementation>
                         <No/>
                     </Implementation>
                     <Performer>Reception_wp1_par2</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra8"/>
-                                    <TransitionRef Id="Reception_wp1_tra11"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="Reception_wp1_act9" Name="שליחת מייל לחברי סגל">
                     <Implementation>
@@ -107,188 +90,13 @@
                     </Implementation>
                     <Performer>Reception_wp1_par2</Performer>
                 </Activity>
-                <Activity Id="Reception_wp1_act13" Name="הזמנה לזימון">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par1</Performer>
-                </Activity>
-                <Activity Id="Reception_wp1_act14" Name="XOR">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra12"/>
-                                    <TransitionRef Id="Reception_wp1_tra16"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act15" Name="זימון לסמינר">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act17" Name="דחייה">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                </Activity>
-                <Activity Id="Reception_wp1_act18" Name="XOR">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra17"/>
-                                    <TransitionRef Id="Reception_wp1_tra18"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act19" Name="AND">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra13"/>
-                                    <TransitionRef Id="Reception_wp1_tra20"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act20" Name="תהליך החלטת חבר סגל">
-                    <Implementation>
-                        <SubFlow Execution="ASYNCHR" Id="estimation_wp1"/>
-                    </Implementation>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act10" Name="זימון לראיון">
-                    <Implementation>
-                        <SubFlow Id="invitation_wp2"/>
-                    </Implementation>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act11" Name="AND">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="AND">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra15"/>
-                                    <TransitionRef Id="Reception_wp1_tra19"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
                 <Activity Id="Reception_wp1_act12" Name="קבלת הודעת דחיה">
                     <Implementation>
                         <No/>
                     </Implementation>
                     <Performer>Reception_wp1_par1</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act16" Name="מתן סמינר">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par1</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra25"/>
-                                    <TransitionRef Id="Reception_wp1_tra27"/>
-                                    <TransitionRef Id="Reception_wp1_tra24"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act22" Name="התרשמות מסמינר">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par3</Performer>
-                </Activity>
-                <Activity Id="Reception_wp1_act23" Name="התרשמות מסמינר">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra29"/>
-                                    <TransitionRef Id="Reception_wp1_tra28"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act21" Name="ראיון">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par1</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="XOR">
-                                <TransitionRefs>
-                                    <TransitionRef Id="Reception_wp1_tra26"/>
-                                    <TransitionRef Id="Reception_wp1_tra34"/>
-                                    <TransitionRef Id="Reception_wp1_tra35"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act24" Name="AND">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="AND"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="Reception_wp1_act27" Name="קריאת מאמרי מועמד">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par3</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act28" Name="ISI Journal Citation Report">
                     <Implementation>
                         <No/>
                     </Implementation>
@@ -304,21 +112,9 @@
                     <Route/>
                     <TransitionRestrictions>
                         <TransitionRestriction>
-                            <Join Type="AND"/>
+                            <Join Type="XOR"/>
                         </TransitionRestriction>
                     </TransitionRestrictions>
-                </Activity>
-                <Activity Id="Reception_wp1_act31" Name="התרשמות מראיון">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par2</Performer>
-                </Activity>
-                <Activity Id="Reception_wp1_act32" Name="התרשמות מראיון">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>Reception_wp1_par3</Performer>
                 </Activity>
                 <Activity Id="Reception_wp1_act34" Name="הכנת המלצה">
                     <Implementation>
@@ -332,7 +128,7 @@
                             <Split Type="XOR">
                                 <TransitionRefs>
                                     <TransitionRef Id="Reception_wp1_tra43"/>
-                                    <TransitionRef Id="Reception_wp1_tra39"/>
+                                    <TransitionRef Id="Reception_wp1_tra17"/>
                                 </TransitionRefs>
                             </Split>
                         </TransitionRestriction>
@@ -350,6 +146,57 @@
                     </Implementation>
                     <Performer>Reception_wp1_par1</Performer>
                 </Activity>
+                <Activity Id="Reception_wp1_act25" Name="שימוש במאגר">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par2</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act7" Name="ניהול קבלת מועמד">
+                    <Implementation>
+                        <SubFlow Id="estimation_wp2"/>
+                    </Implementation>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Reception_wp1_tra11"/>
+                                    <TransitionRef Id="Reception_wp1_tra13"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="Reception_wp1_act10" Name="קבלת פרטי מועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par3</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act11" Name="התרשמות ממועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par3</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act13" Name="התרשמות מועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par2</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act14" Name="קבלת החלטה">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par3</Performer>
+                </Activity>
+                <Activity Id="Reception_wp1_act15" Name="דחית מועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Reception_wp1_par2</Performer>
+                </Activity>
             </Activities>
             <Transitions>
                 <Transition From="Reception_wp1_act1" Id="Reception_wp1_tra1" To="Reception_wp1_act5"/>
@@ -358,83 +205,26 @@
                 <Transition From="Reception_wp1_act4" Id="Reception_wp1_tra4" To="Reception_wp1_act5"/>
                 <Transition From="Reception_wp1_act5" Id="Reception_wp1_tra5" To="Reception_wp1_act6"/>
                 <Transition From="Reception_wp1_act6" Id="Reception_wp1_tra6" To="Reception_wp1_act8"/>
-                <Transition From="Reception_wp1_act7" Id="Reception_wp1_tra7" To="Reception_wp1_act8"/>
-                <Transition From="Reception_wp1_act8" Id="Reception_wp1_tra8" To="Reception_wp1_act9"/>
-                <Transition From="Reception_wp1_act8" Id="Reception_wp1_tra11" To="Reception_wp1_act7"/>
-                <Transition From="Reception_wp1_act13" Id="Reception_wp1_tra14" To="Reception_wp1_act14"/>
-                <Transition From="Reception_wp1_act14" Id="Reception_wp1_tra16" To="Reception_wp1_act18"/>
-                <Transition From="Reception_wp1_act18" Id="Reception_wp1_tra18" To="Reception_wp1_act15"/>
-                <Transition From="Reception_wp1_act18" Id="Reception_wp1_tra17" To="Reception_wp1_act19"/>
-                <Transition From="Reception_wp1_act19" Id="Reception_wp1_tra20" To="Reception_wp1_act15"/>
-                <Transition From="Reception_wp1_act9" Id="Reception_wp1_tra9" To="Reception_wp1_act20"/>
-                <Transition From="Reception_wp1_act14" Id="Reception_wp1_tra12" To="Reception_wp1_act17"/>
-                <Transition From="Reception_wp1_act19" Id="Reception_wp1_tra13" To="Reception_wp1_act10"/>
-                <Transition From="Reception_wp1_act20" Id="Reception_wp1_tra10" To="Reception_wp1_act11"/>
-                <Transition From="Reception_wp1_act11" Id="Reception_wp1_tra15" To="Reception_wp1_act13"/>
-                <Transition From="Reception_wp1_act11" Id="Reception_wp1_tra19" To="Reception_wp1_act20"/>
-                <Transition From="Reception_wp1_act17" Id="Reception_wp1_tra21" To="Reception_wp1_act12"/>
-                <Transition From="Reception_wp1_act15" Id="Reception_wp1_tra22" To="Reception_wp1_act16"/>
-                <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra25" To="Reception_wp1_act22"/>
-                <Transition From="Reception_wp1_act10" Id="Reception_wp1_tra23" To="Reception_wp1_act21"/>
-                <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra26" To="Reception_wp1_act24"/>
-                <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra27" To="Reception_wp1_act24"/>
-                <Transition From="Reception_wp1_act24" Id="Reception_wp1_tra32" To="Reception_wp1_act27"/>
-                <Transition From="Reception_wp1_act28" Id="Reception_wp1_tra33" To="Reception_wp1_act27"/>
-                <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra34" To="Reception_wp1_act31"/>
-                <Transition From="Reception_wp1_act21" Id="Reception_wp1_tra35" To="Reception_wp1_act32"/>
-                <Transition From="Reception_wp1_act31" Id="Reception_wp1_tra36" To="Reception_wp1_act30"/>
-                <Transition From="Reception_wp1_act32" Id="Reception_wp1_tra37" To="Reception_wp1_act30"/>
                 <Transition From="Reception_wp1_act29" Id="Reception_wp1_tra42" To="Reception_wp1_act35"/>
                 <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra43" To="Reception_wp1_act34"/>
                 <Transition From="Reception_wp1_act34" Id="Reception_wp1_tra45" To="Reception_wp1_act36"/>
                 <Transition From="Reception_wp1_act36" Id="Reception_wp1_tra46" To="Reception_wp1_act37"/>
-                <Transition From="Reception_wp1_act23" Id="Reception_wp1_tra28" To="Reception_wp1_act30"/>
-                <Transition From="Reception_wp1_act23" Id="Reception_wp1_tra29" To="Reception_wp1_act10"/>
-                <Transition From="Reception_wp1_act27" Id="Reception_wp1_tra30" To="Reception_wp1_act30"/>
-                <Transition From="Reception_wp1_act22" Id="Reception_wp1_tra31" To="Reception_wp1_act30"/>
                 <Transition From="Reception_wp1_act30" Id="Reception_wp1_tra38" To="Reception_wp1_act29"/>
-                <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra39" To="Reception_wp1_act12"/>
-                <Transition From="Reception_wp1_act16" Id="Reception_wp1_tra24" To="Reception_wp1_act23"/>
+                <Transition From="Reception_wp1_act8" Id="Reception_wp1_tra7" To="Reception_wp1_act25"/>
+                <Transition From="Reception_wp1_act25" Id="Reception_wp1_tra8" To="Reception_wp1_act9"/>
+                <Transition From="Reception_wp1_act9" Id="Reception_wp1_tra9" To="Reception_wp1_act10"/>
+                <Transition From="Reception_wp1_act10" Id="Reception_wp1_tra10" To="Reception_wp1_act7"/>
+                <Transition From="Reception_wp1_act7" Id="Reception_wp1_tra11" To="Reception_wp1_act11"/>
+                <Transition From="Reception_wp1_act11" Id="Reception_wp1_tra12" To="Reception_wp1_act27"/>
+                <Transition From="Reception_wp1_act7" Id="Reception_wp1_tra13" To="Reception_wp1_act13"/>
+                <Transition From="Reception_wp1_act13" Id="Reception_wp1_tra14" To="Reception_wp1_act30"/>
+                <Transition From="Reception_wp1_act27" Id="Reception_wp1_tra15" To="Reception_wp1_act14"/>
+                <Transition From="Reception_wp1_act14" Id="Reception_wp1_tra16" To="Reception_wp1_act30"/>
+                <Transition From="Reception_wp1_act35" Id="Reception_wp1_tra17" To="Reception_wp1_act15"/>
+                <Transition From="Reception_wp1_act15" Id="Reception_wp1_tra18" To="Reception_wp1_act12"/>
             </Transitions>
         </WorkflowProcess>
-        <WorkflowProcess Id="estimation_wp1" Name="החלטת חבר סגל">
-            <ProcessHeader>
-                <Created>2011-04-09 10:29:27</Created>
-            </ProcessHeader>
-            <Participants>
-                <Participant Id="estimation_wp1_par1">
-                    <ParticipantType Type="ROLE"/>
-                </Participant>
-                <Participant Id="estimation_wp1_par2" Name="חבר סגל">
-                    <ParticipantType Type="ROLE"/>
-                </Participant>
-            </Participants>
-            <Activities>
-                <Activity Id="estimation_wp1_act1" Name="קבלת מייל">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>estimation_wp1_par2</Performer>
-                </Activity>
-                <Activity Id="estimation_wp1_act2" Name="התרשמות ממועמד">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>estimation_wp1_par2</Performer>
-                </Activity>
-                <Activity Id="estimation_wp1_act3" Name="שליחת חוות דעת">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>estimation_wp1_par2</Performer>
-                </Activity>
-            </Activities>
-            <Transitions>
-                <Transition From="estimation_wp1_act1" Id="estimation_wp1_tra1" To="estimation_wp1_act2"/>
-                <Transition From="estimation_wp1_act2" Id="estimation_wp1_tra2" To="estimation_wp1_act3"/>
-            </Transitions>
-        </WorkflowProcess>
-        <WorkflowProcess Id="invitation_wp2" Name="זימון לראיון">
+        <WorkflowProcess Id="invitation_wp2" Name="ניהול ממליצים">
             <ProcessHeader>
                 <Created>2011-04-09 11:08:44</Created>
             </ProcessHeader>
@@ -442,10 +232,7 @@
                 <Participant Id="invitation_wp2_par1" Name="ראש חוג">
                     <ParticipantType Type="HUMAN"/>
                 </Participant>
-                <Participant Id="invitation_wp2_par2" Name="ממליץ">
-                    <ParticipantType Type="ROLE"/>
-                </Participant>
-                <Participant Id="invitation_wp2_par3" Name="אחראית סימנרים">
+                <Participant Id="invitation_wp2_par2" Name="ממליצים">
                     <ParticipantType Type="ROLE"/>
                 </Participant>
             </Participants>
@@ -467,24 +254,6 @@
                         <No/>
                     </Implementation>
                     <Performer>invitation_wp2_par2</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
-                </Activity>
-                <Activity Id="invitation_wp2_act4" Name="AND">
-                    <Route/>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Split Type="AND">
-                                <TransitionRefs>
-                                    <TransitionRef Id="invitation_wp2_tra5"/>
-                                    <TransitionRef Id="invitation_wp2_tra4"/>
-                                </TransitionRefs>
-                            </Split>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="invitation_wp2_act5" Name="ארגון ממליצים">
                     <Implementation>
@@ -492,25 +261,11 @@
                     </Implementation>
                     <Performer>invitation_wp2_par1</Performer>
                 </Activity>
-                <Activity Id="invitation_wp2_act11" Name="קבלת פרטי מועמד">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>invitation_wp2_par3</Performer>
-                </Activity>
-                <Activity Id="invitation_wp2_act6" Name="תיאום ראיון">
-                    <Implementation>
-                        <SubFlow Id="invitation_wp"/>
-                    </Implementation>
-                </Activity>
             </Activities>
             <Transitions>
                 <Transition From="invitation_wp2_act1" Id="invitation_wp2_tra1" To="invitation_wp2_act2"/>
                 <Transition From="invitation_wp2_act2" Id="invitation_wp2_tra2" To="invitation_wp2_act3"/>
-                <Transition From="invitation_wp2_act3" Id="invitation_wp2_tra3" To="invitation_wp2_act4"/>
-                <Transition From="invitation_wp2_act4" Id="invitation_wp2_tra4" To="invitation_wp2_act5"/>
-                <Transition From="invitation_wp2_act4" Id="invitation_wp2_tra5" To="invitation_wp2_act3"/>
-                <Transition From="invitation_wp2_act11" Id="invitation_wp2_tra6" To="invitation_wp2_act6"/>
+                <Transition From="invitation_wp2_act3" Id="invitation_wp2_tra3" To="invitation_wp2_act5"/>
             </Transitions>
         </WorkflowProcess>
         <WorkflowProcess Id="invitation_wp" Name="תיאום ראיון">
@@ -534,11 +289,6 @@
                         <No/>
                     </Implementation>
                     <Performer>invitation_wp_par1</Performer>
-                    <TransitionRestrictions>
-                        <TransitionRestriction>
-                            <Join Type="XOR"/>
-                        </TransitionRestriction>
-                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="invitation_wp_act2" Name="בחירת זמנים">
                     <Implementation>
@@ -601,6 +351,12 @@
                     </Implementation>
                     <Performer>invitation_wp_par1</Performer>
                 </Activity>
+                <Activity Id="invitation_wp2_act11" Name="קבלת פרטי מועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>invitation_wp_par1</Performer>
+                </Activity>
             </Activities>
             <Transitions>
                 <Transition From="invitation_wp_act1" Id="invitation_wp_tra1" To="invitation_wp_act2"/>
@@ -612,7 +368,6 @@
                 <Transition From="invitation_wp_act6" Id="invitation_wp_tra7" To="invitation_wp_act8"/>
                 <Transition From="invitation_wp_act12" Id="invitation_wp_tra11" To="invitation_wp_act1"/>
                 <Transition From="invitation_wp_act8" Id="invitation_wp_tra12" To="invitation_wp_act11"/>
-                <Transition From="invitation_wp_act7" Id="invitation_wp_tra13" To="invitation_wp_act1"/>
             </Transitions>
         </WorkflowProcess>
         <WorkflowProcess Id="recommendation_wp1" Name="הכנת המלצה">
@@ -670,6 +425,183 @@
                 <Transition From="recommendation_wp1_act2" Id="recommendation_wp1_tra2" To="recommendation_wp1_act3"/>
                 <Transition From="recommendation_wp1_act3" Id="recommendation_wp1_tra3" To="recommendation_wp1_act4"/>
                 <Transition From="recommendation_wp1_act4" Id="recommendation_wp1_tra4" To="recommendation_wp1_act5"/>
+            </Transitions>
+        </WorkflowProcess>
+        <WorkflowProcess Id="estimation_wp2" Name="ניהול קבלת מועמד">
+            <ProcessHeader>
+                <Created>2011-04-12 20:34:03</Created>
+            </ProcessHeader>
+            <Participants>
+                <Participant Id="estimation_wp2_par1" Name="מועמד">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="estimation_wp2_par2" Name="ראש חוג">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="estimation_wp2_par3" Name="אחראית סמנרים">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="estimation_wp2_act1" Name="החלטת אופן גיוס">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par2</Performer>
+                </Activity>
+                <Activity Id="estimation_wp2_act2" Name="הודעת דחיית מועמד">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par2</Performer>
+                </Activity>
+                <Activity Id="estimation_wp2_act3" Name="XOR">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="estimation_wp2_tra3"/>
+                                    <TransitionRef Id="estimation_wp2_tra2"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act4" Name="XOR">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="estimation_wp2_tra5"/>
+                                    <TransitionRef Id="estimation_wp2_tra4"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act5" Name="הודעה על אי ביצוע ראיון">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par2</Performer>
+                </Activity>
+                <Activity Id="estimation_wp2_act6" Name="הודעת על ביצוע ראיון">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="estimation_wp2_tra9"/>
+                                    <TransitionRef Id="estimation_wp2_tra7"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act7" Name="ביצוע ראיון">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par1</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="estimation_wp2_tra8"/>
+                                    <TransitionRef Id="estimation_wp2_tra16"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="Reception_wp1_act10" Name="ניהול ממליצים">
+                    <Implementation>
+                        <SubFlow Id="invitation_wp2"/>
+                    </Implementation>
+                </Activity>
+                <Activity Id="invitation_wp2_act6" Name="תיאום ראיון">
+                    <Implementation>
+                        <SubFlow Id="invitation_wp"/>
+                    </Implementation>
+                </Activity>
+                <Activity Id="estimation_wp2_act8" Name="XOR">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act9" Name="תיאום סמינר">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par3</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act10" Name="ביצוע סמינר וביקור">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par1</Performer>
+                </Activity>
+                <Activity Id="estimation_wp2_act11" Name="XOR">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="estimation_wp2_tra14"/>
+                                    <TransitionRef Id="estimation_wp2_tra17"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+                <Activity Id="estimation_wp2_act12" Name="איסוף כל הסינונים">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>estimation_wp2_par2</Performer>
+                </Activity>
+                <Activity Id="estimation_wp2_act13" Name="AND">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="estimation_wp2_act1" Id="estimation_wp2_tra1" To="estimation_wp2_act3"/>
+                <Transition From="estimation_wp2_act3" Id="estimation_wp2_tra2" To="estimation_wp2_act2"/>
+                <Transition From="estimation_wp2_act3" Id="estimation_wp2_tra3" To="estimation_wp2_act4"/>
+                <Transition From="estimation_wp2_act4" Id="estimation_wp2_tra4" To="estimation_wp2_act5"/>
+                <Transition From="estimation_wp2_act4" Id="estimation_wp2_tra5" To="estimation_wp2_act6"/>
+                <Transition From="estimation_wp2_act6" Id="estimation_wp2_tra9" To="Reception_wp1_act10"/>
+                <Transition From="estimation_wp2_act6" Id="estimation_wp2_tra7" To="invitation_wp2_act6"/>
+                <Transition From="estimation_wp2_act8" Id="estimation_wp2_tra11" To="estimation_wp2_act9"/>
+                <Transition From="estimation_wp2_act9" Id="estimation_wp2_tra12" To="estimation_wp2_act10"/>
+                <Transition From="estimation_wp2_act10" Id="estimation_wp2_tra13" To="estimation_wp2_act11"/>
+                <Transition From="estimation_wp2_act11" Id="estimation_wp2_tra14" To="estimation_wp2_act6"/>
+                <Transition From="invitation_wp2_act6" Id="estimation_wp2_tra6" To="estimation_wp2_act7"/>
+                <Transition From="estimation_wp2_act7" Id="estimation_wp2_tra16" To="estimation_wp2_act9"/>
+                <Transition From="estimation_wp2_act7" Id="estimation_wp2_tra8" To="estimation_wp2_act8"/>
+                <Transition From="Reception_wp1_act10" Id="estimation_wp2_tra10" To="estimation_wp2_act13"/>
+                <Transition From="estimation_wp2_act11" Id="estimation_wp2_tra17" To="estimation_wp2_act13"/>
+                <Transition From="estimation_wp2_act13" Id="estimation_wp2_tra15" To="estimation_wp2_act12"/>
+                <Transition From="estimation_wp2_act5" Id="estimation_wp2_tra18" To="estimation_wp2_act8"/>
             </Transitions>
         </WorkflowProcess>
     </WorkflowProcesses>
