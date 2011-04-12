@@ -289,6 +289,11 @@
                         <No/>
                     </Implementation>
                     <Performer>invitation_wp_par1</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
                 </Activity>
                 <Activity Id="invitation_wp_act2" Name="בחירת זמנים">
                     <Implementation>
@@ -307,12 +312,6 @@
                         <No/>
                     </Implementation>
                     <Performer>invitation_wp_par1</Performer>
-                </Activity>
-                <Activity Id="invitation_wp_act5" Name="קבלת זמנים">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>invitation_wp_par3</Performer>
                 </Activity>
                 <Activity Id="invitation_wp_act6" Name="XOR">
                     <Route/>
@@ -351,23 +350,17 @@
                     </Implementation>
                     <Performer>invitation_wp_par1</Performer>
                 </Activity>
-                <Activity Id="invitation_wp2_act11" Name="קבלת פרטי מועמד">
-                    <Implementation>
-                        <No/>
-                    </Implementation>
-                    <Performer>invitation_wp_par1</Performer>
-                </Activity>
             </Activities>
             <Transitions>
                 <Transition From="invitation_wp_act1" Id="invitation_wp_tra1" To="invitation_wp_act2"/>
                 <Transition From="invitation_wp_act2" Id="invitation_wp_tra2" To="invitation_wp_act3"/>
-                <Transition From="invitation_wp_act4" Id="invitation_wp_tra3" To="invitation_wp_act5"/>
                 <Transition From="invitation_wp_act3" Id="invitation_wp_tra4" To="invitation_wp_act4"/>
-                <Transition From="invitation_wp_act5" Id="invitation_wp_tra5" To="invitation_wp_act6"/>
                 <Transition From="invitation_wp_act6" Id="invitation_wp_tra6" To="invitation_wp_act7"/>
                 <Transition From="invitation_wp_act6" Id="invitation_wp_tra7" To="invitation_wp_act8"/>
                 <Transition From="invitation_wp_act12" Id="invitation_wp_tra11" To="invitation_wp_act1"/>
                 <Transition From="invitation_wp_act8" Id="invitation_wp_tra12" To="invitation_wp_act11"/>
+                <Transition From="invitation_wp_act4" Id="invitation_wp_tra3" To="invitation_wp_act6"/>
+                <Transition From="invitation_wp_act7" Id="invitation_wp_tra5" To="invitation_wp_act1"/>
             </Transitions>
         </WorkflowProcess>
         <WorkflowProcess Id="recommendation_wp1" Name="הכנת המלצה">
