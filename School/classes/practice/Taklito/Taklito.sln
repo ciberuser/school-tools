@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreRecordLabel", "CoreRecordLabel\CoreRecordLabel.csproj", "{F2824042-5365-4FE0-9B49-52786DF4957A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaklitoDataDemo", "CoreRecordLabel\TaklitoDataDemo.csproj", "{F2824042-5365-4FE0-9B49-52786DF4957A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaklitoData", "TaklitoData\TaklitoData.csproj", "{D2C749B2-6BF6-454A-BD87-CD05857EDD1D}"
 EndProject

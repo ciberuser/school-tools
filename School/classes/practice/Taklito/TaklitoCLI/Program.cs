@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TaklitoData;
+using TaklitoDataDemo;
 
 namespace TaklitoCLI
 {
     class Program
     {
-        IManageGroup manageGroup = new ManageGroup();
+        IGroupManager manageGroup = new GroupManager();
         public void ShowAllGroups()
         {
-            List<Group> allGroup = manageGroup.getAllGroups();
+            List<Group> allGroup = manageGroup.GetAllGroups();
             
             foreach (Group g in allGroup)
             {
-                Console.WriteLine("the group name is :{0}", g.Name);
+                Console.WriteLine("the group id:{0} group name:{1}", g.GroupID,g.Name);
             }
+     
             
         }
 
@@ -35,9 +36,10 @@ namespace TaklitoCLI
         {
             Program p = new Program();
             Console.WriteLine("Welcome to Taklito : choose option");
-            Console.WriteLine("ag :to add new group\n"+
+            Console.WriteLine("add group:to add new group\n"+
                                "q: Exit\n"+ 
-                               "view");
+                               "view: view all groups\n ");
+
             string input =  Console.ReadLine();
 
 
@@ -48,12 +50,13 @@ namespace TaklitoCLI
                 {
                     case "q":
                         break;
-                    case "add":
+                    case "add group":
                         p.AddNewGroup();
                         break;
                     case "view":
                         p.ShowAllGroups();
                         break;
+
                 }
                input = Console.ReadLine();
 
