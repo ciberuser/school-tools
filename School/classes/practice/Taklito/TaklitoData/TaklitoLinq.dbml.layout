@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TaklitoLinq">
+  <DataContextMoniker Name="/TaklitoLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bffae20e-f608-4ca4-86e2-d997dd815021" absoluteBounds="1.5, 1.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/TaklitoLinqDataContext/Group" />
+      <nestedChildShapes>
+        <elementListCompartment Id="502f186e-0441-4ee3-9a45-21b4ebd0aa7c" absoluteBounds="1.5150000000000001, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="46f6957b-29e6-4a4a-a9e9-a73955e5de1c" absoluteBounds="4.125, 1.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/TaklitoLinqDataContext/Artist" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e44a3c2e-bf49-470b-986e-90284abf0bb4" absoluteBounds="4.14, 1.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.5 : 1.90949625651042); (4.125 : 1.90949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TaklitoLinqDataContext/Group/Group_Artist" />
+      <nodes>
+        <classShapeMoniker Id="bffae20e-f608-4ca4-86e2-d997dd815021" />
+        <classShapeMoniker Id="46f6957b-29e6-4a4a-a9e9-a73955e5de1c" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
