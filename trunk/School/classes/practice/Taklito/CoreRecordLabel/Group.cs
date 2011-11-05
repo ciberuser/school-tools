@@ -10,6 +10,7 @@ namespace TaklitoDataDemo
         string m_name;
         int m_id;
         List<Artist> m_Artists =  new List<Artist>();
+
         
 
         public Group() { }
