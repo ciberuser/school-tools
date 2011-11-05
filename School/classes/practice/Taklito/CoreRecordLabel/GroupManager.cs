@@ -30,7 +30,12 @@ namespace TaklitoDataDemo
 
         public void JoinArtistToGroup(Artist artist, ref Group group)
         {
-            if (group!= null) group.Artists.Add(artist);
+            
+            if (group != null)
+            {
+                artist.Group = group;
+                group.Artists.Add(artist);
+            }
         }
 
         public void JoinArtistToGroup(Artist artist, int groupId)
@@ -38,7 +43,8 @@ namespace TaklitoDataDemo
             try
             {
                 int index = FindGroup(groupId);
-                m_groups[index].Artists.Add(artist);
+                Group g = m_groups[index];
+                JoinArtistToGroup(artist, ref g );
             }
             catch (System.Exception ex)
             {
