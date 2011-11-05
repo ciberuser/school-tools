@@ -92,11 +92,11 @@ namespace TaklitoDataDemo
             int i = 0;
             foreach (Group g in m_groups)
             {
-                i++;
                 if (g.GroupID == id)
                 {
                     return i;
                 }
+                i++;
             }
             return -1;
         }
