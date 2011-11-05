@@ -65,7 +65,7 @@ namespace TaklitoDataDemo
             }
         }
 
-        public void LeaveArtistFromGroup(Artist artistId, int groupId)
+        public void RemoveArtistFromGroup(Artist artistId, int groupId)
         {
             try
             {
@@ -77,7 +77,16 @@ namespace TaklitoDataDemo
             }
         }
 
-       
+        Group GetGroup(int id)
+        {
+            foreach (Group g in m_groups)
+            {
+                if (g.GroupID == id) return g;
+
+            }
+            return null;
+        }
+        
         int FindGroup(int id)
         {
             int i = 0;
@@ -96,6 +105,14 @@ namespace TaklitoDataDemo
         {
             throw new Exception(string.Format("can't find group error{0}", ex.Message));
         }
+
+       
+        public void RemoveGroup(int groupId)
+        {
+            m_groups.Remove(GetGroup(groupId));
+        }
+
+       
         #endregion
     }
 }
