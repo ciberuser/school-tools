@@ -30,6 +30,19 @@ namespace TaklitoCLI
             manageGroup.AddGroup(name);
         }
 
+        public bool AddArtistToGroup(Artist art, int groupID)
+        {
+            try
+            {
+                manageGroup.JoinArtistToGroup(art, groupID);
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            
+        }
 
 
         static void Main(string[] args)
@@ -38,7 +51,9 @@ namespace TaklitoCLI
             Console.WriteLine("Welcome to Taklito : choose option");
             Console.WriteLine("add group:to add new group\n"+
                                "q: Exit\n"+ 
-                               "view: view all groups\n ");
+                               "view: view all groups\n " + 
+                               "add_art: add artist \n" +
+                               "create_art :create artist\n");
 
             string input =  Console.ReadLine();
 
@@ -55,6 +70,15 @@ namespace TaklitoCLI
                         break;
                     case "view":
                         p.ShowAllGroups();
+                        break;
+                    case "add_art":
+                        Console.WriteLine("create new artist test:\nadd first,last and position");
+                        Artist ar = new Artist();
+                        ar.FirstName = Console.ReadLine();
+                        ar.LastName = Console.ReadLine();
+                        ar.Position = Console.ReadLine();
+
+                        p.AddArtistToGroup(ar, 0);
                         break;
 
                 }
