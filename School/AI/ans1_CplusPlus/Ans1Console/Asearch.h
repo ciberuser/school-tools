@@ -12,6 +12,7 @@ namespace Search
 	class Asearch:public Isearch
 	{
 		public:
+			virtual void Search();
 			Asearch(const string& inputStr);
 			void PrintPhase(const int phaseNum);
 		protected:

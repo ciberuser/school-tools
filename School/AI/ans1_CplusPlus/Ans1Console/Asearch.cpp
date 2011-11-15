@@ -11,9 +11,14 @@ namespace Search
 		PrintMatrix();
 	}
 
+	void Asearch::Search()
+	{
+		
+	}
+
 	Asearch::Asearch(const string& inputStr)
 	{
-	
+		
 	}
 
 	void Asearch::PrintMatrix()
