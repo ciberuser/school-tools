@@ -9,7 +9,7 @@ namespace TaklitoDataDemo
     {
 
         List<Group> m_groups;
-
+        int m_indexCont = 0;
         #region IGroupManager Members
 
         public GroupManager()
@@ -21,8 +21,9 @@ namespace TaklitoDataDemo
         {
              
             Group newGroup = new Group(name);
-            newGroup.GroupID = m_groups.Count + 1;
+            newGroup.GroupID = m_indexCont;
             m_groups.Add(newGroup);
+            m_indexCont++;
         }
 
         public Group[] GetAllGroups()
