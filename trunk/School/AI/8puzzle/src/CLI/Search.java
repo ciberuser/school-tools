@@ -8,26 +8,32 @@ public class Search {
 	/**
 	 * @param args
 	 */
-	public static int main(String[] args)
+	public static void main(String[] args)
 	{
 		// for debug ///
 		
 		
 		//
-		if (args[0] == null) 
+		if (args.length > 0)
 		{
-			System.out.println("no file was insert ");
-			return 1;
+			if (args[0].isEmpty()) 
+			{
+				System.out.println("no file was insert ");
+				return ;
+			}
+			if (args[1] == null)
+			{
+				System.out.println("no algorithm was insert");
+				return ;
+			}
+			//ISearch search = new BFSSearch("1 2 3 4 5 6 7 8 b");
+			Puzzle p = new Puzzle("1 2 3 4 5 6 7 8 b");
+			p.Up();
+			p.Down();
+			p.Left();
+			p.Right();
+			return ;
 		}
-		if (args[1] == null)
-		{
-			System.out.println("no algorithm was insert");
-			return 2;
-		}
-		ISearch search = new DFSSearch();
-			
-		return 0;
-		
 	}
 
 }
