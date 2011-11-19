@@ -3,14 +3,14 @@ package SearchCore;
 import SearchCore.Def;
 public class Puzzle 
 {
-	int SIZE = Def.MATIRX_SIZE;
-	int BLANK = Def.BLANK; 
+	private int SIZE = Def.MATIRX_SIZE;
+	private int BLANK = Def.BLANK; 
 	
 	public int[][] getPuzzle(){	return m_puzzle; }
 
 	private  int[][] m_puzzle = new int[SIZE][SIZE];
 	
-	
+		
 	public Puzzle(String vector)
 	{
 		int arr[] = ConverToInt(vector);
@@ -28,7 +28,12 @@ public class Puzzle
 		}
 	}
 	
-	public void Up()
+	public Puzzle(int [][] puzzle)
+	{
+		m_puzzle = puzzle;
+	}
+	
+	public Puzzle Up()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
@@ -38,10 +43,11 @@ public class Puzzle
 			m_puzzle[posRow-1][posColum] = BLANK;
 			m_puzzle[posRow][posColum] = temp;
 		}
+		return this;
 	
 	}
 	
-	public void Down()
+	public Puzzle Down()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
@@ -51,9 +57,10 @@ public class Puzzle
 			m_puzzle[posRow+1][posColum] = BLANK;
 			m_puzzle[posRow][posColum] = temp;
 		}
+		return this;
 	}
 	
-	public void Left()
+	public Puzzle Left()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
@@ -63,9 +70,10 @@ public class Puzzle
 			m_puzzle[posRow][posColum-1] = BLANK;
 			m_puzzle[posRow][posColum] = temp;
 		}
+		return this;
 	}
 	
-	public void Right()
+	public Puzzle Right()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
@@ -75,6 +83,7 @@ public class Puzzle
 			m_puzzle[posRow][posColum+1] = BLANK;
 			m_puzzle[posRow][posColum] = temp;
 		}
+		return this;
 	}
 	
 	
@@ -106,7 +115,27 @@ public class Puzzle
 		}
 		return arr;
 	}
+	
+	public String GetPuzzelString()
+	{
+		String str = new String();
+		int col = 0;
+		int row = 0;
+		for (int i=0 ; i<Def.VECTOR_SIZE ; ++i)
+		{
+			Integer temp = m_puzzle[row][col];
+			if (m_puzzle[row][col] == BLANK) str+="b";
+			else str += temp.toString();
+			if (col == 2)
+			{
+				row++;
+				col = -1;
+			}
+			col++;
+		}
 		
+		return str;
+	}
 	
 	
 	
