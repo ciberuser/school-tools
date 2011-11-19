@@ -27,11 +27,9 @@ public class Search {
 				return ;
 			}
 			//ISearch search = new BFSSearch("1 2 3 4 5 6 7 8 b");
-			Puzzle p = new Puzzle("1 2 3 4 5 6 7 8 b");
-			p.Up();
-			p.Down();
-			p.Left();
-			p.Right();
+			
+			ISearch se = new BFSSearch("b 8 7 4 6 5 1 3 2");
+			se.Search();
 			return ;
 		}
 	}

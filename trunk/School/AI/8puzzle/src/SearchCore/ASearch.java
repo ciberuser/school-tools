@@ -5,44 +5,30 @@ import SearchCore.Def;
 public abstract class ASearch implements ISearch
 {
 	
-	
-	
-	
-	
-	
+		
 	public ASearch()
 	{
 		
 	}
-	
-	
-	
-	
-	
-	
+			
 	public ASearch(String vector)
 	{
 		
 	}
 
-	public void Search()
-	{
 		
-	}
-	
-	
-	
-	public void  PrintPhase()
+		
+	public void  PrintPhase(Puzzle p)
 	{
+		int[][] puzzleMatrix = p.getPuzzle();
 		System.out.println("the state is :\n");
 		for (int i = 0 ; i < Def.MATIRX_SIZE ;++i)
 		{
-			for (int j = 0 ; i < Def.MATIRX_SIZE ; ++i) 
-		
+			for (int j = 0 ; j < Def.MATIRX_SIZE ; ++j) 
 			{
-				System.out.println(m_puzzleMatrix[i][j] +" ");				
+				System.out.print(puzzleMatrix[i][j] +" ");				
 			}
-			System.out.println("\n");
+			System.out.print("\n");
 		}
 	}
 	
@@ -55,8 +41,7 @@ public abstract class ASearch implements ISearch
 		return true;
 	}
 	
-	// protected
-	protected int [][] m_puzzleMatrix = new int[Def.MATIRX_SIZE][Def.MATIRX_SIZE] ;
+
 	
 	
 }
