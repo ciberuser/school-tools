@@ -3,12 +3,13 @@ package SearchCore;
 import SearchCore.Def;
 public class Puzzle 
 {
-	private int SIZE = Def.MATIRX_SIZE;
+	private int ROW_SIZE = Def.MATRIX_ROW_SIZE;
+	private int COL_SIZE = Def.MATRIX_COL_SIZE;
 	private int BLANK = Def.BLANK; 
 	
 	public int[][] getPuzzle(){	return m_puzzle; }
 
-	private  int[][] m_puzzle = new int[SIZE][SIZE];
+	private  int[][] m_puzzle = new int[ROW_SIZE][COL_SIZE];
 	
 		
 	public Puzzle(String vector)
@@ -37,13 +38,14 @@ public class Puzzle
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
+		int [][] tempPuzzle = CopyPuzzleMatrix(m_puzzle);
 		if (posRow > 0)
 		{
-			int temp = m_puzzle[posRow-1][posColum];
-			m_puzzle[posRow-1][posColum] = BLANK;
-			m_puzzle[posRow][posColum] = temp;
+			int temp = tempPuzzle[posRow-1][posColum];
+			tempPuzzle[posRow-1][posColum] = BLANK;
+			tempPuzzle[posRow][posColum] = temp;
 		}
-		return this;
+		return new Puzzle(tempPuzzle);
 	
 	}
 	
@@ -51,53 +53,56 @@ public class Puzzle
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
+		int[][] tempPuzzle = CopyPuzzleMatrix(m_puzzle);
 		if (posRow < 2) 
 		{
-			int temp = m_puzzle[posRow+1][posColum];
-			m_puzzle[posRow+1][posColum] = BLANK;
-			m_puzzle[posRow][posColum] = temp;
+			int temp = tempPuzzle[posRow+1][posColum];
+			tempPuzzle[posRow+1][posColum] = BLANK;
+			tempPuzzle[posRow][posColum] = temp;
 		}
-		return this;
+		return new Puzzle(tempPuzzle);
 	}
 	
 	public Puzzle Left()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
+		int[][] tempPuzzle = CopyPuzzleMatrix(m_puzzle);
 		if(posColum > 0)
 		{
-			int temp = m_puzzle[posRow][posColum-1];
-			m_puzzle[posRow][posColum-1] = BLANK;
-			m_puzzle[posRow][posColum] = temp;
+			int temp = tempPuzzle[posRow][posColum-1];
+			tempPuzzle[posRow][posColum-1] = BLANK;
+			tempPuzzle[posRow][posColum] = temp;
 		}
-		return this;
+		return new Puzzle(tempPuzzle);
 	}
 	
 	public Puzzle Right()
 	{
 		int posRow = FindBlankPosRow();
 		int posColum = FindBlankPosColum();
+		int[][] tempPuzzle = CopyPuzzleMatrix(m_puzzle);
 		if (posColum < 2) 
 		{
-			int temp = m_puzzle[posRow][posColum+1];
-			m_puzzle[posRow][posColum+1] = BLANK;
-			m_puzzle[posRow][posColum] = temp;
+			int temp = tempPuzzle[posRow][posColum+1];
+			tempPuzzle[posRow][posColum+1] = BLANK;
+			tempPuzzle[posRow][posColum] = temp;
 		}
-		return this;
+		return new Puzzle(tempPuzzle);
 	}
 	
 	
 	private int FindBlankPosRow()
 	{
-		for(int i =0; i< SIZE ; ++i )
-		 for (int j=0 ;j< SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return i;
+		for(int i =0; i< ROW_SIZE ; ++i )
+		 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return i;
 		return -1;
 	}
 	
 	private int FindBlankPosColum()
 	{
-		for(int i =0; i< SIZE ; ++i )
-			 for (int j=0 ;j< SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return j;
+		for(int i =0; i< ROW_SIZE ; ++i )
+			 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return j;
 			return -1;
 	}
 	
@@ -137,7 +142,15 @@ public class Puzzle
 		return str;
 	}
 	
-	
-	
+	private int[][] CopyPuzzleMatrix(int[][] puzzle)
+	{
+		int[][] newMatrix =new int[ROW_SIZE][COL_SIZE];
+		for(int i=0; i< ROW_SIZE ; i++)
+			for (int j=0 ; j<COL_SIZE ; j++)
+			{
+				newMatrix[i][j] = puzzle[i][j];
+			}
+			return newMatrix;
+	}
 	
 }

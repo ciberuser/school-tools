@@ -28,7 +28,7 @@ public class Search {
 			}
 			//ISearch search = new BFSSearch("1 2 3 4 5 6 7 8 b");
 			
-			ISearch se = new BFSSearch("b 8 7 4 6 5 1 3 2");
+			ISearch se = new DFSSearch("b 8 7 4 6 5 1 3 2");
 			se.Search();
 			return ;
 		}

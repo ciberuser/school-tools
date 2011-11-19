@@ -9,7 +9,7 @@ import java.util.Queue;
 public class BFSSearch extends ASearch implements ISearch {
 
 	Puzzle startPuzzle;	
-	Queue<Puzzle> m_queue = new LinkedList<Puzzle>();
+	protected Queue<Puzzle> m_queue = new LinkedList<Puzzle>();	
 	Map<String,Integer> m_phaseState = new HashMap<String,Integer>(); // 
 		
 	public BFSSearch() 
