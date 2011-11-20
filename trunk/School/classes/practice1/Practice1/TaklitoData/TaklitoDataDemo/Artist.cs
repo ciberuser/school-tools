@@ -11,6 +11,12 @@ namespace TaklitoDataDemo
         string m_last;
         string m_pos;
         Group m_group;
+        List<Album> m_albumes = new List<Album>();
+
+        internal List<Album> Albumes
+        {
+            get { return m_albumes; }
+        }
         
         public string FirstName
         {
