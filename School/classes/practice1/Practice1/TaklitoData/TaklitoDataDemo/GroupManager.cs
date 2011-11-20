@@ -31,6 +31,12 @@ namespace TaklitoDataDemo
             return m_groups.ToArray();
         }
 
+        public void AddAlbum(Album album, int groupId)
+        {
+            Group group = FindGroup(groupId);
+            group.Albumes.Add(album);
+        }
+
         public void JoinArtistToGroup(Artist artist, ref Group group)
         {
             

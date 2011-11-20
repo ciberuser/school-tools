@@ -16,7 +16,9 @@ namespace TaklitoDataDemo
         void JoinArtistToGroup(Artist artist, int groupId);
         void MoveArtistFromGroupToGroup(Artist artist, int groupFrom, int groupTo);
         void RemoveArtistFromGroup(Artist artistId, int groupId);
+        void AddAlbum(Album album, int groupId);
         Group FindGroup(string name);
+
 
     }
 }

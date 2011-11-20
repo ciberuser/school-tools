@@ -10,7 +10,12 @@ namespace TaklitoDataDemo
         string m_name;
         int m_id;
         List<Artist> m_Artists =  new List<Artist>();
+        List<Album> m_albumes = new List<Album>();
 
+        internal List<Album> Albumes
+        {
+            get { return m_albumes; }
+        }
         
 
         public Group() { }
