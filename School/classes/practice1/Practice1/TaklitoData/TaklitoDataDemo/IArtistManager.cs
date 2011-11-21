@@ -5,10 +5,11 @@ using System.Text;
 
 namespace TaklitoDataDemo
 {
-    interface IArtistManager
+     public interface IArtistManager
     {
         void AddArtist(string firstName,string lastName);
         void AddAlbumToArtist(Album album, string firstName, string lastName);
         Artist[] GetAllArtists();
+        
     }
 }
