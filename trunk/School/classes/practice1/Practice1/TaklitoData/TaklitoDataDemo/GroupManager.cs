@@ -33,7 +33,7 @@ namespace TaklitoDataDemo
 
         public void AddAlbum(Album album, int groupId)
         {
-            m_groups[FindGroupIndex(groupId)].Albumes.Add(album);
+            m_groups[FindGroupIndex(groupId)].Albums.Add(album);
            
         }
 
