@@ -13,11 +13,11 @@ namespace TaklitoDataDemo
         Group m_group;
         List<Album> m_albumes = new List<Album>();
 
-        internal List<Album> Albumes
+        public List<Album> Albumes
         {
             get { return m_albumes; }
         }
-        
+
         public string FirstName
         {
             get { return m_frist; }

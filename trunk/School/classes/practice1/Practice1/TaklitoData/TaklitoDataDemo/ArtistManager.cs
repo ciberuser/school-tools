@@ -5,13 +5,13 @@ using System.Text;
 
 namespace TaklitoDataDemo
 {
-    class ArtistManager:IArtistManager
+    public class ArtistManager : IArtistManager
     {
         List<Artist> m_artists = new List<Artist>();
-       
+
         #region IArtistManager Members
 
-        public void AddArtist(string firstName,string lastName)
+        public void AddArtist(string firstName, string lastName)
         {
             Artist artist = new Artist();
             artist.FirstName = firstName;
@@ -19,30 +19,31 @@ namespace TaklitoDataDemo
             m_artists.Add(artist);
         }
 
-        public void AddAlbumToArtist(Album album, string firstName,string lastName)
+        public void AddAlbumToArtist(Album album, string firstName, string lastName)
         {
-           if (FindArtist(firstName,lastName)!= null) 
-           {
-               Artist art = FindArtist(firstName,lastName);
-               art.Albumes.Add(album);
-           }
-          
+            if (FindArtist(firstName, lastName) != null)
+            {
+                Artist art = FindArtist(firstName, lastName);
+                art.Albumes.Add(album);
+            }
+
         }
 
         public Artist[] GetAllArtists()
         {
-            m_artists.ToArray();
+            return m_artists.ToArray();
         }
 
         #endregion
 
-        Artist FindArtist(string first,string last)
+        Artist FindArtist(string first, string last)
         {
-            foreach(Artist art in m_artists)
+            foreach (Artist art in m_artists)
             {
-                if (art.FirstName == first && art.LastName ==last)
+                if (art.FirstName == first && art.LastName == last)
                     return art;
             }
             return null;
         }
+    }
 }

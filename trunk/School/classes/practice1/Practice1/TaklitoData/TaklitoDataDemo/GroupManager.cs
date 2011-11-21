@@ -33,8 +33,8 @@ namespace TaklitoDataDemo
 
         public void AddAlbum(Album album, int groupId)
         {
-            Group group = FindGroup(groupId);
-            group.Albumes.Add(album);
+            m_groups[FindGroupIndex(groupId)].Albumes.Add(album);
+           
         }
 
         public void JoinArtistToGroup(Artist artist, ref Group group)
@@ -51,7 +51,7 @@ namespace TaklitoDataDemo
         {
             try
             {
-                int index = FindGroup(groupId);
+                int index = FindGroupIndex(groupId);
                 Group g = m_groups[index];
                 JoinArtistToGroup(artist, ref g );
             }
@@ -68,8 +68,8 @@ namespace TaklitoDataDemo
             int to, from;
             try
             {
-                from = FindGroup(groupFrom);
-                to = FindGroup(groupTo);
+                from = FindGroupIndex(groupFrom);
+                to = FindGroupIndex(groupTo);
                 m_groups[to].Artists.Add(artist);
                 m_groups[from].Artists.Remove(artist);
             }
@@ -84,7 +84,7 @@ namespace TaklitoDataDemo
         {
             try
             {
-                m_groups[FindGroup(groupId)].Artists.Remove(artistId);
+                m_groups[FindGroupIndex(groupId)].Artists.Remove(artistId);
             }
             catch (System.Exception ex)
             {
@@ -102,7 +102,7 @@ namespace TaklitoDataDemo
             return null;
         }
         
-        int FindGroup(int id)
+        int FindGroupIndex(int id)
         {
             int i = 0;
             foreach (Group g in m_groups)

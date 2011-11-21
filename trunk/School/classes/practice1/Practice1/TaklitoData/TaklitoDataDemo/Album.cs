@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TaklitoDataDemo
 {
-    class Album
+    public class Album
     {
         int m_albumId;
 
@@ -21,7 +21,7 @@ public string Name
   get { return m_name; }
   set { m_name = value; }
 }
-        int m_year
+int m_year;
 
     
 
