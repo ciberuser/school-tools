@@ -238,6 +238,20 @@ namespace TaklitoDataUnitTest
             Assert.IsTrue(g.Artists.Count == 0);
         }
 
+        [TestMethod]
+        public void TestAddAlbum()
+        {
+            string albumName ="str";
+            string grp1 =GROUP + "0" ;   
+            Album album = new Album();
+            album.AlbumId =1 ;
+            album.Name = albumName;
+            IGroupManager gm = AddGroupsGroup(1);
+            int gid1 = GetSafeGroupid(grp1, gm);
+            gm.AddAlbum(album, gid1);
+            Assert.IsTrue(gm.GetAllGroups()[0].Albums[0].Name == albumName);
+        }
+
         
 
     }
