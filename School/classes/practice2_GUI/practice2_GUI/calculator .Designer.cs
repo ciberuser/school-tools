@@ -37,8 +37,8 @@
             this.historyLlistBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.computeButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.historyGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ActioncomboBox
@@ -52,7 +52,7 @@
             "%"});
             this.ActioncomboBox.Location = new System.Drawing.Point(100, 37);
             this.ActioncomboBox.Name = "ActioncomboBox";
-            this.ActioncomboBox.Size = new System.Drawing.Size(27, 21);
+            this.ActioncomboBox.Size = new System.Drawing.Size(54, 21);
             this.ActioncomboBox.TabIndex = 0;
             // 
             // FristNumtextBox
@@ -64,7 +64,7 @@
             // 
             // SecondNumtextBox
             // 
-            this.SecondNumtextBox.Location = new System.Drawing.Point(133, 38);
+            this.SecondNumtextBox.Location = new System.Drawing.Point(160, 38);
             this.SecondNumtextBox.Name = "SecondNumtextBox";
             this.SecondNumtextBox.Size = new System.Drawing.Size(82, 20);
             this.SecondNumtextBox.TabIndex = 2;
@@ -81,7 +81,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 67);
+            this.label2.Location = new System.Drawing.Point(12, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 4;
@@ -89,9 +89,9 @@
             // 
             // ResultTextBox
             // 
-            this.ResultTextBox.Location = new System.Drawing.Point(51, 64);
+            this.ResultTextBox.Location = new System.Drawing.Point(33, 64);
             this.ResultTextBox.Name = "ResultTextBox";
-            this.ResultTextBox.Size = new System.Drawing.Size(164, 20);
+            this.ResultTextBox.Size = new System.Drawing.Size(121, 20);
             this.ResultTextBox.TabIndex = 5;
             this.ResultTextBox.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -100,7 +100,7 @@
             this.historyLlistBox.FormattingEnabled = true;
             this.historyLlistBox.Location = new System.Drawing.Point(12, 123);
             this.historyLlistBox.Name = "historyLlistBox";
-            this.historyLlistBox.Size = new System.Drawing.Size(203, 30);
+            this.historyLlistBox.Size = new System.Drawing.Size(230, 30);
             this.historyLlistBox.TabIndex = 6;
             // 
             // label3
@@ -114,7 +114,7 @@
             // 
             // computeButton
             // 
-            this.computeButton.Location = new System.Drawing.Point(140, 7);
+            this.computeButton.Location = new System.Drawing.Point(167, 64);
             this.computeButton.Name = "computeButton";
             this.computeButton.Size = new System.Drawing.Size(75, 23);
             this.computeButton.TabIndex = 8;
@@ -122,20 +122,22 @@
             this.computeButton.UseVisualStyleBackColor = true;
             this.computeButton.Click += new System.EventHandler(this.computeButton_Click);
             // 
-            // dataGridView1
+            // historyGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 163);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 9;
+            this.historyGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.historyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.historyGridView.Location = new System.Drawing.Point(12, 163);
+            this.historyGridView.Name = "historyGridView";
+            this.historyGridView.RowHeadersWidth = 20;
+            this.historyGridView.Size = new System.Drawing.Size(230, 150);
+            this.historyGridView.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 325);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(265, 325);
+            this.Controls.Add(this.historyGridView);
             this.Controls.Add(this.computeButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.historyLlistBox);
@@ -147,7 +149,7 @@
             this.Controls.Add(this.ActioncomboBox);
             this.Name = "Form1";
             this.Text = "Calculator";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,7 +166,7 @@
         private System.Windows.Forms.ListBox historyLlistBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button computeButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView historyGridView;
     }
 }
 

@@ -25,7 +25,7 @@ namespace practice2_GUI
         {
             m_dataTable =  CreateTable();
             InitializeComponent();
-            dataGridView1.DataSource  = m_dataTable;
+            historyGridView.DataSource  = m_dataTable;
         }
 
         private DataTable CreateTable()
@@ -92,6 +92,7 @@ namespace practice2_GUI
                                 m_dataTable.Rows.Add(num1, "+", num2);
                                 break;
                         }
+                        resultStr = "the result :" + resultStr;
                         AddToHistory(resultStr);
                         ResultTextBox.Text = resultStr;
                     }
