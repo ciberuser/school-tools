@@ -1,6 +1,5 @@
 package SearchCore;
 
-import java.awt.List;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -88,17 +87,7 @@ public class DFSSearch extends ASearch {
 		nodes = ExpandRelveantNode(nodes ,p.Up(),oldStr);
 		nodes = ExpandRelveantNode(nodes ,p.Left() ,oldStr);
 		nodes = ExpandRelveantNode(nodes ,p.Right() ,oldStr);
-		//newStatePuzzle = p.Up();
-		//newPuzzleStateStr = newStatePuzzle.GetPuzzelString();
 		
-		/*
-		if (newPuzzleStateStr.compareTo(p.GetPuzzelString()) != 0)
-		{
-			newState = new Node(newStatePuzzle);
-			newState.setM_color(ECOLOR.eWHITE);
-			nodes.add(newState);
-		}
-		*/
 		
 		return nodes;
 	}
