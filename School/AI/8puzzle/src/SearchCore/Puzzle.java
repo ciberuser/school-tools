@@ -45,6 +45,7 @@ public class Puzzle
 			tempPuzzle[posRow-1][posColum] = BLANK;
 			tempPuzzle[posRow][posColum] = temp;
 		}
+
 		return new Puzzle(tempPuzzle);
 	
 	}
@@ -60,6 +61,7 @@ public class Puzzle
 			tempPuzzle[posRow+1][posColum] = BLANK;
 			tempPuzzle[posRow][posColum] = temp;
 		}
+		
 		return new Puzzle(tempPuzzle);
 	}
 	
@@ -74,6 +76,7 @@ public class Puzzle
 			tempPuzzle[posRow][posColum-1] = BLANK;
 			tempPuzzle[posRow][posColum] = temp;
 		}
+		
 		return new Puzzle(tempPuzzle);
 	}
 	
@@ -88,6 +91,7 @@ public class Puzzle
 			tempPuzzle[posRow][posColum+1] = BLANK;
 			tempPuzzle[posRow][posColum] = temp;
 		}
+		
 		return new Puzzle(tempPuzzle);
 	}
 	

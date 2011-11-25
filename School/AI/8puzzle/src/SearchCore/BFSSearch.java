@@ -26,6 +26,7 @@ public class BFSSearch extends ASearch implements ISearch {
 	
 	public void Search()
 	{
+		super.Search();
 		SetVisit(startPuzzle, null);
 		while (!m_queue.isEmpty())
 		{
@@ -35,18 +36,22 @@ public class BFSSearch extends ASearch implements ISearch {
 		System.out.println("no solution in BFS");
 	}
 
+	//need to check it 
 	private Puzzle ChildNode(Puzzle p)
 	{
 		String oldPuzzleStr = p.GetPuzzelString();
 	 	SetVisit(p.Up(), oldPuzzleStr) ;
 		if (CheckCompletion(p))return p ;
 		oldPuzzleStr = p.GetPuzzelString();
+		
 		SetVisit(p.Down(), oldPuzzleStr);
 		if(CheckCompletion(p))return p;
 		oldPuzzleStr  = p.GetPuzzelString();
+		
 		SetVisit(p.Left(), oldPuzzleStr) ;
 		if(CheckCompletion(p)) return p ;
 		oldPuzzleStr = p.GetPuzzelString();
+		
 		SetVisit(p.Right(), oldPuzzleStr);
 		if(CheckCompletion(p))return p;
 		
