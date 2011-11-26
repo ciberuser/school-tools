@@ -90,24 +90,46 @@ public class Puzzle
 			int temp = tempPuzzle[posRow][posColum+1];
 			tempPuzzle[posRow][posColum+1] = BLANK;
 			tempPuzzle[posRow][posColum] = temp;
+			
 		}
 		
 		return new Puzzle(tempPuzzle);
 	}
 	
 	
-	private int FindBlankPosRow()
+	public int FindNunPosRow(int num)
 	{
 		for(int i =0; i< ROW_SIZE ; ++i )
-		 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return i;
-		return -1;
+			 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == num) return i;
+			return -2;
 	}
 	
-	private int FindBlankPosColum()
+	public int FindNunPosCol(int num)
 	{
 		for(int i =0; i< ROW_SIZE ; ++i )
 			 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return j;
+			return -2;
+	}
+	
+	private int FindBlankPosRow()
+	{
+		return FindNunPosRow(BLANK);
+		/*
+		for(int i =0; i< ROW_SIZE ; ++i )
+		 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return i;
+		return -1;
+		*/
+	}
+	
+	
+	private int FindBlankPosColum()
+	{
+		return FindNunPosCol(BLANK);
+		/*
+		for(int i =0; i< ROW_SIZE ; ++i )
+			 for (int j=0 ;j< COL_SIZE; ++j) if(m_puzzle[i][j] == Def.BLANK) return j;
 			return -1;
+			*/
 	}
 	
 	private int[] ConverToInt(String vector)
