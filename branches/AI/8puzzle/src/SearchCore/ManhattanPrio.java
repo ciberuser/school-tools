@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class ManhattanPrio implements Iheuristic 
 {
-	public Integer GetScore(AStartSearch.Node node)
+	public Integer GetScore(AStarSearch.Node node)
 	{
 		int sum =0;
 		int rowPos,colPos;

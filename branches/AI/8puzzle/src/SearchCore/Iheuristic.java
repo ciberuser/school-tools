@@ -1,10 +1,10 @@
 package SearchCore;
 
-import SearchCore.AStartSearch.Node;
+import SearchCore.AStarSearch.Node;
 
 public interface Iheuristic 
 {
-	Integer GetScore(AStartSearch.Node node);
+	Integer GetScore(AStarSearch.Node node);
 
 	
 }

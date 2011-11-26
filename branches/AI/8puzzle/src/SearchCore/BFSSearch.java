@@ -60,12 +60,15 @@ public class BFSSearch extends ASearch implements ISearch {
 	
 	private void SetVisit(Puzzle p,String oldPhase)
 	{
-		PrintPhase(p);
-		if(!m_phaseState.containsKey(p.GetPuzzelString()))
+		if (p!=null)
 		{
-			int newValue = (oldPhase== null) ? 0 : m_phaseState.get(oldPhase)+1;
-			m_phaseState.put(p.GetPuzzelString(),newValue);
-			m_queue.add(p);
+			PrintPhase(p);
+			if(!m_phaseState.containsKey(p.GetPuzzelString()))
+			{
+				int newValue = (oldPhase== null) ? 0 : m_phaseState.get(oldPhase)+1;
+				m_phaseState.put(p.GetPuzzelString(),newValue);
+				m_queue.add(p);
+			}
 		}
 	}
 	
@@ -75,6 +78,7 @@ public class BFSSearch extends ASearch implements ISearch {
 		if(IsGoal(p.getPuzzle()))
 		{
 			System.out.println("success!! Depth:"+ m_phaseState.get(p.GetPuzzelString())) ;
+			System.out.println("it's take " +(System.currentTimeMillis()- m_startTime)+ " millis sec");
 			System.exit(0);
 			return true;
 		}
