@@ -26,12 +26,14 @@ public class Search {
 				System.out.println("no algorithm was insert");
 				return ;
 			}
-			ISearch search = new BFSSearch("b 8 7 4 6 5 1 3 2");
+			//ISearch search = new BFSSearch("b 8 7 4 6 5 1 3 2");
 			
-			ISearch se = new DFSSearch("b 8 7 4 6 5 1 3 2");
-			se.Search();
-			System.out.println("new DFS search");
-			search.Search();
+			//ISearch se = new DFSSearch("b 8 7 4 6 5 1 3 2");
+			//se.Search();
+			//System.out.println("new BFS search");
+			//search.Search();
+			ISearch astar = new AStarSearch("b 8 7 4 6 5 1 3 2");
+			astar.Search();
 			return ;
 		}
 	}

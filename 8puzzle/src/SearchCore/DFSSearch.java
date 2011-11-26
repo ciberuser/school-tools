@@ -28,6 +28,7 @@ public class DFSSearch extends ASearch {
 			Node node = m_stack.pop();
 			if (IsGoalNode(node)) 
 				{
+				    System.out.println("it's take " +(System.currentTimeMillis()- m_startTime)+ " millis sec");
 					System.exit(0);
 				}
 			node.setM_color(ECOLOR.eGReY);
@@ -59,17 +60,21 @@ public class DFSSearch extends ASearch {
 	
 	private LinkedList<Node> ExpandRelveantNode(LinkedList<Node> nodes , Puzzle NewNodePuzzle , String OldNodeState)
 	{
-		String newPStr =  NewNodePuzzle.GetPuzzelString();
-		if(!history.containsKey(newPStr))
+		
+		if (NewNodePuzzle != null)
 		{
-			history.put(newPStr, false);
-			if (NewNodePuzzle.GetPuzzelString().compareTo(OldNodeState) !=0 )
+			String newPStr =  NewNodePuzzle.GetPuzzelString();
+			if(!history.containsKey(newPStr))
 			{
-				
-				Node node = new Node(NewNodePuzzle);
-				node.setM_color(ECOLOR.eWHITE);
-				PrintPhase(node.getM_puzzle());
-				nodes.push(node);
+				history.put(newPStr, false);
+				if (NewNodePuzzle.GetPuzzelString().compareTo(OldNodeState) !=0 )
+				{
+					
+					Node node = new Node(NewNodePuzzle);
+					node.setM_color(ECOLOR.eWHITE);
+					PrintPhase(node.getM_puzzle());
+					nodes.push(node);
+				}
 			}
 		}
 		return nodes;
