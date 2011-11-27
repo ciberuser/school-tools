@@ -28,7 +28,7 @@ public class DFSSearch extends ASearch {
 			Node node = m_stack.pop();
 			if (IsGoalNode(node)) 
 				{
-				    System.out.println("it's take " +(System.currentTimeMillis()- m_startTime)+ " millis sec");
+					PrintTotalTime();
 					System.exit(0);
 				}
 			node.setM_color(ECOLOR.eGReY);

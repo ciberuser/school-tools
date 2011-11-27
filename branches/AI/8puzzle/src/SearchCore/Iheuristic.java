@@ -4,7 +4,5 @@ import SearchCore.AStarSearch.Node;
 
 public interface Iheuristic 
 {
-	Integer GetScore(AStarSearch.Node node);
-
-	
+	Integer GetScore(Node node);
 }

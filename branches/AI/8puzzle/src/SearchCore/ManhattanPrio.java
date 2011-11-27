@@ -12,7 +12,7 @@ public class ManhattanPrio implements Iheuristic
 		Puzzle p = node.getPuzzle();
 		int[][] goalMatrix = Def.GOAL_MATRIX;
 		for(int i = 0 ; i< Def.MATRIX_ROW_SIZE ; ++i )
-			for (int j=0 ; j<Def.MATRIX_COL_SIZE ; ++j )
+			for (int j=0 ; j <Def.MATRIX_COL_SIZE ; ++j )
 			{
 				rowPos = p.FindNunPosRow(goalMatrix[i][j]);
 				colPos = p.FindNunPosCol(goalMatrix[i][j]);

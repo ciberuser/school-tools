@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.naming.LinkLoopException;
+
 
 public class AStarSearch extends ASearch {
 
@@ -18,20 +18,21 @@ public class AStarSearch extends ASearch {
 	Vector<String> m_history ;
 	
 
-	public AStarSearch(String puzzle)
+	public AStarSearch(String puzzle, Iheuristic heurisitc )
 	{
 		startPuzzle = new Puzzle(puzzle);
 		m_open = new Vector<Node>();
 		m_close = new Vector<Node>();
 		m_history = new Vector<String>();
 		m_came_from = new HashMap<Node, Node>();
-		m_heuristicAlgorithm = new ManhattanPrio();
+		m_heuristicAlgorithm = heurisitc;
 	
 	}
 	
 	@Override
 	public void Search() 
 	{
+		super.Search();
 		Node start = new Node(startPuzzle);
 		start.g =0;
 		start.h = m_heuristicAlgorithm.GetScore(start);
@@ -45,8 +46,9 @@ public class AStarSearch extends ASearch {
 			if (IsGoal(x.getPuzzle().getPuzzle())) 
 			{
 												
-				System.out.println("it's take " +(System.currentTimeMillis()- m_startTime)+ " millis sec");
-				System.exit(0);
+				PrintTotalTime();
+				PrintPath(x);
+				return ;
 				// need to add depth
 			}
 			
@@ -81,8 +83,8 @@ public class AStarSearch extends ASearch {
 					
 					if (better_g== true)
 					{
-						PrintPhase(y.getPuzzle());
-						//m_came_from.put(y,x);
+						//PrintPhase(y.getPuzzle());
+						m_came_from.put(y,x);
 						y.g = new_g;
 						y.h = m_heuristicAlgorithm.GetScore(y);
 						y.f = y.h +y.g;
@@ -143,6 +145,18 @@ public class AStarSearch extends ASearch {
 			}
 		return minNode;
 		
+	}
+
+	
+	private void PrintPath(Node node)
+	{
+		if (!m_came_from.containsKey(node))
+		{
+			return;
+		}
+		else
+		PrintPath(m_came_from.get(node));
+		PrintPhase(node.getPuzzle());
 	}
 	
     List<Node> NeighborNodes()
