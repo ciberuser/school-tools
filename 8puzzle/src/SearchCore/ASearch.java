@@ -1,8 +1,5 @@
 package SearchCore;
 
-import java.util.Date;
-
-
 
 public abstract class ASearch implements ISearch
 {
@@ -21,10 +18,15 @@ public abstract class ASearch implements ISearch
 
 	public void Search()
 	{
-		m_startTime =System.currentTimeMillis(); 
+		m_startTime = System.currentTimeMillis(); 
 		
 	}
 	
+	protected void PrintTotalTime()
+	{
+		long time = System.currentTimeMillis()- m_startTime;
+		System.out.println("it's take " +(time/1000)+ "  sec");
+	}
 	
 	public void  PrintPhase(Puzzle p)
 	{ 

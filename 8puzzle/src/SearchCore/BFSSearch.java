@@ -31,38 +31,38 @@ public class BFSSearch extends ASearch implements ISearch {
 		while (!m_queue.isEmpty())
 		{
 				Puzzle p = m_queue.remove();
-				ChildNode(p);
+				if (CheckNode(p))return;
 		}
 		System.out.println("no solution in BFS");
 	}
 
 	//need to check it 
-	private Puzzle ChildNode(Puzzle p)
+	private boolean CheckNode(Puzzle p)
 	{
 		String oldPuzzleStr = p.GetPuzzelString();
 	 	SetVisit(p.Up(), oldPuzzleStr) ;
-		if (CheckCompletion(p))return p ;
+		if (CheckCompletion(p))return true ;
 		oldPuzzleStr = p.GetPuzzelString();
 		
 		SetVisit(p.Down(), oldPuzzleStr);
-		if(CheckCompletion(p))return p;
+		if(CheckCompletion(p))return true;
 		oldPuzzleStr  = p.GetPuzzelString();
 		
 		SetVisit(p.Left(), oldPuzzleStr) ;
-		if(CheckCompletion(p)) return p ;
+		if(CheckCompletion(p)) return true ;
 		oldPuzzleStr = p.GetPuzzelString();
 		
 		SetVisit(p.Right(), oldPuzzleStr);
-		if(CheckCompletion(p))return p;
+		if(CheckCompletion(p))return true;
 		
-		return p;
+		return false;
 	}
 	
 	private void SetVisit(Puzzle p,String oldPhase)
 	{
 		if (p!=null)
 		{
-			PrintPhase(p);
+			//PrintPhase(p);
 			if(!m_phaseState.containsKey(p.GetPuzzelString()))
 			{
 				int newValue = (oldPhase== null) ? 0 : m_phaseState.get(oldPhase)+1;
@@ -78,8 +78,8 @@ public class BFSSearch extends ASearch implements ISearch {
 		if(IsGoal(p.getPuzzle()))
 		{
 			System.out.println("success!! Depth:"+ m_phaseState.get(p.GetPuzzelString())) ;
-			System.out.println("it's take " +(System.currentTimeMillis()- m_startTime)+ " millis sec");
-			System.exit(0);
+			PrintTotalTime();
+		
 			return true;
 		}
 		return false;

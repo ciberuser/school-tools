@@ -6,8 +6,7 @@ public class Puzzle
 	private int ROW_SIZE = Def.MATRIX_ROW_SIZE;
 	private int COL_SIZE = Def.MATRIX_COL_SIZE;
 	private int BLANK = Def.BLANK; 
-	private int m_posRow ;
-	private int m_posCol ;
+	
 	public int[][] getPuzzle(){	return m_puzzle; }
 
 	private  int[][] m_puzzle = new int[ROW_SIZE][COL_SIZE];
