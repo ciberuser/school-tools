@@ -16,6 +16,7 @@ public class AStarSearch extends ASearch {
 	Iheuristic m_heuristicAlgorithm; 
 	Puzzle startPuzzle;
 	Vector<String> m_history ;
+	int m_attempt = 0;
 	
 
 	public AStarSearch(String puzzle, Iheuristic heurisitc )
@@ -42,6 +43,12 @@ public class AStarSearch extends ASearch {
 				
 		while (!m_open.isEmpty())
 		{
+			attempt++;
+			if (attempt > Def.MAX_ATTEMPT)
+			{
+				System.out.println("No solution (max attempt is 100,000)");
+				return ;
+			}
 			Node x = FindTheLowF_score();
 			if (IsGoal(x.getPuzzle().getPuzzle())) 
 			{
@@ -152,6 +159,7 @@ public class AStarSearch extends ASearch {
 	{
 		if (!m_came_from.containsKey(node))
 		{
+			PrintPhase(node.getPuzzle());
 			return;
 		}
 		else

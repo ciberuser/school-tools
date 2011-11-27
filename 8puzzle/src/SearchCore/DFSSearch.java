@@ -20,6 +20,7 @@ public class DFSSearch extends ASearch {
 	@Override
 	public void Search()
 	{
+		super.Search();
 		Node headNode = new Node(startPuzzle);
 		headNode.setM_color(ECOLOR.eWHITE);
 		m_stack.push(headNode);
