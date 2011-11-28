@@ -38,7 +38,7 @@ public class Search {
 		
 		if (args.length > 0)
 		{
-			if (args[0].isEmpty()) 
+			if (args[0] == null) 
 			{
 				System.out.println("no file was insert ");
 				return ;
@@ -82,9 +82,12 @@ public class Search {
 					System.out.println("A Star have been selected:\nstarting manhattan heurisic");
 					ISearch manhattanSearch =new AStarSearch(content,new ManhattanPrio());
 					manhattanSearch.Search();
-					System.out.println("starting hamming heurisic");
+					System.out.println("\nstarting hamming heurisic");
 					ISearch hammingSearch = new AStarSearch(content,new HammingPrio());
 					hammingSearch.Search();
+					System.out.println("\nstarting student heurisic");
+					ISearch studentSearch = new AStarSearch(content,new UserHeuristicPrio());
+					studentSearch.Search();
 				}
 				
 							

@@ -3,7 +3,8 @@ package SearchCore;
 
 public abstract class ASearch implements ISearch
 {
-	protected int attempt = 0;
+	protected int m_steps;
+	
 	protected long m_startTime ;
 	
 	public ASearch()
@@ -25,14 +26,14 @@ public abstract class ASearch implements ISearch
 	protected void PrintTotalTime()
 	{
 		long time = System.currentTimeMillis()- m_startTime;
-		System.out.println("it's take " +(time/1000)+ "  sec");
+		System.out.println("it's take " +time+ " milli sec");
 	}
 	
 	public void  PrintPhase(Puzzle p)
 	{ 
-		attempt++;
+		
 		int[][] puzzleMatrix = p.getPuzzle();
-		System.out.print("Attempt :" +attempt + "(");
+		System.out.print("(");
 		for (int i = 0 ; i < Def.MATRIX_ROW_SIZE ;++i)
 		{
 			for (int j = 0 ; j < Def.MATRIX_COL_SIZE ; ++j) 
@@ -44,6 +45,11 @@ public abstract class ASearch implements ISearch
 			
 		}
 		System.out.print(")->\n");
+	}
+	
+	public void printPhase(String puzzleStr)
+	{
+		System.out.println("(" + puzzleStr + ")->");
 	}
 	
 	protected boolean IsGoal(int[][] matrix)

@@ -16,7 +16,7 @@ public class AStarSearch extends ASearch {
 	Iheuristic m_heuristicAlgorithm; 
 	Puzzle startPuzzle;
 	Vector<String> m_history ;
-	int m_attempt = 0;
+
 	
 
 	public AStarSearch(String puzzle, Iheuristic heurisitc )
@@ -27,7 +27,7 @@ public class AStarSearch extends ASearch {
 		m_history = new Vector<String>();
 		m_came_from = new HashMap<Node, Node>();
 		m_heuristicAlgorithm = heurisitc;
-	
+		m_steps = 0;
 	}
 	
 	@Override
@@ -43,8 +43,8 @@ public class AStarSearch extends ASearch {
 				
 		while (!m_open.isEmpty())
 		{
-			attempt++;
-			if (attempt > Def.MAX_ATTEMPT)
+			m_steps++;
+			if (m_steps > Def.MAX_ATTEMPT)
 			{
 				System.out.println("No solution (max attempt is 100,000)");
 				return ;
@@ -54,6 +54,7 @@ public class AStarSearch extends ASearch {
 			{
 												
 				PrintTotalTime();
+				System.out.println("Path details :");
 				PrintPath(x);
 				return ;
 				// need to add depth
@@ -64,6 +65,7 @@ public class AStarSearch extends ASearch {
 			LinkedList<Node> neighbors = neighbor_nodes(x);
 			if (!neighbors.isEmpty()) //need to check if empty
 			{
+				
 				for (Node y : neighbors)
 				{
 					if (m_close.contains(y))
@@ -113,6 +115,7 @@ public class AStarSearch extends ASearch {
 		{
 			//if (node.parent == null) return null;
 			m_history.add(node.getPuzzle().GetPuzzelString());
+			
 			Puzzle p = node.getPuzzle();
 			Node tempNode =  ExpendNode(p.Up());
 			if (tempNode != null) neighbors.add(tempNode);
