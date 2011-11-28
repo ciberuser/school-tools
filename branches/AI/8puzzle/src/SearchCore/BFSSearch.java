@@ -11,7 +11,8 @@ public class BFSSearch extends ASearch implements ISearch {
 	Puzzle startPuzzle;	
 	protected Queue<Puzzle> m_queue = new LinkedList<Puzzle>();	
 	Map<String,Integer> m_phaseState = new HashMap<String,Integer>(); // 
-		
+	Map<String,String> m_history = new HashMap<String, String>();
+	
 	public BFSSearch() 
 	{
 		
@@ -22,7 +23,6 @@ public class BFSSearch extends ASearch implements ISearch {
 		super(vector);
 		startPuzzle  = new Puzzle(vector);
 	}
-
 	
 	public void Search()
 	{
@@ -62,12 +62,14 @@ public class BFSSearch extends ASearch implements ISearch {
 	{
 		if (p!=null)
 		{
+			String puzzleStringPhase = p.GetPuzzelString();
 			//PrintPhase(p);
-			if(!m_phaseState.containsKey(p.GetPuzzelString()))
+			if(!m_phaseState.containsKey(puzzleStringPhase))
 			{
 				int newValue = (oldPhase== null) ? 0 : m_phaseState.get(oldPhase)+1;
 				m_phaseState.put(p.GetPuzzelString(),newValue);
 				m_queue.add(p);
+				m_history.put(puzzleStringPhase, oldPhase);
 			}
 		}
 	}
@@ -77,12 +79,25 @@ public class BFSSearch extends ASearch implements ISearch {
 		
 		if(IsGoal(p.getPuzzle()))
 		{
-			System.out.println("success!! Depth:"+ m_phaseState.get(p.GetPuzzelString())) ;
+			System.out.println("Depth:"+ m_phaseState.get(p.GetPuzzelString())) ;
+			System.out.println("node tree history details:");
+			PrintPath(p.GetPuzzelString());
 			PrintTotalTime();
-		
 			return true;
 		}
 		return false;
+	}
+	
+	void PrintPath(String puzzleStr)
+	{
+		if(!m_history.containsKey(puzzleStr))
+		{
+		//	printPhase(puzzleStr);
+			return ;
+		}
+		PrintPath(m_history.get(puzzleStr));
+		printPhase(puzzleStr);
+		
 	}
 	
 }
