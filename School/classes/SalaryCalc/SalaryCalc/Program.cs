@@ -10,8 +10,8 @@ namespace SalaryCalc
         static void Main(string[] args)
         {
             Console.WriteLine("welcome to salary calculator !");
-            WorkerReader wr = new WorkerReader();
-
+            //WorkerReader wr = new WorkerReader();
+            ISalaryCalculator i_s = new SalaryCalculator();
 
 
         }
