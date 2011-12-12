@@ -34,7 +34,12 @@ namespace SalaryCalc
        // XmlTextReader m_txtReader = new XmlTextReader(SALARY_DATA);
         //XmlValidatingReader m_reader = new XmlValidatingReader(m_txtReader);
         XmlDocument m_doc;
-        Dictionary<WorkerData,int> m_workers= new Dictionary<WorkerData,int>();
+        Dictionary<WorkerData, int> m_workers = new Dictionary<WorkerData, int>();
+
+        public Dictionary<WorkerData, int> Workers
+        {
+            get { return m_workers; }
+        }
 
         public WorkerReader()
         {
@@ -42,10 +47,10 @@ namespace SalaryCalc
             ReadData();
         }
 
-        void ReadData()
+
+
+        public Dictionary<WorkerData,int> ReadData()
         {
-            try
-            {
                 m_doc.Load(SALARY_DATA);
                 
                 XmlNode Workers =  m_doc["Workers"];
@@ -57,10 +62,7 @@ namespace SalaryCalc
                     m_workers.Add(tempdata,int.Parse(worker.InnerText));
                 }
 
-            }
-            catch (Exception ex)
-            {
-            }
+                return m_workers;          
         }
 
 

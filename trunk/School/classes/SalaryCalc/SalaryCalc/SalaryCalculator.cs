@@ -7,25 +7,56 @@ namespace SalaryCalc
 {
     class SalaryCalculator:ISalaryCalculator
     {
-        const int CELLING_1 = 100;
-        const int CELLIN_2 = 130;
-        const int CELLIN_3 = 160;
-        const int CELLIN_4 = 180;
 
+        public delegate int salaryFanction(int hours);
 
+        const int HOUR_PAY = 30; 
+        enum ECellin
+        {
+            eLevel_1 = 100,
+            eLevel_2 = 130,
+            eLevel_3 = 160,
+            eLevel_4 = 180
+        }
+
+        Dictionary<ECellin, salaryFanction> m_salariesFunction;
+        WorkerReader m_workerDataBase;
+        void Init()
+        {
+            m_salariesFunction = new Dictionary<ECellin, salaryFanction>();
+            m_salariesFunction.Add(ECellin.eLevel_1, hours => (hours * HOUR_PAY));
+            m_salariesFunction.Add(ECellin.eLevel_2, hours => (hours * HOUR_PAY) +400);
+            m_salariesFunction.Add(ECellin.eLevel_3, hours => ((hours * HOUR_PAY) + 800));
+            m_salariesFunction.Add(ECellin.eLevel_4, hours => ((hours * HOUR_PAY) +1000));
+        }
+
+        public SalaryCalculator()
+        {
+            Init();
+            m_workerDataBase = new WorkerReader();
+            int h = GetSalary("ori", "alon");
+        }
+                        
+        
         #region ISalaryCalculator Members
 
-
-
-        public float WorkerSalary(string firstName, string last)
+        public int GetSalary(string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            int hours =  WorkerHour(firstName, lastName);
+            foreach (var level in Enum.GetValues(typeof(ECellin)))
+            {
+                if (hours < (int)level)
+                    return m_salariesFunction[(ECellin)level](hours);
+            }
+            return 0;
+            
         }
-
-        public float[] GetAllSalaries()
+        
+        public int WorkerHour(string firstName, string last)
         {
-            throw new NotImplementedException();
+            return  m_workerDataBase.Workers.Where(x => (x.Key.First == firstName && x.Key.Last == last)).FirstOrDefault().Value;
         }
+                
 
         #endregion
     }
