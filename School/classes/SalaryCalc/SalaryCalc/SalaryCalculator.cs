@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SalaryCalc
 {
-    class SalaryCalculator:ISalaryCalculator
+    public class SalaryCalculator:ISalaryCalculator
     {
 
         public delegate int salaryFanction(int hours);
@@ -42,7 +42,7 @@ namespace SalaryCalc
 
         public int GetSalary(string firstName, string lastName)
         {
-            int hours =  WorkerHour(firstName, lastName);
+            int hours =  GetWorkerHour(firstName, lastName);
             foreach (var level in Enum.GetValues(typeof(ECellin)))
             {
                 if (hours < (int)level)
@@ -51,13 +51,13 @@ namespace SalaryCalc
             return 0;
             
         }
-        
-        public int WorkerHour(string firstName, string last)
+
+        public int GetWorkerHour(string firstName, string lastName)
         {
-            return  m_workerDataBase.Workers.Where(x => (x.Key.First == firstName && x.Key.Last == last)).FirstOrDefault().Value;
+            return m_workerDataBase.Workers.Where(x => (x.Key.First == firstName && x.Key.Last == lastName)).FirstOrDefault().Value;
         }
                 
 
-        #endregion
+       #endregion
     }
 }

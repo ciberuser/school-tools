@@ -7,8 +7,7 @@ namespace SalaryCalc
 {
     interface ISalaryCalculator
     {
-        int WorkerHour(string firstName, string last);
-        float[] GetAllSalaries();
-
+        int GetWorkerHour(string firstName, string lastName);
+        int GetSalary(string firstName, string lastName);
     }
 }

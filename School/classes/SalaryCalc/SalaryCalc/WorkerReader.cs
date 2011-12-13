@@ -31,9 +31,7 @@ namespace SalaryCalc
     {
         const string SALARY_DATA = "SalaryData.xml";
 
-       // XmlTextReader m_txtReader = new XmlTextReader(SALARY_DATA);
-        //XmlValidatingReader m_reader = new XmlValidatingReader(m_txtReader);
-        XmlDocument m_doc;
+         XmlDocument m_doc;
         Dictionary<WorkerData, int> m_workers = new Dictionary<WorkerData, int>();
 
         public Dictionary<WorkerData, int> Workers
