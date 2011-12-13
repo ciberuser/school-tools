@@ -34,7 +34,7 @@ namespace SalaryCalc
         {
             Init();
             m_workerDataBase = new WorkerReader();
-            int h = GetSalary("ori", "alon");
+            
         }
                         
         
