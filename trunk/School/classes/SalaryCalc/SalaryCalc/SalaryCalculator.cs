@@ -48,7 +48,7 @@ namespace SalaryCalc
                 if (hours < (int)level)
                     return m_salariesFunction[(ECellin)level](hours);
             }
-            return 0;
+            return m_salariesFunction[ECellin.eLevel_4](hours);
             
         }
 
