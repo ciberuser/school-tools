@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TaklitoDataMap">
+  <DataContextMoniker Name="/TaklitoDataMapDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1139d098-b836-45f3-97e9-094a9fe2aa30" absoluteBounds="0.875, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/TaklitoDataMapDataContext/Album" />
+      <nestedChildShapes>
+        <elementListCompartment Id="31564979-a4df-4515-aac1-2ef96665bc49" absoluteBounds="0.89000000000000012, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1eb808d3-dcd1-4a96-a8f0-e70ccd486085" absoluteBounds="3.625, 1.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/TaklitoDataMapDataContext/Artist" />
+      <nestedChildShapes>
+        <elementListCompartment Id="faf1a81b-a82b-4c26-95b3-6cdf5fc6102a" absoluteBounds="3.6399999999999997, 1.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.625 : 1.88544840494792); (2.875 : 1.88544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TaklitoDataMapDataContext/Artist/Artist_Album" />
+      <nodes>
+        <classShapeMoniker Id="1eb808d3-dcd1-4a96-a8f0-e70ccd486085" />
+        <classShapeMoniker Id="1139d098-b836-45f3-97e9-094a9fe2aa30" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="15b72252-0164-4306-ad94-3bded04e104f" absoluteBounds="0.75, 3.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/TaklitoDataMapDataContext/Group" />
+      <nestedChildShapes>
+        <elementListCompartment Id="86d96d07-dbb5-481b-ac42-ba957a34cf23" absoluteBounds="0.76500000000000012, 3.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.8125 : 3.5); (1.8125 : 2.27089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TaklitoDataMapDataContext/Group/Group_Album" />
+      <nodes>
+        <classShapeMoniker Id="15b72252-0164-4306-ad94-3bded04e104f" />
+        <classShapeMoniker Id="1139d098-b836-45f3-97e9-094a9fe2aa30" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.09699625651042); (4.625 : 4.09699625651042); (4.625 : 3.27089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TaklitoDataMapDataContext/Group/Group_Artist" />
+      <nodes>
+        <classShapeMoniker Id="15b72252-0164-4306-ad94-3bded04e104f" />
+        <classShapeMoniker Id="1eb808d3-dcd1-4a96-a8f0-e70ccd486085" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

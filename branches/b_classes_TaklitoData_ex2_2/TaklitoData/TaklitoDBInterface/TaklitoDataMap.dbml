@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TaklitoDataBase" Class="TaklitoDataMapDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\TaklitoDataBase.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="TaklitoDBInterface.Properties.Settings" SettingsPropertyName="TaklitoDataBaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="AlbumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FK_Artist" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_Group" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Artist_Album" Member="Artist" ThisKey="FK_Artist" OtherKey="ArtistID" Type="Artist" IsForeignKey="true" />
+      <Association Name="Group_Album" Member="Group" ThisKey="FK_Group" OtherKey="GroupID" Type="Group" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Artist" Member="Artists">
+    <Type Name="Artist">
+      <Column Name="ArtistID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FK_Group" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Position" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Artist_Album" Member="Albums" ThisKey="ArtistID" OtherKey="FK_Artist" Type="Album" />
+      <Association Name="Group_Artist" Member="Group" ThisKey="FK_Group" OtherKey="GroupID" Type="Group" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Group]" Member="Groups">
+    <Type Name="Group">
+      <Column Name="GroupID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="Group_Album" Member="Albums" ThisKey="GroupID" OtherKey="FK_Group" Type="Album" />
+      <Association Name="Group_Artist" Member="Artists" ThisKey="GroupID" OtherKey="FK_Group" Type="Artist" />
+    </Type>
+  </Table>
+</Database>
