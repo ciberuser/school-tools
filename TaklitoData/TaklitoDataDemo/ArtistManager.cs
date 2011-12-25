@@ -11,6 +11,11 @@ namespace TaklitoDataDemo
 
         #region IArtistManager Members
 
+        public void RemoveArtist(int ArtistID)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddArtist(string firstName, string lastName)
         {
             Artist artist = new Artist();
@@ -35,6 +40,8 @@ namespace TaklitoDataDemo
         }
 
         #endregion
+
+
 
         Artist FindArtist(string first, string last)
         {
