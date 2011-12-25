@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Linq;
+using System.Threading;
 
 namespace TaklitoDBInterface
 {
@@ -101,9 +102,10 @@ namespace TaklitoDBInterface
         {
             Group gfrom = GetGroupTable().Where(X => X.GroupID == groupFrom).Single();
             Group gto = GetGroupTable().Where(X => X.GroupID == groupTo).Single();
-            gto.Artists.Add(artist);
             gfrom.Artists.Remove(artist);
+            gto.Artists.Add(artist);
             m_db.SubmitChanges();
+            Thread.Sleep(5000);
         }
 
         public void RemoveArtistFromGroup(Artist artistId, int groupId)
