@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using TaklitoDataDemo;
 using TaklitoDBInterface;
+using System.Data.Linq;
 
 namespace TaklitoDataUnitTest
 {
@@ -16,10 +17,12 @@ namespace TaklitoDataUnitTest
     [TestClass]
     public class GroupManagerTest
     {
-        const string GROUP = "group";
-        const string ARTIST = "artist";
+        const string GROUP = Services.GROUP;
+        const string ARTIST = Services.ARTIST;
+        const string ALBUM = Services.ALBUM;
 
         IGroupManager m_gropManager;
+        private TestContext testContextInstance;
 
         public GroupManagerTest()
         {
@@ -28,8 +31,7 @@ namespace TaklitoDataUnitTest
             //
         }
 
-        private TestContext testContextInstance;
-
+        
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -45,6 +47,8 @@ namespace TaklitoDataUnitTest
                 testContextInstance = value;
             }
         }
+
+        
 
         #region Additional test attributes
         //
@@ -66,22 +70,12 @@ namespace TaklitoDataUnitTest
          [TestCleanup()]
          public void MyTestCleanup() 
          {
-             CleanDBGroup();
+
+             Services.CleanDB();
+            // CleanDBGroup();
          }
         //
         #endregion
-
-        void CleanDBGroup()
-        {
-            IGroupManager gm = GetGroupManager();
-            Group[] allGroup = gm.GetAllGroups();
-            foreach (Group g in allGroup)
-            {
-                if (g.Name.Contains(GROUP))
-                    gm.RemoveGroup(g.GroupID);
-            }
-        }
-
 
         IGroupManager GetGroupManager()
         {
@@ -103,10 +97,10 @@ namespace TaklitoDataUnitTest
             for(int i=0 ; i<size ;i++)
             {
                 Artist a = new Artist();
-                a.ArtistID = i;
-                a.FirstName = ARTIST + i.ToString();
-                a.LastName = "_" + ARTIST + "_" + i.ToString();
-                a.Position = ARTIST + "__pos" + i.ToString();
+                a.ArtistID = i+Services.createIntGuid();
+                a.FirstName = Services.FIRST_NAME + i.ToString();
+                a.LastName = Services.LAST_NAME+  i.ToString();
+                a.Position = ARTIST + "p" + i.ToString();
                 ar.Add(a);
             }
             return ar.ToArray();
@@ -225,7 +219,7 @@ namespace TaklitoDataUnitTest
             int groupID = GetSafeGroupid(GROUP + "0", gm);
             gm.JoinArtistToGroup(artists[0], groupID);
             Group g = findSafeGroup(GROUP+"0",gm);
-            //Assert.IsTrue(g.Artists[0] == artists[0]);
+            Assert.IsTrue(g.Artists[0] == artists[0]);
         }
 
         [TestMethod]
@@ -235,13 +229,13 @@ namespace TaklitoDataUnitTest
             Artist[] artists = CreateArtists(1);
             Group g = findSafeGroup(GROUP + "0", gm);
             gm.JoinArtistToGroup(artists[0], ref g);
-           // Assert.IsTrue(g.Artists[0] == artists[0]);
+            Assert.IsTrue(g.Artists[0] == artists[0]);
         }
 
         [TestMethod]
         public void TestMoveArtist()
         {
-            string grp1 =GROUP + "0" ;
+            string grp1 = GROUP + "0" ;
             string grp2 = GROUP + "1";
             IGroupManager gm = AddGroupsGroup(2);
             Artist[] artists = CreateArtists(1);
@@ -252,7 +246,7 @@ namespace TaklitoDataUnitTest
 
             Group g1 = findSafeGroup(grp1,gm);
             Group g2 = findSafeGroup(grp2,gm);
-            // Assert.IsTrue(g1.Artists.Count == 0 && g2.Artists[0] == artists[0]);
+            Assert.IsTrue(g1.Artists.Count == 0 && g2.Artists[0] == artists[0]);
         }
 
         [TestMethod]
@@ -263,23 +257,32 @@ namespace TaklitoDataUnitTest
             Artist[] artists = CreateArtists(1);
             int gid1 = GetSafeGroupid(grp1, gm);
             gm.JoinArtistToGroup(artists[0], gid1);
+            
             gm.RemoveArtistFromGroup(artists[0], gid1);
-            Group g = gm.GetAllGroups()[0];
-          //  Assert.IsTrue(g.Artists.Count == 0);
+            foreach (Group g in gm.GetAllGroups())
+            {
+                if (g.Name.Contains(GROUP))
+                {
+                    Assert.IsTrue(g.Artists.Count == 0);
+                    break;
+                }
+ 
+            }
+           
         }
 
         [TestMethod]
         public void TestAddAlbum()
         {
-            string albumName ="str";
+            string albumName =ALBUM;
             string grp1 =GROUP + "0" ;   
             Album album = new Album();
-            album.AlbumId =1 ;
+            album.AlbumId = Services.createIntGuid();
             album.Name = albumName;
             IGroupManager gm = AddGroupsGroup(1);
             int gid1 = GetSafeGroupid(grp1, gm);
             gm.AddAlbum(album, gid1);
-           // Assert.IsTrue(gm.GetAllGroups()[0].Albums[0].Name == albumName);
+          //  Assert.IsTrue(gm.GetAllGroups()[0].Albums[0].Name == albumName);
         }
 
         

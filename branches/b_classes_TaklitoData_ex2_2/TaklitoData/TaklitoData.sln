@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaklitoDataUnitTest", "Takl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaklitoDBInterface", "TaklitoDBInterface\TaklitoDBInterface.csproj", "{C4104024-125F-4474-B184-9023A518C73F}"
 EndProject
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "taklitoData", "taklitoData\taklitoData.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
+EndProject
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "taklitoServer", "taklitoServer\taklitoServer.dbproj", "{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TaklitoData2.vsmdi
@@ -35,6 +39,18 @@ Global
 		{C4104024-125F-4474-B184-9023A518C73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4104024-125F-4474-B184-9023A518C73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4104024-125F-4474-B184-9023A518C73F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B47510B-E9AB-400A-BF18-396F8F9DC8AA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

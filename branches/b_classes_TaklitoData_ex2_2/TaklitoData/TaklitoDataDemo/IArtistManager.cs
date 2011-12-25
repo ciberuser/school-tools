@@ -10,6 +10,7 @@ namespace TaklitoDataDemo
         void AddArtist(string firstName,string lastName);
         void AddAlbumToArtist(Album album, string firstName, string lastName);
         Artist[] GetAllArtists();
+        void RemoveArtist(int ArtistID);
         
     }
 }

@@ -3,7 +3,13 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TaklitoDataDemo;
+//////////////////////////////////////////////////////////////////////////
+//if you using linq please unmark this flow line.
+using System.Data.Linq;
+//////////////////////////////////////////////////////////////////////////
+using TaklitoDBInterface;
+
+
 
 namespace TaklitoDataUnitTest
 {
@@ -13,9 +19,10 @@ namespace TaklitoDataUnitTest
     [TestClass]
     public class ArtistManagerTests
     {
-        const string FIRST_NAME = "firstname";
-        const string LAST_NAME ="lastname";
+        const string FIRST_NAME = Services.FIRST_NAME;
+        const string LAST_NAME = Services.LAST_NAME;
 
+        IArtistManager m_am;
 
         public ArtistManagerTests()
         {
@@ -44,7 +51,8 @@ namespace TaklitoDataUnitTest
 
         private IArtistManager GetArtistManger()
         {
-            return new ArtistManager();
+            if (m_am==null) m_am =  new ArtistManager();
+            return m_am;
         }
 
         private Artist[] GetArtists()
@@ -57,8 +65,8 @@ namespace TaklitoDataUnitTest
             Artist[] artArr = new Artist[cont];
             for (int i = 0; i < cont ;++i)
             {
-                artArr[i].FirstName = FIRST_NAME + "_" + i;
-                artArr[i].LastName = LAST_NAME + "_" + i;
+                artArr[i].FirstName = FIRST_NAME +  i;
+                artArr[i].LastName = LAST_NAME +  i;
              }
             return artArr;
         }
@@ -80,22 +88,26 @@ namespace TaklitoDataUnitTest
         // public void MyTestInitialize() { }
         //
         // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
+        [TestCleanup()]
+        public void MyTestCleanup() 
+        {
+            Services.CleanDB();
+        }
+        
         #endregion
 
         [TestMethod]
         public void TestAddAlbumToArtist()
         {
             Album album = new Album();
-            album.AlbumId =1;
-            album.Name ="test";
-
+            album.AlbumId = Services.createIntGuid();
+            album.Name =Services.ALBUM;
+            
             IArtistManager artManager = GetArtistManger();
-            artManager.AddArtist("_" + FIRST_NAME + "_", "_" + LAST_NAME + "_");
-            artManager.AddAlbumToArtist(album, "_" + FIRST_NAME + "_", "_" + LAST_NAME + "_");
-            Assert.IsTrue(artManager.GetAllArtists()[0].Albumes[0].Name == "test");
+            int size = artManager.GetAllArtists().Length;
+            int artistId = artManager.AddArtist(FIRST_NAME , LAST_NAME );
+            artManager.AddAlbumToArtist(album, FIRST_NAME ,LAST_NAME);
+            Assert.IsTrue(artManager.GetAllArtists().Where(X => X.ArtistID ==artistId).Single().Albums[0].Name == Services.ALBUM);
         }
 
         [TestMethod]
@@ -108,17 +120,16 @@ namespace TaklitoDataUnitTest
         public void TestAddArtist()
         {
             int toAdd = 2 ;
-           
+            int[] IdArr = new int[toAdd] ;
             IArtistManager manger = GetArtistManger();
+            int size = manger.GetAllArtists().Length;
             for (int i = 0; i < toAdd; ++i)
             {
-
-                manger.AddArtist(FIRST_NAME + "_" + i, LAST_NAME + "_" + i);
+                IdArr[i] = manger.AddArtist(FIRST_NAME + i, LAST_NAME + i);
             }
 
-            Assert.IsTrue(manger.GetAllArtists()[0].FirstName == FIRST_NAME + "_" + 0);
-            Assert.IsTrue(manger.GetAllArtists()[1].LastName == LAST_NAME + "_" + 1);
-
+            Assert.IsTrue(manger.GetAllArtists().Where(X => X.ArtistID == IdArr[0]).Single().FirstName == FIRST_NAME + "0");
+            Assert.IsTrue(manger.GetAllArtists().Where(X => X.ArtistID == IdArr[1]).Single().LastName == LAST_NAME + "1");
         }
 
     }

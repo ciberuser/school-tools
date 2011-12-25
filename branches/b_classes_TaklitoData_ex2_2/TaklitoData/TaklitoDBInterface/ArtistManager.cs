@@ -11,6 +11,7 @@ namespace TaklitoDBInterface
 
         private Table<Artist> GetArtistsTable()
         {
+            if (!TaklitoContext.GetIntance().TaklitoDataContext1.DatabaseExists()) return null;
             return TaklitoContext.GetIntance().TaklitoDataContext1.GetTable<Artist>();
         }
 
@@ -21,22 +22,33 @@ namespace TaklitoDBInterface
 
         #region IArtistManager Members
 
-        public void AddArtist(string firstName, string lastName)
+        public int AddArtist(string firstName, string lastName)
         {
             Artist artist = new Artist();
             artist.FirstName = firstName;
             artist.LastName = lastName;
-           
+            artist.ArtistID = Services.createIntGuid();
+            GetArtistsTable().InsertOnSubmit(artist);
+            TaklitoContext.GetIntance().TaklitoDataContext1.SubmitChanges();
+            return artist.ArtistID;
         }
 
         public void AddAlbumToArtist(Album album, string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            Artist a = GetArtistsTable().Where(X => X.FirstName == firstName && X.LastName == lastName).FirstOrDefault();
+            a.Albums.Add(album);
+            TaklitoContext.GetIntance().TaklitoDataContext1.SubmitChanges();
         }
 
         public Artist[] GetAllArtists()
         {
-            throw new NotImplementedException();
+            return GetArtistsTable().ToArray();
+        }
+
+        public void RemoveArtist(int ArtistID)
+        {
+            GetArtistsTable().DeleteOnSubmit(GetArtistsTable().Where(X => X.ArtistID == ArtistID).Select(x => x).Single());
+            TaklitoContext.GetIntance().TaklitoDataContext1.SubmitChanges();
         }
 
         #endregion

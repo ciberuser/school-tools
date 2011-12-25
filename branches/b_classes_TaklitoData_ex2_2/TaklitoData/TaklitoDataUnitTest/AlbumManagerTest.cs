@@ -11,13 +11,12 @@ namespace TaklitoDataUnitTest
     public class AlbumManagerTest
     {
 
-
-               
+                       
 
         [TestMethod]
         public void GetAlbum()
         {
-            TableMaster tm = new TableMaster();
+            AlbumMaster tm = new AlbumMaster();
             Album[] album = tm.GetAllAlbum();
             Assert.IsTrue(album[0].Name.Trim() == "Lies");
         }
