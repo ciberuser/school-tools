@@ -239,13 +239,13 @@ namespace TaklitoDataUnitTest
             string grp2 = GROUP + "1";
             IGroupManager gm = AddGroupsGroup(2);
             Artist[] artists = CreateArtists(1);
-            int gid1 = GetSafeGroupid(grp1, gm);
-            int gid2 = GetSafeGroupid(grp2, gm);
-            gm.JoinArtistToGroup(artists[0],gid1);
-            gm.MoveArtistFromGroupToGroup(artists[0], gid1, gid2);
+            int gfromId = GetSafeGroupid(grp1, gm);
+            int gtoId = GetSafeGroupid(grp2, gm);
+            gm.JoinArtistToGroup(artists[0], gfromId);
+            gm.MoveArtistFromGroupToGroup(artists[0], gfromId, gtoId);
 
-            Group g1 = findSafeGroup(grp1,gm);
-            Group g2 = findSafeGroup(grp2,gm);
+            Group g1 = findSafeGroup(grp1, gm);
+            Group g2 = findSafeGroup(grp2, gm);
             Assert.IsTrue(g1.Artists.Count == 0 && g2.Artists[0] == artists[0]);
         }
 
