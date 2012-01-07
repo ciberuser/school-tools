@@ -1,0 +1,25 @@
+variable Burglary  
+variable Earthquake
+variable Alarm     
+variable JohnCalls 
+variable MaryCalls
+
+probability Burglary
+  0.001 
+
+probability Earthquake
+  0.002 
+
+probability Alarm | Burglary Earthquake
+  t  t  0.95  
+  t  f  0.94 
+  f  t  0.29 
+  f  f  0.001
+
+probability JohnCalls | Alarm
+  t  0.90  
+  f  0.05  
+
+probability MaryCalls | Alarm
+  t  0.70  
+  f  0.01  
