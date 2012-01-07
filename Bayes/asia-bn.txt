@@ -1,0 +1,42 @@
+variable Smoking 
+variable Bronchitis
+variable Cancer     
+variable Asia 
+variable Tumberculosis
+variable Toc
+variable Dyspnea
+variable Xray 
+
+probability Smoking
+  0.3
+
+probability Asia
+  0.01  
+
+probability Bronchitis | Smoking
+  t  0.2
+  f  0.1  
+
+probability Cancer | Smoking
+  t  0.1 
+  f  0.03 
+
+probability Tumberculosis | Asia 
+  t  0.06
+  f  0.01 
+
+probability Toc | Cancer Tumberculosis
+  t  t  1.0
+  t  f  1.0
+  f  f  0
+  f  t  1.0 
+
+probability Dyspnea | Bronchitis Toc
+  t  t  0.7
+  t  f  0.5
+  f  t  0.6
+  f  f  0.1
+
+probability Xray | Toc
+  t  0.93
+  f  0.06 
