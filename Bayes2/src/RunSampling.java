@@ -35,8 +35,9 @@ public class RunSampling {
 
 	Sampling sample = new Sampling(bn, q);
 
-	NumberFormat nf = new DecimalFormat("0.00000000");
-	
+	NumberFormat nf = new DecimalFormat("0.000000");
+	System.out.println("runnig sampling file "+bn_filename);
+	System.out.print(" with query file "+ query_filename);
 	System.out.print("the sampling result :");
 	System.out.print(nf.format( sample.runMoreIterations(max_iters) ));
 	
