@@ -56,30 +56,7 @@ public class Sampling {
     {
     	m_bayesNet = bn;
     	m_query =q;
-    	/*
-        int quertVar = q.queryVar;
-        
-    	for (int i =0; i< bn.numVariables ; i++)
-    	{
-    		if (bn.numParents[i]==0) 
-    	}
-    	    	
-    	for (int i = 0; i<q.evidence.length ; ++i)
-    	{
-    		System.out.println(q.evidence[i]);
-    	}
-    	
-    	System.out.println("query var : "+ q.queryVar);
-    	for (int i=0;i<bn.numVariables ; i++)
-    	{
-    		System.out.println(bn.varName[i]);
-    		
-    	}
-    	*/
-    	
-    	
-	// fill in initialization code here
-    		
+    
     }
 
     
@@ -113,12 +90,19 @@ public class Sampling {
     		}
     		
     		float result = (queryVarCount/contConditionCount);
-    		System.out.print((int)queryVarCount);
-    		System.out.print("/");
-    		System.out.print((int)contConditionCount);
-    		System.out.print(" = ");
-    		return result;
+    		NumberFormat nf = new DecimalFormat("0.000000");
+    		
+    		
+    		System.out.println("\nsampling result :");
+    		PrintResult(queryVarCount, contConditionCount);
+    		System.out.print(nf.format(result));
+    	 	System.out.println("\nuseful samples :");
+    	 	PrintResult(contConditionCount,n);
+    	 	System.out.print(contConditionCount/n);
+    	 	return result;
     	}
+    	
+    	
     	//int[] sample = GenSample(
     	
     	//double[] a = new double[2];
@@ -126,4 +110,11 @@ public class Sampling {
 
     }
 
+    private void PrintResult(double a,double b)
+	{
+		System.out.print((int)a);
+		System.out.print("/");
+		System.out.print((int)b);
+		System.out.print(" = ");
+	}
 }
