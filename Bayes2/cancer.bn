@@ -1,0 +1,26 @@
+variable A t f
+variable B t f
+variable C t f
+variable D t f
+variable E t f
+
+probability A
+  0.2   0.8
+
+probability B | A
+  t  0.8  0.2
+  f  0.2  0.8
+
+probability C | A
+  t  0.2  0.8
+  f  0.05  0.95
+
+probability E | C B
+  t  t  0.8  0.2
+  t  f  0.8  0.2
+  f  t  0.8  0.2
+  f  f  0.05 0.95
+
+probability D | B
+  t  0.8  0.2
+  f  0.6  0.4
