@@ -8,11 +8,16 @@ public class Network
 		
 	}
 	
-	public void AddPrioToNode(String Node,float prio)
+	public void AddPrioToNode(String nodeName,float prio)
 	{
 		
 	}
 	
+	public void AddParent(String[] Pname)
+	{
+		
+	}
+		
 	public float RunQuery(String Query)
 	{
 		return 0;

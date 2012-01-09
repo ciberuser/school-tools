@@ -19,20 +19,32 @@ public class Sampling {
      *  query on which MCMC is to be run.
      */
 	
-	private int GetRandomNum()
+	private double GetRandomNum()
 	{
 		Random genNum= new Random();
-    	return genNum.nextInt(2)-1;
+		  	return genNum.nextDouble();
 	}
 	
-	private int[] GenSample(int numVarible)
+	private int[] GenSample( BayesNet bn)
 	{
-		int[] sample = new int[numVarible];
-		for(int i= 0 ; i< numVarible ; i++)
+		int numVariables = bn.numVariables;
+		int[] sample = new int[numVariables];
+		
+		for(int i= 0 ; i< numVariables ; i++)
 		{
-			sample[i] = GetRandomNum();
+			sample[i] = GetValue(bn,GetRandomNum(),i,sample);
 		}
+		for (int i=0; i<sample.length ;i++) sample[i]--;
 		return sample;
+	}
+	
+	
+	private int GetValue(BayesNet bn,double d ,int i,int[] sample)
+	{
+		
+		double dub = bn.getCondProb(i,sample);
+		if (dub > d) return 1;
+		else return 0;
 	}
 	
 	private BayesNet m_bayesNet ;
@@ -73,7 +85,7 @@ public class Sampling {
     
     public double runMoreIterations(int n)
     {
-    	if (m_bayesNet.numVariables ==0) return 0;
+    	if (m_bayesNet.numVariables == 0) return 0;
     	else
     	{
     		
@@ -82,7 +94,7 @@ public class Sampling {
     		int[] sample;
     		for(int i = 0; i<n ; i++)
     		{
-    			 sample= GenSample(m_bayesNet.numVariables);
+    			 sample= GenSample(m_bayesNet);
     			
     			 boolean testCon = true;
     			 for(int j = 0 ; j< m_query.evidence.length ;j++)
