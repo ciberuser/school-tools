@@ -85,12 +85,12 @@ public class Sampling {
     
     public double runMoreIterations(int n)
     {
+    	
     	if (m_bayesNet.numVariables == 0) return 0;
     	else
     	{
-    		
     		float queryVarCount = 0;
-    		float contConditionCount =0;
+    		float contConditionCount =1;
     		int[] sample;
     		for(int i = 0; i<n ; i++)
     		{
@@ -111,8 +111,12 @@ public class Sampling {
     				 	 if (sample[m_query.queryVar] == 0) queryVarCount++;
     				 }
     		}
-    		float result = (queryVarCount/contConditionCount);
     		
+    		float result = (queryVarCount/contConditionCount);
+    		System.out.print((int)queryVarCount);
+    		System.out.print("/");
+    		System.out.print((int)contConditionCount);
+    		System.out.print(" = ");
     		return result;
     	}
     	//int[] sample = GenSample(
