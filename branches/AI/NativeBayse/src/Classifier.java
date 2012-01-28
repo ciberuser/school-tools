@@ -8,8 +8,6 @@ import java.util.Vector;
 
 public class Classifier 
 {
-	
-	
 	public void AddWordList(String filename)
 	{
 		try 
@@ -26,6 +24,47 @@ public class Classifier
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void ClassArticle(String fileName)
+	{
+		try {
+			String[] AllLines = ReadFromFile(fileName);
+			int i = 0;
+			for(String line : AllLines)
+			{
+				m_Data.AddArticle2Class(Integer.parseInt(line.trim()), i++);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public double GetPR(int wordIndex,int classType)
+	{ 
+		intWarp K = new intWarp();
+		int wicj =  m_Data.GetCountWordInClass(wordIndex, classType);
+		int wjcj = m_Data.GetTotalWordSInClass(classType,K);
+		return ((double)(wicj+1)/((double)wjcj+(double)K.getM_Value())); //need to fix it ...
+	}
+	
+	public void Words2Articles(String fileName)
+	{
+		try
+		{
+			String[] AllLines = ReadFromFile(fileName);
+			for(String line : AllLines)
+			{
+				String[] Items = line.split("\\s");
+				m_Data.AddWordToArticle(Integer.parseInt(Items[0]), Integer.parseInt(Items[1]));
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	
