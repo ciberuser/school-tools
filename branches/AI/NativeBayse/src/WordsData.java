@@ -30,8 +30,11 @@ public class WordsData
 	public void AddWord(String word)
 	{
 		m_wordList.add(word);
-		
-		
+	}
+	
+	public int GetNumOfWords()
+	{
+		return m_wordList.size();
 	}
 	
 	public void AddArticle2Class(int classType,int articleIndex)

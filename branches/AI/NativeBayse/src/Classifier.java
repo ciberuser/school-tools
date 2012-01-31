@@ -26,6 +26,11 @@ public class Classifier
 		
 	}
 	
+	public int GetCountOfWords()
+	{
+	 	return m_Data.GetNumOfWords();
+	}
+	
 	public void ClassArticle(String fileName)
 	{
 		try {
@@ -66,8 +71,6 @@ public class Classifier
 			// TODO: handle exception
 		}
 	}
-	
-	
 	
 	private String[] ReadFromFile(String filename) throws IOException
 	{
