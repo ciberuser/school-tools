@@ -25,25 +25,35 @@ public class RunClassifier {
 		String WordsFile = args[0];
 		String AritcleListFile =  args[1] ;
 		String classFile =  args[2] ;
+		String testData = args[3];
+		String testLabel = args[4];
 		
-		Classifier classifier = new Classifier();
+		Classifier classifier = new Classifier(WordsFile,AritcleListFile,classFile);
 		
-		classifier.AddWordList(WordsFile);
-		classifier.Words2Articles(AritcleListFile);
-		classifier.ClassArticle(classFile);
 		
-		System.out.println("the out of count word in class");
 		FindWords(classifier);
-		//double count = classifier.GetPR( 25,1 );
-		for (int i =0 ; i< BEST_WORD;++i)
+		System.out.println("2 )the 10 most discriminative word features : ");
+		for (int i = 0 ; i < BestWordsIndexs.length ; i++)
 		{
-			//System.out.println("word res :" +logResults[i]);
-			System.out.println("word index:" +BestWordsIndexs[i]);	
+			System.out.println(BestWordsIndexs[i]+" : " + classifier.GetWord(BestWordsIndexs[i]));
+			
 		}
+		
+		System.out.println("\n3)learing data acorrding to "+AritcleListFile + " and "+ classFile);
+		System.out.println("accuracy of train data :" + classifier.Learn());
+		
+		System.out.println("evaluating the classifier according to files: " +testData +" and "+ testLabel);
+		double success = classifier.EvaluateData(testData, testLabel);
+		System.out.println("classifier success to classify at accuracy of :" +success);
+			
 		
 		
 	}
-
+	
+	static void FindWords2(Classifier classfier)
+	{
+		
+	}
 
 	static void FindWords(Classifier classfier)
 	{
@@ -53,7 +63,7 @@ public class RunClassifier {
 		{ 
 		   double res =	Math.log(classfier.GetPR(i, 1)) - Math.log(classfier.GetPR(i,2));
 		   
-		   double resLog=  Math.abs(res);
+		   double resLog=Math.abs(res);
 		   
 		   for(int j = 0 ; j<BEST_WORD ; j++)
 		   {
@@ -64,6 +74,7 @@ public class RunClassifier {
 				  break;
 			   }
 		   }
+		   
 		}
 		
 	}
