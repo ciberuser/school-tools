@@ -9,11 +9,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import Interfaces.ICollector;
+import Services.Logger;
 
-public class WgetCollector implements ICollector{
+public class WgetCollector extends BaseCFinder implements ICollector {
 
+	
+	public  WgetCollector(String name)
+	{
+		super(name);
+	}
+	
+	public WgetCollector()
+	{
+		super();
+	}
+	
+	
 	@Override
-	public boolean SaveDataFile(String PathToSave,String data) {
+	public boolean SaveDataFile(String PathToSave,String address) {
 	
 		FileWriter outFile = null;
 		PrintWriter out = null; 
@@ -22,14 +35,18 @@ public class WgetCollector implements ICollector{
 		{
 			outFile = new FileWriter(PathToSave);
 			out = new PrintWriter(outFile);
-			BufferedReader r = new BufferedReader(new InputStreamReader(new URL(data).openStream()));
+			BufferedReader r = new BufferedReader(new InputStreamReader(new URL(address).openStream()));
 			while ((s = r.readLine())!= null)
 			{
-				out.append(s);
+				s=s.replace(">", ">\n");
+				out.append(s+"\n");
 			}
 			out.close();
 			
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
+			Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
 			if(out != null)
 			out.close();
 			return false;

@@ -2,6 +2,6 @@ package Interfaces;
 
 public interface ICollector 
 {
-	boolean SaveDataFile(String PathToSave,String data);
+	boolean SaveDataFile(String PathToSave,String address);
 	
 }
