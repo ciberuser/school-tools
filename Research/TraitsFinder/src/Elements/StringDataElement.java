@@ -41,8 +41,8 @@ public class StringDataElement extends AElement implements IElement {
 
 	public void SetProperty(String ProperyDef, String ProperyData)
 	{
-		m_propertyData = ProperyData;
-		m_propertyDef = ProperyDef;
+		super.SetProperty(ProperyDef, ProperyData);
+		SetProperty(ProperyDef,(String)ProperyData);
 	}
 	
 	

@@ -9,7 +9,7 @@ public abstract class AElement  {
 	protected List<IElement> m_elements;
 	
 	
-	public List<IElement> GetSessions() {
+	public List<IElement> GetElements() {
 		return m_elements;
 	}
 
