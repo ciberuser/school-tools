@@ -11,13 +11,14 @@ public class Logger
 	
 	public static Logger GetLogger()
 	{
-		if (new File(LOG_NAME).exists())
-		{
-			File file = new File(LOG_NAME);
-			file.delete();
-		}
+		
 		if (m_logger==null)
 		{
+			if (new File(LOG_NAME).exists())
+			{
+				File file = new File(LOG_NAME);
+				file.delete();
+			}
 			m_logger = new Logger(LOG_NAME);
 		}
 		return m_logger;
