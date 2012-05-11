@@ -24,13 +24,13 @@ public class WgetCollectorTests {
 
 	@Test
 	public void testSaveDataFile() {
-		assertTrue(m_wgetCollector.SaveDataFile("testYnet", "http://www.ynet.co.il/home/0,7340,L-8,00.html"));
+		assertTrue(m_wgetCollector.SaveDataFile("testYnet.xml", "http://www.ynet.co.il/home/0,7340,L-8,00.html"));
 	}
 	
 	@Test
 	public void TestPinterrestSiteGet()
 	{
-		assertTrue(m_wgetCollector.SaveDataFile("pinterrest", "http://pinterest.com/all/"));
+		assertTrue(m_wgetCollector.SaveDataFile("pinterrest.xml", "http://pinterest.com/all/"));
 	}
 
 }
