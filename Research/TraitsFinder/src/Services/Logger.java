@@ -11,7 +11,6 @@ public class Logger
 	
 	public static Logger GetLogger()
 	{
-		
 		if (m_logger==null)
 		{
 			if (new File(LOG_NAME).exists())
