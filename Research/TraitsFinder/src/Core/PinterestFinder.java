@@ -5,20 +5,35 @@ import java.io.IOException;
 
 import Services.Logger;
 
+import Elements.StringDataElement;
 import Interfaces.IElement;
 import Interfaces.IFinder;
+
+import javax.xml.crypto.NodeSetData;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+
 
 public class PinterestFinder implements IFinder {
 
 	//final static String USER_ADDRESS_Path = 
 	final static String PINTEREST_FINDER = "PinterstFinder";
+	final static String USER_ALL_USERS_COMMENT_PATH = "//body/div[@id='wrapper']/div[@id='ColumnContainer']";
+	final static String USER_COMMENT_PATH = "//div[@class='convo attribution clearfix']";
+	final static String USERS_FOLDER_POOL_PATH = "users";
+	
 	String m_FilePath;
 	private Document doc;
 	
@@ -38,29 +53,88 @@ public class PinterestFinder implements IFinder {
 			
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(fXmlFile);
-			NodeList nodes = doc.getChildNodes();
+						
+			XPathFactory factory = XPathFactory.newInstance();
+			XPath xpath = factory.newXPath();
+			Node users = (Node)xpath.evaluate(USER_ALL_USERS_COMMENT_PATH, doc,XPathConstants.NODE);
+			IElement mainElement = new StringDataElement();
+			if(users != null)
+			{
+			
+				NodeList list = (NodeList)xpath.evaluate(USER_COMMENT_PATH,users,XPathConstants.NODESET);
+				
+				CreateResultsPool(USERS_FOLDER_POOL_PATH);
+				WriteLineToLog( "Data for of nodes :");
+					for (int i = 0 ; i < list.getLength() ; i++)
+					{
+						Node t=list.item(i);
+					  	String[] user_item= t.getTextContent().trim().replace("\t","").split("\n");
+					  	//creating user data.
+					  	CreateResultsPool(USERS_FOLDER_POOL_PATH +"/" +user_item[0].replace(" ", "_"));
+						//save pool of intersts.
+					  	NodeList user_nudeItem = (NodeList)xpath.evaluate("//p//a",t,XPathConstants.NODESET);
+						//NamedNodeMap nnm= user_nudeItem.getAttributes();
+						//Node nx= nnm.getNamedItem("href");
+						//String st= nx.getNodeValue();
+						
+						
+						
+					}
+				//}
+			}
+			return null;
+			
 			
 		} 
 		catch (Exception e)
 		{
-			Logger.GetLogger().WriteLine(PINTEREST_FINDER, e.toString());
+			WriteLineToLog("Error on parsing main pinterset error : "+ e.toString());
 			Logger.GetLogger().Write(PINTEREST_FINDER, e.toString());
 			e.printStackTrace();
+			return null;
 		}
 		
-		return null;
+		
 	}
 
 	@Override
 	public boolean SaveItem() {
-		// TODO Auto-generated method stub
-		return false;
+			return true;
 	}
 
 	@Override
-	public boolean CreateResultsPool(String Path) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean CreateResultsPool(String Path)
+	{
+		try
+		{
+			   // Create one directory
+			  boolean success = (
+			  new File(Path)).mkdir();
+			  if (success) 
+			  {
+				  WriteLineToLog("directory has created at "+Path);
+				  return true;
+			  }
+			  else
+			  {
+				  WriteLineToLog("failed to create directory "); 
+				return false;
+			  }
+			
+		}
+		catch (Exception e)
+		{
+			//Catch exception if any
+			WriteLineToLog( "error when creating directory Error: " +e.getMessage()); 
+			return false;
+		}
+		
+	  	
+	}
+	
+	private void WriteLineToLog(String msg)
+	{
+		Logger.GetLogger().WriteLine(PINTEREST_FINDER,msg);
 	}
 
 	

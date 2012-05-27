@@ -39,8 +39,8 @@ public class PinterstFinderTest {
 	public void testFindString()
 	{
 		assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, "http://pinterest.com/all/"));
-		m_pintersetFinder.Find(PINTERS_FILE);
-		fail("Not yet implemented");
+		assertTrue(m_pintersetFinder.Find(PINTERS_FILE)!=null);
+		
 	}
 
 	@Test
