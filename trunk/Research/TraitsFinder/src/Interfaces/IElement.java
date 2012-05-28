@@ -6,7 +6,7 @@ public interface IElement
 {
 	List<IElement> GetElements();
 	void AddElement(IElement element);
-	void SetProperty(String ProperyDef,Object ProperyData);
+	void AddProperty(String ProperyDef,Object ProperyData);
+	void SetSerializer(IElemetSerializer serializer);
 	
-
 }

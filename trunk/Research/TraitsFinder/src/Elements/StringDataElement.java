@@ -3,6 +3,9 @@ package Elements;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Interfaces.*;
 
 public class StringDataElement extends AElement implements IElement {
@@ -11,42 +14,39 @@ public class StringDataElement extends AElement implements IElement {
 	public StringDataElement()
 	{
 		super();
+		m_properties = new HashMap<String, String>();
 	}
 	
 	public StringDataElement(String ProperyDef, String ProperyData)
 	{
 		super();
-		m_propertyDef = ProperyDef;
-		m_propertyData = ProperyData;
+		m_properties = new HashMap<String, String>();
+		m_properties.put(ProperyDef, ProperyData);
 	}
-	
-	public String GetData()
-	{
-		return m_propertyData;
-	}
-		
-	public String GetDefinition()
-	{
-		return m_propertyDef;
-	}
-	
-		
+			
 	@Override
-	public void SetProperty(String ProperyDef, Object ProperyData)
+	public void AddProperty(String ProperyDef, Object ProperyData)
 	{
 		super.SetProperty(ProperyDef, ProperyData);
-		m_propertyData = (String)ProperyData;
-		m_propertyDef = ProperyDef;
+		m_properties.put(ProperyDef,(String) ProperyData);
 	}
 
+	@Override
+	public void SetSerializer(IElemetSerializer serializer)
+	{
+		m_serializer = serializer;
+	}
+	
 	public void SetProperty(String ProperyDef, String ProperyData)
 	{
 		super.SetProperty(ProperyDef, ProperyData);
 		SetProperty(ProperyDef,(String)ProperyData);
 	}
 	
+	private Map<String,String> m_properties;
+	private IElemetSerializer m_serializer;
 	
-	private String m_propertyData;
-	private String m_propertyDef;
+	
+	
 	
 }

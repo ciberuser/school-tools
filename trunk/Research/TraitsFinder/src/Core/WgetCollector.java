@@ -58,50 +58,7 @@ public class WgetCollector extends BaseCFinder implements ICollector {
 			return false;
 		}
 		 
-		
-		
-		
-		/*
-		  
-		 
-		try 
-		{
-			outFile = new FileWriter(PathToSave);
-			out = new PrintWriter(outFile);
-			BufferedReader r = new BufferedReader(new InputStreamReader(new URL(address).openStream()));
-			while ((s = r.readLine())!= null)
-			{
-				if(s.contains("<input"))
-				{
-					s=s.replace("<input", "</input");
-				}
-				else
-				{
-					if(s.contains("form"))
-					{
-						s=s.replace("<form", "</form");
-					}
-					else
-					{
-						s=s.replace(">", ">\n");
-					}
-				}
-				out.append(s+"\n");
-			}
-			out.close();
-			Logger.GetLogger().WriteLine(m_Name,"html saved!! convert to xml: ");
-		
-			
-		}
-		catch (Exception e)
-		{
-			Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
-			if(out != null)
-			out.close();
-			return false;
-		}
-		return true;
-		*/
+						
 	}
 	
 

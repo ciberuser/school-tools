@@ -2,31 +2,41 @@ package TratisFinderTests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Core.PinterestFinder;
+import Core.CommonDef;
+import Core.PintersetScouter;
 import Core.WgetCollector;
 import Interfaces.ICollector;
-import Interfaces.IFinder;
+import Interfaces.IScouter;
+import Services.FileServices;
+import Services.Logger;
+
 
 public class PinterstFinderTest {
 
 	ICollector m_mainPageCollector;
-	IFinder m_pintersetFinder ;
+	IScouter m_pintersetScouter ;
 	final static String PINTERS_FILE ="pinterrest_Main.xml"; 
+	final static String PINTERST_TESTS = "PintersTests";
 	
 	
 	@Before
 	public void setUp() throws Exception 
 	{
 		m_mainPageCollector = new WgetCollector();
-		m_pintersetFinder = new PinterestFinder();
+		m_pintersetScouter = new PintersetScouter();
+		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
+		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 	}
 
 	@Test
@@ -38,8 +48,8 @@ public class PinterstFinderTest {
 	@Test
 	public void testFindString()
 	{
-		assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, "http://pinterest.com/all/"));
-		assertTrue(m_pintersetFinder.Find(PINTERS_FILE)!=null);
+		//assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, "http://pinterest.com/all/"));
+		assertTrue(m_pintersetScouter.Scout(PINTERS_FILE)!=null);
 		
 	}
 
@@ -53,4 +63,6 @@ public class PinterstFinderTest {
 		fail("Not yet implemented");
 	}
 
+	
+	
 }
