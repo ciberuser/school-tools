@@ -2,6 +2,8 @@ package Services;
 
 import java.io.File;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import Core.CommonDef;
 
 public class FileServices 
@@ -46,6 +48,11 @@ public class FileServices
 		}
 		
 	  	
+	}
+	
+	public static boolean PathExist(String path)
+	{
+		return new File(path).exists();
 	}
 	
 	private static void WriteLineToLog(String module, String msg)

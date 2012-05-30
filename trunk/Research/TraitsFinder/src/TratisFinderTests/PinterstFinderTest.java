@@ -31,6 +31,10 @@ public class PinterstFinderTest {
 		m_mainPageCollector = new WgetCollector();
 		m_pintersetScouter = new PintersetScouter();
 		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
+		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
+		{
+			FileServices.CreateFolder(getClass().getName(), CommonDef.ROOT_DATA_FOLDER);
+		}
 	}
 
 	@After
@@ -48,7 +52,7 @@ public class PinterstFinderTest {
 	@Test
 	public void testFindString()
 	{
-		//assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, "http://pinterest.com/all/"));
+		assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, CommonDef.PINTERSET_URL+ "all/"));
 		assertTrue(m_pintersetScouter.Scout(PINTERS_FILE)!=null);
 		
 	}
