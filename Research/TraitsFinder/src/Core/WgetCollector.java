@@ -18,21 +18,19 @@ import Services.Logger;
 public class WgetCollector extends BaseCFinder implements ICollector {
 
 	
-	public  WgetCollector(String name)
-	{
-		super(name);
-	}
+
 	
 	public WgetCollector()
 	{
-		super("WgetCollector");
+		
 	}
 	
 	
 	@Override
 	public boolean SaveDataFile(String PathToSave,String address) {
 	
-		Logger.GetLogger().WriteLine(m_Name, " save url "+ address+" to clean file, file path : "+ PathToSave +" ....");
+		WriteLineToLog(" save url "+ address+" to clean file, file path : "+ PathToSave +" ....");
+		//Logger.GetLogger().WriteLine(m_Name, " save url "+ address+" to clean file, file path : "+ PathToSave +" ....");
 		CleanerProperties props = new CleanerProperties();
 		 
 		// set some properties to non-default values
@@ -49,12 +47,15 @@ public class WgetCollector extends BaseCFinder implements ICollector {
 			new PrettyXmlSerializer(props).writeToFile(
 				    tagNode, PathToSave, "utf-8"
 				);
-			Logger.GetLogger().WriteLine(m_Name,"done saving file!! save on : "+PathToSave);
+			WriteLineToLog("done saving file!! save on : "+PathToSave);
+			//Logger.GetLogger().WriteLine(m_Name,"done saving file!! save on : "+PathToSave);
 			return true;
 		} 
 		catch (Exception e) {
-			Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
-			Logger.GetLogger().WriteLine(m_Name, e.getCause().toString());
+			WriteLineToLog("Error "+e.toString());
+			WriteLineToLog(e.getCause().toString());
+			//Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
+			//Logger.GetLogger().WriteLine(m_Name, e.getCause().toString());
 			return false;
 		}
 		 

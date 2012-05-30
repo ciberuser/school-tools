@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Core.CommonDef;
 import Core.WgetCollector;
 import Interfaces.ICollector;
 
@@ -15,7 +16,8 @@ public class WgetCollectorTests {
 	@Before
 	public void setUp() throws Exception 
 	{
-		m_wgetCollector = new WgetCollector("WgetCollector");
+		m_wgetCollector = new WgetCollector();
+		
 	}
 
 	@After
@@ -24,13 +26,13 @@ public class WgetCollectorTests {
 
 	@Test
 	public void testSaveDataFile() {
-		//assertTrue(m_wgetCollector.SaveDataFile("testYnet.xml", "http://www.ynet.co.il/home/0,7340,L-8,00.html"));
+		assertTrue(m_wgetCollector.SaveDataFile(CommonDef.ROOT_DATA_FOLDER +"testYnet.xml", "http://www.ynet.co.il"));
 	}
 	
 	@Test
 	public void TestPinterrestSiteGet()
 	{
-		assertTrue(m_wgetCollector.SaveDataFile("pinterrest.xml", "http://pinterest.com/all/"));
+		assertTrue(m_wgetCollector.SaveDataFile(CommonDef.ROOT_DATA_FOLDER+ "pinterrest.xml", CommonDef.PINTERSET_URL+ "all/"));
 	}
 
 }

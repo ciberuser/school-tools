@@ -1,18 +1,23 @@
 package Core;
 
+import Services.Logger;
+
 public abstract class BaseCFinder 
 {
 	
 	
-	public void SetClassName(String name)
+	protected String GetClassName()
 	{
-		m_Name = name;
+		m_Name=this.getClass().getName();
+		return m_Name;
 	}
 	
-	public BaseCFinder(String name)
+	protected  void WriteLineToLog(String msg)
 	{
-		m_Name = name;
+		Logger.GetLogger().WriteLine(GetClassName(),msg);
 	}
+
+	
 	
 	public BaseCFinder(){}
 	

@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 
 
-public class PintersetScouter implements IScouter {
+public class PintersetScouter extends BaseCFinder  implements IScouter {
 
 	//final static String USER_ADDRESS_Path = 
 	final static String PINTEREST_SCOUTER = "PinterstScouter";
@@ -80,7 +80,7 @@ public class PintersetScouter implements IScouter {
 						for(int j = 0 ; j <user_nudeItem.getLength() ; ++j )
 						{
 							String Link =  user_nudeItem.item(j).getAttributes().getNamedItem("href").getNodeValue();
-							if (Link.contains(user_item[2]))
+							if (Link.contains(user_item[0]))
 							{
 								WriteLineToLog("propery value will be: " +Link);
 							}
@@ -121,16 +121,17 @@ public class PintersetScouter implements IScouter {
 	@Override
 	public boolean CreateResultsPool(String Path)
 	{
-		return FileServices.CreateFolder(PINTEREST_SCOUTER, Path);
+		return FileServices.CreateFolder(getClass().getName(), Path);
 		
 	  	
 	}
-	
+	/*
 	private void WriteLineToLog(String msg)
 	{
 		Logger.GetLogger().WriteLine(PINTEREST_SCOUTER,msg);
 	}
 
+*/
 	
 	
 	
