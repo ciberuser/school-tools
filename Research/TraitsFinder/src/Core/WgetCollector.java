@@ -10,7 +10,7 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 
-import Interfaces.ICollector;
+import Services.ICollector;
 import Services.Logger;
 
 

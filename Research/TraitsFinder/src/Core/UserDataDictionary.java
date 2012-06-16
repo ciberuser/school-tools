@@ -1,7 +1,7 @@
 package Core;
 
-import Interfaces.IElement;
-import Interfaces.ISavedUserData;
+import Core.Interfaces.ISavedUserData;
+import Elements.Interfaces.IElement;
 import Services.GenericDictionary;
 
 public class UserDataDictionary implements ISavedUserData

@@ -1,4 +1,4 @@
-package Interfaces;
+package Elements.Interfaces;
 
 import java.util.List;
 

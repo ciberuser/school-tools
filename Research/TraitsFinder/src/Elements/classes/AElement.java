@@ -1,8 +1,9 @@
-package Elements;
+package Elements.classes;
 
 import java.util.List;
 
-import Interfaces.IElement;
+
+import Elements.Interfaces.IElement;
 
 public abstract class AElement  {
 
