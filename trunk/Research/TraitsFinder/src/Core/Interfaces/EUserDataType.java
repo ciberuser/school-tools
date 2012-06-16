@@ -1,4 +1,4 @@
-package Interfaces;
+package Core.Interfaces;
 
 public enum EUserDataType 
 {

@@ -1,29 +1,27 @@
 package Core;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 import Services.FileServices;
 import Services.Logger;
 
-import Elements.StringDataElement;
-import Interfaces.IElement;
-import Interfaces.IScouter;
+import Elements.Interfaces.*;
+import Elements.classes.*;
+import Core.Interfaces.*;
 
-import javax.xml.crypto.NodeSetData;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+
 
 
 
@@ -70,23 +68,33 @@ public class PintersetScouter extends BaseCFinder  implements IScouter {
 					{
 						Node t=list.item(i);
 					  	String[] user_item= t.getTextContent().trim().replace("\t","").split("\n");
-					  	//creating user data.
-						String userName = user_item[0];
-						CreateResultsPool(USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
-						WriteLineToLog("user to elemnet :" + userName);
-						WriteLineToLog("add property type:" +  user_item[2]);
+					    Node userDetiles =	(Node)xpath.evaluate("//a",t,XPathConstants.NODE);
+					    String userName = user_item[0];
+					    String Link = user_item[2];
+					    //if (userDetiles.getAttributes().getNamedItem("title")!=null)
+						//{
+					    	//String userName =userDetiles.getAttributes().getNamedItem("title").getNodeValue(); // user_item[0];
+					    	//Link = userDetiles.getAttributes().getNamedItem("href").getNodeValue();
+					    	CreateResultsPool(USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
+							WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link);
+						//}
+						
+						
+					//	WriteLineToLog(" add element key:" +  user_item[2] +" value : " +userLink );
+						
 						//save pool of intersts.
 					  	NodeList user_nudeItem = (NodeList)xpath.evaluate("//p//a",t,XPathConstants.NODESET);
 						for(int j = 0 ; j <user_nudeItem.getLength() ; ++j )
 						{
-							String Link =  user_nudeItem.item(j).getAttributes().getNamedItem("href").getNodeValue();
-							if (Link.contains(user_item[0]))
+							String Linkitem =  user_nudeItem.item(j).getAttributes().getNamedItem("href").getNodeValue();
+							String value = user_nudeItem.item(j).getTextContent();
+							if (Linkitem.contains(user_item[2].toLowerCase()))
 							{
-								WriteLineToLog("propery value will be: " +Link);
+								WriteLineToLog("value :"+ value+" propery value will be: " +Linkitem);
 							}
 							else
 							{
-								WriteLineToLog("link to add: "+ Link) ;
+								WriteLineToLog("link to add: "+ Linkitem ) ;
 							}
 						}
 					  	//NamedNodeMap nnm= user_nudeItem.getAttributes();

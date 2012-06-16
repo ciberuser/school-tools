@@ -19,6 +19,7 @@ public abstract class BaseCFinder
 
 	
 	
+	
 	public BaseCFinder(){}
 	
 	protected static String m_Name = ""; 

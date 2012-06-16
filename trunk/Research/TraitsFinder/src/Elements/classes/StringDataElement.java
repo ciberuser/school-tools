@@ -1,6 +1,7 @@
 
-package Elements;
+package Elements.classes;
 
+import Elements.Interfaces.*;
 
 
 import java.util.HashMap;

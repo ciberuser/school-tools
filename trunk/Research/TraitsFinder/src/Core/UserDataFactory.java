@@ -1,7 +1,7 @@
 package Core;
 
-import Interfaces.EUserDataType;
-import Interfaces.ISavedUserData;
+import Core.Interfaces.EUserDataType;
+import Core.Interfaces.ISavedUserData;
 import Services.AbstractFactory;
 
 public class UserDataFactory extends AbstractFactory

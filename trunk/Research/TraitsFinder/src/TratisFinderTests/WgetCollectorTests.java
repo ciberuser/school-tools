@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import Core.CommonDef;
 import Core.WgetCollector;
-import Interfaces.ICollector;
+import Services.ICollector;
 
 public class WgetCollectorTests {
 

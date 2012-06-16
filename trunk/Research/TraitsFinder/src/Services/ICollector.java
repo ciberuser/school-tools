@@ -1,4 +1,4 @@
-package Interfaces;
+package Services;
 
 public interface ICollector 
 {

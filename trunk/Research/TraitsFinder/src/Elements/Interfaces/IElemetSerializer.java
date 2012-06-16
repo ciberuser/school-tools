@@ -1,4 +1,4 @@
-package Interfaces;
+package Elements.Interfaces;
 
 public interface IElemetSerializer
 {

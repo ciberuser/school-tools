@@ -11,9 +11,9 @@ import org.junit.Test;
 import Core.CommonDef;
 import Core.PintersetScouter;
 import Core.WgetCollector;
-import Interfaces.ICollector;
-import Interfaces.IScouter;
+import Core.Interfaces.*;
 import Services.FileServices;
+import Services.ICollector;
 import Services.Logger;
 
 
@@ -52,7 +52,7 @@ public class PinterstFinderTest {
 	@Test
 	public void testFindString()
 	{
-		assertTrue(m_mainPageCollector.SaveDataFile(PINTERS_FILE, CommonDef.PINTERSET_URL+ "all/"));
+		
 		assertTrue(m_pintersetScouter.Scout(PINTERS_FILE)!=null);
 		
 	}

@@ -1,4 +1,6 @@
-package Interfaces;
+package Core.Interfaces;
+
+import Elements.Interfaces.*;
 
 public interface ISavedUserData 
 {
