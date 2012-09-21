@@ -2,7 +2,7 @@ package Core;
 
 import Services.Logger;
 
-public abstract class BaseCFinder 
+public abstract class CommonCFinder 
 {
 	
 	
@@ -20,7 +20,7 @@ public abstract class BaseCFinder
 	
 	
 	
-	public BaseCFinder(){}
+	public CommonCFinder(){}
 	
 	protected static String m_Name = ""; 
 }

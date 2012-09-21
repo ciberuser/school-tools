@@ -1,8 +1,8 @@
 package Services;
 
-import Core.BaseCFinder;
+import Core.CommonCFinder;
 
-public class  AbstractFactory extends BaseCFinder
+public class  AbstractFactory extends CommonCFinder
 {
 	private AbstractFactory m_factory;
 	

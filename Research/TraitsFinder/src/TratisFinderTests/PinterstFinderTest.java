@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Core.CommonDef;
-import Core.PintersetScouter;
+import Core.PintersetCrawler;
 import Core.WgetCollector;
 import Core.Interfaces.*;
 import Services.FileServices;
@@ -20,7 +20,7 @@ import Services.Logger;
 public class PinterstFinderTest {
 
 	ICollector m_mainPageCollector;
-	IScouter m_pintersetScouter ;
+	ICrawler m_pintersetScouter ;
 	final static String PINTERS_FILE ="pinterrest_Main.xml"; 
 	final static String PINTERST_TESTS = "PintersTests";
 	
@@ -29,7 +29,7 @@ public class PinterstFinderTest {
 	public void setUp() throws Exception 
 	{
 		m_mainPageCollector = new WgetCollector();
-		m_pintersetScouter = new PintersetScouter();
+		m_pintersetScouter = new PintersetCrawler();
 		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
 		{
@@ -52,9 +52,7 @@ public class PinterstFinderTest {
 	@Test
 	public void testFindString()
 	{
-		
-		assertTrue(m_pintersetScouter.Scout(PINTERS_FILE)!=null);
-		
+		assertTrue(m_pintersetScouter.Crawl(PINTERS_FILE)!=null);
 	}
 
 	@Test

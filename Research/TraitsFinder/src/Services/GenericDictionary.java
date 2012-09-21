@@ -1,25 +1,30 @@
 package Services;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 
 public class GenericDictionary<T>  implements IDictionary<T>
 {
 
 	Map<String,T> m_item ;
+	Set<T> m_sortedItem;
 	
 	public  GenericDictionary()
 	{
 		m_item = new HashMap<String, T>();
+		m_sortedItem =new  HashSet<T>();
 	}
 	
 	
 	@Override
 	public void AddItem(String id, T item)
 	{
-
+		m_sortedItem.add(item);
 		m_item.put(id, item);
 		
 	}
@@ -45,6 +50,12 @@ public class GenericDictionary<T>  implements IDictionary<T>
 	public int Size() {
 		return GetAllItem().size();
 		
+	}
+
+	@Override
+	public Object[] GetSortedItems() {
+		return m_sortedItem.toArray();
+				
 	}
 
 	

@@ -8,24 +8,30 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import Core.BaseCFinder;
+import Core.CommonCFinder;
 
-public class DomNode extends BaseCFinder
+public class DomNode extends CommonCFinder
 {
 	
 	public  DomNode()
 	{
 		m_node = null;
+		Init();
 	}
 	
 	public DomNode(Node node)
 	{
 		m_node = node;
+		Init();
+	}
+	
+	private void Init()
+	{
 		m_factory = XPathFactory.newInstance();
 		m_xpath = m_factory.newXPath();
 	}
-	
 	
 	public Node GetNode(String path)
 	{
@@ -95,6 +101,8 @@ public class DomNode extends BaseCFinder
 		}
 	}
 	
+	
+	
 	public static Node GetNode(String path,Node node) throws XPathExpressionException
 	{
 		return (Node) m_xpath.evaluate(path, node,XPathConstants.NODE);
@@ -105,6 +113,31 @@ public class DomNode extends BaseCFinder
 		return (Node) m_xpath.evaluate(path, doc,XPathConstants.NODE);
 	}
 	 
+	public NodeList GetNodeList(String path)
+	{
+		try
+		{
+			return (NodeList) m_xpath.evaluate(path, m_node, XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			WriteLineToLog(e.getMessage());
+			return null;
+		}
+	}
+	
+	
+	
+	
+	public static NodeList GetNodeList(String path,Document doc) throws XPathExpressionException
+	{
+		return (NodeList) m_xpath.evaluate(path,doc ,XPathConstants.NODESET);
+	}
+	
+	public static NodeList GetNodeList(String path,Node node) throws XPathExpressionException
+	{
+		return (NodeList) m_xpath.evaluate(path,node ,XPathConstants.NODESET);
+	}
+	
+	
 	
 	private void PrintError(Exception e)
 	{

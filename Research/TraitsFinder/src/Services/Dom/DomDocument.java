@@ -18,9 +18,9 @@ import org.xml.sax.SAXException;
 
 import Services.FileServices;
 
-import Core.BaseCFinder;
+import Core.CommonCFinder;
 
-public class DomDocument extends BaseCFinder
+public class DomDocument extends CommonCFinder
 {
 	
 	

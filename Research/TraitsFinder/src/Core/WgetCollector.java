@@ -15,7 +15,7 @@ import Services.Logger;
 
 
 
-public class WgetCollector extends BaseCFinder implements ICollector {
+public class WgetCollector extends CommonCFinder implements ICollector {
 
 	
 
