@@ -15,4 +15,6 @@ public interface IDictionary<T>
 	
 	int Size();
 	
+	Object[] GetSortedItems();
+	
 }

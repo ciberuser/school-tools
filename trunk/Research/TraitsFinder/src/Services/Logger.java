@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Logger
 {
@@ -24,16 +27,14 @@ public class Logger
 				
 	}
 	
-	
-	
 	public static void Write(String module, String msg)
 	{
-		WriteStringToFile(String.format("-[%s]-:[%s]", module,msg),m_filePath);
+		WriteStringToFile(String.format("|%s|[%s]-:[%s]",GetTimeStr(), module,msg),m_filePath);
 	}
 	
 	public static void WriteLine(String module, String msg)
 	{
-		WriteStringToFile(String.format("-[%s]-:[%s]\n", module,msg),m_filePath);
+		WriteStringToFile(String.format("|%s|[%s]-:[%s]\n",GetTimeStr(), module,msg),m_filePath);
 	}
 	
 	private Logger(String filePath)
@@ -65,6 +66,13 @@ public class Logger
 			
 	}
 
+	private static String GetTimeStr()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		return dateFormat.format(cal.getTime());
+	}
+	
 	private static FileWriter fstream =null;
 	private static Logger m_logger = null;
 	private static String m_filePath;

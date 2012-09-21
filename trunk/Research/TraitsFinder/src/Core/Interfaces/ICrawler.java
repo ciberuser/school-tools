@@ -1,10 +1,10 @@
 package Core.Interfaces;
 import Elements.Interfaces.*;
-public interface IScouter 
+public interface ICrawler 
 {
 
-	IElement Scout();
-	IElement Scout(String item);
+	IElement Crawl();
+	IElement Crawl(String item);
 	boolean SaveItem();
 	boolean CreateResultsPool(String Path);
 	
