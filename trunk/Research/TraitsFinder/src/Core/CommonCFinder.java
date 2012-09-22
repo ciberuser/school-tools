@@ -17,6 +17,10 @@ public abstract class CommonCFinder
 		Logger.GetLogger().WriteLine(GetClassName(),msg);
 	}
 
+	protected void WriteToLog(String msg)
+	{
+		Logger.GetLogger().Write(GetClassName(), msg);
+	}
 	
 	
 	

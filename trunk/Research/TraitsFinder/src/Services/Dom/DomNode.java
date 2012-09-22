@@ -82,7 +82,7 @@ public class DomNode extends CommonCFinder
 		}
 	}
 	
-	public static String GetValue(Node node) throws Exception
+	public String GetValue(Node node) throws Exception
 	{
 		if (node == null) return "";
 		else
@@ -91,7 +91,7 @@ public class DomNode extends CommonCFinder
 		}
 	}
 	
-	public static String GetAttribute(Node node ,String attribute) throws Exception
+	public String GetAttribute(Node node ,String attribute) throws Exception
 	{
 		
 		if (node ==null) return "";
@@ -103,12 +103,12 @@ public class DomNode extends CommonCFinder
 	
 	
 	
-	public static Node GetNode(String path,Node node) throws XPathExpressionException
+	public  Node GetNode(String path,Node node) throws XPathExpressionException
 	{
 		return (Node) m_xpath.evaluate(path, node,XPathConstants.NODE);
 	}
 	
-	public static Node GetNode(String path,Document doc) throws XPathExpressionException
+	public  Node GetNode(String path,Document doc) throws XPathExpressionException
 	{
 		return (Node) m_xpath.evaluate(path, doc,XPathConstants.NODE);
 	}
@@ -127,12 +127,12 @@ public class DomNode extends CommonCFinder
 	
 	
 	
-	public static NodeList GetNodeList(String path,Document doc) throws XPathExpressionException
+	public  NodeList GetNodeList(String path,Document doc) throws XPathExpressionException
 	{
 		return (NodeList) m_xpath.evaluate(path,doc ,XPathConstants.NODESET);
 	}
 	
-	public static NodeList GetNodeList(String path,Node node) throws XPathExpressionException
+	public  NodeList GetNodeList(String path,Node node) throws XPathExpressionException
 	{
 		return (NodeList) m_xpath.evaluate(path,node ,XPathConstants.NODESET);
 	}
