@@ -24,7 +24,7 @@ public class DomDocument extends CommonCFinder
 {
 	
 	
-		private Document m_document = null; 
+	private Document m_document = null; 
 	private XPath m_xpath;
 	
 	public DomDocument(String xmlFilePath) throws ParserConfigurationException, SAXException, IOException
@@ -44,6 +44,25 @@ public class DomDocument extends CommonCFinder
 	public Document GetDocument()
 	{
 		return m_document;
+	}
+	
+	public Document GetDoucument(String xPathStr)
+	{
+		if (m_document != null && m_xpath!=null)
+		{
+			
+			try {
+				return  (Document)m_xpath.evaluate(xPathStr, m_document,XPathConstants.NODE);
+			} catch (XPathExpressionException e) {
+				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage());
+				
+			}
+		}
+		else
+		{
+			WriteLineToLog("error document and xpath art not initialize");
+		}
+		return null;
 	}
 	
 	public Node GetNode(String xPathStr)

@@ -6,10 +6,26 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Core.UserCrawler;
+import Core.Interfaces.ICrawler;
+import Elements.Interfaces.IElement;
+
 public class UserCrawlerTest {
 
+	
+	private final String[] TESTS_USERS ={
+			"ivashka13",
+			"mrspepin",
+			"janetswartz",
+			"micheledegio",
+			"ceciliamoden"
+			};
+	
+	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception 
+	{
+		
 	}
 
 	@After
@@ -22,8 +38,15 @@ public class UserCrawlerTest {
 	}
 
 	@Test
-	public void testCrawlString() {
-		fail("Not yet implemented");
+	public void testCrawlString()
+	{
+		for(String user : TESTS_USERS)
+		{
+			
+			ICrawler userCrawler = new UserCrawler(user);
+			assertTrue(userCrawler.Crawl() != null);
+			
+		}
 	}
 
 }

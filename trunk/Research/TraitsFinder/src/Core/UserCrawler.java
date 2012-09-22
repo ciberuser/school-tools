@@ -2,10 +2,13 @@ package Core;
 
 import java.io.IOException;
 
+//import javax.lang.model.element.Element;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import org.w3c.dom.Element;
+
 
 import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
@@ -19,7 +22,9 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	private String m_userXmlPath;
 	
 	private DomDocument m_documnet ;
-	private final static  String SUBJECTS_PATH  = CommonDef.CONTANIER_PATH +"/ul[@class='sortable']";
+	private DomNode m_node;
+	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_PATH + "/ul";
+	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
 	
 		
@@ -43,7 +48,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	@Override
 	public IElement Crawl() 
 	{
-		return Crawl(CommonDef.PINTERSET_URL + "//" + m_userName);		
+		return Crawl(CommonDef.PINTERSET_URL + m_userName+ "");		
 	}
 	
 	
@@ -51,12 +56,27 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	public IElement Crawl(String userUrl) {
 
 		m_userUrl = userUrl;
+		NodeList itemsNodes;
 		try {
 			
 				if (DownloadFile(m_userXmlPath, m_userUrl))
 				{
 					m_documnet = new DomDocument(m_userXmlPath);
-					NodeList itemsNodes =  m_documnet .GetNodes(SUBJECTS_PATH);
+					Node node =  m_documnet.GetNode(SUBJECTS_XPATH);
+					m_node = new DomNode(node);
+					NodeList allSubjects =  node.getChildNodes();/* m_node.GetNodeList("//li") */;
+					for(int i =0 ; i<allSubjects.getLength() ;++i)
+					{
+						
+						Node n =  allSubjects.item(i);
+						if (n.getNodeType() == node.ELEMENT_NODE)
+						{
+							String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
+							FileServices.CreateFolder(GetClassName(), m_userPath+"//"+ subjectName);
+							
+						}
+					}
+				
 				}
 				
 			}
