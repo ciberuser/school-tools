@@ -9,6 +9,7 @@ import Services.Logger;
 import Elements.Interfaces.*;
 import Elements.classes.*;
 import Core.Interfaces.*;
+import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
 
 
@@ -33,7 +34,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 	final static String PINTEREST_PATH = CommonDef.ROOT_DATA_FOLDER + CommonDef.PINTERSET_XML;
 	
 	private String m_FilePath;
-	private Document doc;
+	private Document m_doc;
 	private DomNode m_node;
 	
 	
@@ -78,13 +79,11 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		
 			
 		m_FilePath = PINTEREST_PATH;
+	
+		DomDocument documetService = new DomDocument(m_FilePath);
+		m_doc = documetService.GetDocument();
 		
-		File fXmlFile = new File(m_FilePath);
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		doc = dBuilder.parse(fXmlFile);
-		
-		Node users = m_node.GetNode(USER_ALL_USERS_COMMENT_PATH,doc); 
+		Node users = m_node.GetNode(USER_ALL_USERS_COMMENT_PATH,m_doc); 
 		IElement mainElement = new StringDataElement();
 		if(users != null)
 		{

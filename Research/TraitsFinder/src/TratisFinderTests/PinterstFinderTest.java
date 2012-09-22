@@ -19,7 +19,6 @@ import Services.Logger;
 
 public class PinterstFinderTest {
 
-	ICollector m_mainPageCollector;
 	ICrawler m_pintersetScouter ;
 	final static String PINTERS_FILE ="pinterrest_Main.xml"; 
 	final static String PINTERST_TESTS = "PintersTests";
@@ -28,7 +27,6 @@ public class PinterstFinderTest {
 	@Before
 	public void setUp() throws Exception 
 	{
-		m_mainPageCollector = new WgetCollector();
 		m_pintersetScouter = new PintersetCrawler();
 		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
