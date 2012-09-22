@@ -23,7 +23,7 @@ public class PinterstFinderTest {
 	ICrawler m_pintersetScouter ;
 	final static String PINTERS_FILE ="pinterrest_Main.xml"; 
 	final static String PINTERST_TESTS = "PintersTests";
-	
+	private boolean m_runCrawler;
 	
 	@Before
 	public void setUp() throws Exception 
@@ -44,20 +44,27 @@ public class PinterstFinderTest {
 	}
 
 	@Test
-	public void testFind() 
+	public void testCrawl() 
+	{
+		assertTrue(m_pintersetScouter.Crawl()!=null);
+		m_runCrawler = true;
+		
+	}
+
+	@Test
+	public void testCrawlString()
 	{
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testFindString()
+	public void testSaveItem() 
 	{
-		assertTrue(m_pintersetScouter.Crawl(PINTERS_FILE)!=null);
-	}
-
-	@Test
-	public void testSaveItem() {
-		fail("Not yet implemented");
+		if (m_runCrawler == false)
+		{
+			assertTrue(m_pintersetScouter.Crawl() != null);
+		}
+		assertTrue(FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER +CommonDef.PINTERSET_XML));
 	}
 
 	@Test

@@ -11,68 +11,65 @@ import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
 import Services.FileServices;
 import Services.Dom.*;
-public class UserCrawler extends CommonCFinder  implements ICrawler
+public class UserCrawler extends ACrawler  implements ICrawler
 {
 	private String m_userName;
-	
-	private WgetCollector m_collector;
+	private String m_userPath;
+	private String m_userUrl ;
+	private String m_userXmlPath;
 	
 	private DomDocument m_documnet ;
 	private final static  String SUBJECTS_PATH  = CommonDef.CONTANIER_PATH +"/ul[@class='sortable']";
 	
-
+	
 		
 	public UserCrawler(String userName)
 	{
 		m_userName = userName;
+		m_userPath = CommonDef.USERS_FOLDER_POOL_PATH + "//" + m_userName;
+		m_userXmlPath = m_userPath + "//" + userName + ".xml" ; 
 		Init();
 	}
 
 
 	private void Init()
 	{
-		m_collector = new WgetCollector();
+		if (!FileServices.PathExist(m_userPath))
+		{
+			FileServices.CreateFolder(GetClassName(), m_userPath);
+		}
 	}
 	
 	@Override
-	public IElement Crawl() {
-		if( m_userName != null || m_userName !="" )
-		{
-			String userFolder  = CommonDef.USERS_FOLDER_POOL_PATH+"//" +m_userName;
-			if (!FileServices.PathExist(userFolder))
-			{
-				FileServices.CreateFolder(this.GetClassName(), userFolder);
-			}
-			String userXML =  userFolder +"//" +  m_userName +".xml";
+	public IElement Crawl() 
+	{
+		return Crawl(CommonDef.PINTERSET_URL + "//" + m_userName);		
+	}
+	
+	
+	@Override
+	public IElement Crawl(String userUrl) {
+
+		m_userUrl = userUrl;
+		try {
 			
-			if ( m_collector.SaveDataFile(userXML ,CommonDef.PINTERSET_URL+"//" + m_userName))
-			{
-				try {
-					m_documnet = new DomDocument(userXML);
-					NodeList itemsNodes =  m_documnet .GetNodes(SUBJECTS_PATH);
-					
-				}
-				catch (Exception ex)
+				if (DownloadFile(m_userXmlPath, m_userUrl))
 				{
-					WriteLineToLog("Error :" +ex.getMessage());
-					WriteLineToLog("stuck trace :" +ex.getStackTrace());
-				} 
+					m_documnet = new DomDocument(m_userXmlPath);
+					NodeList itemsNodes =  m_documnet .GetNodes(SUBJECTS_PATH);
+				}
 				
 			}
+			catch (Exception ex)
+			{
+				PrintErrorParsing(ex, m_userName +" crawling" );
+				return null;
+			} 
 			
-			
-			
-
-		}
 		return null;
 		
-	}
 
-
-	@Override
-	public IElement Crawl(String item) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
 
 

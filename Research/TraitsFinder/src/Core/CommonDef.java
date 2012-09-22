@@ -8,5 +8,6 @@ public class CommonDef
 	public final static String CONTANIER_PATH = "//body/div[@id='wrapper']/div[@id='ColumnContainer']";
 	public final static String EMPTY="";
 	public final static String PINTERSET_URL ="http://pinterest.com/";
+	public final static String PINTERSET_XML = "pinterest_main.xml";
 	
 }
