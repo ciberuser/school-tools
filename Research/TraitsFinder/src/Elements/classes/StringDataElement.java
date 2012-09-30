@@ -7,7 +7,7 @@ import Elements.Interfaces.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import Interfaces.*;
+
 
 public class StringDataElement extends AElement implements IElement {
 
@@ -46,6 +46,11 @@ public class StringDataElement extends AElement implements IElement {
 	
 	private Map<String,String> m_properties;
 	private IElemetSerializer m_serializer;
+	@Override
+	public Object GetProperty(String ProperyDef) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

@@ -1,6 +1,8 @@
 package Core;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //import javax.lang.model.element.Element;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,9 +25,10 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	
 	private DomDocument m_documnet ;
 	private DomNode m_node;
-	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_PATH + "/ul";
+	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_XPATH + "/ul";
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
+	private List<String> m_subjects;
 	
 		
 	public UserCrawler(String userName)
@@ -43,6 +46,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		{
 			FileServices.CreateFolder(GetClassName(), m_userPath);
 		}
+		m_subjects = new ArrayList<String>();
 	}
 	
 	@Override
@@ -52,11 +56,10 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	}
 	
 	
-	@Override
-	public IElement Crawl(String userUrl) {
+
+	protected IElement Crawl(String userUrl) {
 
 		m_userUrl = userUrl;
-		NodeList itemsNodes;
 		try {
 			
 				if (DownloadFile(m_userXmlPath, m_userUrl))
@@ -72,11 +75,10 @@ public class UserCrawler extends ACrawler  implements ICrawler
 						if (n.getNodeType() == node.ELEMENT_NODE)
 						{
 							String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
-							FileServices.CreateFolder(GetClassName(), m_userPath+"//"+ subjectName);
-							
+							m_subjects.add(subjectName);
 						}
 					}
-				
+					CreateResultsPool(m_userPath);
 				}
 				
 			}
@@ -102,7 +104,14 @@ public class UserCrawler extends ACrawler  implements ICrawler
 
 	@Override
 	public boolean CreateResultsPool(String Path) {
-		// TODO Auto-generated method stub
+		if (FileServices.PathExist(Path) && !m_subjects.isEmpty())
+		{
+			for (String subjectName : m_subjects)
+			{
+				FileServices.CreateFolder(GetClassName(), Path+"//"+ subjectName);
+			}
+			
+		}
 		return false;
 	}
 	

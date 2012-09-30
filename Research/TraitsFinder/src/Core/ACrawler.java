@@ -2,7 +2,7 @@ package Core;
 
 import Services.FileServices;
 import Services.ICollector;
-import Core.Interfaces.ICrawler;
+
 
 public class ACrawler  extends CommonCFinder
 {

@@ -33,20 +33,10 @@ public class UserCrawlerTest {
 	}
 
 	@Test
-	public void testCrawl() {
-		fail("Not yet implemented");
+	public void testCrawl()
+	{
+		
 	}
 
-	@Test
-	public void testCrawlString()
-	{
-		for(String user : TESTS_USERS)
-		{
-			
-			ICrawler userCrawler = new UserCrawler(user);
-			assertTrue(userCrawler.Crawl() != null);
-			
-		}
-	}
 
 }

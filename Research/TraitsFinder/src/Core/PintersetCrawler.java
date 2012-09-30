@@ -28,7 +28,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 
 	//final static String USER_ADDRESS_Path = 
 	final static String PINTEREST_SCOUTER = "PinterstScouter";
-	final static String USER_ALL_USERS_COMMENT_PATH = CommonDef.CONTANIER_PATH;
+	final static String USER_ALL_USERS_COMMENT_PATH = CommonDef.CONTANIER_XPATH;
 	final static String USER_COMMENT_PATH = "//div[@class='convo attribution clearfix']";
 	final static String USERS_FOLDER_POOL_PATH = CommonDef.USERS_FOLDER_POOL_PATH;
 	final static String PINTEREST_PATH = CommonDef.ROOT_DATA_FOLDER + CommonDef.PINTERSET_XML;
@@ -50,8 +50,8 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		return Crawl(PINTEREST_PATH);
 	}
 	
-	@Override
-	public IElement Crawl(String SavefilePath) 
+	
+	protected IElement Crawl(String SavefilePath) 
 	{
 		m_FilePath = SavefilePath;
 		try
@@ -103,10 +103,10 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 				UserCrawler uct = new  UserCrawler(Link); 
 							
 				//save pool of intersts.
-		    	NodeList user_nudeItem = m_node.GetNodeList("//p//a",t); //(NodeList)xpath.evaluate("//p//a",t,XPathConstants.NODESET);
+		    	NodeList user_nudeItem = m_node.GetNodeList("//p//a",t);
 				for(int j = 0 ; j <user_nudeItem.getLength() ; ++j )
 				{
-					String Linkitem = m_node.GetAttribute(user_nudeItem.item(j),"href");  //user_nudeItem.item(j).getAttributes().getNamedItem("href").getNodeValue();
+					String Linkitem = m_node.GetAttribute(user_nudeItem.item(j),"href");  
 					String value = m_node.GetValue(user_nudeItem.item(j));
 					if (Linkitem.contains(user_item[2].toLowerCase()))
 					{
