@@ -8,5 +8,9 @@ public interface IElement
 	void AddElement(IElement element);
 	void AddProperty(String ProperyDef,Object ProperyData);
 	void SetSerializer(IElemetSerializer serializer);
+	void SetName(String elementName);
+	
+	String GetName();
+	Object GetProperty(String ProperyDef);
 	
 }

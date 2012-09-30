@@ -1,8 +1,5 @@
 package Core;
 
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.net.URL;
 
 import org.htmlcleaner.CleanerProperties;
@@ -11,13 +8,8 @@ import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 
 import Services.ICollector;
-import Services.Logger;
-
-
 
 public class WgetCollector extends CommonCFinder implements ICollector {
-
-	
 
 	
 	public WgetCollector()
