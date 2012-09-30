@@ -14,6 +14,7 @@ import org.w3c.dom.Element;
 
 import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
+import Elements.classes.StringDataElement;
 import Services.FileServices;
 import Services.Dom.*;
 public class UserCrawler extends ACrawler  implements ICrawler
@@ -28,6 +29,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_XPATH + "/ul";
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
+	private IElement m_element;
 	private List<String> m_subjects;
 	
 		
@@ -78,7 +80,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 							m_subjects.add(subjectName);
 						}
 					}
-					CreateResultsPool(m_userPath);
+					if (CreateResultsPool(m_userPath)) return m_element;
 				}
 				
 			}
@@ -103,14 +105,21 @@ public class UserCrawler extends ACrawler  implements ICrawler
 
 
 	@Override
-	public boolean CreateResultsPool(String Path) {
+	public boolean CreateResultsPool(String Path) 
+	{
+		m_element = new StringDataElement();
+		m_element.SetName(m_userName);
 		if (FileServices.PathExist(Path) && !m_subjects.isEmpty())
 		{
 			for (String subjectName : m_subjects)
 			{
-				FileServices.CreateFolder(GetClassName(), Path+"//"+ subjectName);
+				//FileServices.CreateFolder(GetClassName(), Path+"//"+ subjectName);
+				ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
+				IElement subjectElem = subjectCrawler.Crawl();
+				m_element.AddElement(subjectElem);
+				
 			}
-			
+			return true;
 		}
 		return false;
 	}

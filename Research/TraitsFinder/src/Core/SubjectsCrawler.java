@@ -74,7 +74,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	protected IElement Crawl(String subjectName) 
 	{
 		m_subjectName = subjectName;
-		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" +subjectName ;
+		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName) ;
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
 		//if (FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(module, Path)
 		if (DownloadFile(m_subjectXmlPath, m_subjectURL))
@@ -115,7 +115,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		
 		return null;
 	}
-
+	
 	@Override
 	public boolean SaveItem() {
 		// TODO Auto-generated method stub
@@ -128,4 +128,8 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		return false;
 	}
 
+	private String CleanSubject2URL(String sujectName)
+	{
+		return  sujectName.replace("_", "-").replace("'", "-").replace("&", "").replace("--", "-").replace(".", "");
+	}
 }

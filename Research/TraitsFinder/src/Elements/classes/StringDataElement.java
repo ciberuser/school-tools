@@ -2,8 +2,10 @@
 package Elements.classes;
 
 import Elements.Interfaces.*;
+import Services.GenericDictionary;
 
 
+import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,25 +13,27 @@ import java.util.Map;
 
 public class StringDataElement extends AElement implements IElement {
 
+	private GenericDictionary<String> m_properties;
+	private IElemetSerializer m_serializer;
 	
 	public StringDataElement()
 	{
 		super();
-		m_properties = new HashMap<String, String>();
+		m_properties =new GenericDictionary<String>();
 	}
 	
 	public StringDataElement(String ProperyDef, String ProperyData)
 	{
 		super();
-		m_properties = new HashMap<String, String>();
-		m_properties.put(ProperyDef, ProperyData);
+		m_properties = new GenericDictionary<String>();
+		m_properties.AddItem(ProperyData, ProperyData);
 	}
 			
 	@Override
 	public void AddProperty(String ProperyDef, Object ProperyData)
 	{
 		super.SetProperty(ProperyDef, ProperyData);
-		m_properties.put(ProperyDef,(String) ProperyData);
+		m_properties.AddItem(ProperyDef,  ProperyData.toString());
 	}
 
 	@Override
@@ -44,12 +48,16 @@ public class StringDataElement extends AElement implements IElement {
 		SetProperty(ProperyDef,(String)ProperyData);
 	}
 	
-	private Map<String,String> m_properties;
-	private IElemetSerializer m_serializer;
+	
 	@Override
 	public Object GetProperty(String ProperyDef) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if (!m_properties.IsExist(ProperyDef))
+		{
+			WriteLineToLog("the property " + ProperyDef +"is not exist ");
+			return null;
+		}
+		return m_properties.GetItem(ProperyDef);		
 	}
 	
 	
