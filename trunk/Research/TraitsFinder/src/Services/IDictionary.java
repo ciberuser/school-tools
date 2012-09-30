@@ -17,4 +17,6 @@ public interface IDictionary<T>
 	
 	Object[] GetSortedItems();
 	
+	boolean IsExist(String id);
+	
 }
