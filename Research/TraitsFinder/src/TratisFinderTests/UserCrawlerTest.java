@@ -13,7 +13,7 @@ import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
 import Services.FileServices;
 
-public class UserCrawlerTest {
+public class UserCrawlerTest  extends test{
 
 	
 	private final String[] TESTS_USERS ={
@@ -28,6 +28,7 @@ public class UserCrawlerTest {
 	@Before
 	public void setUp() throws Exception 
 	{
+		super.setUp();
 		if (FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH))
 		{
 			FileServices.DeleteFolder(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
