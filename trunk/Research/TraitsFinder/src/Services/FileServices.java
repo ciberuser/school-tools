@@ -4,8 +4,8 @@ import java.io.File;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
-import Services.Logger.ELogLevel;
-import Services.Logger.Logger;
+import Services.Log.ELogLevel;
+import Services.Log.Logger;
 
 import Core.CommonDef;
 

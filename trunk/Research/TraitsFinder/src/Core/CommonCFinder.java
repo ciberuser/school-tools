@@ -1,7 +1,7 @@
 package Core;
 
-import Services.Logger.ELogLevel;
-import Services.Logger.Logger;
+import Services.Log.ELogLevel;
+import Services.Log.Logger;
 
 public abstract class CommonCFinder 
 {

@@ -12,7 +12,7 @@ import Elements.Interfaces.IElement;
 import Services.FileServices;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 import Elements.classes.*;
 
 public class SubjectsCrawler extends ACrawler implements ICrawler

@@ -2,7 +2,7 @@ package Core;
 
 import Services.FileServices;
 import Services.ICollector;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 
 public class ACrawler  extends CommonCFinder

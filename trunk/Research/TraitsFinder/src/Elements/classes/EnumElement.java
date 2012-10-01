@@ -6,7 +6,7 @@ import java.util.Map;
 
 import Elements.Interfaces.IElement;
 import Elements.Interfaces.IElemetSerializer;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 
 public class EnumElement  extends AElement implements IElement

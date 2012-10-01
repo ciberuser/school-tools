@@ -10,8 +10,8 @@ import Elements.classes.*;
 import Core.Interfaces.*;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
-import Services.Logger.ELogLevel;
-import Services.Logger.Logger;
+import Services.Log.ELogLevel;
+import Services.Log.Logger;
 
 
 import javax.xml.parsers.DocumentBuilderFactory;
