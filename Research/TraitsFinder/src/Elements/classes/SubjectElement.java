@@ -1,5 +1,7 @@
 package Elements.classes;
 
+import Services.Logger.ELogLevel;
+
 public class SubjectElement extends  EnumElement
 {
 	
@@ -15,7 +17,7 @@ public class SubjectElement extends  EnumElement
 		
 		if ( EProperty.valueOf(ProperyDef)==null)
 		{
-			WriteLineToLog("Error no "+ProperyDef+ "is exist ");
+			WriteLineToLog("Error no "+ProperyDef+ "is exist ",ELogLevel.WARNING);
 			return null;
 		}
 		return super.GetProperty(ProperyDef);

@@ -8,6 +8,7 @@ import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 
 import Services.ICollector;
+import Services.Logger.ELogLevel;
 
 public class WgetCollector extends CommonCFinder implements ICollector {
 
@@ -21,7 +22,7 @@ public class WgetCollector extends CommonCFinder implements ICollector {
 	@Override
 	public boolean SaveDataFile(String PathToSave,String address) {
 	
-		WriteLineToLog(" save url "+ address+" to clean file, file path : "+ PathToSave +" ....");
+		WriteLineToLog(" save url "+ address+" to clean file, file path : "+ PathToSave +" ....",ELogLevel.INFORMATION);
 		//Logger.GetLogger().WriteLine(m_Name, " save url "+ address+" to clean file, file path : "+ PathToSave +" ....");
 		CleanerProperties props = new CleanerProperties();
 		 
@@ -39,13 +40,13 @@ public class WgetCollector extends CommonCFinder implements ICollector {
 			new PrettyXmlSerializer(props).writeToFile(
 				    tagNode, PathToSave, "utf-8"
 				);
-			WriteLineToLog("done saving file!! save on : "+PathToSave);
+			WriteLineToLog("done saving file!! save on : "+PathToSave ,ELogLevel.INFORMATION);
 			//Logger.GetLogger().WriteLine(m_Name,"done saving file!! save on : "+PathToSave);
 			return true;
 		} 
 		catch (Exception e) {
-			WriteLineToLog("Error "+e.toString());
-			WriteLineToLog(e.getCause().toString());
+			WriteLineToLog("Error "+e.toString(),ELogLevel.ERROR);
+			WriteLineToLog(e.getCause().toString(),ELogLevel.ERROR);
 			//Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
 			//Logger.GetLogger().WriteLine(m_Name, e.getCause().toString());
 			return false;

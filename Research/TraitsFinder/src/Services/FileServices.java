@@ -4,6 +4,9 @@ import java.io.File;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
+import Services.Logger.ELogLevel;
+import Services.Logger.Logger;
+
 import Core.CommonDef;
 
 public class FileServices 
@@ -35,10 +38,10 @@ public class FileServices
 		if (fileElm.exists())
 		{
 			fileElm.delete();
-			WriteLineToLog(module, "the path " + path+" have been deleted");
+			WriteLineToLog(module, "the path " + path+" have been deleted",ELogLevel.INFORMATION);
 			return true;
 		}
-		WriteLineToLog(module, "failed to delete " +path +" path not exist ");
+		WriteLineToLog(module, "failed to delete " +path +" path not exist ",ELogLevel.ERROR);
 		return false;
 	}
 	
@@ -53,12 +56,12 @@ public class FileServices
 			  new File(Path)).mkdir();
 			  if (success) 
 			  {
-				  WriteLineToLog(module, "directory has created at "+Path);
+				  WriteLineToLog(module, "directory has created at "+Path,ELogLevel.INFORMATION);
 				  return true;
 			  }
 			  else
 			  {
-				  WriteLineToLog(module,"failed to create directory :  " + Path); 
+				  WriteLineToLog(module,"failed to create directory :  " + Path,ELogLevel.ERROR); 
 				return false;
 			  }
 			
@@ -66,7 +69,7 @@ public class FileServices
 		catch (Exception e)
 		{
 			//Catch exception if any
-			WriteLineToLog(module ,"error when creating directory Error: " +e.getMessage()); 
+			WriteLineToLog(module ,"error when creating directory Error: " +e.getMessage(),ELogLevel.ERROR); 
 			return false;
 		}
 		
@@ -78,9 +81,9 @@ public class FileServices
 		return new File(path).exists();
 	}
 	
-	private static void WriteLineToLog(String module, String msg)
+	private static void WriteLineToLog(String module, String msg,ELogLevel logLevel)
 	{
-		Logger.GetLogger().WriteLine(module,msg);
+		Logger.GetLogger().WriteLine(module,msg,logLevel);
 	}
 
 }

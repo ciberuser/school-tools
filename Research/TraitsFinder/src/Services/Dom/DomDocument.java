@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import Services.FileServices;
+import Services.Logger.ELogLevel;
 
 import Core.CommonCFinder;
 
@@ -54,13 +55,13 @@ public class DomDocument extends CommonCFinder
 			try {
 				return  (Document)m_xpath.evaluate(xPathStr, m_document,XPathConstants.NODE);
 			} catch (XPathExpressionException e) {
-				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage());
+				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage(),ELogLevel.ERROR);
 				
 			}
 		}
 		else
 		{
-			WriteLineToLog("error document and xpath art not initialize");
+			WriteLineToLog("error document and xpath art not initialize",ELogLevel.ERROR);
 		}
 		return null;
 	}
@@ -73,13 +74,13 @@ public class DomDocument extends CommonCFinder
 			try {
 				return  (Node)m_xpath.evaluate(xPathStr, m_document,XPathConstants.NODE);
 			} catch (XPathExpressionException e) {
-				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage());
+				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage(),ELogLevel.ERROR);
 				
 			}
 		}
 		else
 		{
-			WriteLineToLog("error document and xpath art not initialize");
+			WriteLineToLog("error document and xpath art not initialize",ELogLevel.ERROR);
 		}
 		return null;
 	}
@@ -92,13 +93,13 @@ public class DomDocument extends CommonCFinder
 			try {
 				return  (NodeList)m_xpath.evaluate(xPathStr, m_document,XPathConstants.NODESET);
 			} catch (XPathExpressionException e) {
-				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage());
+				WriteLineToLog("error can't get node according to xpath "+ xPathStr+ " error:" +e.getMessage(),ELogLevel.ERROR);
 				
 			}
 		}
 		else
 		{
-			WriteLineToLog("error document and xpath art not initialize");
+			WriteLineToLog("error document and xpath art not initialize",ELogLevel.ERROR);
 		}
 		return null;
 	}
