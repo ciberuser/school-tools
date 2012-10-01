@@ -6,6 +6,7 @@ import java.util.Map;
 
 import Elements.Interfaces.IElement;
 import Elements.Interfaces.IElemetSerializer;
+import Services.Logger.ELogLevel;
 
 
 public class EnumElement  extends AElement implements IElement
@@ -37,11 +38,11 @@ public class EnumElement  extends AElement implements IElement
 			if(property.toString() == ProperyDef.toLowerCase().trim())
 			{
 				m_properties.put(property, ProperyData);
-				WriteLineToLog("new property have been added, "+property.toString()+":"+ProperyData);
+				WriteLineToLog("new property have been added, "+property.toString()+":"+ProperyData ,ELogLevel.INFORMATION);
 				return ;
 			}
 		}
-		WriteLineToLog("property " + ProperyDef +" not found - value not added...");
+		WriteLineToLog("property " + ProperyDef +" not found - value not added...",ELogLevel.WARNING);
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class EnumElement  extends AElement implements IElement
 			
 		if (!m_properties.containsKey((Object)ProperyDef))
 		{	
-			WriteLineToLog("the Property "+ ProperyDef +"is not found...");
+			WriteLineToLog("the Property "+ ProperyDef +"is not found...",ELogLevel.WARNING);
 			return null;
 		}
 		return m_properties.get(ProperyDef);

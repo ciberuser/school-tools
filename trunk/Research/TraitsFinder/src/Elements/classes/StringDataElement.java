@@ -3,6 +3,7 @@ package Elements.classes;
 
 import Elements.Interfaces.*;
 import Services.GenericDictionary;
+import Services.Logger.ELogLevel;
 
 
 import java.io.ObjectInputStream.GetField;
@@ -54,7 +55,7 @@ public class StringDataElement extends AElement implements IElement {
 		
 		if (!m_properties.IsExist(ProperyDef))
 		{
-			WriteLineToLog("the property " + ProperyDef +"is not exist ");
+			WriteLineToLog("the property " + ProperyDef +"is not exist ",ELogLevel.WARNING);
 			return null;
 		}
 		return m_properties.GetItem(ProperyDef);		

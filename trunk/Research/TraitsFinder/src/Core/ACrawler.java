@@ -2,6 +2,7 @@ package Core;
 
 import Services.FileServices;
 import Services.ICollector;
+import Services.Logger.ELogLevel;
 
 
 public class ACrawler  extends CommonCFinder
@@ -25,7 +26,7 @@ public class ACrawler  extends CommonCFinder
 		{
 			if (!FileServices.PathExist(filePath))
 			{
-				WriteLineToLog("ERROR: failed to create main pinterset test ..." +filePath);
+				WriteLineToLog("failed to create main pinterset test ..." +filePath,ELogLevel.ERROR);
 				return false;
 			}
 		}
@@ -34,8 +35,8 @@ public class ACrawler  extends CommonCFinder
 	
 	protected void PrintErrorParsing(Exception e,String cralwingType)
 	{
-		WriteLineToLog("Error on " +cralwingType +" error : "+ e.toString());
-		WriteToLog(e.toString());
+		WriteLineToLog("Error on " +cralwingType +" error : "+ e.toString(),ELogLevel.ERROR);
+		WriteToLog(e.toString(),ELogLevel.ERROR);
 		e.printStackTrace();
 	}
 	

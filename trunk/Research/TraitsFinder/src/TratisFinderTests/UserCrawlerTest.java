@@ -6,11 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Core.CommonCFinder;
 import Core.CommonDef;
 import Core.UserCrawler;
 import Core.Interfaces.ICrawler;
-import Elements.Interfaces.IElement;
 import Services.FileServices;
 
 public class UserCrawlerTest  extends test{

@@ -10,6 +10,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import Services.Logger.ELogLevel;
+
 import Core.CommonCFinder;
 
 public class DomNode extends CommonCFinder
@@ -56,7 +58,7 @@ public class DomNode extends CommonCFinder
 			}
 			catch (Exception e)
 			{
-				WriteLineToLog("error while try to get node value :  " + e.getMessage());
+				WriteLineToLog("error while try to get node value :  " + e.getMessage(),ELogLevel.ERROR);
 				return "";
 
 			}
@@ -74,7 +76,7 @@ public class DomNode extends CommonCFinder
 			}
 			catch (Exception e)
 			{
-				WriteLineToLog("error while try to get node " +attribute +" attribute  :  " + e.getMessage());
+				WriteLineToLog("error while try to get node " +attribute +" attribute  :  " + e.getMessage(),ELogLevel.ERROR);
 				return "";
 			}
 			
@@ -119,7 +121,7 @@ public class DomNode extends CommonCFinder
 		{
 			return (NodeList) m_xpath.evaluate(path, m_node, XPathConstants.NODESET);
 		} catch (XPathExpressionException e) {
-			WriteLineToLog(e.getMessage());
+			WriteLineToLog(e.getMessage(),ELogLevel.ERROR);
 			return null;
 		}
 	}
@@ -141,8 +143,8 @@ public class DomNode extends CommonCFinder
 	
 	private void PrintError(Exception e)
 	{
-		WriteLineToLog("Error: " +e.getMessage());
-		WriteLineToLog(e.getStackTrace().toString());
+		WriteLineToLog("Error: " +e.getMessage(),ELogLevel.ERROR);
+		WriteLineToLog(e.getStackTrace().toString(),ELogLevel.ERROR);
 		
 	}
 	

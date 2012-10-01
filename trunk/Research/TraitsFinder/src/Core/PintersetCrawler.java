@@ -4,13 +4,14 @@ import java.io.File;
 
 import Services.FileServices;
 import Services.ICollector;
-import Services.Logger;
 
 import Elements.Interfaces.*;
 import Elements.classes.*;
 import Core.Interfaces.*;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
+import Services.Logger.ELogLevel;
+import Services.Logger.Logger;
 
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -59,7 +60,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 			if (DownloadFile(m_FilePath, CommonDef.PINTERSET_URL))
 			return StartCrawling();
 			//in case of fail...
-			WriteLineToLog("failed to download pinterest main file....");
+			WriteLineToLog("failed to download pinterest main file....",ELogLevel.ERROR);
 			return null;
 		} 
 		catch (Exception e)
@@ -73,7 +74,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 	{
 		if (m_FilePath == null) 
 		{
-			WriteLineToLog("Error : no file to main pinterset crawler...");
+			WriteLineToLog("no file to main pinterset crawler...",ELogLevel.ERROR);
 			return  null;
 		}
 		
@@ -89,7 +90,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		{
 			NodeList list = m_node.GetNodeList(USER_COMMENT_PATH,users) ;
 			CreateResultsPool(USERS_FOLDER_POOL_PATH);
-			WriteLineToLog( "Data for of nodes :");
+			WriteLineToLog( "Data for of nodes :",ELogLevel.INFORMATION);
 			for (int i = 0 ; i < list.getLength() ; i++)
 			{
 				Node t=list.item(i);
@@ -99,7 +100,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 			    String Link = user_item[2];
 		  
 		    	CreateResultsPool(USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
-				WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link);
+				WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link,ELogLevel.INFORMATION);
 				UserCrawler uct = new  UserCrawler(Link); 
 							
 				//save pool of intersts.
@@ -110,7 +111,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 					String value = m_node.GetValue(user_nudeItem.item(j));
 					if (Linkitem.contains(user_item[2].toLowerCase()))
 					{
-						WriteLineToLog("value :"+ value+" propery value will be: " +Linkitem);
+						WriteLineToLog("value :"+ value+" propery value will be: " +Linkitem,ELogLevel.INFORMATION);
 						//Debug...
 					}
 					else

@@ -14,7 +14,7 @@ import Core.WgetCollector;
 import Core.Interfaces.*;
 import Services.FileServices;
 import Services.ICollector;
-import Services.Logger;
+import Services.Logger.Logger;
 
 
 public class PinterstFinderTest extends test {

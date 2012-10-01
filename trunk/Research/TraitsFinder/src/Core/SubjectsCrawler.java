@@ -1,10 +1,5 @@
 package Core;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.DOMException;
@@ -15,9 +10,9 @@ import org.w3c.dom.NodeList;
 import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
 import Services.FileServices;
-import Services.GenericDictionary;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
+import Services.Logger.ELogLevel;
 import Elements.classes.*;
 
 public class SubjectsCrawler extends ACrawler implements ICrawler
@@ -59,7 +54,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		if(m_userName.length() != 0 && m_subjectName.length() != 0 ) return Crawl(m_subjectName);
 		else
 		{
-			WriteLineToLog("no user name and subject name can't crawled the subject...");
+			WriteLineToLog("no user name and subject name can't crawled the subject...",ELogLevel.ERROR);
 			return null;
 		}
 		
@@ -92,7 +87,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
 						
 						IElement itemElem = new SubjectElement(itemName);
-						WriteToLog("new item add to " +m_subjectName +" subject:" +itemName);
+						WriteLineToLog("new item add to " +m_subjectName +" subject:" +itemName,ELogLevel.INFORMATION);
 						itemElem.AddProperty(EProperty.description.toString(),itemDes);
 						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);
 						
@@ -102,7 +97,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 				return subjectElem;
 			} 
 			catch (Exception e) {
-				WriteLineToLog("error excpetion happen:" + e.getMessage());
+				WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
 				return null;
 			}
 		}
