@@ -19,7 +19,7 @@ public class ACrawler  extends CommonCFinder
 	{
 		if (FileServices.PathExist(filePath))
 		{
-			FileServices.Delete(this.GetClassName(), filePath);
+			FileServices.DeleteFile(this.GetClassName(), filePath);
 		}
 		if (m_collector.SaveDataFile(filePath, UrlPath))
 		{

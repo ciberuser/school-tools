@@ -30,7 +30,7 @@ public class UserCrawlerTest {
 	{
 		if (FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH))
 		{
-			FileServices.Delete(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
+			FileServices.DeleteFolder(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
 			FileServices.CreateFolder(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
 			
 		}
