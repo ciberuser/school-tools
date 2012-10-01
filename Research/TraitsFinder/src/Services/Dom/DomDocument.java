@@ -17,7 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import Services.FileServices;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 import Core.CommonCFinder;
 

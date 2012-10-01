@@ -8,7 +8,7 @@ import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 
 import Services.ICollector;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 public class WgetCollector extends CommonCFinder implements ICollector {
 

@@ -10,7 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 import Core.CommonCFinder;
 

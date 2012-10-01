@@ -1,6 +1,6 @@
 package Elements.classes;
 
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 public class SubjectElement extends  EnumElement
 {

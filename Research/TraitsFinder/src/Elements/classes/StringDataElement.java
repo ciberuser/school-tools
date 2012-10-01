@@ -3,7 +3,7 @@ package Elements.classes;
 
 import Elements.Interfaces.*;
 import Services.GenericDictionary;
-import Services.Logger.ELogLevel;
+import Services.Log.ELogLevel;
 
 
 import java.io.ObjectInputStream.GetField;
