@@ -35,6 +35,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		
 	public UserCrawler(String userName)
 	{
+		if (!FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH)) FileServices.CreateFolder(GetClassName(),CommonDef.USERS_FOLDER_POOL_PATH);
 		m_userName = userName;
 		m_userPath = CommonDef.USERS_FOLDER_POOL_PATH + "//" + m_userName;
 		m_userXmlPath = m_userPath + "//" + userName + ".xml" ; 
@@ -57,8 +58,6 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		return Crawl(CommonDef.PINTERSET_URL + m_userName+ "");		
 	}
 	
-	
-
 	protected IElement Crawl(String userUrl) {
 
 		m_userUrl = userUrl;
