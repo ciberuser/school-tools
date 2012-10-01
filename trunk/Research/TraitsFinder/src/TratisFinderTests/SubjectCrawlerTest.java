@@ -15,7 +15,7 @@ import Core.SubjectsCrawler;
 import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
 
-public class SubjectCrawler {
+public class SubjectCrawlerTest {
 
 	//  user ,subject
 	Map<String,String> m_testSubject = new HashMap<String, String>();

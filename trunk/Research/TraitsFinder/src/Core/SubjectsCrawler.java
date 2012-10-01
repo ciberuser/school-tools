@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -13,6 +15,7 @@ import org.w3c.dom.NodeList;
 import Core.Interfaces.ICrawler;
 import Elements.Interfaces.IElement;
 import Services.FileServices;
+import Services.GenericDictionary;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
 import Elements.classes.*;
@@ -30,7 +33,6 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	private DomDocument m_documnet;
 	private DomNode m_itemsNode;
 		
-	Map<String,String> _ITEM_PROPERTIES = new HashMap<String, String>();
 	
 	
 	final static String ITEM_DESCRIPTION_XPATH = "p[@class='description']";
@@ -46,17 +48,10 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		m_userPath= CommonDef.USERS_FOLDER_POOL_PATH +"//" +userName;
 		m_subjectPath = m_userPath + "//" + m_subjectName;
 		m_subjectXmlPath =m_userPath +"//" + m_subjectName.replace("-", "_")+".xml";
-		Init();
+		
 	}
 	
-	void Init()
-	{
-		_ITEM_PROPERTIES.put("ITEM_DESCRIPTION_XPATH", ITEM_DESCRIPTION_XPATH);
-		_ITEM_PROPERTIES.put("ITEM_NUM_LIKES_XPATH", ITEM_NUM_LIKES_XPATH);
-		_ITEM_PROPERTIES.put("ITEM_NAME_XPATH", ITEM_NAME_XPATH);
-	
-	}
-	
+		
 	@Override
 	public IElement Crawl() 
 	{
@@ -70,7 +65,6 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		
 	}
 
-	
 	protected IElement Crawl(String subjectName) 
 	{
 		m_subjectName = subjectName;
@@ -93,14 +87,16 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					Node n =  allItems.item(i);
 					if (n.getNodeType() == itemsNode.ELEMENT_NODE)
 					{
+						String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH);
+						String itemName = GetItemProperty(n, ITEM_NAME_XPATH);
+						String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
 						
+						IElement itemElem = new SubjectElement(itemName);
+						WriteToLog("new item add to " +m_subjectName +" subject:" +itemName);
+						itemElem.AddProperty(EProperty.description.toString(),itemDes);
+						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);
 						
-						String itemDes = m_itemsNode.GetNode(ITEM_DESCRIPTION_XPATH,n).getTextContent().replace(' ', '_').trim();
-						String itemName = m_itemsNode.GetNode(ITEM_NAME_XPATH,n).getTextContent().replace(' ', '_').trim();
-						
-						IElement elem = new SubjectElement(itemName);
-						elem.AddProperty(EProperty.description.toString(),itemDes);
-						subjectElem.AddElement(elem);
+						subjectElem.AddElement(itemElem);
 					}
 				}
 				return subjectElem;
@@ -108,9 +104,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 			catch (Exception e) {
 				WriteLineToLog("error excpetion happen:" + e.getMessage());
 				return null;
-				
 			}
-			
 		}
 		
 		return null;
@@ -132,4 +126,10 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	{
 		return  sujectName.replace("_", "-").replace("'", "-").replace("&", "").replace("--", "-").replace(".", "");
 	}
+	
+	private String GetItemProperty(Node node,String xpath) throws DOMException, XPathExpressionException
+	{
+		return m_itemsNode.GetNode(xpath,node).getTextContent().replace(' ', '_').trim();
+	}
+	
 }

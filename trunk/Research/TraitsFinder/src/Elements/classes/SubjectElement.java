@@ -6,7 +6,7 @@ public class SubjectElement extends  EnumElement
 	public SubjectElement(String subjectName)
 	{
 		super(subjectName);
-		WriteLineToLog("new subject element created subject name= "+subjectName );
+		//WriteLineToLog("new subject element created subject name= "+subjectName );
 		AddProperty(EProperty.name.toString(), subjectName);
 	}
 	

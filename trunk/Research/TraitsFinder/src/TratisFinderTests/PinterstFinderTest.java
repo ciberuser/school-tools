@@ -28,7 +28,7 @@ public class PinterstFinderTest {
 	public void setUp() throws Exception 
 	{
 		m_pintersetScouter = new PintersetCrawler();
-		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
+		FileServices.DeleteFile(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
 		{
 			FileServices.CreateFolder(getClass().getName(), CommonDef.ROOT_DATA_FOLDER);
@@ -38,7 +38,7 @@ public class PinterstFinderTest {
 	@After
 	public void tearDown() throws Exception
 	{
-		FileServices.Delete(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
+		FileServices.DeleteFile(PINTERST_TESTS, CommonDef.USERS_FOLDER_POOL_PATH);
 	}
 
 	@Test
