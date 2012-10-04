@@ -33,7 +33,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	final static String ITEM_DESCRIPTION_XPATH = "p[@class='description']";
 	final static String ITEM_NUM_LIKES_XPATH = "p[@class='stats colorless']/span";
 	final static String ITEM_NAME_XPATH = "div[@class='convo attribution clearfix']/p";
-	
+	final static String ITEM_REPIN_XPATH ="";
 	
 	
 	public SubjectsCrawler(String userName ,String subjectName)
@@ -46,7 +46,6 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		
 	}
 	
-		
 	@Override
 	public IElement Crawl() 
 	{
@@ -88,10 +87,20 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						
 						IElement itemElem = new SubjectElement(itemName);
 						WriteLineToLog("new item add to " +m_subjectName +" subject:" +itemName,ELogLevel.INFORMATION);
-						itemElem.AddProperty(EProperty.description.toString(),itemDes);
-						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);
 						
-						subjectElem.AddElement(itemElem);
+						if (itemElem != null)
+						{
+							itemElem.AddProperty(EProperty.description.toString(),itemDes);
+							if (itemLikes.length()>0)  {
+							itemElem.AddProperty(EProperty.likes.toString(), itemLikes);}
+							subjectElem.AddElement(itemElem);
+						}
+						else
+						{
+							WriteLineToLog("item element is null", ELogLevel.ERROR);
+						}
+												
+						
 					}
 				}
 				return subjectElem;
