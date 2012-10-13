@@ -10,4 +10,6 @@ public class CommonDef
 	public final static String PINTERSET_URL ="http://pinterest.com/";
 	public final static String PINTERSET_XML = "pinterest_main.xml";
 	
+	public final static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
+	
 }
