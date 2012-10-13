@@ -88,17 +88,11 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						IElement itemElem = new SubjectElement(itemName);
 						WriteLineToLog("new item add to " +m_subjectName +" subject:" +itemName,ELogLevel.INFORMATION);
 						
-						if (itemElem != null)
-						{
-							itemElem.AddProperty(EProperty.description.toString(),itemDes);
-							if (itemLikes.length()>0)  {
-							itemElem.AddProperty(EProperty.likes.toString(), itemLikes);}
-							subjectElem.AddElement(itemElem);
-						}
-						else
-						{
-							WriteLineToLog("item element is null", ELogLevel.ERROR);
-						}
+						itemElem.AddProperty(EProperty.description.toString(),itemDes);
+						if (itemLikes.length()>0)  {
+						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);}
+						subjectElem.AddElement(itemElem);
+						
 												
 						
 					}

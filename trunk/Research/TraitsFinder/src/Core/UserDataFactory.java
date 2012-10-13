@@ -2,9 +2,9 @@ package Core;
 
 import Core.Interfaces.EUserDataType;
 import Core.Interfaces.ISavedUserData;
-import Services.AbstractFactory;
 
-public class UserDataFactory extends AbstractFactory
+
+public class UserDataFactory //extends AbstractFactory
 {
 	ISavedUserData GetInerface(EUserDataType type)
 	{

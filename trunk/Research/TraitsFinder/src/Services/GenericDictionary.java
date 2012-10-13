@@ -58,12 +58,15 @@ public class GenericDictionary<T>  implements IDictionary<T>
 				
 	}
 
-
 	@Override
 	public boolean IsExist(String id) {
 		
 		return m_item.containsKey(id);
 	}
 
+	public Map ToMap()
+	{
+		return m_item;
+	}
 	
 }
