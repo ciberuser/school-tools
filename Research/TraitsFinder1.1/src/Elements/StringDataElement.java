@@ -69,7 +69,7 @@ public class StringDataElement extends AElement implements IElement {
 	}
 
 	@Override
-	public void Save() {
+	public void Serialize() {
 		// TODO Auto-generated method stub
 		
 	}

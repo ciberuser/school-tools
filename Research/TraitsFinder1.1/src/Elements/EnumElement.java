@@ -13,8 +13,8 @@ import Services.Log.ELogLevel;
 public class EnumElement  extends AElement 
 {
 	
-	IElementSerializer m_serializer;
-	Map<EProperty,Object> m_properties ;
+	
+	protected Map<EProperty,Object> m_properties ;
 	
 	
 	public EnumElement(String elementName)
@@ -47,11 +47,7 @@ public class EnumElement  extends AElement
 	}
 
 
-	public void SetSerializer(IElementSerializer serializer) 
-	{
-		m_serializer = serializer;
-			
-	}
+	
 	
 	private EProperty findProperty(String ProperyDef)
 	{

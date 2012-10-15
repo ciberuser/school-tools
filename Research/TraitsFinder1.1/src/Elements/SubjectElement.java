@@ -25,7 +25,7 @@ public class SubjectElement extends  EnumElement implements IElement
 	}
 
 	@Override
-	public void Save() 
+	public void Serialize() 
 	{
 		if ( m_serializer == null)
 		{

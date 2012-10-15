@@ -14,6 +14,7 @@ import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
 
 import Core.CommonCBase;
+import Core.CommonDef;
 import Elements.IElement;
 import Elements.EProperty;
 import Services.Log.ELogLevel;
@@ -48,11 +49,12 @@ public class Neo4JServices extends CommonCBase
 				tempNode =  m_services.createNode(); 
 				tempNode.setProperty(EProperty.name.toString(),name );
 				m_indexNode.add(tempNode, EProperty.name.toString(),name );
-				WriteLineToLog("add node id: "+ tempNode.getId(), ELogLevel.INFORMATION);
+				WriteLineToLog("node created id: "+ tempNode.getId(), ELogLevel.INFORMATION);
 			}
 			else
 			{
 				tempNode =  hits.getSingle();
+				WriteLineToLog("found node id:" +tempNode.getId(), ELogLevel.INFORMATION);
 			}
 			tx.success();
 			
@@ -63,13 +65,17 @@ public class Neo4JServices extends CommonCBase
 			tx.finish();
 			return 0;
 		}
-		finally
-        {
-            tx.finish();
-            
-        }
+		tx.finish();
+         
 		return tempNode.getId();
 		
+	}
+	
+	public long GetNodeElementId(IElement element)
+	{
+		Node returnNode = m_indexNode.get(EProperty.name.toString(), element.GetName()).getSingle();
+		if (returnNode != null) return returnNode.getId();
+		return CommonDef.NOT_EXIST_IN_DB;
 	}
 	
 	public boolean AddRelasion(IElement elm1 ,IElement elm2, RelationshipType relType)
@@ -78,10 +84,22 @@ public class Neo4JServices extends CommonCBase
 		Node elm2Node = m_indexNode.get(EProperty.name.toString(), elm2.GetName()).getSingle();
 		if (elm1Node.getId() == elm2Node.getId()) 	return false;
 		Relationship rel =  elm1Node.createRelationshipTo(elm2Node,relType);
-		
 		return true;
-		
 	}
+	
+	public String GetNodeProperty(long NodeId , String Property)
+	{
+		return m_services.getNodeById(NodeId).getProperty(Property).toString();
+	}
+	
+	public String GetNodeProperty(IElement element , String Property)
+	{
+		long nodeId = GetNodeElementId(element);
+		if (nodeId != CommonDef.NOT_EXIST_IN_DB) return GetNodeProperty(nodeId, Property);
+		return "";
+	}
+	
+	
 	
 	
 	

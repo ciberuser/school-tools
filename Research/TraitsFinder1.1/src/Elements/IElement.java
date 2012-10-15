@@ -13,7 +13,7 @@ public interface IElement
 	void SetSerializer(IElementSerializer serializer);
 	void SetName(String elementName);
 	Map GetProperties();
-	void Save();
+	void Serialize();
 	String GetName();
 	Object GetProperty(String ProperyDef);
 	

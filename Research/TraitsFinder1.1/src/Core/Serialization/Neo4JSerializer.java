@@ -47,7 +47,7 @@ public class Neo4JSerializer extends ASerializer implements IElementSerializer  
 
 
 	@Override
-	public void Save(IElement elemet) {
+	public void Link(IElement elemet) {
 		// TODO Auto-generated method stub
 		
 	}

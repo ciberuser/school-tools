@@ -5,7 +5,7 @@ import Elements.IElement;
 public interface IElementSerializer
 {
 	void Save();
-	void Save(IElement elemet);
+	void Link(IElement elemet);
 	IElementSerializer Load();
 	boolean Close();
 }

@@ -4,11 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Core.CommonCBase;
+import Core.Serialization.IElementSerializer;
 import Elements.IElement;
 
 public abstract class AElement  extends CommonCBase{
 
 	protected List<IElement> m_elements;
+	
+	protected IElementSerializer m_serializer;
+	
 	protected String m_name;
 	
 	public AElement()
@@ -21,6 +25,8 @@ public abstract class AElement  extends CommonCBase{
 		m_elements = new LinkedList<IElement>();
 		m_name = elementName;
 	}
+	
+	public void SetSerializer(IElementSerializer serializer) { m_serializer = serializer;	}
 	
 	public void SetName(String elementName) {	m_name = elementName;}
 	
