@@ -16,8 +16,10 @@ import Core.CommonDef;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Elements.StringDataElement;
+import Elements.UserElement;
 import Services.FileServices;
 import Services.Dom.*;
+import Services.Log.ELogLevel;
 public class UserCrawler extends ACrawler  implements ICrawler
 {
 	private String m_userName;
@@ -30,7 +32,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_XPATH + "/ul";
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
-	private IElement m_element;
+	private IElement m_userElement;
 	private List<String> m_subjects;
 	
 		
@@ -80,7 +82,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 							m_subjects.add(subjectName);
 						}
 					}
-					if (CreateResultsPool(m_userPath)) return m_element;
+					if (CreateResultsPool(m_userPath)) return m_userElement;
 				}
 				
 			}
@@ -107,8 +109,8 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	@Override
 	public boolean CreateResultsPool(String Path) 
 	{
-		m_element = new StringDataElement();
-		m_element.SetName(m_userName);
+		m_userElement = new UserElement();
+		m_userElement.SetName(m_userName);
 		if (FileServices.PathExist(Path) && !m_subjects.isEmpty())
 		{
 			for (String subjectName : m_subjects)
@@ -116,7 +118,14 @@ public class UserCrawler extends ACrawler  implements ICrawler
 				//FileServices.CreateFolder(GetClassName(), Path+"//"+ subjectName);
 				ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
 				IElement subjectElem = subjectCrawler.Crawl();
-				m_element.AddElement(subjectElem);
+				if (subjectElem == null)
+				{
+					WriteLineToLog("the subject :"+subjectName +"didn't crawled...", ELogLevel.ERROR);
+				}
+				else
+				{
+					m_userElement.AddElement(subjectElem);
+				}
 				
 			}
 			return true;

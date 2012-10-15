@@ -29,12 +29,12 @@ public class Logger
 	
 	public static void Write(String module, ELogLevel logLevel,String msg)
 	{
-		WriteStringToFile(String.format("|%s|[%-17s]-[%s:%s]",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
+		WriteStringToFile(String.format("|%s|[%-19s]-[%s:%s]",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
 	}
 	
 	public static void WriteLine(String module, String msg,ELogLevel logLevel)
 	{
-		WriteStringToFile(String.format("|%s|[%-17s]-[%s:%s]\n",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
+		WriteStringToFile(String.format("|%s|[%-19s]-[%s:%s]\n",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
 	}
 	
 	private Logger(String filePath)

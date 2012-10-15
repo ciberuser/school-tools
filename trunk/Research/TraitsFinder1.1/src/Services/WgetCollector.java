@@ -46,7 +46,7 @@ public class WgetCollector extends CommonCBase implements ICollector {
 		} 
 		catch (Exception e) {
 			WriteLineToLog("Error "+e.toString(),ELogLevel.ERROR);
-			WriteLineToLog(e.getCause().toString(),ELogLevel.ERROR);
+			//WriteLineToLog(e.getCause().toString(),ELogLevel.ERROR);
 			//Logger.GetLogger().WriteLine(m_Name,"Error "+e.toString());
 			//Logger.GetLogger().WriteLine(m_Name, e.getCause().toString());
 			return false;

@@ -6,6 +6,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import scala.annotation.target.getter;
+
 
 import Core.CommonDef;
 import Core.Interfaces.ICrawler;
@@ -39,11 +41,11 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	
 	public SubjectsCrawler(String userName ,String subjectName)
 	{
-		m_subjectName = subjectName;
+		m_subjectName = subjectName.replace("-", "_");
 		m_userName = userName;
 		m_userPath= CommonDef.USERS_FOLDER_POOL_PATH +"//" +userName;
 		m_subjectPath = m_userPath + "//" + m_subjectName;
-		m_subjectXmlPath =m_userPath +"//" + m_subjectName.replace("-", "_")+".xml";
+		m_subjectXmlPath =m_userPath +"//"+ m_subjectName+"//"+ m_subjectName+".xml";
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
 	}
 	
@@ -64,7 +66,8 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	{
 		m_subjectName = subjectName;
 		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName) ;
-		//if (FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(module, Path)
+		
+		if (!FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(GetClassName(), m_subjectPath);
 		if (DownloadFile(m_subjectXmlPath, m_subjectURL))
 		{
 			try 
@@ -84,12 +87,13 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH);
 						String itemName = GetItemProperty(n, ITEM_NAME_XPATH);
 						String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
-						
+												
 						IElement itemElem = new SubjectElement(itemName);
 						WriteLineToLog("new item add to " +m_subjectName +" subject:" +itemName,ELogLevel.INFORMATION);
 						
 						itemElem.AddProperty(EProperty.description.toString(),itemDes);
-						if (itemLikes.length()>0)  {
+						if (itemLikes.length()>0) 
+						{
 						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);}
 						subjectElem.AddElement(itemElem);
 						

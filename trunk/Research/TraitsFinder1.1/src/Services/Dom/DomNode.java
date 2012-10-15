@@ -120,7 +120,9 @@ public class DomNode extends CommonCBase
 		try
 		{
 			return (NodeList) m_xpath.evaluate(path, m_node, XPathConstants.NODESET);
-		} catch (XPathExpressionException e) {
+		} 
+		catch (XPathExpressionException e)
+		{
 			WriteLineToLog(e.getMessage(),ELogLevel.ERROR);
 			return null;
 		}

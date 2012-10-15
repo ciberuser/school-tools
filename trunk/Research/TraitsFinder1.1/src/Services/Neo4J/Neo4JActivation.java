@@ -39,6 +39,7 @@ public class Neo4JActivation
 			
 	public static boolean Start(String DBpath)
 	{
+		
 		m_DBservice =  new GraphDatabaseFactory().newEmbeddedDatabase( DBpath );
 		RegisterShutdownHook(m_DBservice);
 		m_isActive = true;
