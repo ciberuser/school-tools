@@ -13,6 +13,7 @@ public class CommonDef
 	
 	public final static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
 	
+	public final static String NEO_WEIGHT = "weight";
 	
 	//DB logic:
 	

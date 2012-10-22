@@ -11,13 +11,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Core.CommonCBase;
 import Core.CommonDef;
 import Core.Crawlers.SubjectsCrawler;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Services.FileServices;
+import Services.Log.ELogLevel;
 
-public class SubjectCrawlerTest {
+public class SubjectCrawlerTest extends CommonCBase{
 
 	//  user ,subject
 	Map<String,String> m_testSubject = new HashMap<String, String>();
@@ -49,10 +51,12 @@ public class SubjectCrawlerTest {
 			Map.Entry<String, String> userSubjectPairs = (Map.Entry<String, String>) it.next();
 			
 			ICrawler crawler = new SubjectsCrawler(userSubjectPairs.getKey(),userSubjectPairs.getValue());
-			IElement elem = crawler.Crawl() ;
+			IElement elem = crawler.Crawl(true) ;
 			assertTrue(elem != null);
-			assertTrue(elem.GetName() == userSubjectPairs.getValue());
-						
+			WriteLineToLog("subject elem name= " +elem.GetName()+ " check :"+userSubjectPairs.getValue().replace("-", "_"), ELogLevel.INFORMATION);
+			assertTrue(elem.GetName().compareTo(userSubjectPairs.getValue().replace("-", "_"))==0);
+			
+			//assertTrue(crawler.CreateResultsPool(false));
 		}
 		
 	}

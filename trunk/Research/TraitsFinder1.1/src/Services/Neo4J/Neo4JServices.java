@@ -2,9 +2,16 @@ package Services.Neo4J;
 
 
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.lang.model.element.Element;
 
 
+import org.apache.lucene.analysis.CharArrayMap.EntryIterator;
+import org.apache.lucene.analysis.CharArrayMap.EntrySet;
+import org.apache.lucene.search.FieldComparator.RelevanceComparator;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -24,12 +31,17 @@ public class Neo4JServices extends CommonCBase
 	
 	GraphDatabaseService m_services;
 	private Index<Node> m_indexNode;
+	private Index<Relationship> m_indexRelation; 
 	
+	
+	
+		
 	public Neo4JServices(GraphDatabaseService service)
 	{
 		
 			m_services = service;
 			m_indexNode =  m_services.index().forNodes(EProperty.name.toString());
+			m_indexRelation = m_services.index().forRelationships(RelType.Users.toString());
 	}
 	
 	public long CreateNode(IElement element)
@@ -47,7 +59,7 @@ public class Neo4JServices extends CommonCBase
 			if (hits.size() == 0)
 			{
 				tempNode =  m_services.createNode(); 
-				tempNode.setProperty(EProperty.name.toString(),name );
+				//tempNode.setProperty(EProperty.name.toString(),name );
 				m_indexNode.add(tempNode, EProperty.name.toString(),name );
 				WriteLineToLog("node created id: "+ tempNode.getId(), ELogLevel.INFORMATION);
 			}
@@ -55,6 +67,13 @@ public class Neo4JServices extends CommonCBase
 			{
 				tempNode =  hits.getSingle();
 				WriteLineToLog("found node id:" +tempNode.getId(), ELogLevel.INFORMATION);
+			}
+			Iterator itr =  element.GetProperties().entrySet().iterator();
+			while (itr.hasNext())
+			{
+				Map.Entry pair = (Map.Entry) itr.next();
+				tempNode.setProperty(pair.getKey().toString(), pair.getValue().toString());
+				WriteLineToLog("add prop to node: propkey="+ pair.getKey().toString()+" propvalue= " +pair.getValue().toString(), ELogLevel.INFORMATION);
 			}
 			tx.success();
 			
@@ -78,13 +97,71 @@ public class Neo4JServices extends CommonCBase
 		return CommonDef.NOT_EXIST_IN_DB;
 	}
 	
-	public boolean AddRelasion(IElement elm1 ,IElement elm2, RelationshipType relType)
+	public Relationship AddRelasion(IElement elm1 ,IElement elm2, RelationshipType relType)
 	{
-		Node elm1Node = m_indexNode.get(EProperty.name.toString(), elm1.GetName()).getSingle();
-		Node elm2Node = m_indexNode.get(EProperty.name.toString(), elm2.GetName()).getSingle();
-		if (elm1Node.getId() == elm2Node.getId()) 	return false;
-		Relationship rel =  elm1Node.createRelationshipTo(elm2Node,relType);
-		return true;
+		Relationship relReturn ;
+		Transaction tx =null;
+		try
+		{
+			Node elm1Node = m_indexNode.get(EProperty.name.toString(), elm1.GetName()).getSingle();
+			Node elm2Node = m_indexNode.get(EProperty.name.toString(), elm2.GetName()).getSingle();
+			if ((elm1Node.getId() == elm2Node.getId()) || elm1Node == null || elm2Node == null ) return null;
+			tx = m_services.beginTx();
+			for(Relationship rel :elm1Node.getRelationships(RelType.Weight))
+			{
+				if (rel.getOtherNode(elm2Node) !=null)
+				{
+					relReturn =rel;
+					break;
+				}
+			}
+			relReturn =  elm1Node.createRelationshipTo(elm2Node,relType);
+			tx.success();
+			WriteLineToLog("set new relation between : " +elm1Node.getProperty(EProperty.name.toString())+ " to " +elm2Node.getProperty(EProperty.name.toString())+" created reltype=" +relType.toString(),ELogLevel.INFORMATION );
+			tx.finish();
+			return relReturn;
+		}
+		catch (Exception e) {
+			WriteLineToLog("exception occur msg="+e.getMessage(),ELogLevel.ERROR);
+			return null;
+		}
+		finally 
+		{
+			if (tx!=null) tx.finish();
+		}
+	}
+		
+	
+	public boolean AddWeightRelasion(IElement elm1 ,IElement elm2)
+	{
+		Relationship rel =  AddRelasion(elm1, elm2, RelType.Weight);
+		if (rel == null) return false;
+		boolean status = false;
+		Transaction tx = m_services.beginTx();
+		try
+		{
+			if (!rel.hasProperty(CommonDef.NEO_WEIGHT))
+			{
+				rel.setProperty(CommonDef.NEO_WEIGHT, 1);
+				status = true;
+			}
+			else
+			{
+				int count = (Integer)rel.getProperty(CommonDef.NEO_WEIGHT);
+				count++;
+				rel.setProperty(CommonDef.NEO_WEIGHT, count);
+				status = true;
+			}
+			tx.success();
+			tx.finish();
+			return status;
+		}
+		catch(Exception e)
+		{
+			WriteToLog("error occur msg=" +e.getMessage(), ELogLevel.ERROR);
+			tx.finish();
+			return false;
+		}
 	}
 	
 	public String GetNodeProperty(long NodeId , String Property)

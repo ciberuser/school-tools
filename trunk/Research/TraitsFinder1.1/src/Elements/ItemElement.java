@@ -8,6 +8,10 @@ public class ItemElement extends EnumElement implements IElement{
 		
 	}
 
+	public  ItemElement(String name)
+	{
+		super(name);
+	}
 	
 
 }

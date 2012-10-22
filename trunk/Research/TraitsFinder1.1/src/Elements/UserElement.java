@@ -12,5 +12,9 @@ public class UserElement extends StringDataElement
 		//TODO add the link between them....
 		
 	}
+	public UserElement(String name)
+	{
+		super(EProperty.name.toString(), name);
+	}
 	
 }
