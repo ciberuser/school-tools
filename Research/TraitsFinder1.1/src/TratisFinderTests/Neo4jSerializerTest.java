@@ -23,27 +23,34 @@ import Services.Neo4J.Neo4JServices;
 
 public class Neo4jSerializerTest extends CommonCBase{
 
-	private final static String PROP_NAME = "car";
-	private final static String PROP_DES  = "bmw m3";
+	private final static String PROP_NAME1 = "car";
+	private final static String PROP_NAME2 = "pizza";
+	
+	private final static String PROP_DES1  = "bmw m3";
+	private final static String PROP_DES2 = "napoly pizza";
 	
 	private String m_DBdir = CommonDef.ROOT_DATA_FOLDER+"TestDBRoot/"; 
 	IElement m_element ;
+	IElement m_element2;
 	IElementSerializer m_serializer;
+	IElementSerializer m_serializer2;
 	
 	@Before
 	public void setUp() throws Exception
 	{
 		InitElement();
 		m_serializer =  SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, m_element, m_DBdir);
+		m_serializer2 = SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J,m_element2, m_DBdir);
 	}
 
 	
 	void InitElement()
 	{
 		
-		m_element = new SubjectElement(PROP_NAME);
-		m_element.AddProperty(EProperty.description.toString(),PROP_NAME);
-				
+		m_element = new SubjectElement(PROP_NAME1);
+		m_element.AddProperty(EProperty.description.toString(),PROP_DES1);
+		m_element2 = new SubjectElement(PROP_NAME2);
+		m_element2.AddProperty(EProperty.description.toString(), PROP_DES2);
 	}
 	
 	@After
@@ -55,8 +62,10 @@ public class Neo4jSerializerTest extends CommonCBase{
 	@Test
 	public void testNeo4JSerializer()
 	{
-		assertTrue(m_serializer!=null);
 		assertTrue(FileServices.PathExist(m_DBdir));
+		assertTrue(m_serializer!=null);
+		assertTrue(m_serializer2 !=null);
+		
 	}
 
 	@Test
@@ -64,12 +73,14 @@ public class Neo4jSerializerTest extends CommonCBase{
 	{
 		assertTrue(Neo4JActivation.IsActive());
 		Neo4JServices ns = new Neo4JServices(Neo4JActivation.GetGraphDatabaseService());
-		m_serializer.Save();
+		assertTrue(m_serializer.Save());
 		long elementId = ns.GetNodeElementId(m_element);
 		WriteLineToLog("the element id is : "+elementId , ELogLevel.INFORMATION);
 		assertTrue(elementId != CommonDef.NOT_EXIST_IN_DB);
-		assertTrue(ns.GetNodeProperty(m_element, EProperty.name.toString()) == PROP_NAME );
-		assertTrue(ns.GetNodeProperty(m_element, EProperty.description.toString()) == PROP_DES );	
+		assertTrue(ns.GetNodeProperty(m_element, EProperty.name.toString()).compareTo(PROP_NAME1 )==0);
+		assertTrue(ns.GetNodeProperty(m_element, EProperty.description.toString()).compareTo(PROP_DES1)==0 );	
+		assertTrue(m_serializer2.Save());
+		assertTrue(ns.AddWeightRelasion(m_element, m_element2))	;	
 	}
 
 	@Test

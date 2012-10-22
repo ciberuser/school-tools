@@ -2,6 +2,7 @@ package Core.Crawlers;
 
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
+import Elements.ItemElement;
 import Services.Log.ELogLevel;
 
 public class ItemCrawler extends ACrawler implements ICrawler {
@@ -9,7 +10,7 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 	private String m_itemURL;
 	private String m_ItemPath;
 	private String m_itemName;
-	
+		
 	public ItemCrawler(String ItemUrl, String ItemPath,String ItemName)
 	{
 		m_itemURL = ItemUrl;
@@ -18,8 +19,9 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 	}
 
 	@Override
-	public IElement Crawl() 
+	public IElement Crawl(boolean recursive) 
 	{
+		IElement itemElement = null;
 		if (m_itemURL.length()>0 && m_ItemPath.length()>0) 
 		{
 			if (!DownloadFile(m_ItemPath, m_itemURL))
@@ -27,9 +29,9 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 				WriteLineToLog("failed to download Item itemPath:" +m_ItemPath +" item URL:" +m_itemURL, ELogLevel.ERROR);
 				return null;
 			}
-				
+			itemElement = new ItemElement(m_itemName);	
 		}
-		return null;
+		return itemElement;
 	}
 
 	@Override
@@ -38,10 +40,5 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 		return false;
 	}
 
-	@Override
-	public boolean CreateResultsPool(String Path) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

@@ -2,7 +2,10 @@ package Core.Crawlers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 //import javax.lang.model.element.Element;
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +16,8 @@ import org.w3c.dom.Element;
 
 
 import Core.CommonDef;
+import Core.CrawlerProcessor;
+import Core.ECrawlingType;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Elements.StringDataElement;
@@ -34,7 +39,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	
 	private IElement m_userElement;
 	private List<String> m_subjects;
-	
+	private Map<String,ICrawler> m_subjectLists;
 		
 	public UserCrawler(String userName)
 	{
@@ -53,17 +58,19 @@ public class UserCrawler extends ACrawler  implements ICrawler
 			FileServices.CreateFolder(GetClassName(), m_userPath);
 		}
 		m_subjects = new ArrayList<String>();
+		m_subjectLists = new HashMap<String, ICrawler>();
 	}
 	
 	@Override
-	public IElement Crawl() 
+	public IElement Crawl(boolean recursive) 
 	{
-		return Crawl(CommonDef.PINTERSET_URL + m_userName+ "");		
+		return Crawl(CommonDef.PINTERSET_URL + m_userName+ "",recursive);		
 	}
 	
-	protected IElement Crawl(String userUrl) {
+	protected IElement Crawl(String userUrl,boolean recursive) {
 
 		m_userUrl = userUrl;
+		if (m_userName.isEmpty() || m_userPath.isEmpty() || m_userXmlPath.isEmpty()) return null;
 		try {
 			
 				if (DownloadFile(m_userXmlPath, m_userUrl))
@@ -72,17 +79,30 @@ public class UserCrawler extends ACrawler  implements ICrawler
 					Node node =  m_documnet.GetNode(SUBJECTS_XPATH);
 					m_node = new DomNode(node);
 					NodeList allSubjects =  node.getChildNodes();/* m_node.GetNodeList("//li") */;
+					m_userElement = new UserElement(m_userName);
 					for(int i =0 ; i<allSubjects.getLength() ;++i)
 					{
-						
-						Node n =  allSubjects.item(i);
-						if (n.getNodeType() == node.ELEMENT_NODE)
+						if(recursive)
 						{
-							String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
-							m_subjects.add(subjectName);
+							Node n =  allSubjects.item(i);
+							if (n.getNodeType() == node.ELEMENT_NODE)
+							{
+								String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
+								ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
+								IElement subjectElm = subjectCrawler.Crawl(CrawlerProcessor.GetInstance().IsDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
+								if (subjectElm == null)
+								{
+									WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);
+								}
+								else
+								{
+									m_userElement.AddElement(subjectElm);
+								}
+								
+							}
 						}
 					}
-					if (CreateResultsPool(m_userPath)) return m_userElement;
+					 return m_userElement; //TODO:: need to add processor!!
 				}
 				
 			}
@@ -106,33 +126,6 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	}
 
 
-	@Override
-	public boolean CreateResultsPool(String Path) 
-	{
-		m_userElement = new UserElement();
-		m_userElement.SetName(m_userName);
-		if (FileServices.PathExist(Path) && !m_subjects.isEmpty())
-		{
-			for (String subjectName : m_subjects)
-			{
-				//FileServices.CreateFolder(GetClassName(), Path+"//"+ subjectName);
-				ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
-				IElement subjectElem = subjectCrawler.Crawl();
-				if (subjectElem == null)
-				{
-					WriteLineToLog("the subject :"+subjectName +"didn't crawled...", ELogLevel.ERROR);
-				}
-				else
-				{
-					m_userElement.AddElement(subjectElem);
-				}
-				
-			}
-			return true;
-		}
-		return false;
-	}
-	
 	
 	
 	

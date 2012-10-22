@@ -45,7 +45,7 @@ public class PinterstFinderTest extends test {
 	@Test
 	public void testCrawl() 
 	{
-		assertTrue(m_pintersetScouter.Crawl()!=null);
+		assertTrue(m_pintersetScouter.Crawl(true)!=null);
 		m_runCrawler = true;
 		
 	}
@@ -61,7 +61,7 @@ public class PinterstFinderTest extends test {
 	{
 		if (m_runCrawler == false)
 		{
-			assertTrue(m_pintersetScouter.Crawl() != null);
+			assertTrue(m_pintersetScouter.Crawl(true) != null);
 		}
 		assertTrue(FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER +CommonDef.PINTERSET_XML));
 	}

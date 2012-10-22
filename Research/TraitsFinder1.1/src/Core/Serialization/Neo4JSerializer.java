@@ -13,7 +13,7 @@ public class Neo4JSerializer extends ASerializer implements IElementSerializer  
 
 	
 	//private Neo4JActivation m_DBActivation;
-	private boolean m_activeNeo4J;
+	
 	private Neo4JServices m_neoServies ;
 	
 	public Neo4JSerializer(IElement element,String dbDir)
@@ -34,22 +34,33 @@ public class Neo4JSerializer extends ASerializer implements IElementSerializer  
 			m_neoServies = new Neo4JServices(Neo4JActivation.GetGraphDatabaseService());
 			WriteLineToLog("Neo4J is is active", ELogLevel.INFORMATION);
 		}
+		m_neoServies = new Neo4JServices(Neo4JActivation.GetGraphDatabaseService());
 	}
 	
 	
 
 	@Override
-	public void Save()
+	public boolean Save()
 	{
-		m_neoServies.CreateNode(m_element);
+		return  (m_neoServies.CreateNode(m_element)!=0);
 	}
 
-
-
 	@Override
-	public void Link(IElement elemet) {
-		// TODO Auto-generated method stub
+	public boolean Link(IElement elemet)
+	{
+		if (m_element == null)
+		{
+			WriteLineToLog("no serializer have no element", ELogLevel.ERROR);
+			return false;
+		}
 		
+		if ( m_neoServies == null)
+		{
+			WriteLineToLog("no neo4j services ", ELogLevel.ERROR);
+			return false;
+		}
+		return  m_neoServies.AddWeightRelasion(m_element,elemet) ;
+	
 	}
 
 

@@ -1,5 +1,10 @@
 package Core.Crawlers;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.DOMException;
@@ -10,7 +15,10 @@ import scala.annotation.target.getter;
 
 
 import Core.CommonDef;
+import Core.CrawlerProcessor;
+import Core.ECrawlingType;
 import Core.Interfaces.ICrawler;
+import Elements.EProperty;
 import Elements.IElement;
 import Services.FileServices;
 import Services.Dom.DomDocument;
@@ -28,15 +36,20 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	private String m_subjectXmlPath;
 	private String m_subjectURL ;
 	
+	
+	
 	private DomDocument m_documnet;
 	private DomNode m_itemsNode;
 		
+	
 	
 	
 	final static String ITEM_DESCRIPTION_XPATH = "p[@class='description']";
 	final static String ITEM_NUM_LIKES_XPATH = "p[@class='stats colorless']/span";
 	final static String ITEM_NAME_XPATH = "div[@class='convo attribution clearfix']/p";
 	final static String ITEM_REPIN_XPATH ="";
+	final static String ITEM_URL_XPATH = "div[@class='PinHolder']/a";
+	
 	
 	
 	public SubjectsCrawler(String userName ,String subjectName)
@@ -47,13 +60,16 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		m_subjectPath = m_userPath + "//" + m_subjectName;
 		m_subjectXmlPath =m_userPath +"//"+ m_subjectName+"//"+ m_subjectName+".xml";
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
+		
 	}
 	
+	
+	
 	@Override
-	public IElement Crawl() 
+	public IElement Crawl(boolean recursive) 
 	{
 		
-		if(m_userName.length() != 0 && m_subjectName.length() != 0 ) return Crawl(m_subjectName);
+		if(m_userName.length() != 0 && m_subjectName.length() != 0 ) return Crawl(m_subjectName,recursive);
 		else
 		{
 			WriteLineToLog("no user name and subject name can't crawled the subject...",ELogLevel.ERROR);
@@ -62,7 +78,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		
 	}
 
-	protected IElement Crawl(String subjectName) 
+	protected IElement Crawl(String subjectName,boolean recursive) 
 	{
 		m_subjectName = subjectName;
 		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName) ;
@@ -84,21 +100,26 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					Node n =  allItems.item(i);
 					if (n.getNodeType() == itemsNode.ELEMENT_NODE)
 					{
-						String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH);
-						String itemName = GetItemProperty(n, ITEM_NAME_XPATH);
+						String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH); //can drop
+						String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       // can be drop
 						String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
-												
-						IElement itemElem = new SubjectElement(itemName);
-						WriteLineToLog("new item add to " +m_subjectName +" subject:" +itemName,ELogLevel.INFORMATION);
 						
-						itemElem.AddProperty(EProperty.description.toString(),itemDes);
-						if (itemLikes.length()>0) 
+						DomNode urlNode = new DomNode(m_itemsNode.GetNode(ITEM_URL_XPATH, n));
+						String ItemURL = (urlNode!=null) ? urlNode.GetAttribute("href") : "";		
+						
+						if (ItemURL=="") WriteLineToLog("Item Url Not Found", ELogLevel.ERROR);
+						else
 						{
-						itemElem.AddProperty(EProperty.likes.toString(), itemLikes);}
-						subjectElem.AddElement(itemElem);
-						
-												
-						
+							if (recursive) 
+							{
+								ICrawler itemCrawler = new ItemCrawler(CommonDef.PINTERSET_URL+ItemURL, m_subjectPath + "//" +itemName+".xml", itemName);
+								IElement itemElm = itemCrawler.Crawl(CrawlerProcessor.GetInstance().IsDepthCrawling(ECrawlingType.Item)); //TODO::add actions
+								itemElm.AddProperty(EProperty.description.toString(), itemDes);
+								if(itemLikes.length() > 0) itemElm.AddProperty(EProperty.likes.toString(), itemLikes); 
+								subjectElem.AddElement(itemElm);
+							}
+						}
+					
 					}
 				}
 				return subjectElem;
@@ -118,11 +139,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		return false;
 	}
 
-	@Override
-	public boolean CreateResultsPool(String Path) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	private String CleanSubject2URL(String sujectName)
 	{

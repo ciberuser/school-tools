@@ -3,9 +3,8 @@ import Elements.*;
 public interface ICrawler 
 {
 
-	IElement Crawl();
+	IElement Crawl(boolean recursive);
 	boolean SaveItem();
-	boolean CreateResultsPool(String Path);
-	
+
 	
 }

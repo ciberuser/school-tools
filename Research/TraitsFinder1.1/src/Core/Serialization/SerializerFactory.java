@@ -20,7 +20,8 @@ public class SerializerFactory
 		}
 		return m_sFactory;
 	}
-		
+	
+			
 	public IElementSerializer GetSerializer(ESerializerType type,IElement element,String SerializerProperties)
 	{
 		switch (type) 

@@ -45,7 +45,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 	}
 	
 	@Override
-	public IElement Crawl() {
+	public IElement Crawl(boolean recursive) {
 		
 		return Crawl(PINTEREST_PATH);
 	}
@@ -88,7 +88,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		if(users != null)
 		{
 			NodeList list = m_node.GetNodeList(USER_COMMENT_PATH,users) ;
-			CreateResultsPool(USERS_FOLDER_POOL_PATH);
+			FileServices.CreateFolder(getClass().getName(),USERS_FOLDER_POOL_PATH);
 			WriteLineToLog( "Data for of nodes :",ELogLevel.INFORMATION);
 			for (int i = 0 ; i < list.getLength() ; i++)
 			{
@@ -98,7 +98,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 			    String userName = user_item[0];
 			    String Link = user_item[2];
 		  
-		    	CreateResultsPool(USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
+			    FileServices.CreateFolder( GetClassName(),USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
 				WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link,ELogLevel.INFORMATION);
 				UserCrawler uct = new  UserCrawler(Link); 
 							
@@ -130,11 +130,6 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		return true;
 	}
 
-	@Override
-	public boolean CreateResultsPool(String Path)
-	{
-		return FileServices.CreateFolder(getClass().getName(), Path);
-	}
 	
 	
 	
