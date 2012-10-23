@@ -49,14 +49,15 @@ public class SubjectCrawlerTest extends CommonCBase{
 		while( it.hasNext())
 		{
 			Map.Entry<String, String> userSubjectPairs = (Map.Entry<String, String>) it.next();
-			
+			String subjectSaveName = userSubjectPairs.getValue().replace("-", "_");
 			ICrawler crawler = new SubjectsCrawler(userSubjectPairs.getKey(),userSubjectPairs.getValue());
-			IElement elem = crawler.Crawl(true) ;
+			IElement elem = crawler.Crawl(false) ;
 			assertTrue(elem != null);
-			WriteLineToLog("subject elem name= " +elem.GetName()+ " check :"+userSubjectPairs.getValue().replace("-", "_"), ELogLevel.INFORMATION);
-			assertTrue(elem.GetName().compareTo(userSubjectPairs.getValue().replace("-", "_"))==0);
 			
-			//assertTrue(crawler.CreateResultsPool(false));
+			//WriteLineToLog("subject elem name= " +elem.GetName()+ " check :"+userSubjectPairs.getValue().replace("-", "_"), ELogLevel.INFORMATION);
+			assertTrue(elem.GetName().compareTo(subjectSaveName)==0); // TODO :: add generic way....
+			assertTrue(FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH +"//"+ userSubjectPairs.getKey()+"//"+subjectSaveName ));
+			assertTrue(FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH +"//"+ userSubjectPairs.getKey()+"//"+subjectSaveName +"//"+CommonDef.FOLLOWER_FILE_NAME));
 		}
 		
 	}

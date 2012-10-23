@@ -8,6 +8,7 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 	
 	private		Jedis m_jedis;
 	private		static UsersCrawlingTargets m_instance = null;
+	
 	public static UsersCrawlingTargets GetInstance() {
 		if (m_instance==null) 
 		{
@@ -15,17 +16,25 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		}
 		return m_instance;
 	}
-	private		UsersCrawlingTargets() {
+	
+	private		UsersCrawlingTargets()
+	{
 		m_jedis = new Jedis("localhost"); // protect against failure
 	}
+	
 	@Override
-	public String GetNextTarget() {
+	public String GetNextTarget() 
+	{
 		String sNextTarget = "";
 		try
 		{
 			sNextTarget = m_jedis.spop("UserTargets");
 			WriteLineToLog("Providing next target: "  + sNextTarget, ELogLevel.INFORMATION);
-		} catch(Exception e){}
+		} 
+		catch(Exception e)
+		{
+			WriteExcptionError(e.getMessage());
+		}
 		return sNextTarget;
 	}
 
@@ -42,9 +51,17 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 			{
 				WriteLineToLog("Adding "  + sTarget + " to target list failed", ELogLevel.ERROR);
 			}
-		} catch(Exception e){}
+		} 
+		catch(Exception e)
+		{
+			WriteExcptionError(e.getMessage());
+		}
 		
 		return bSuccessful;
 	}
 
+	private void WriteExcptionError(String msg)
+	{
+		WriteLineToLog("exception accore msg="+msg, ELogLevel.ERROR);
+	}
 }

@@ -35,8 +35,8 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	private String m_userName;
 	private String m_subjectXmlPath;
 	private String m_subjectURL ;
-	
-	
+	private String m_followersXmlPath;
+	private String m_followersUrl;
 	
 	private DomDocument m_documnet;
 	private DomNode m_itemsNode;
@@ -49,6 +49,9 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	final static String ITEM_NAME_XPATH = "div[@class='convo attribution clearfix']/p";
 	final static String ITEM_REPIN_XPATH ="";
 	final static String ITEM_URL_XPATH = "div[@class='PinHolder']/a";
+	final static String FOLLOWERS_FILE_NAME = CommonDef.FOLLOWER_FILE_NAME;
+	final static String FOLLOWERS_URL = "followers";
+	final static String FOLLOWERS_USER_LIST ="//body/div[@class='FixedContainer']/div[@id='PeopleList']/div[@class='person']";
 	
 	
 	
@@ -58,6 +61,8 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		m_userName = userName;
 		m_userPath= CommonDef.USERS_FOLDER_POOL_PATH +"//" +userName;
 		m_subjectPath = m_userPath + "//" + m_subjectName;
+		m_followersXmlPath = m_subjectPath + "//" +  FOLLOWERS_FILE_NAME;
+		
 		m_subjectXmlPath =m_userPath +"//"+ m_subjectName+"//"+ m_subjectName+".xml";
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
 		
@@ -82,13 +87,15 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	{
 		m_subjectName = subjectName;
 		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName) ;
+		m_followersUrl = m_subjectURL+"/" +FOLLOWERS_URL;
 		
 		if (!FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(GetClassName(), m_subjectPath);
+		IElement subjectElem =null;
 		if (DownloadFile(m_subjectXmlPath, m_subjectURL))
 		{
 			try 
 			{
-				IElement subjectElem = new SubjectElement(m_subjectName);
+				subjectElem = new SubjectElement(m_subjectName);
 				m_documnet = new DomDocument(m_subjectXmlPath);
 				Node itemsNode = m_documnet.GetNode(CommonDef.CONTANIER_XPATH);
 				m_itemsNode = new DomNode(itemsNode);
@@ -122,11 +129,49 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					
 					}
 				}
+				
+				DownloadFile(m_followersXmlPath, m_followersUrl);
+				if (!FileServices.PathExist(m_followersXmlPath))
+				{
+					WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
+				}
+				else
+				{
+					m_documnet = new DomDocument(m_followersXmlPath);
+					Node foolowersNode = m_documnet.GetNode(FOLLOWERS_USER_LIST);
+					NodeList foolowersNodes = foolowersNode.getChildNodes();
+					for(int i =0 ; i<foolowersNodes.getLength() ;++i)
+					{
+						Node n = foolowersNodes.item(i);
+						
+						if (n.getNodeType() == itemsNode.ELEMENT_NODE) 
+						{
+							DomNode ns = new DomNode(n);
+							String  userfollow =null;
+							if (ns != null)
+							{
+								userfollow = ns.GetAttribute(n, "href") ;
+							}
+							if (userfollow!="") 
+							{
+								userfollow = userfollow.replaceAll("/","");
+								WriteLineToLog("userfollow="+userfollow, ELogLevel.INFORMATION);
+							}
+							
+							
+							
+						}
+					}
+					
+					
+				}
+				
 				return subjectElem;
 			} 
 			catch (Exception e) {
 				WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
-				return null;
+				 
+				return subjectElem;
 			}
 		}
 		

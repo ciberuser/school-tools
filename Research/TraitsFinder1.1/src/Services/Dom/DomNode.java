@@ -65,6 +65,7 @@ public class DomNode extends CommonCBase
 		}
 	}
 	
+		
 	public String GetAttribute(String attribute)
 	{
 		if (m_node ==null) return "";
@@ -95,11 +96,19 @@ public class DomNode extends CommonCBase
 	
 	public String GetAttribute(Node node ,String attribute) throws Exception
 	{
-		
-		if (node ==null) return "";
-		else
+		try
 		{
-			return node.getAttributes().getNamedItem(attribute).getNodeValue();	
+			if (node ==null) return "";
+			else
+			{
+				return node.getAttributes().getNamedItem(attribute).getNodeValue();	
+			}
+		}
+		catch (Exception e) 
+		{
+			WriteLineToLog("attribute not exist", ELogLevel.WARNING);
+			return "";
+
 		}
 	}
 	
