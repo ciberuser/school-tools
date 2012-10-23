@@ -23,7 +23,6 @@ public class CrawlerProcessor implements ICrawlerProcessor
 		m_depthbehavior = new HashMap<ECrawlingType, Boolean>();
 		m_depthbehavior.put(ECrawlingType.Main, true);
 		m_depthbehavior.put(ECrawlingType.User, true);
-		
 		m_depthbehavior.put(ECrawlingType.Subject, false);
 		m_depthbehavior.put(ECrawlingType.Item,false);
 	}
