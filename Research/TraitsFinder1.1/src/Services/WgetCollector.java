@@ -41,8 +41,7 @@ public class WgetCollector extends CommonCBase implements ICollector {
 				    tagNode, PathToSave, "utf-8"
 				);
 			WriteLineToLog("done saving file!! save on : "+PathToSave ,ELogLevel.INFORMATION);
-			//Logger.GetLogger().WriteLine(m_Name,"done saving file!! save on : "+PathToSave);
-			return true;
+			return FileServices.PathExist(PathToSave);
 		} 
 		catch (Exception e) {
 			WriteLineToLog("Error "+e.toString(),ELogLevel.ERROR);

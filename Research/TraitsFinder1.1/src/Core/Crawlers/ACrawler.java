@@ -20,19 +20,18 @@ public class ACrawler  extends CommonCBase
 	
 	protected boolean DownloadFile(String filePath,String UrlPath)
 	{
-		if (FileServices.PathExist(filePath))
+		
+		boolean fileExist = FileServices.PathExist(filePath);
+		if (fileExist && FileServices.NumberDaysFileNotModified(filePath)<30)
+		{
+			return true;
+		}
+		if (fileExist)
 		{
 			FileServices.DeleteFile(this.GetClassName(), filePath);
+			
 		}
-		if (m_collector.SaveDataFile(filePath, UrlPath))
-		{
-			if (!FileServices.PathExist(filePath))
-			{
-				WriteLineToLog("failed to create main pinterset test ..." +filePath,ELogLevel.ERROR);
-				return false;
-			}
-		}
-	 return true;	
+		return  m_collector.SaveDataFile(filePath, UrlPath);
 	}
 	
 	protected void PrintErrorParsing(Exception e,String cralwingType)

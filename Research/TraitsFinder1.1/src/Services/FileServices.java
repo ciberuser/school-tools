@@ -1,6 +1,7 @@
 package Services;
 
 import java.io.File;
+import java.util.Date;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
@@ -86,4 +87,14 @@ public class FileServices
 		Logger.GetLogger().WriteLine(module,msg,logLevel);
 	}
 
+	public static int NumberDaysFileNotModified(String path)
+	{
+		File file = new File(path);
+		if (!file.exists()) return CommonDef.NOT_EXIST;
+		int lastModified = (int) new Date(file.lastModified()).getDay();
+		int today = new Date().getDay();
+		return today-lastModified;
+	}
+	
+	
 }

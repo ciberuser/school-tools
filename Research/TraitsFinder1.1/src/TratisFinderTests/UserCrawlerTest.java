@@ -48,6 +48,8 @@ public class UserCrawlerTest  extends test{
 		{
 			ICrawler crawler = new UserCrawler(user);
 			assertTrue(crawler.Crawl(true)!=null);
+			assertTrue(FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH + "/" +CommonDef.AlignUserName(user) ));
+			
 		}
 		IsCrawled =true;
 		
