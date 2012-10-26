@@ -17,6 +17,7 @@ import scala.annotation.target.getter;
 import Core.CommonDef;
 import Core.CrawlerProcessor;
 import Core.ECrawlingType;
+import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
 import Elements.IElement;
@@ -57,7 +58,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	
 	public SubjectsCrawler(String userName ,String subjectName)
 	{
-		m_subjectName = subjectName.replace("-", "_");
+		m_subjectName = CommonDef.AlignSubjectName(subjectName);
 		m_userName = userName;
 		m_userPath= CommonDef.USERS_FOLDER_POOL_PATH +"//" +userName;
 		m_subjectPath = m_userPath + "//" + m_subjectName;
@@ -120,7 +121,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 							if (recursive) 
 							{
 								ICrawler itemCrawler = new ItemCrawler(CommonDef.PINTERSET_URL+ItemURL, m_subjectPath + "//" +itemName+".xml", itemName);
-								IElement itemElm = itemCrawler.Crawl(CrawlerProcessor.GetInstance().IsDepthCrawling(ECrawlingType.Item)); //TODO::add actions
+								IElement itemElm = itemCrawler.Crawl(CrawlerProcessor.GetInstance().GetDepthCrawling(ECrawlingType.Item)); //TODO::add actions
 								itemElm.AddProperty(EProperty.description.toString(), itemDes);
 								if(itemLikes.length() > 0) itemElm.AddProperty(EProperty.likes.toString(), itemLikes); 
 								subjectElem.AddElement(itemElm);
@@ -155,7 +156,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 							if (userfollow!="") 
 							{
 								userfollow = userfollow.replaceAll("/","");
-								WriteLineToLog("userfollow="+userfollow, ELogLevel.INFORMATION);
+								UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
 							}
 							
 							
@@ -188,7 +189,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 
 	private String CleanSubject2URL(String sujectName)
 	{
-		return  sujectName.replace("_", "-").replace("'", "-").replace("&", "").replace("--", "-").replace(".", "");
+		return  CommonDef.AlignSubjectURL(sujectName);
 	}
 	
 	private String GetItemProperty(Node node,String xpath) throws DOMException, XPathExpressionException

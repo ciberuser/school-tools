@@ -49,7 +49,7 @@ public class SubjectCrawlerTest extends CommonCBase{
 		while( it.hasNext())
 		{
 			Map.Entry<String, String> userSubjectPairs = (Map.Entry<String, String>) it.next();
-			String subjectSaveName = userSubjectPairs.getValue().replace("-", "_");
+			String subjectSaveName = CommonDef.AlignSubjectName(userSubjectPairs.getValue());
 			ICrawler crawler = new SubjectsCrawler(userSubjectPairs.getKey(),userSubjectPairs.getValue());
 			IElement elem = crawler.Crawl(false) ;
 			assertTrue(elem != null);

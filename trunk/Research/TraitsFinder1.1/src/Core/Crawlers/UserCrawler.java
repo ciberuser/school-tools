@@ -72,7 +72,6 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		m_userUrl = userUrl;
 		if (m_userName.isEmpty() || m_userPath.isEmpty() || m_userXmlPath.isEmpty()) return null;
 		try {
-			
 				if (DownloadFile(m_userXmlPath, m_userUrl))
 				{
 					m_documnet = new DomDocument(m_userXmlPath);
@@ -89,7 +88,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 							{
 								String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
 								ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
-								IElement subjectElm = subjectCrawler.Crawl(CrawlerProcessor.GetInstance().IsDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
+								IElement subjectElm = subjectCrawler.Crawl(CrawlerProcessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
 								if (subjectElm == null)
 								{
 									WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);

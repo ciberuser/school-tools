@@ -22,7 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-
+//need to refactor all this class!!!!
 
 public class PintersetCrawler extends ACrawler  implements ICrawler {
 
@@ -98,7 +98,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 			    String userName = user_item[0];
 			    String Link = user_item[2];
 		  
-			    FileServices.CreateFolder( GetClassName(),USERS_FOLDER_POOL_PATH +"/" +userName.replace(" ", "_"));
+			    FileServices.CreateFolder( GetClassName(),USERS_FOLDER_POOL_PATH +"/" +CommonDef.AlignUserName(userName));
 				WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link,ELogLevel.INFORMATION);
 				UserCrawler uct = new  UserCrawler(Link); 
 							

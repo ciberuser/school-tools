@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Core.CommonDef;
+import Services.FileServices;
 import Services.ICollector;
 import Services.WgetCollector;
 
@@ -17,9 +18,9 @@ public class WgetCollectorTests {
 	public void setUp() throws Exception 
 	{
 		m_wgetCollector = new WgetCollector();
-		
+		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER )) 
+			FileServices.CreateFolder(this.getClass().getName(), CommonDef.ROOT_DATA_FOLDER );
 	}
-
 	@After
 	public void tearDown() throws Exception {
 	}
