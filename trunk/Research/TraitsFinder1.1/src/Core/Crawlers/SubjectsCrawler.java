@@ -1,9 +1,6 @@
 package Core.Crawlers;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -11,11 +8,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import scala.annotation.target.getter;
-
-
 import Core.CommonDef;
-import Core.CrawlerProcessor;
+import Core.CrawlerProccessor;
 import Core.ECrawlingType;
 import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawler;
@@ -121,7 +115,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 							if (recursive) 
 							{
 								ICrawler itemCrawler = new ItemCrawler(CommonDef.PINTERSET_URL+ItemURL, m_subjectPath + "//" +itemName+".xml", itemName);
-								IElement itemElm = itemCrawler.Crawl(CrawlerProcessor.GetInstance().GetDepthCrawling(ECrawlingType.Item)); //TODO::add actions
+								IElement itemElm = itemCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Item)); //TODO::add actions
 								itemElm.AddProperty(EProperty.description.toString(), itemDes);
 								if(itemLikes.length() > 0) itemElm.AddProperty(EProperty.likes.toString(), itemLikes); 
 								subjectElem.AddElement(itemElm);

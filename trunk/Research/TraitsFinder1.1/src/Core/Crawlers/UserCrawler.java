@@ -1,26 +1,15 @@
 package Core.Crawlers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-//import javax.lang.model.element.Element;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
 
 
 import Core.CommonDef;
-import Core.CrawlerProcessor;
+import Core.CrawlerProccessor;
 import Core.ECrawlingType;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
-import Elements.StringDataElement;
 import Elements.UserElement;
 import Services.FileServices;
 import Services.Dom.*;
@@ -38,8 +27,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
 	private IElement m_userElement;
-	private List<String> m_subjects;
-	private Map<String,ICrawler> m_subjectLists;
+
 		
 	public UserCrawler(String userName)
 	{
@@ -57,8 +45,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		{
 			FileServices.CreateFolder(GetClassName(), m_userPath);
 		}
-		m_subjects = new ArrayList<String>();
-		m_subjectLists = new HashMap<String, ICrawler>();
+		
 	}
 	
 	@Override
@@ -88,7 +75,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 							{
 								String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
 								ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
-								IElement subjectElm = subjectCrawler.Crawl(CrawlerProcessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
+								IElement subjectElm = subjectCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
 								if (subjectElm == null)
 								{
 									WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);

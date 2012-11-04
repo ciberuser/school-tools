@@ -1,22 +1,19 @@
 package Core.Crawlers;
-import java.io.File;
 
 
 import Services.FileServices;
-import Services.ICollector;
 
+import Elements.EProperty;
 import Elements.IElement;
 import Elements.StringDataElement;
 
 import Core.CommonDef;
+
+import Core.UsersCrawlingTargets;
 import Core.Interfaces.*;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;
 import Services.Log.ELogLevel;
-import Services.Log.Logger;
-
-
-import org.w3c.dom.Document;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -28,20 +25,16 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 
 	//final static String USER_ADDRESS_Path = 
 	final static String PINTEREST_SCOUTER = "PinterstScouter";
-	final static String USER_ALL_USERS_COMMENT_PATH = CommonDef.CONTANIER_XPATH;
-	final static String USER_COMMENT_PATH = "//div[@class='convo attribution clearfix']";
-	final static String USERS_FOLDER_POOL_PATH = CommonDef.USERS_FOLDER_POOL_PATH;
+	final static String USER_ALL_USERS_COMMENT_PATH = CommonDef.CONTANIER_XPATH + "/div/div[@class='convo attribution clearfix']/a";
 	final static String PINTEREST_PATH = CommonDef.ROOT_DATA_FOLDER + CommonDef.PINTERSET_XML;
 	
 	private String m_FilePath;
-	private Document m_doc;
-	private DomNode m_node;
+	
 	
 	
 	public PintersetCrawler()
 	{
 		super();
-		m_node = new DomNode(); 
 	}
 	
 	@Override
@@ -71,57 +64,34 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 
 	private IElement StartCrawling() throws Exception
 	{
-		if (m_FilePath == null) 
+		IElement mainElement = null;
+		if (!FileServices.PathExist(m_FilePath))
 		{
-			WriteLineToLog("no file to main pinterset crawler...",ELogLevel.ERROR);
-			return  null;
+			WriteToLog("no file to parse download failed...", ELogLevel.ERROR);
 		}
-		
+		else
+		{
+			DomDocument documetService = new DomDocument(m_FilePath);
 			
-		m_FilePath = PINTEREST_PATH;
-	
-		DomDocument documetService = new DomDocument(m_FilePath);
-		m_doc = documetService.GetDocument();
-		
-		Node users = m_node.GetNode(USER_ALL_USERS_COMMENT_PATH,m_doc); 
-		IElement mainElement = new StringDataElement();
-		if(users != null)
-		{
-			NodeList list = m_node.GetNodeList(USER_COMMENT_PATH,users) ;
-			FileServices.CreateFolder(getClass().getName(),USERS_FOLDER_POOL_PATH);
-			WriteLineToLog( "Data for of nodes :",ELogLevel.INFORMATION);
-			for (int i = 0 ; i < list.getLength() ; i++)
+			NodeList allusers=  documetService.GetNodes(USER_ALL_USERS_COMMENT_PATH);
+			if (allusers!=null)
 			{
-				Node t=list.item(i);
-			  	String[] user_item= t.getTextContent().trim().replace("\t","").split("\n");
-			    Node userDetiles =	m_node.GetNode("//a",t);
-			    String userName = user_item[0];
-			    String Link = user_item[2];
-		  
-			    FileServices.CreateFolder( GetClassName(),USERS_FOLDER_POOL_PATH +"/" +CommonDef.AlignUserName(userName));
-				WriteLineToLog("user to elemnet as key:" + userName+" value : "+Link,ELogLevel.INFORMATION);
-				UserCrawler uct = new  UserCrawler(Link); 
-							
-				//save pool of intersts.
-		    	NodeList user_nudeItem = m_node.GetNodeList("//p//a",t);
-				for(int j = 0 ; j <user_nudeItem.getLength() ; ++j )
+				mainElement = new StringDataElement(EProperty.name.toString(), "main");
+			}
+			
+			for(int i =0 ; i<allusers.getLength() ;++i)
+			{
+				Node n = allusers.item(i);
+				String userName = new DomNode(n).GetAttribute("href");
+				if (userName!="")
 				{
-					String Linkitem = m_node.GetAttribute(user_nudeItem.item(j),"href");  
-					String value = m_node.GetValue(user_nudeItem.item(j));
-					if (Linkitem.contains(user_item[2].toLowerCase()))
-					{
-						WriteLineToLog("value :"+ value+" propery value will be: " +Linkitem,ELogLevel.INFORMATION);
-						//Debug...
-					}
-					else
-					{
-				 	//WriteLineToLog("link to add: "+ Linkitem ) ;
-					}
+					userName = userName.replace("/", "");
+					UsersCrawlingTargets.GetInstance().AddTarget(userName);
 				}
-    		}
-			return mainElement;
+			}
 		}
-		return null;
+		
+		return mainElement;
 	}
 		
 	@Override

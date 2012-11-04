@@ -9,8 +9,10 @@ import org.junit.Test;
 import Core.CommonDef;
 import Core.Crawlers.UserCrawler;
 import Core.Interfaces.ICrawler;
+import Elements.EProperty;
 import Elements.IElement;
 import Services.FileServices;
+import Services.Log.ELogLevel;
 
 public class UserCrawlerTest  extends test{
 
@@ -29,12 +31,15 @@ public class UserCrawlerTest  extends test{
 	public void setUp() throws Exception 
 	{
 		super.setUp();
-		if (FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH))
+		
+		/*if (FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH))
 		{
 			FileServices.DeleteFolder(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
 			FileServices.CreateFolder(getClass().getName(), CommonDef.USERS_FOLDER_POOL_PATH);
 			
 		}
+		*/
+		
 	}
 
 	@After
@@ -46,26 +51,20 @@ public class UserCrawlerTest  extends test{
 	{
 		for (String user :TESTS_USERS)
 		{
+			IElement usersElement = null;
 			ICrawler crawler = new UserCrawler(user);
-			assertTrue(crawler.Crawl(true)!=null);
+			usersElement = crawler.Crawl(true);
+			assertTrue(usersElement!=null);
 			assertTrue(FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH + "/" +CommonDef.AlignUserName(user) ));
+			WriteToLog("user name for element  = " +usersElement.GetProperty(EProperty.name.toString()).toString() , ELogLevel.INFORMATION);
+			assertTrue (usersElement.GetProperty(EProperty.name.toString()).toString().compareTo(user) == 0);
+			
 			
 		}
 		IsCrawled =true;
 		
 	}
 	
-	/*
-	@Test
-	public void testCreateResultsPool()
-	{
-		if (!IsCrawled)	testCrawl();
-		for(String user :TESTS_USERS)
-		{
-			assertTrue(FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH +"/" + user)); 
-		}
-	}
-	*/
 	
 	@Test
 	public void testSave()
