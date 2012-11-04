@@ -26,9 +26,12 @@ public class StringDataElement extends AElement implements IElement {
 	
 	public StringDataElement(String ProperyDef, String ProperyData)
 	{
-		super();
+		if (ProperyDef == EProperty.name.toString())
+		{
+			m_name = ProperyData;
+		}
 		m_properties = new GenericDictionary<String>();
-		m_properties.AddItem(ProperyData, ProperyData);
+		m_properties.AddItem(ProperyDef, ProperyData);
 	}
 			
 	
@@ -56,7 +59,7 @@ public class StringDataElement extends AElement implements IElement {
 		
 		if (!m_properties.IsExist(ProperyDef))
 		{
-			WriteLineToLog("the property " + ProperyDef +"is not exist ",ELogLevel.WARNING);
+			WriteLineToLog("the property " + ProperyDef +" is not exist ",ELogLevel.WARNING);
 			return null;
 		}
 		return m_properties.GetItem(ProperyDef);		

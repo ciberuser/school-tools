@@ -1,6 +1,5 @@
 package Core;
 
-import java.io.EOFException;
 
 import redis.clients.jedis.Jedis;
 import Core.Interfaces.ICrawlingTargets;
@@ -54,7 +53,6 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		{
 			sNextTarget = m_jedis.spop("UserTargets");
 			WriteLineToLog("Providing next target: "  + sNextTarget, ELogLevel.INFORMATION);
-			
 		} 
 		catch(Exception e)
 		{

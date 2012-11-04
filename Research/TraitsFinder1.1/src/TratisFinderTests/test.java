@@ -6,10 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Core.CommonCBase;
 import Core.CommonDef;
 import Services.FileServices;
 
-public class test {
+public class test extends CommonCBase {
 
 	@Before
 	public void setUp() throws Exception
