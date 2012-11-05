@@ -11,6 +11,10 @@ public class CrawlerRunner extends Thread
 
 	private ICrawler m_crawler ;
 	private String m_lock;
+	public String Getlock() {
+		return m_lock;
+	}
+
 	private ReentrantReadWriteLock m_lockObjFactory;
 	private Lock m_writeLockObj;
 	private IElement m_headElement;
@@ -66,25 +70,31 @@ public class CrawlerRunner extends Thread
 	
 	public void run() 
 	{
-		if (m_crawler == null) return ;
-		IElement elm = m_crawler.Crawl(m_recursive);
-		if (elm!=null && m_headElement!=null)
-		{
-			m_writeLockObj.lock();
-			try
-			{
-				m_headElement.AddElement(elm);
-			}
-			finally
-			{
-				m_writeLockObj.unlock();
-			}
 		
+		try
+		{
+			if (m_crawler == null) return ;
+			IElement elm = m_crawler.Crawl(m_recursive);
+			if (elm!=null && m_headElement!=null)
+			{
+				m_writeLockObj.lock();
+				try
+				{
+					m_headElement.AddElement(elm);
+				}
+				finally
+				{
+					m_writeLockObj.unlock();
+				}
+			
+			}
 		}
-		
-		synchronized(m_lock)
+		finally
 		{
-			m_lock.notify();
+			synchronized(m_lock)
+			{
+				m_lock.notify();
+			}
 		}
 		
 		//interrupt();
