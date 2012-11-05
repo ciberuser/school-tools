@@ -26,7 +26,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_XPATH + "/ul";
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
-	private IElement m_userElement;
+	
 
 		
 	public UserCrawler(String userName)
@@ -56,6 +56,8 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	
 	protected IElement Crawl(String userUrl,boolean recursive) {
 
+		
+		IElement userElement = null;
 		m_userUrl = userUrl;
 		if (m_userName.isEmpty() || m_userPath.isEmpty() || m_userXmlPath.isEmpty()) return null;
 		try {
@@ -63,32 +65,35 @@ public class UserCrawler extends ACrawler  implements ICrawler
 				{
 					m_documnet = new DomDocument(m_userXmlPath);
 					Node node =  m_documnet.GetNode(SUBJECTS_XPATH);
-					m_node = new DomNode(node);
-					NodeList allSubjects =  node.getChildNodes();/* m_node.GetNodeList("//li") */;
-					m_userElement = new UserElement(m_userName);
-					for(int i =0 ; i<allSubjects.getLength() ;++i)
+					if (node!=null)
 					{
-						if(recursive)
+						m_node = new DomNode(node);
+						NodeList allSubjects =  node.getChildNodes();/* m_node.GetNodeList("//li") */;
+						userElement = new UserElement(m_userName);
+						for(int i =0 ; i<allSubjects.getLength() ;++i)
 						{
-							Node n =  allSubjects.item(i);
-							if (n.getNodeType() == node.ELEMENT_NODE)
+							if(recursive)
 							{
-								String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
-								ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
-								IElement subjectElm = subjectCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
-								if (subjectElm == null)
+								Node n =  allSubjects.item(i);
+								if (n.getNodeType() == node.ELEMENT_NODE)
 								{
-									WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);
+									String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
+									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName);
+									IElement subjectElm = subjectCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
+									if (subjectElm == null)
+									{
+										WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);
+									}
+									else
+									{
+										userElement.AddElement(subjectElm);
+									}
+									
 								}
-								else
-								{
-									m_userElement.AddElement(subjectElm);
-								}
-								
 							}
 						}
 					}
-					 return m_userElement; //TODO:: need to add processor!!
+					return userElement; //TODO:: need to add processor!!
 				}
 				
 			}

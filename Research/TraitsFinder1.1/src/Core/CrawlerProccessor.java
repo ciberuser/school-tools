@@ -106,14 +106,15 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 		long leftUserToCrawl =UsersCrawlingTargets.GetInstance().NumbertOfTargets();
 		WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
 		int count = 0;
-		List<CrawlerRunner>  runners = new ArrayList<CrawlerRunner>();
+		//List<CrawlerRunner>  runners = new ArrayList<CrawlerRunner>();
 		while (leftUserToCrawl > 0 && count <maxExcution)
 		{
 			WriteToLog("number of user are left to crawl = "+leftUserToCrawl, ELogLevel.INFORMATION);
-			runners.add(CrawlTopUserTarget(headElement));
+			CrawlTopUserTarget(headElement);
 			count++; 
 		}
-		return runners.toArray(new CrawlerRunner[0]);
+		return null;
+		//return runners.toArray(new CrawlerRunner[0]);
 	}
 	
 	//TODO:: need to change it!!!

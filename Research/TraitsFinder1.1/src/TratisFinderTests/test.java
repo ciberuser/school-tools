@@ -19,6 +19,7 @@ public class test extends CommonCBase {
 		{
 			FileServices.CreateFolder(this.getClass().getName(), CommonDef.ROOT_DATA_FOLDER);
 		}
+		if (!FileServices.PathExist(CommonDef.USERS_FOLDER_POOL_PATH)) FileServices.CreateFolder(GetClassName(),CommonDef.USERS_FOLDER_POOL_PATH);
 		
 	}
 

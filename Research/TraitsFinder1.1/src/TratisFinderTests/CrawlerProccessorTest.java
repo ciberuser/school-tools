@@ -22,6 +22,7 @@ public class CrawlerProccessorTest extends test{
 	public void setUp() throws Exception 
 	{
 		CrawlerProccessor.CrawledCount = 0;
+		super.setUp();		
 	}
 
 	@After
@@ -37,13 +38,16 @@ public class CrawlerProccessorTest extends test{
 		IElement mainElem =  crawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main));
 		assertTrue(mainElem.GetElements().size()==0);
 		CrawlerRunner[] runners =  CrawlerProccessor.GetInstance().ExcuteCrawler(mainElem,NUMBER_OF_THEARD);
-		for (int i =0 ; i< locks.length ; i++)
+		
+		//need to fix it ....
+		
+		for (int i =0 ; i< runners.length ; i++)
 		{
-			synchronized(locks[i])
+			synchronized(runners[i].Getlock())
 			{
-				while (runners[i].isAlive())
+				
 					try {
-						locks[i].wait();
+						runners[i].Getlock().wait();//
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						WriteLineToLog("exception happen msg="+e.getMessage(), ELogLevel.ERROR);
@@ -60,11 +64,10 @@ public class CrawlerProccessorTest extends test{
 		IElement mainElem =  crawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main));
 		assertTrue(mainElem.GetElements().size()==0);
 		CrawlerRunner runner = CrawlerProccessor.GetInstance().CrawlTopUserTarget(mainElem);
-		synchronized(CrawlerProccessor.GetInstance().getLocks()[0])
+		synchronized(runner.Getlock())
 		{
-			while (runner.isAlive())
-				try {
-					CrawlerProccessor.GetInstance().getLocks()[0].wait();
+			try {
+				runner.Getlock().wait();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					WriteLineToLog("exception happen msg="+e.getMessage(), ELogLevel.ERROR);
