@@ -1,12 +1,9 @@
 package Elements;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import Core.Serialization.IElementSerializer;
-import Elements.IElement;
+
 import Services.Log.ELogLevel;
 
 

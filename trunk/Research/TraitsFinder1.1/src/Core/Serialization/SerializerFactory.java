@@ -1,6 +1,6 @@
 package Core.Serialization;
 
-import scala.reflect.New;
+
 import Elements.IElement;
 
 public class SerializerFactory 

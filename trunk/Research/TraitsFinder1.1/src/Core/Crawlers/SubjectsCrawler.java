@@ -50,19 +50,29 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	
 	
 	
+	public SubjectsCrawler(String userName ,String subjectName ,String subjectUrl)
+	{
+		Init(userName,subjectName,subjectUrl);
+		
+	}
+	
 	public SubjectsCrawler(String userName ,String subjectName)
+	{
+		Init(userName, subjectName,CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName));
+	}
+	
+	private void Init(String userName ,String subjectName ,String subjectUrl)
 	{
 		m_subjectName = CommonDef.AlignSubjectName(subjectName);
 		m_userName = userName;
 		m_userPath= CommonDef.USERS_FOLDER_POOL_PATH +"//" +userName;
+		m_subjectURL = subjectUrl;
 		m_subjectPath = m_userPath + "//" + m_subjectName;
 		m_followersXmlPath = m_subjectPath + "//" +  FOLLOWERS_FILE_NAME;
 		
 		m_subjectXmlPath =m_userPath +"//"+ m_subjectName+"//"+ m_subjectName+".xml";
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
-		
 	}
-	
 	
 	
 	@Override
@@ -81,8 +91,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	protected IElement Crawl(String subjectName,boolean recursive) 
 	{
 		m_subjectName = subjectName;
-		m_subjectURL = CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName) ;
-		m_followersUrl = m_subjectURL+"/" +FOLLOWERS_URL;
+		m_followersUrl = m_subjectURL +FOLLOWERS_URL;
 		
 		if (!FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(GetClassName(), m_subjectPath);
 		IElement subjectElem =null;
@@ -132,40 +141,14 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 				}
 				else
 				{
-					m_documnet = new DomDocument(m_followersXmlPath);
-					Node foolowersNode = m_documnet.GetNode(FOLLOWERS_USER_LIST);
-					NodeList foolowersNodes = foolowersNode.getChildNodes();
-					for(int i =0 ; i<foolowersNodes.getLength() ;++i)
-					{
-						Node n = foolowersNodes.item(i);
-						
-						if (n.getNodeType() == itemsNode.ELEMENT_NODE) 
-						{
-							DomNode ns = new DomNode(n);
-							String  userfollow =null;
-							if (ns != null)
-							{
-								userfollow = ns.GetAttribute(n, "href") ;
-							}
-							if (userfollow!="") 
-							{
-								userfollow = userfollow.replaceAll("/","");
-								UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
-							}
-							
-							
-							
-						}
-					}
-					
-					
+					CrawlFollowers(m_followersXmlPath, itemsNode);			
 				}
 				
 				return subjectElem;
 			} 
 			catch (Exception e) {
 				WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
-				 
+				WriteLineToLog("cause="+e.getCause().toString(), ELogLevel.ERROR); 
 				return subjectElem;
 			}
 		}
@@ -179,7 +162,39 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		return false;
 	}
 
-	
+	private void CrawlFollowers(String followerXml ,Node elementNode)
+	{
+		try
+		{
+			m_documnet = new DomDocument(followerXml);
+			Node foolowersNode = m_documnet.GetNode(FOLLOWERS_USER_LIST);
+			NodeList foolowersNodes = foolowersNode.getChildNodes();
+			for(int i =0 ; i<foolowersNodes.getLength() ;++i)
+			{
+				Node n = foolowersNodes.item(i);
+				
+				if (n.getNodeType() == elementNode.ELEMENT_NODE) 
+				{
+					DomNode ns = new DomNode(n);
+					String  userfollow =null;
+					if (ns != null)
+					{
+						userfollow = ns.GetAttribute(n, "href") ;
+					}
+					if (userfollow!="") 
+					{
+						userfollow = userfollow.replaceAll("/","");
+						UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
+					}
+				}
+			}
+		}
+		catch(Exception e )
+		{
+			WriteToLog("exception happen on followes crawling msg=" +e.getMessage(), ELogLevel.ERROR);
+			
+		}
+	}
 
 	private String CleanSubject2URL(String sujectName)
 	{

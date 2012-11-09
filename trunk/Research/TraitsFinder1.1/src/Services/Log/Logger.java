@@ -12,6 +12,8 @@ public class Logger
 {
 	final static String LOG_NAME ="TraitsFinder.log";
 	
+	
+	
 	public static Logger GetLogger()
 	{
 		if (m_logger==null)
@@ -27,19 +29,27 @@ public class Logger
 				
 	}
 	
+	public static void SetPrintLevel(ELogLevel printLevel)
+	{
+		m_printLogLevel = printLevel;
+	}
+	
 	public static void Write(String module, ELogLevel logLevel,String msg)
 	{
+		if (logLevel.compareTo(m_printLogLevel)>=0)
 		WriteStringToFile(String.format("|%s|[%-19s]-[%s:%s]",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
 	}
 	
 	public static void WriteLine(String module, String msg,ELogLevel logLevel)
 	{
+		if (logLevel.compareTo(m_printLogLevel)>=0)
 		WriteStringToFile(String.format("|%s|[%-19s]-[%s:%s]\n",GetTimeStr(), module,logLevel.toString(),msg),m_filePath);
 	}
 	
 	private Logger(String filePath)
 	{
 		m_filePath = filePath;
+		m_printLogLevel = ELogLevel.INFORMATION;
 	}
 	
 	
@@ -76,4 +86,5 @@ public class Logger
 	private static FileWriter fstream =null;
 	private static Logger m_logger = null;
 	private static String m_filePath;
+	private static ELogLevel m_printLogLevel;
 }

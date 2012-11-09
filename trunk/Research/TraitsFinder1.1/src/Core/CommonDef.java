@@ -19,6 +19,8 @@ public class CommonDef
 	
 	public final static String NEO_WEIGHT = "weight";
 	
+	
+	public static int MAX_RUNNERS = 4;
 	//DB logic:
 	
 	public final static long NOT_EXIST_IN_DB = -1;

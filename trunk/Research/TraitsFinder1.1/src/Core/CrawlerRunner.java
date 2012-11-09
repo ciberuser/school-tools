@@ -3,6 +3,8 @@ package Core;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+
+
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 
@@ -11,6 +13,8 @@ public class CrawlerRunner extends Thread
 
 	private ICrawler m_crawler ;
 	private String m_lock;
+	
+	
 	public String Getlock() {
 		return m_lock;
 	}
@@ -28,8 +32,6 @@ public class CrawlerRunner extends Thread
 	public void setCrawler(ICrawler crawler) 
 	{
 		this.m_crawler = crawler;
-		m_lockObjFactory = new ReentrantReadWriteLock();
-		m_writeLockObj = m_lockObjFactory.writeLock();
 	}
 
 	public void setRecursive(boolean recursive) {
@@ -41,6 +43,8 @@ public class CrawlerRunner extends Thread
 		m_crawler = null;
 		m_recursive = false;
 		m_element = null;
+		m_lockObjFactory = new ReentrantReadWriteLock();
+		m_writeLockObj = m_lockObjFactory.writeLock();
 	}
 	
 	private boolean m_recursive;
@@ -60,11 +64,12 @@ public class CrawlerRunner extends Thread
 		
 	}
 	
-	public CrawlerRunner(ICrawler crawler , boolean recursive ,String lock)
+	public CrawlerRunner(ICrawler crawler , boolean recursive,String Namelock )
 	{
+		Init();
 		m_crawler = crawler;
 		m_recursive = recursive;
-		m_lock= lock;
+		m_lock = Namelock;
 	}
 	
 	
@@ -91,6 +96,7 @@ public class CrawlerRunner extends Thread
 		}
 		finally
 		{
+					
 			synchronized(m_lock)
 			{
 				m_lock.notify();
