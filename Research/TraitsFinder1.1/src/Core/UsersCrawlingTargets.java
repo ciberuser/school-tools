@@ -9,6 +9,7 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 	
 	private		Jedis m_jedis;
 	private		static UsersCrawlingTargets m_instance = null;
+	private 	final static String KEY_NAME = "UserTargets";
 		
 	enum E_OS {Windows,Linux,Mac}
 	
@@ -41,7 +42,7 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 	
 	public long NumbertOfTargets()
 	{
-		return m_jedis.dbSize();
+		return  (m_jedis.exists(KEY_NAME))? 1 : 0;
 	}
 	
 	
@@ -51,7 +52,7 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		String sNextTarget = "";
 		try
 		{
-			sNextTarget = m_jedis.spop("UserTargets");
+			sNextTarget = m_jedis.spop(KEY_NAME);
 			WriteLineToLog("Providing next target: "  + sNextTarget, ELogLevel.INFORMATION);
 		} 
 		catch(Exception e)
@@ -67,17 +68,13 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		boolean bSuccessful = false;
 		try 
 		{
-			if (!m_jedis.exists(sTarget) || m_jedis.dbSize()<CommonDef.MAX_CRAWLING_USER)
+			if (!m_jedis.exists(sTarget) || m_jedis.llen(KEY_NAME)<CommonDef.MAX_CRAWLING_USER)
 			{
-				bSuccessful = m_jedis.sadd("UserTargets", sTarget) > 0;
+				bSuccessful = m_jedis.sadd(KEY_NAME, sTarget) > 0;
 				if (bSuccessful) 
 				{
 					WriteLineToLog("Added "  + sTarget + " to target list successfully", ELogLevel.INFORMATION);
-					
-				} else 
-				{
-					WriteLineToLog("Adding "  + sTarget + " to target list failed", ELogLevel.ERROR);
-				}
+				} 
 			}
 		} 
 		catch(Exception e)

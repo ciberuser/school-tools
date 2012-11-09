@@ -1,7 +1,6 @@
 package Core.Serialization;
 
-import scala.util.control.Exception;
-import Core.CommonDef;
+
 import Elements.IElement;
 import Services.FileServices;
 import Services.Log.ELogLevel;

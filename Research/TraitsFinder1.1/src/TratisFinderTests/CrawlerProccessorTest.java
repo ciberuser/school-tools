@@ -33,7 +33,7 @@ public class CrawlerProccessorTest extends test{
 	@Test
 	public void testMultiThreaded()
 	{
-		String[] locks = CrawlerProccessor.GetInstance().getLocks();
+		//String[] locks = CrawlerProccessor.GetInstance().getLocks();
 		ICrawler crawler  = new  PintersetCrawler();
 		IElement mainElem =  crawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main));
 		assertTrue(mainElem.GetElements().size()==0);

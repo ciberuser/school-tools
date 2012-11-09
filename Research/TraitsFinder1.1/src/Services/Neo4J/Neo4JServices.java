@@ -32,10 +32,7 @@ public class Neo4JServices extends CommonCBase
 	GraphDatabaseService m_services;
 	private Index<Node> m_indexNode;
 	private Index<Relationship> m_indexRelation; 
-	
-	
-	
-		
+			
 	public Neo4JServices(GraphDatabaseService service)
 	{
 		

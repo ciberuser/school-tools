@@ -2,6 +2,7 @@ package Core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import Core.Crawlers.UserCrawler;
 import Core.Interfaces.ICrawler;
@@ -12,6 +13,7 @@ public class CrawlerProcessor implements ICrawlerProcessor
 {
 
 	private static CrawlerProcessor m_CrawlerProcessor;
+	
 	
 	
 	Map <ECrawlingType,Boolean> m_depthbehavior ;
