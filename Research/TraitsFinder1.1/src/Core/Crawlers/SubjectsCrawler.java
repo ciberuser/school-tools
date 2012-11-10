@@ -58,7 +58,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 	
 	public SubjectsCrawler(String userName ,String subjectName)
 	{
-		Init(userName, subjectName,CommonDef.PINTERSET_URL + m_userName +"/" + CleanSubject2URL(subjectName));
+		Init(userName, subjectName,CommonDef.PINTERSET_URL +userName  +"/" + CleanSubject2URL(subjectName));
 	}
 	
 	private void Init(String userName ,String subjectName ,String subjectUrl)

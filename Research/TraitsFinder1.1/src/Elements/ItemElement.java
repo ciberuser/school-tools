@@ -14,10 +14,11 @@ public class ItemElement extends EnumElement implements IElement{
 	}
 
 	@Override
-	public void Save() {
+	public void Link(IElement elment) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 
 }

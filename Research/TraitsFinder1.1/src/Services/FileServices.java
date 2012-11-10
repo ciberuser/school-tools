@@ -2,9 +2,6 @@ package Services;
 
 import java.io.File;
 import java.util.Date;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import Services.Log.ELogLevel;
 import Services.Log.Logger;
 

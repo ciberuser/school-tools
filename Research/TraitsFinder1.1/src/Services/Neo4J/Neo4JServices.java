@@ -2,16 +2,10 @@ package Services.Neo4J;
 
 
 
-import java.util.HashSet;
+
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.lang.model.element.Element;
-
-
-import org.apache.lucene.analysis.CharArrayMap.EntryIterator;
-import org.apache.lucene.analysis.CharArrayMap.EntrySet;
-import org.apache.lucene.search.FieldComparator.RelevanceComparator;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;

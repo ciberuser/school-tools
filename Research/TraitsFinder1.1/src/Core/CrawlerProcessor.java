@@ -2,7 +2,6 @@ package Core;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import Core.Crawlers.UserCrawler;
 import Core.Interfaces.ICrawler;

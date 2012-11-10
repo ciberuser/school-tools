@@ -2,13 +2,12 @@
 package Elements;
 
 import Core.Serialization.IElementSerializer;
-import Elements.*;
+
 import Services.GenericDictionary;
 import Services.Log.ELogLevel;
 
 
-import java.io.ObjectInputStream.GetField;
-import java.util.HashMap;
+
 import java.util.Map;
 
 
@@ -16,7 +15,7 @@ import java.util.Map;
 public class StringDataElement extends AElement implements IElement {
 
 	private GenericDictionary<String> m_properties;
-	private IElementSerializer m_serializer;
+	
 	
 	public StringDataElement()
 	{
@@ -78,10 +77,11 @@ public class StringDataElement extends AElement implements IElement {
 	}
 
 	@Override
-	public void Save() {
+	public void Link(IElement elment) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 	
 	
