@@ -9,7 +9,14 @@ public class UserElement extends StringDataElement
 		{
 			element.Serialize();
 		}
-		//TODO add the link between them....
+	
+		for (int i=0;i<m_elements.size();++i)
+		{
+			for (int j=0;j<m_elements.size();j++)
+			{
+				m_elements.get(i).Link(m_elements.get(j));
+			}
+		}
 		
 	}
 	public UserElement(String name)
@@ -17,10 +24,14 @@ public class UserElement extends StringDataElement
 		super(EProperty.name.toString(), name);
 	}
 	
-	
 	@Override
-	public void Save()
+	public void Link(IElement elment) 
 	{
 		
+		
+		
 	}
+
+	
+	
 }

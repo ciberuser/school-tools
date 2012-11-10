@@ -1,5 +1,8 @@
 package Elements;
 
+import Core.CommonDef;
+import Core.Serialization.ESerializerType;
+import Core.Serialization.SerializerFactory;
 import Elements.IElement;
 import Services.Log.ELogLevel;
 
@@ -9,7 +12,10 @@ public class SubjectElement extends  EnumElement implements IElement
 	public SubjectElement(String subjectName)
 	{
 		super(subjectName);
-		//WriteLineToLog("new subject element created subject name= "+subjectName );
+		if (m_serializer == null)
+		{
+			m_serializer = SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, this, CommonDef.GRAPH_DB_DIR);
+		}
 		AddProperty(EProperty.name.toString(), subjectName);
 	}
 	
@@ -38,9 +44,16 @@ public class SubjectElement extends  EnumElement implements IElement
 	}
 
 	@Override
-	public void Save() {
-		// TODO Auto-generated method stub
+	public void Link(IElement elment)
+	{
+		if (m_serializer==null)
+		{
+			WriteLineToLog("no serializer for linking process",ELogLevel.ERROR);
+			return;
+		}
+		m_serializer.Link(elment);
 		
 	}
+
 	
 }

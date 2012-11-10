@@ -65,11 +65,15 @@ public class UserCrawlerTest  extends test{
 		
 	}
 	
-	
+		
 	@Test
 	public void testSave()
 	{
-		
+		IElement testedUserElement =null;
+		ICrawler crawler = new UserCrawler(TESTS_USERS[0]);
+		testedUserElement = crawler.Crawl(true);
+		assertTrue(testedUserElement!=null);
+		testedUserElement.Serialize();	
 	}
 
 

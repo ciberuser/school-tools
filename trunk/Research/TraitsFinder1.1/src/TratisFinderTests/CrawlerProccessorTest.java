@@ -11,7 +11,6 @@ import Core.CrawlerRunner;
 import Core.ECrawlingType;
 import Core.Crawlers.PintersetCrawler;
 import Core.Interfaces.ICrawler;
-import Core.Interfaces.ICrawlerProcessor;
 import Elements.IElement;
 import Services.Log.ELogLevel;
 

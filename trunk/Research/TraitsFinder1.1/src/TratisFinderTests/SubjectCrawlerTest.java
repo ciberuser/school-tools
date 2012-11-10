@@ -17,9 +17,9 @@ import Core.Crawlers.SubjectsCrawler;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Services.FileServices;
-import Services.Log.ELogLevel;
 
-public class SubjectCrawlerTest extends CommonCBase{
+
+public class SubjectCrawlerTest extends test{
 
 	//  user ,subject
 	Map<String,String> m_testSubject = new HashMap<String, String>();
@@ -62,4 +62,19 @@ public class SubjectCrawlerTest extends CommonCBase{
 		
 	}
 
+	@Test
+	public void testSave()
+	{
+		String userKey = "fashionhut";
+		String Subject2 = "books-worth-reading";	
+		ICrawler crawler = new SubjectsCrawler(userKey,m_testSubject.get(userKey));
+		
+		IElement subElem = crawler.Crawl(false) ;
+		IElement subElem2 =  new SubjectsCrawler(userKey, Subject2).Crawl(false);
+		assertTrue(subElem!=null & subElem2 != null);
+		subElem.Serialize();
+		subElem2.Serialize();
+		subElem.Link(subElem2);
+	}
+	
 }

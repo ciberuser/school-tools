@@ -2,7 +2,7 @@ package TratisFinderTests;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,9 +12,7 @@ import Core.CommonDef;
 import Core.Crawlers.PintersetCrawler;
 import Core.Interfaces.*;
 import Services.FileServices;
-import Services.ICollector;
-import Services.WgetCollector;
-import Services.Log.Logger;
+
 
 
 public class PinterstFinderTest extends test {

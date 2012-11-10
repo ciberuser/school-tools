@@ -2,7 +2,6 @@ package App;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
@@ -77,7 +76,6 @@ public class AppRunner extends CommonCBase {
 	        	int maxRunner = Integer.parseInt(line.getOptionValue(FLAG_RUNNERS));
 	        	CommonDef.MAX_RUNNERS = maxRunner;
 	        }
-	        
 	        if (line.hasOption(FLAG_MAX_USERS))
 	        {
 	        	maxUser = Integer.parseInt(line.getOptionValue(FLAG_MAX_USERS));

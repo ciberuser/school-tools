@@ -14,8 +14,8 @@ public interface IElement
 	void SetName(String elementName);
 	Map GetProperties();
 	void Serialize();
+	void Link(IElement elment);
 	String GetName();
 	Object GetProperty(String ProperyDef);
-	void Save();
-	
+		
 }
