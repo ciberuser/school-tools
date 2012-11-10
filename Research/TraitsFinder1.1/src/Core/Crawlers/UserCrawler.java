@@ -23,7 +23,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 	
 	private DomDocument m_documnet ;
 	private DomNode m_node;
-	private final static String SUBJECTS_XPATH  = CommonDef.CONTANIER_XPATH + "/ul";
+	private final static String SUBJECTS_XPATH  ="//*[@id='ColumnContainer']/ul" /* CommonDef.CONTANIER_XPATH + "/ul"*/;
 	private final static String SUBJECT_NAME_XPATH = "div/h3/a";
 	
 	
@@ -54,7 +54,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		return Crawl(CommonDef.PINTERSET_URL + m_userName+ "",recursive);		
 	}
 	
-	protected IElement Crawl(String userUrl,boolean recursive) {
+	protected IElement Crawl(String userUrl,boolean recursive) { //TODO::refactor!!!!
 
 		
 		IElement userElement = null;
@@ -68,7 +68,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 					if (node!=null)
 					{
 						m_node = new DomNode(node);
-						NodeList allSubjects =  node.getChildNodes();/* m_node.GetNodeList("//li") */;
+						NodeList allSubjects =  node.getChildNodes();
 						userElement = new UserElement(m_userName);
 						for(int i =0 ; i<allSubjects.getLength() ;++i)
 						{
@@ -106,10 +106,9 @@ public class UserCrawler extends ACrawler  implements ICrawler
 			catch (Exception ex)
 			{
 				PrintErrorParsing(ex, m_userName +" crawling" );
-				return null;
+				
 			} 
-			
-		return null;
+		return userElement;
 		
 
 	

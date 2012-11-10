@@ -12,6 +12,12 @@ public class ItemElement extends EnumElement implements IElement{
 	{
 		super(name);
 	}
+
+	@Override
+	public void Save() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

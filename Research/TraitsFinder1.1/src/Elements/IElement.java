@@ -16,5 +16,6 @@ public interface IElement
 	void Serialize();
 	String GetName();
 	Object GetProperty(String ProperyDef);
+	void Save();
 	
 }

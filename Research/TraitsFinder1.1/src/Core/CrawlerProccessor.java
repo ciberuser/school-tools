@@ -1,6 +1,7 @@
 package Core;
 
 
+import java.awt.image.CropImageFilter;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -24,6 +25,7 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 	
 	private CrawlerProccessor()
 	{
+		CrawledCount =0;
 		Init();
 		
 	}
@@ -76,7 +78,6 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 		long leftUserToCrawl = UsersCrawlingTargets.GetInstance().NumbertOfTargets();
 		WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
 		int count = 0;
-		
 		while (leftUserToCrawl > 0 && count <maxExcution)
 		{
 			if (CrawlTopUserTarget(headElement)!=null)
@@ -101,7 +102,9 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 			{
 				runner = new CrawlerRunner(new UserCrawler(userName), m_depthbehavior.get(ECrawlingType.User),new String(userName));
 				runner.SetHeadElement(headElement);
-				WriteLineToLog("excute Runner for user:"+userName, ELogLevel.INFORMATION);
+				String runMsg ="excute Runner for user:"+userName;
+				WriteLineToLog(runMsg, ELogLevel.INFORMATION);
+				WriteToConsole(runMsg);
 				CrawledCount++;
 				runner.start();
 			}

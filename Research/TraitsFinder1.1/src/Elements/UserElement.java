@@ -17,4 +17,10 @@ public class UserElement extends StringDataElement
 		super(EProperty.name.toString(), name);
 	}
 	
+	
+	@Override
+	public void Save()
+	{
+		
+	}
 }

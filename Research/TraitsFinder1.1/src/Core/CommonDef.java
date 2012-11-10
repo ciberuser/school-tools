@@ -1,5 +1,7 @@
 package Core;
 
+import Services.Log.ELogLevel;
+
 public class CommonDef 
 {
 	public final static String ROOT_DATA_FOLDER = "data/";
@@ -27,7 +29,11 @@ public class CommonDef
 	
 	public final static int NOT_EXIST = -1;
 	
-	public final static long MAX_CRAWLING_USER = 150;
+	public static long MAX_CRAWLING_USER = 150;
+	
+	public static ELogLevel LOGGER_LEVEL = ELogLevel.WARNING;
+	
+	
 	
 	public static String AlignUserName(String userName)
 	{
@@ -36,11 +42,11 @@ public class CommonDef
 	
 	public static String AlignSubjectURL(String subjectName)
 	{
-		return  subjectName.replace("_", "-").replace("'", "-").replace("&", "").replace("--", "-").replace(".", "");
+		return  subjectName.replace("_", "-").replace("'", "-").replace("&", "").replace("--", "-").replace(".", "").replace("?", "");
 	}
 	
 	public static String AlignSubjectName(String subjectName)
 	{
-		return subjectName.replace("-", "_");
+		return subjectName.replace("-", "_").replace("?", "").replace("/", "").replace("\\","").replace("|", "").replace('"', '_').replace("'", "").replace("<", "").replace(">", "").replace("(", "").replace(")","").replace(":", "").replace("*", "").replace("..", "");
 	}
 }

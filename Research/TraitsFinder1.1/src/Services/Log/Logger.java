@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import Core.CommonDef;
+
 public class Logger
 {
 	final static String LOG_NAME ="TraitsFinder.log";
@@ -49,7 +51,7 @@ public class Logger
 	private Logger(String filePath)
 	{
 		m_filePath = filePath;
-		m_printLogLevel = ELogLevel.INFORMATION;
+		m_printLogLevel = CommonDef.LOGGER_LEVEL;
 	}
 	
 	

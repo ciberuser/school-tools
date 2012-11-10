@@ -36,5 +36,11 @@ public class SubjectElement extends  EnumElement implements IElement
 		
 		
 	}
+
+	@Override
+	public void Save() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
