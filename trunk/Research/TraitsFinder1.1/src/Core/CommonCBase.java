@@ -21,7 +21,10 @@ public abstract class CommonCBase
 		Logger.GetLogger().Write(GetClassName(), logLevel, msg);
 	}
 	
-	
+	protected void WriteToConsole(String msg)
+	{
+		System.out.println(msg);
+	}
 	
 	public CommonCBase(){}
 	

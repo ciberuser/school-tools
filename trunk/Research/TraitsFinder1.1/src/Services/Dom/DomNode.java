@@ -106,7 +106,7 @@ public class DomNode extends CommonCBase
 		}
 		catch (Exception e) 
 		{
-			WriteLineToLog("attribute not exist", ELogLevel.WARNING);
+			//WriteLineToLog("attribute not exist", ELogLevel.WARNING);
 			return "";
 
 		}

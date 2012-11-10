@@ -42,7 +42,7 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 	
 	public long NumbertOfTargets()
 	{
-		return  (m_jedis.exists(KEY_NAME))? 1 : 0;
+		return  (m_jedis.exists(KEY_NAME))? 1: 0; //TODO::Fix this problem !!!
 	}
 	
 	

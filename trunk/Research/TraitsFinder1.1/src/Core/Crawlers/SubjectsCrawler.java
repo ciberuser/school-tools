@@ -70,7 +70,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		m_subjectPath = m_userPath + "//" + m_subjectName;
 		m_followersXmlPath = m_subjectPath + "//" +  FOLLOWERS_FILE_NAME;
 		
-		m_subjectXmlPath =m_userPath +"//"+ m_subjectName+"//"+ m_subjectName+".xml";
+		m_subjectXmlPath =m_subjectPath +"//"+ m_subjectName+".xml";
 		if (!FileServices.PathExist(m_userPath)) FileServices.CreateFolder(GetClassName(), m_userPath);
 	}
 	
@@ -191,7 +191,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		}
 		catch(Exception e )
 		{
-			WriteToLog("exception happen on followes crawling msg=" +e.getMessage(), ELogLevel.ERROR);
+			WriteLineToLog("exception happen on followes crawling msg=" +e.getMessage(), ELogLevel.ERROR);
 			
 		}
 	}

@@ -76,6 +76,12 @@ public class StringDataElement extends AElement implements IElement {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void Save() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
