@@ -6,6 +6,9 @@ package Services.Neo4J;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -88,6 +91,21 @@ public class Neo4JServices extends CommonCBase
 		return CommonDef.NOT_EXIST_IN_DB;
 	}
 	
+	Relationship FindRelation(Node src ,Node traget)
+	{
+		boolean found =false;
+		for(Relationship rel : src.getRelationships(RelType.Weight,Direction.BOTH))
+		{
+			found = rel.getEndNode().equals(traget);
+			if (found)
+			{
+				WriteLineToLog("found relation ", ELogLevel.INFORMATION);
+				return rel;
+			}
+		}
+		return null;
+	}
+	
 	public Relationship AddRelasion(IElement elm1 ,IElement elm2, RelationshipType relType)
 	{
 		Relationship relReturn ;
@@ -97,19 +115,22 @@ public class Neo4JServices extends CommonCBase
 			Node elm1Node = m_indexNode.get(EProperty.name.toString(), elm1.GetName()).getSingle();
 			Node elm2Node = m_indexNode.get(EProperty.name.toString(), elm2.GetName()).getSingle();
 			if ((elm1Node.getId() == elm2Node.getId()) || elm1Node == null || elm2Node == null ) return null;
-			tx = m_services.beginTx();
-			for(Relationship rel :elm1Node.getRelationships(RelType.Weight))
+					
+			do
 			{
-				if (rel.getOtherNode(elm2Node) !=null)
-				{
-					relReturn =rel;
-					break;
-				}
+				relReturn = FindRelation(elm1Node, elm2Node);
+				if (relReturn !=null) break;
+				relReturn = FindRelation(elm2Node, elm1Node);
 			}
-			relReturn =  elm1Node.createRelationshipTo(elm2Node,relType);
-			tx.success();
-			WriteLineToLog("set new relation between : " +elm1Node.getProperty(EProperty.name.toString())+ " to " +elm2Node.getProperty(EProperty.name.toString())+" created reltype=" +relType.toString(),ELogLevel.INFORMATION );
-			tx.finish();
+			while(false);
+			if (relReturn == null)
+			{
+				tx = m_services.beginTx();
+				relReturn =  elm1Node.createRelationshipTo(elm2Node,relType);
+				tx.success();
+				WriteLineToLog("new relation between : " +elm1Node.getProperty(EProperty.name.toString())+ " to " +elm2Node.getProperty(EProperty.name.toString())+" created reltype=" +relType.toString(),ELogLevel.INFORMATION );
+				tx.finish();
+			}
 			return relReturn;
 		}
 		catch (Exception e) {
@@ -133,12 +154,14 @@ public class Neo4JServices extends CommonCBase
 		{
 			if (!rel.hasProperty(CommonDef.NEO_WEIGHT))
 			{
+				WriteLineToLog("set weight to 1",ELogLevel.INFORMATION);
 				rel.setProperty(CommonDef.NEO_WEIGHT, 1);
 				status = true;
 			}
 			else
 			{
 				int count = (Integer)rel.getProperty(CommonDef.NEO_WEIGHT);
+				WriteLineToLog("the wight is " + count +"increase weight",ELogLevel.INFORMATION);
 				count++;
 				rel.setProperty(CommonDef.NEO_WEIGHT, count);
 				status = true;
