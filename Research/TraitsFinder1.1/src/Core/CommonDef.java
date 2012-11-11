@@ -23,7 +23,7 @@ public class CommonDef
 	public final static int NOT_EXIST = -1;
 	public static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
 	public final static String NEO_WEIGHT = "weight";	
-	
+	public static boolean SET_GRAPH = false;
 	//////////////////////////////////////////////////////////////////////
 	//running configuration 
 	public static int MAX_RUNNERS = 4;
