@@ -21,17 +21,15 @@ import Elements.IElement;
 
 public class AppRunner extends CommonCBase {
 	
-	
-	private final static String FLAG_DEBUG 		= "d";
-	private final static String FLAG_RUNNERS 	= "t";
-	private final static String FLAG_MAX_USERS  = "u";
+	//commands 
+	private final static String FLAG_DEBUG 		= "debug";
+	private final static String FLAG_RUNNERS 	= "runners";
+	private final static String FLAG_MAX_USERS  = "users";
 	private final static String FLAG_HELP 		= "help";
-	
-	
-	
+	private final static String FLAG_GRAPH		= "graphPath";
+		
 	private final static String APP_NAME = "Traits Finder CLI"; 
-	
-	
+
 	private static void  Init()
 	{
 		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
@@ -49,6 +47,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName(FLAG_RUNNERS).hasArg().withDescription("number of runners").create(FLAG_RUNNERS));
 		options.addOption(FLAG_DEBUG,false,"set debug node - will increase loglevel to information");
 		options.addOption(OptionBuilder.withArgName(FLAG_MAX_USERS).hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
+		options.addOption(OptionBuilder.withArgName(FLAG_GRAPH).hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		return options;
 	}
 	
@@ -84,6 +83,12 @@ public class AppRunner extends CommonCBase {
 	        if (line.hasOption(FLAG_HELP))
 	        {
 	        	hf.printHelp(APP_NAME, options);
+	        }
+	        if (line.hasOption(FLAG_GRAPH))
+	        {
+	        	String graphPath = line.getOptionValue(FLAG_GRAPH);
+	        	CommonDef.GRAPH_DB_DIR = graphPath;
+	        	CommonDef.SET_GRAPH = true;
 	        }
 	        
 	    }
