@@ -73,11 +73,11 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 	
 	
 		
-	public CrawlerRunner[] ExcuteCrawler(IElement headElement,int maxExcution)
+	public CrawlerRunner[] ExcuteCrawler(IElement headElement,long maxExcution)
 	{
 		long leftUserToCrawl = UsersCrawlingTargets.GetInstance().NumbertOfTargets();
-		WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
-		int count = 0;
+		//WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
+		long count = 0;
 		while (leftUserToCrawl > 0 && count <maxExcution)
 		{
 			if (CrawlTopUserTarget(headElement)!=null)
@@ -102,7 +102,7 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 			{
 				runner = new CrawlerRunner(new UserCrawler(userName), m_depthbehavior.get(ECrawlingType.User),new String(userName));
 				runner.SetHeadElement(headElement);
-				String runMsg ="excute Runner for user:"+userName;
+				String runMsg ="execute Runner for user:"+userName;
 				WriteLineToLog(runMsg, ELogLevel.INFORMATION);
 				WriteToConsole(runMsg);
 				CrawledCount++;
