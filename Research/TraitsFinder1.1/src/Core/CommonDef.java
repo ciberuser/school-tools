@@ -21,7 +21,7 @@ public class CommonDef
 	//DB logic:
 	public final static long NOT_EXIST_IN_DB = -1;
 	public final static int NOT_EXIST = -1;
-	public final static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
+	public static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
 	public final static String NEO_WEIGHT = "weight";	
 	
 	//////////////////////////////////////////////////////////////////////
