@@ -58,7 +58,7 @@ public class AppRunner extends CommonCBase {
 	 */
 	public static void main(String[] args) {
 		Init();
-		int maxUser=10;
+		long maxUser=CommonDef.MAX_CRAWLING_USER;
 		Options options = InitOptions();
 		HelpFormatter hf = new HelpFormatter();
 		CommandLineParser parser  =new PosixParser();
@@ -78,7 +78,7 @@ public class AppRunner extends CommonCBase {
 	        }
 	        if (line.hasOption(FLAG_MAX_USERS))
 	        {
-	        	maxUser = Integer.parseInt(line.getOptionValue(FLAG_MAX_USERS));
+	        	maxUser = Long.parseLong(line.getOptionValue(FLAG_MAX_USERS));
 	        	CommonDef.MAX_CRAWLING_USER = maxUser;
 	        }
 	        if (line.hasOption(FLAG_HELP))

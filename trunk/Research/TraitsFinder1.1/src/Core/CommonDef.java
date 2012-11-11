@@ -17,24 +17,22 @@ public class CommonDef
 	
 	public final static String FOLLOWER_FILE_NAME ="followers.xml";
 	
-	public final static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
-	
-	public final static String NEO_WEIGHT = "weight";
-	
-	
-	public static int MAX_RUNNERS = 4;
+	////////////////////////////////////////////////////////////////////
 	//DB logic:
-	
 	public final static long NOT_EXIST_IN_DB = -1;
-	
 	public final static int NOT_EXIST = -1;
+	public final static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
+	public final static String NEO_WEIGHT = "weight";	
 	
+	//////////////////////////////////////////////////////////////////////
+	//running configuration 
+	public static int MAX_RUNNERS = 4;
 	public static long MAX_CRAWLING_USER = 150;
 	
+	//default log level
 	public static ELogLevel LOGGER_LEVEL = ELogLevel.WARNING;
 	
-	
-	
+		
 	public static String AlignUserName(String userName)
 	{
 		return userName.replace(" ", "_");
@@ -47,6 +45,6 @@ public class CommonDef
 	
 	public static String AlignSubjectName(String subjectName)
 	{
-		return subjectName.replace("-", "_").replace("?", "").replace("/", "").replace("\\","").replace("|", "").replace('"', '_').replace("'", "").replace("<", "").replace(">", "").replace("(", "").replace(")","").replace(":", "").replace("*", "").replace("..", "");
+		return subjectName.replace("-", "_").toLowerCase().replace("?", "").replace("/", "").replace("\\","").replace("|", "").replace('"', '_').replace("'", "").replace("<", "").replace(">", "").replace("(", "").replace(")","").replace(":", "").replace("*", "").replace("..", "");
 	}
 }
