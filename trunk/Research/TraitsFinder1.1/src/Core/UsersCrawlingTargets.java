@@ -45,6 +45,12 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		return  (m_jedis.exists(KEY_NAME))? 1: 0; //TODO::Fix this problem !!!
 	}
 	
+	public boolean CleanTargets()
+	{
+		
+		//TODO:: implement clean radis !!! 
+		return false;
+	}
 	
 	@Override
 	public String GetNextTarget() 
@@ -68,7 +74,13 @@ public class UsersCrawlingTargets extends CommonCBase implements ICrawlingTarget
 		boolean bSuccessful = false;
 		try 
 		{
-			if (!m_jedis.exists(sTarget) || m_jedis.llen(KEY_NAME)<CommonDef.MAX_CRAWLING_USER)
+			if (!m_jedis.isConnected()) 
+			{
+				WriteLineToLog("somehow connection to server is down reconnect to server....", ELogLevel.WARNING);
+				m_jedis.connect();
+			}
+			
+			if (!m_jedis.exists(sTarget))
 			{
 				bSuccessful = m_jedis.sadd(KEY_NAME, sTarget) > 0;
 				if (bSuccessful) 

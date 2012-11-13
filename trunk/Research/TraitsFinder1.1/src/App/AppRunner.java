@@ -7,6 +7,7 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.neo4j.kernel.impl.nioneo.xa.WriteTransaction;
 
 import Services.FileServices;
 import Services.Log.*;
@@ -29,6 +30,7 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_GRAPH		= "graphPath";
 		
 	private final static String APP_NAME = "Traits Finder CLI"; 
+	private final static String CLI_VERSION ="1.0.0.0";
 
 	private static void  Init()
 	{
@@ -48,9 +50,28 @@ public class AppRunner extends CommonCBase {
 		options.addOption(FLAG_DEBUG,false,"set debug node - will increase loglevel to information");
 		options.addOption(OptionBuilder.withArgName(FLAG_MAX_USERS).hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
 		options.addOption(OptionBuilder.withArgName(FLAG_GRAPH).hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
+		options.addOption(FLAG_HELP,false,"show help");
 		return options;
 	}
 	
+	private static void PrintHelp(Options options)
+	{
+		HelpFormatter hf = new HelpFormatter();
+		hf.printHelp(APP_NAME, options);
+	}
+	private static void PrintLine()
+	{
+		for(int i=0;i<65;i++) System.out.print("=");
+	}
+	
+	private static void PrintHead()
+	{
+		System.out.println("\n"+APP_NAME);
+		PrintLine();			
+		System.out.println("\nCLI version="+CLI_VERSION +" ,core version=" + CommonDef.CORE_VERSION);
+		PrintLine();
+		System.out.println("");
+	}
 	
 	/**
 	 * @param args
@@ -59,9 +80,8 @@ public class AppRunner extends CommonCBase {
 		Init();
 		long maxUser=CommonDef.MAX_CRAWLING_USER;
 		Options options = InitOptions();
-		HelpFormatter hf = new HelpFormatter();
 		CommandLineParser parser  =new PosixParser();
-		
+		PrintHead();
 		try {
 	        // parse the command line arguments
 	        CommandLine line = parser.parse( options, args );
@@ -82,7 +102,8 @@ public class AppRunner extends CommonCBase {
 	        }
 	        if (line.hasOption(FLAG_HELP))
 	        {
-	        	hf.printHelp(APP_NAME, options);
+	        	PrintHelp(options);
+	        	return ;
 	        }
 	        if (line.hasOption(FLAG_GRAPH))
 	        {
@@ -94,16 +115,18 @@ public class AppRunner extends CommonCBase {
 	    }
 	    catch( ParseException exp ) {
 	        // oops, something went wrong
-	    	System.out.println("worng command or argument's \n");
-	    	hf.printHelp(APP_NAME, options);
+	    	System.out.println("ERROR !!! : Wrong command or bad syntax\nmsg=" +exp.getMessage() );
+	    	PrintHelp(options);
+	    	
 	    	return ;
 	    }
 
 		
 		IElement mainElement  = null;
 		ICrawler pinterserCrawler = new PintersetCrawler();
-		System.out.println("start crawling main page...");
+		System.out.print("start crawling main page...");
 		mainElement =  pinterserCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main));
+		System.out.print("done!\n");
 		if (mainElement !=null)
 		{
 			CrawlerProccessor.GetInstance().ExcuteCrawler(mainElement, maxUser);

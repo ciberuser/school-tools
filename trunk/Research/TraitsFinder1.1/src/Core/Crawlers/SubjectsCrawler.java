@@ -148,7 +148,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 			} 
 			catch (Exception e) {
 				WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
-				WriteLineToLog("cause="+e.getCause().toString(), ELogLevel.ERROR); 
+			//	WriteLineToLog("cause="+e.getCause().toString(), ELogLevel.ERROR); 
 				return subjectElem;
 			}
 		}
