@@ -15,6 +15,8 @@ import Core.CommonCBase;
 import Core.CommonDef;
 import Core.CrawlerProccessor;
 import Core.ECrawlingType;
+import Core.QueueCrawlinTargets;
+import Core.Crawlers.OffLineUsersCrawler;
 import Core.Crawlers.PintersetCrawler;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
@@ -28,9 +30,10 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_MAX_USERS  = "users";
 	private final static String FLAG_HELP 		= "help";
 	private final static String FLAG_GRAPH		= "graphPath";
+	private final static String FLAG_OFF_LINE 	= "offline";
 		
 	private final static String APP_NAME = "Traits Finder CLI"; 
-	private final static String CLI_VERSION ="1.0.0.0";
+	private final static String CLI_VERSION ="1.0.0.2";
 
 	private static void  Init()
 	{
@@ -48,9 +51,10 @@ public class AppRunner extends CommonCBase {
 		Options options = new Options();
 		options.addOption(OptionBuilder.withArgName(FLAG_RUNNERS).hasArg().withDescription("number of runners").create(FLAG_RUNNERS));
 		options.addOption(FLAG_DEBUG,false,"set debug node - will increase loglevel to information");
-		options.addOption(OptionBuilder.withArgName(FLAG_MAX_USERS).hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
-		options.addOption(OptionBuilder.withArgName(FLAG_GRAPH).hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
+		options.addOption(OptionBuilder.withArgName("number of user to crawl").hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
+		options.addOption(OptionBuilder.withArgName("graph folder path").hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		options.addOption(FLAG_HELP,false,"show help");
+		options.addOption(OptionBuilder.withArgName("local folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
 		return options;
 	}
 	
@@ -73,15 +77,19 @@ public class AppRunner extends CommonCBase {
 		System.out.println("");
 	}
 	
+		
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) //TODO:: to refactor!!! 
+	{
 		Init();
 		long maxUser=CommonDef.MAX_CRAWLING_USER;
 		Options options = InitOptions();
+		String offLineDirPath ="";
 		CommandLineParser parser  =new PosixParser();
 		PrintHead();
+		
 		try {
 	        // parse the command line arguments
 	        CommandLine line = parser.parse( options, args );
@@ -112,6 +120,13 @@ public class AppRunner extends CommonCBase {
 	        	CommonDef.SET_GRAPH = true;
 	        }
 	        
+	        if (line.hasOption(FLAG_OFF_LINE))
+	        {
+	        	CommonDef.OFF_LINE_MODE = true;
+	        	
+	        	offLineDirPath = line.getOptionValue(FLAG_OFF_LINE);
+	        }
+	        
 	    }
 	    catch( ParseException exp ) {
 	        // oops, something went wrong
@@ -123,16 +138,20 @@ public class AppRunner extends CommonCBase {
 
 		
 		IElement mainElement  = null;
-		ICrawler pinterserCrawler = new PintersetCrawler();
 		System.out.print("start crawling main page...");
-		mainElement =  pinterserCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main));
+		boolean depMain = CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Main);
+		mainElement = (!CommonDef.OFF_LINE_MODE)? new PintersetCrawler().Crawl(depMain) : new OffLineUsersCrawler(offLineDirPath).Crawl(depMain) ;
+		if (CommonDef.OFF_LINE_MODE) 
+		{
+			maxUser =QueueCrawlinTargets.GetInstance().NumbertOfTargets();
+		}
 		System.out.print("done!\n");
+		
 		if (mainElement !=null)
 		{
 			CrawlerProccessor.GetInstance().ExcuteCrawler(mainElement, maxUser);
-		
 		}
-		
+		//System.out.println("done!!! check result");
 
 	}
 

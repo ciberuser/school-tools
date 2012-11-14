@@ -12,8 +12,9 @@ public class SubjectElement extends  EnumElement implements IElement
 	public SubjectElement(String subjectName)
 	{
 		super(subjectName);
-		if (m_serializer == null)
+		if (m_serializer == null && CommonDef.SET_GRAPH)
 		{
+			WriteLineToLog("attach serializer", ELogLevel.INFORMATION);
 			m_serializer = SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, this, CommonDef.GRAPH_DB_DIR);
 		}
 		AddProperty(EProperty.name.toString(), subjectName);

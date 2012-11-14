@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
+import Services.FileServices;
 
 public class CrawlerRunner extends Thread
 {
@@ -82,7 +83,10 @@ public class CrawlerRunner extends Thread
 			IElement elm = m_crawler.Crawl(m_recursive);
 			if (elm!=null && m_headElement!=null)
 			{
-				if (CommonDef.SET_GRAPH) elm.Serialize(); //write to graph 
+				if (CommonDef.SET_GRAPH) 
+				{
+					elm.Serialize(); //write to graph 
+				}
 				m_writeLockObj.lock();
 				try
 				{

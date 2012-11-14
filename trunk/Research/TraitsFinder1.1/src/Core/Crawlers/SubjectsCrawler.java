@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 import Core.CommonDef;
 import Core.CrawlerProccessor;
 import Core.ECrawlingType;
+import Core.QueueCrawlinTargets;
 import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
@@ -135,15 +136,17 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 				}
 				
 				DownloadFile(m_followersXmlPath, m_followersUrl);
-				if (!FileServices.PathExist(m_followersXmlPath))
+				if (!CommonDef.OFF_LINE_MODE)
 				{
-					WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
+					if (!FileServices.PathExist(m_followersXmlPath))
+					{
+						WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
+					}
+					else
+					{
+						CrawlFollowers(m_followersXmlPath, itemsNode);			
+					}
 				}
-				else
-				{
-					CrawlFollowers(m_followersXmlPath, itemsNode);			
-				}
-				
 				return subjectElem;
 			} 
 			catch (Exception e) {
@@ -184,7 +187,8 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					if (userfollow!="") 
 					{
 						userfollow = userfollow.replaceAll("/","");
-						UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
+						//UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
+						QueueCrawlinTargets.GetInstance().AddTarget(userfollow);
 					}
 				}
 			}

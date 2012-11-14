@@ -65,8 +65,8 @@ public class CrawlerProcessor implements ICrawlerProcessor
 	public IElement CrawlTopUserTarget()
 	{
 		IElement userElement = null;
-		String userName =  UsersCrawlingTargets.GetInstance().GetNextTarget();
-		if (userName!="")
+		String userName =  QueueCrawlinTargets.GetInstance().GetNextTarget();
+		if (userName!="" && userName!=null)
 		{
 			ICrawler userCrawler = new UserCrawler(userName);
 			userElement =  userCrawler.Crawl(m_depthbehavior.get(ECrawlingType.User));

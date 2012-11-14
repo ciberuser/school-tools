@@ -16,7 +16,17 @@ public class ACrawler  extends CommonCBase
 		super();
 		m_collector = new WgetCollector();
 	}
-	
+			
+	protected boolean ForceDownLoadFile(String filePath,String UrlPath)
+	{
+		boolean fileExist = FileServices.PathExist(filePath);
+		if (fileExist)
+		{
+			FileServices.DeleteFile(this.GetClassName(), filePath);
+			
+		}
+		return  m_collector.SaveDataFile(filePath, UrlPath);
+	}
 	
 	protected boolean DownloadFile(String filePath,String UrlPath)
 	{

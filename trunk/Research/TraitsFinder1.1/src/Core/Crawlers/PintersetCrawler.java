@@ -8,6 +8,7 @@ import Elements.IElement;
 import Elements.StringDataElement;
 
 import Core.CommonDef;
+import Core.QueueCrawlinTargets;
 
 import Core.UsersCrawlingTargets;
 import Core.Interfaces.*;
@@ -23,7 +24,6 @@ import org.w3c.dom.NodeList;
 
 public class PintersetCrawler extends ACrawler  implements ICrawler {
 
-	//final static String USER_ADDRESS_Path = 
 	final static String PINTEREST_SCOUTER = "PinterstScouter";
 	final static String USER_ALL_USERS_COMMENT_PATH = CommonDef.CONTANIER_XPATH + "/div/div[@class='convo attribution clearfix']/a";
 	final static String PINTEREST_PATH = CommonDef.ROOT_DATA_FOLDER + CommonDef.PINTERSET_XML;
@@ -49,7 +49,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		m_FilePath = SavefilePath;
 		try
 		{
-			if (DownloadFile(m_FilePath, CommonDef.PINTERSET_URL))
+			if (ForceDownLoadFile(m_FilePath, CommonDef.PINTERSET_URL))
 			return StartCrawling();
 			//in case of fail...
 			WriteLineToLog("failed to download pinterest main file....",ELogLevel.ERROR);
@@ -86,7 +86,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 				if (userName!="")
 				{
 					userName = userName.replace("/", "");
-					UsersCrawlingTargets.GetInstance().AddTarget(userName);
+					QueueCrawlinTargets.GetInstance().AddTarget(userName);
 				}
 			}
 		}
