@@ -95,12 +95,32 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 	public CrawlerRunner CrawlTopUserTarget(IElement headElement)
 	{
 		CrawlerRunner runner = null;
+		
+		
+	//	WriteLineToLog("activeCount= "+CrawlerRunner.activeCount(),ELogLevel.INFORMATION);
+		if (m_maxThread == 1)
+		{
+			String userName =  QueueCrawlinTargets.GetInstance().GetNextTarget();
+			if (userName !="" && userName != null )	//TODO::why this again...
+			{
+				IElement userElm = new UserCrawler(userName).Crawl(m_depthbehavior.get(ECrawlingType.User));
+				if (userElm != null)
+				{
+					if (CommonDef.SET_GRAPH) userElm.Serialize();
+					headElement.AddElement(userElm);
+					return runner;
+				}
+				WriteLineToLog("failed to create user element",ELogLevel.ERROR);
+			}
+			return runner;
+		}
+		
 		if(CrawlerRunner.activeCount() <= m_maxThread)
 		{
 			String userName =  QueueCrawlinTargets.GetInstance().GetNextTarget();
-			WriteLineToLog("users left to crawled=" + QueueCrawlinTargets.GetInstance().NumbertOfTargets(), ELogLevel.INFORMATION);
 			if (userName!=""&& userName!=null)
 			{
+				WriteLineToLog("users left to crawled=" + QueueCrawlinTargets.GetInstance().NumbertOfTargets(), ELogLevel.INFORMATION);
 				runner = new CrawlerRunner(new UserCrawler(userName), m_depthbehavior.get(ECrawlingType.User),new String(userName));
 				runner.SetHeadElement(headElement);
 				String runMsg ="execute Runner for user:"+userName;

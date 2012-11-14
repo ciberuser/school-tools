@@ -8,12 +8,12 @@ public class Neo4JActivation
 {
 	
 	private static boolean m_isActive;
-	private static GraphDatabaseService m_DBservice;
+	private static GraphDatabaseService m_DBservice =null;
 	private static Neo4JActivation m_instance;
 	
 	public static GraphDatabaseService GetGraphDatabaseService()
 	{
-		GetInstance();
+		//GetInstance();
 		return m_DBservice;
 	}
 	
@@ -30,19 +30,17 @@ public class Neo4JActivation
 	
 	public static boolean IsActive()
 	{
-		
-		return m_isActive;
+		return (m_isActive && m_DBservice != null);
 	}
 	
 	private Neo4JActivation()
 	{
-	    new	GraphDatabaseFactory().newEmbeddedDatabaseBuilder("");
+	   // new	GraphDatabaseFactory().newEmbeddedDatabaseBuilder("");
 	   
 	}
 			
 	public static boolean Start(String DBpath)
 	{
-		
 		m_DBservice =  new GraphDatabaseFactory().newEmbeddedDatabase( DBpath );
 		RegisterShutdownHook(m_DBservice);
 		m_isActive = true;

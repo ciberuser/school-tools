@@ -23,6 +23,7 @@ import Elements.IElement;
 import Elements.EProperty;
 import Services.Log.ELogLevel;
 
+@SuppressWarnings("finally")
 public class Neo4JServices extends CommonCBase 
 {
 	
@@ -133,13 +134,10 @@ public class Neo4JServices extends CommonCBase
 			}
 			return relReturn;
 		}
-		catch (Exception e) {
-			WriteLineToLog("exception occur msg="+e.getMessage(),ELogLevel.ERROR);
-			return null;
-		}
 		finally 
 		{
 			if (tx!=null) tx.finish();
+			return null;
 		}
 	}
 		
