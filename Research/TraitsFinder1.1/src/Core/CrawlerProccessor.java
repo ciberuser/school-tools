@@ -75,8 +75,8 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 		
 	public CrawlerRunner[] ExcuteCrawler(IElement headElement,long maxExcution)
 	{
-		long leftUserToCrawl = UsersCrawlingTargets.GetInstance().NumbertOfTargets();
-		//WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
+		long leftUserToCrawl = QueueCrawlinTargets.GetInstance().NumbertOfTargets();
+		WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
 		long count = 0;
 		while (leftUserToCrawl > 0 && count <maxExcution)
 		{
@@ -97,8 +97,9 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 		CrawlerRunner runner = null;
 		if(CrawlerRunner.activeCount() <= m_maxThread)
 		{
-			String userName =  UsersCrawlingTargets.GetInstance().GetNextTarget();
-			if (userName!="")
+			String userName =  QueueCrawlinTargets.GetInstance().GetNextTarget();
+			WriteLineToLog("users left to crawled=" + QueueCrawlinTargets.GetInstance().NumbertOfTargets(), ELogLevel.INFORMATION);
+			if (userName!=""&& userName!=null)
 			{
 				runner = new CrawlerRunner(new UserCrawler(userName), m_depthbehavior.get(ECrawlingType.User),new String(userName));
 				runner.SetHeadElement(headElement);

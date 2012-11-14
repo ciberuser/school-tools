@@ -4,6 +4,7 @@ import java.io.File;
 
 import Core.CommonDef;
 import Core.ECrawlingType;
+import Core.QueueCrawlinTargets;
 import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
@@ -47,7 +48,7 @@ public class OffLineUsersCrawler extends ACrawler implements ICrawler{
 		File folder = new File(dir);
 		File[] listOfFiles = folder.listFiles();
 		
-		if (listOfFiles.length>0 )
+		if (listOfFiles.length >0 )
 		{
 			String CrawlingMsg = "found directories adding user according to users folder....";
 			WriteLineToLog(CrawlingMsg, ELogLevel.INFORMATION);
@@ -56,10 +57,10 @@ public class OffLineUsersCrawler extends ACrawler implements ICrawler{
 		}
 		for (int i = 0; i < listOfFiles.length; i++) 
 		{
-			
 			if (listOfFiles[i].isDirectory())
 			{
-				UsersCrawlingTargets.GetInstance().AddTarget(listOfFiles[i].getName());
+				//UsersCrawlingTargets.GetInstance().AddTarget(listOfFiles[i].getName());
+				QueueCrawlinTargets.GetInstance().AddTarget(listOfFiles[i].getName());
 			}
 		}
 		return mainElement ;

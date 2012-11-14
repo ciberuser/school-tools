@@ -77,12 +77,20 @@ public class UserCrawler extends ACrawler  implements ICrawler
 								Node n =  allSubjects.item(i);
 								if (n.getNodeType() == node.ELEMENT_NODE)
 								{
-									String subjectName = m_node.GetNode(SUBJECT_NAME_XPATH,n).getTextContent().replace(' ', '_');
+												
 									String subjectUrl = new DomNode(m_node.GetNode(SUBJECT_NAME_XPATH,n)).GetAttribute("href");
-									if (subjectUrl!= "") 
+									if (subjectUrl != "") 
 									{
 										subjectUrl = CommonDef.PINTERSET_URL  + subjectUrl;
 										WriteLineToLog("subjectURL="+subjectUrl, ELogLevel.INFORMATION);
+									}
+									
+									Node subjectNode = m_node.GetNode(SUBJECT_NAME_XPATH,n);
+									String subjectName = (subjectNode != null)? subjectName = subjectNode.getTextContent().replace(' ', '_') : (subjectUrl != "")? subjectUrl.split("/")[2]  : "";
+									if (subjectName == "" ||subjectUrl == "") 
+									{
+										WriteLineToLog("missing subject url or name skip this node...", ELogLevel.WARNING);
+										continue;
 									}
 									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
 									IElement subjectElm = subjectCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b

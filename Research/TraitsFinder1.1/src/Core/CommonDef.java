@@ -6,7 +6,7 @@ public class CommonDef
 {
 	
 	
-	public final static String CORE_VERSION = "1.0.0.3";
+	public final static String CORE_VERSION = "1.0.1.1";
 	public final static String ROOT_DATA_FOLDER = "data/";
 	public final static String USERS_FOLDER_POOL_PATH = ROOT_DATA_FOLDER + "users";
 	
@@ -27,15 +27,16 @@ public class CommonDef
 	public static String GRAPH_DB_DIR = ROOT_DATA_FOLDER + "DB_DIR/";
 	public final static String NEO_WEIGHT = "weight";	
 	public static boolean SET_GRAPH = false;
+	public static String VISIT_NAME = "visited.txt";
 	//////////////////////////////////////////////////////////////////////
 	//running configuration 
 	public static int MAX_RUNNERS = 4;
 	public static long MAX_CRAWLING_USER = 150;
-	
+	public static boolean OFF_LINE_MODE =false;
 	//default log level
 	public static ELogLevel LOGGER_LEVEL = ELogLevel.WARNING;
 	
-		
+	public static int MAX_NUMBER_IN_Q = 30000;  //Integer.MAX_VALUE -2;	
 	public static String AlignUserName(String userName)
 	{
 		return userName.replace(" ", "_");

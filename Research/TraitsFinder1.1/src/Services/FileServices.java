@@ -1,6 +1,7 @@
 package Services;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import Services.Log.ELogLevel;
 import Services.Log.Logger;
@@ -29,6 +30,22 @@ public class FileServices
 	   // The directory is now empty so delete it
 	    return dir.delete();
 	}	
+	
+	
+	public static boolean CreateTextFile(String module,String filePath)
+	{
+		File file = new File(filePath);
+		try 
+		{
+			return  file.createNewFile();
+		} 
+		catch (IOException e) 
+		{
+			WriteLineToLog(module,"failed to create file ", ELogLevel.ERROR);
+		}
+		return false;
+		
+	}
 	
 	public static boolean DeleteFile(String module,String path)
 	{

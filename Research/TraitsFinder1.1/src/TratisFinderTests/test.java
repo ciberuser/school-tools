@@ -2,8 +2,11 @@ package TratisFinderTests;
 
 
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 
 import Core.CommonCBase;
@@ -28,11 +31,16 @@ public class test extends CommonCBase {
 	@After
 	public void tearDown() throws Exception {
 	}
-  /*
+ 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void test() 
+	{
+		String s ="/marenbaarlid/been-there/";
+		String s1[] = s.split("/");
+		System.out.println(s1[2]);
+		assertTrue(s1[2].compareTo("been-there")==0);
+		
 	}
-	*/
+	
 
 }

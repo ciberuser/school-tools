@@ -2,6 +2,7 @@ package Services.Neo4J;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class Neo4JActivation 
 {
@@ -29,12 +30,14 @@ public class Neo4JActivation
 	
 	public static boolean IsActive()
 	{
+		
 		return m_isActive;
 	}
 	
 	private Neo4JActivation()
 	{
-		
+	    new	GraphDatabaseFactory().newEmbeddedDatabaseBuilder("");
+	   
 	}
 			
 	public static boolean Start(String DBpath)
