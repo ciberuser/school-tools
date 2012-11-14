@@ -47,19 +47,17 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 	protected IElement Crawl(String SavefilePath) 
 	{
 		m_FilePath = SavefilePath;
+		IElement main = null;
 		try
 		{
 			if (ForceDownLoadFile(m_FilePath, CommonDef.PINTERSET_URL))
-			return StartCrawling();
-			//in case of fail...
-			WriteLineToLog("failed to download pinterest main file....",ELogLevel.ERROR);
-			return null;
+				 main = StartCrawling();
 		} 
 		catch (Exception e)
 		{
 			PrintErrorParsing(e,"main Pinterest file");
-			return null;
 		}
+		return main;
 	}
 
 	private IElement StartCrawling() throws Exception

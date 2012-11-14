@@ -47,8 +47,8 @@ public class ACrawler  extends CommonCBase
 	protected void PrintErrorParsing(Exception e,String cralwingType)
 	{
 		WriteLineToLog("Error on " +cralwingType +" error : "+ e.toString(),ELogLevel.ERROR);
-		WriteToLog(e.toString(),ELogLevel.ERROR);
-		e.printStackTrace();
+		//WriteToLog(e.toString(),ELogLevel.ERROR);
+		//e.printStackTrace();
 	}
 	
 }

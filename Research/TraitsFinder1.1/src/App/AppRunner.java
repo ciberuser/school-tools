@@ -11,9 +11,11 @@ import org.neo4j.kernel.impl.nioneo.xa.WriteTransaction;
 
 import Services.FileServices;
 import Services.Log.*;
+import Services.Neo4J.Neo4JActivation;
 import Core.CommonCBase;
 import Core.CommonDef;
 import Core.CrawlerProccessor;
+import Core.CrawlerRunner;
 import Core.ECrawlingType;
 import Core.QueueCrawlinTargets;
 import Core.Crawlers.OffLineUsersCrawler;
@@ -37,6 +39,8 @@ public class AppRunner extends CommonCBase {
 
 	private static void  Init()
 	{
+		
+		CleanRun();
 		if (!FileServices.PathExist(CommonDef.ROOT_DATA_FOLDER))
 		{
 			FileServices.CreateFolder(APP_NAME, CommonDef.ROOT_DATA_FOLDER);
@@ -78,6 +82,11 @@ public class AppRunner extends CommonCBase {
 	}
 	
 		
+	private static void CleanRun()
+	{
+		ThreadGroup runnerGroup = CrawlerRunner.currentThread( ).getThreadGroup( );
+		if (runnerGroup.activeCount()>1) runnerGroup.destroy();
+	}
 	/**
 	 * @param args
 	 */
@@ -118,6 +127,7 @@ public class AppRunner extends CommonCBase {
 	        	String graphPath = line.getOptionValue(FLAG_GRAPH);
 	        	CommonDef.GRAPH_DB_DIR = graphPath;
 	        	CommonDef.SET_GRAPH = true;
+	        	Neo4JActivation.Start(CommonDef.GRAPH_DB_DIR);     	
 	        }
 	        
 	        if (line.hasOption(FLAG_OFF_LINE))
@@ -143,13 +153,17 @@ public class AppRunner extends CommonCBase {
 		mainElement = (!CommonDef.OFF_LINE_MODE)? new PintersetCrawler().Crawl(depMain) : new OffLineUsersCrawler(offLineDirPath).Crawl(depMain) ;
 		if (CommonDef.OFF_LINE_MODE) 
 		{
-			maxUser =QueueCrawlinTargets.GetInstance().NumbertOfTargets();
+			maxUser = QueueCrawlinTargets.GetInstance().NumbertOfTargets();
 		}
 		System.out.print("done!\n");
 		
 		if (mainElement !=null)
 		{
 			CrawlerProccessor.GetInstance().ExcuteCrawler(mainElement, maxUser);
+		}
+		else 
+		{
+			System.out.println("Error !!!! end run failed to create main element!");
 		}
 		//System.out.println("done!!! check result");
 

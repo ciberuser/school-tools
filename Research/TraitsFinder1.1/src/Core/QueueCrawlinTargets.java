@@ -18,6 +18,7 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 	private Lock m_writeLockObj;
 	private Lock m_readLockObj;
 	private int MAX_LOCK_TRY=3;
+	private int LOCK_TIME = 250;
 	
 	private static QueueCrawlinTargets m_instance ;
 	
@@ -56,8 +57,9 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 					 WriteLineToLog("unlock", ELogLevel.INFORMATION);
 					 break;
 				}
+				Thread.sleep(LOCK_TIME);
 			}
-			Thread.sleep(500);
+			
 					
 		}
 		catch (Exception e) 
@@ -85,8 +87,9 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 					 WriteLineToLog("unlock", ELogLevel.INFORMATION);
 					 break;
 				}
+				Thread.sleep(LOCK_TIME);
 			}
-			Thread.sleep(500);
+			
 					
 		}
 		catch (Exception e) 
@@ -117,7 +120,7 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 					 break;
 				}
 				 WriteLineToLog("sleep for half sec...",ELogLevel.INFORMATION);
-				Thread.sleep(500);
+				Thread.sleep(LOCK_TIME);
 			}	
 					
 		}
@@ -129,6 +132,8 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 		return nextTarget;
 				
 	}
+	
+	
 
 	@Override
 	public boolean AddTarget(String sTarget)
@@ -143,13 +148,13 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 					if ( m_writeLockObj.tryLock())
 					{
 						 WriteLineToLog("success to lock get next target", ELogLevel.INFORMATION);
-						 if (m_targets.size()<= CommonDef.MAX_NUMBER_IN_Q) m_targets.add(sTarget);
+						 if (m_targets.size()<= CommonDef.MAX_NUMBER_IN_Q && !IsExist(sTarget)) m_targets.add(sTarget);
 						 m_writeLockObj.unlock();
 						 WriteLineToLog("unlock", ELogLevel.INFORMATION);
 						 return true;
 					}
 					WriteLineToLog("sleep for half sec...",ELogLevel.INFORMATION);
-					Thread.sleep(500);
+					Thread.sleep(LOCK_TIME);
 				}	
 						
 			}

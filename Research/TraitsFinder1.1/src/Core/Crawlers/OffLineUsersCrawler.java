@@ -59,9 +59,11 @@ public class OffLineUsersCrawler extends ACrawler implements ICrawler{
 		{
 			if (listOfFiles[i].isDirectory())
 			{
+				WriteLineToLog("add user" +listOfFiles[i].getName(), ELogLevel.INFORMATION);
 				//UsersCrawlingTargets.GetInstance().AddTarget(listOfFiles[i].getName());
 				QueueCrawlinTargets.GetInstance().AddTarget(listOfFiles[i].getName());
 			}
+			WriteLineToLog("targes=" + QueueCrawlinTargets.GetInstance().NumbertOfTargets(), ELogLevel.INFORMATION);
 		}
 		return mainElement ;
 	}

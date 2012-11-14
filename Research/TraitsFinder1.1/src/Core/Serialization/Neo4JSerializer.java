@@ -31,7 +31,16 @@ public class Neo4JSerializer extends ASerializer implements IElementSerializer  
 				}
 			}
 			m_neoServies = new Neo4JServices(Neo4JActivation.GetGraphDatabaseService());
-			WriteLineToLog("Neo4J is is active", ELogLevel.INFORMATION);
+			if (m_neoServies==null)
+			{
+				WriteLineToLog("no neo4j service !!!",ELogLevel.ERROR);
+			}
+			else
+			{
+				WriteLineToLog("Neo4J is is active", ELogLevel.INFORMATION);
+			}
+			return;
+			
 		}
 		m_neoServies = new Neo4JServices(Neo4JActivation.GetGraphDatabaseService());
 	}

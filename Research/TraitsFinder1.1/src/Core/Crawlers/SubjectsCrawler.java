@@ -134,10 +134,9 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					
 					}
 				}
-				
-				DownloadFile(m_followersXmlPath, m_followersUrl);
 				if (!CommonDef.OFF_LINE_MODE)
 				{
+					DownloadFile(m_followersXmlPath, m_followersUrl);
 					if (!FileServices.PathExist(m_followersXmlPath))
 					{
 						WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
@@ -165,7 +164,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		return false;
 	}
 
-	private void CrawlFollowers(String followerXml ,Node elementNode)
+	private void CrawlFollowers(String followerXml ,Node elementNode) throws Exception
 	{
 		try
 		{
@@ -196,7 +195,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		catch(Exception e )
 		{
 			WriteLineToLog("exception happen on followes crawling msg=" +e.getMessage(), ELogLevel.ERROR);
-			
+			return;
 		}
 	}
 
