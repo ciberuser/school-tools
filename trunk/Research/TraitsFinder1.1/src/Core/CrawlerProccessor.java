@@ -77,16 +77,25 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 	{
 		long leftUserToCrawl = QueueCrawlinTargets.GetInstance().NumbertOfTargets();
 		WriteLineToLog("NumbertOfTargets="+leftUserToCrawl, ELogLevel.INFORMATION);
-		long count = 0;
-		while (leftUserToCrawl > 0 && count <maxExcution)
+		long userCrawled = 0;
+		while (leftUserToCrawl > 0 && userCrawled <maxExcution)
 		{
 			if (CrawlTopUserTarget(headElement)!=null)
 			{
-				WriteLineToLog("count ="+count,ELogLevel.INFORMATION);
-				count++; 
+				WriteLineToLog("count ="+userCrawled,ELogLevel.INFORMATION);
+				if (CommonDef.SET_GRAPH && userCrawled %100 == 0)
+				{
+					String msg = String.format("graph updated with %l users",userCrawled);
+					WriteLineToLog(msg,ELogLevel.INFORMATION);
+					WriteToConsole(msg);
+				}
+				userCrawled++; 
 			}
 			
 		}
+		String msg = (userCrawled == maxExcution )? String.format("crawler end collecting users number visted users : %l ", userCrawled) : (leftUserToCrawl == 0) ? "crawler don't have users to crawled , need to restart crawling" : "stop from unknow reason ";
+		WriteToConsole(msg);
+		WriteLineToLog(msg,ELogLevel.WARNING);
 		return null;
 		
 	}
