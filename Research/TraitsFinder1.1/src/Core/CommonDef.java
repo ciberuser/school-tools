@@ -11,7 +11,6 @@ public class CommonDef
 	public final static String USERS_FOLDER_POOL_PATH = ROOT_DATA_FOLDER + "users";
 	
 	public final static String BIN_PATH = "bin/";
-	public final static String REDIS_PATH = BIN_PATH + "redis/";
 	
 	public final static String CONTANIER_XPATH = "//body/div[@id='wrapper']/div[@id='ColumnContainer']";
 	public final static String EMPTY="";
