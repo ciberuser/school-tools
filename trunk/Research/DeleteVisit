@@ -1,5 +1,5 @@
 #!/bin/sh
-#  delete all folders 
+#  delete all visit files  
 ##
 	
 USER_FOLDER_ENTERED=$1
@@ -9,12 +9,12 @@ CURRENT_DIR=$(pwd)
 VISIT_FILE=visited.txt
 echo USER_FOLDER_ENTERED=$USER_FOLDER_ENTERED ,CURRENT_DIR=$CURRENT_DIR
 
-
+#will delete all visit files inside userPath
 DeleteVisit()
 {
-	uesrPath=$1
-	echo goind to delete all files inside $uesrPath...
-	for dir in $(find $uesrPath -depth -type d ) ; 
+	userPath=$1
+	echo goind to delete all files inside $userPath...
+	for dir in $(find $userPath -depth -type d ) ; 
 		do 
 			if [ -f $dir/$VISIT_FILE ] ;
 			then	
@@ -26,8 +26,7 @@ DeleteVisit()
 	return
 }
 
-
-#main
+#main 
 
 if [ -d "$USER_FOLDER_ENTERED" ];
 then
