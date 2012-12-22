@@ -33,7 +33,7 @@ public class test extends CommonCBase {
 	}
  
 	@Test
-	public void test() 
+	public void T1test() 
 	{
 		String s ="/marenbaarlid/been-there/";
 		String s1[] = s.split("/");

@@ -12,7 +12,6 @@ import Core.CommonDef;
 import Core.CrawlerProccessor;
 import Core.ECrawlingType;
 import Core.QueueCrawlinTargets;
-import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
 import Elements.IElement;
