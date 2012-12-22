@@ -137,7 +137,7 @@ public class Neo4JServices extends CommonCBase
 		finally 
 		{
 			if (tx!=null) tx.finish();
-			return null;
+			//return null;
 		}
 	}
 		
@@ -145,7 +145,11 @@ public class Neo4JServices extends CommonCBase
 	public boolean AddWeightRelasion(IElement elm1 ,IElement elm2)
 	{
 		Relationship rel =  AddRelasion(elm1, elm2, RelType.Weight);
-		if (rel == null) return false;
+		if (rel == null) 
+		{
+				WriteLineToLog("failed to add relation ... return false at addRelasion!!!", ELogLevel.ERROR);
+				return false;
+		}
 		boolean status = false;
 		Transaction tx = m_services.beginTx();
 		try

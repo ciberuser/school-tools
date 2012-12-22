@@ -96,7 +96,7 @@ public class AppRunner extends CommonCBase {
 		long maxUser=CommonDef.MAX_CRAWLING_USER;
 		Options options = InitOptions();
 		String offLineDirPath ="";
-		CommandLineParser parser  =new PosixParser();
+		CommandLineParser parser = new PosixParser();
 		PrintHead();
 		
 		try {
