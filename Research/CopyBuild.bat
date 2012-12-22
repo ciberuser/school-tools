@@ -1,24 +1,34 @@
 @echo off 
 
-set BUILD_FILE=TraitsFinderCLI.jar
-set OUTPUT_BUILD_MAIN_PATH=C:\Users\oshapira\Dropbox\TraitsFinder
-Set BUILD_DEFAULT_VERSION=%OUTPUT_BUILD_MAIN_PATH%
 
+set LST_PATH=%1
 
-call :copyBuild
-
-:copyBuild
-
-if exist %BUILD_FILE% (
-echo copy build file...
-copy %BUILD_FILE% %BUILD_DEFAULT_VERSION%\%BUILD_FILE% /y 
-if NOT ERRORLEVEL 0 (
-	goto error
+if "%LST_PATH%"=="" (
+	set LST_PATH=CopyBuild.lst
 )
-echo copy success.
+
+if not exist %LST_PATH% (
+	echo error no lst file found ...
+	goto end
+)
+
+for /f "eol=; tokens=1,2" %%i in (%LST_PATH%) do (
+	echo copy %%i to %%j ...
+	call :copyFile %%i %%j 
+)
 goto end
 
-)
+:copyFile 
+setlocal
+	set SRC=%1
+	set DST=%2
+	copy %SRC% %DST% /y 
+	if NOT ERRORLEVEL 0 (
+		goto error
+	)
+endlocal
+exit /b
+
 
 :error
 echo Copy failed....
