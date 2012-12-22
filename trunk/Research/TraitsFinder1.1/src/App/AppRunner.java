@@ -20,7 +20,7 @@ import Core.ECrawlingType;
 import Core.QueueCrawlinTargets;
 import Core.Crawlers.OffLineUsersCrawler;
 import Core.Crawlers.PintersetCrawler;
-import Core.Interfaces.ICrawler;
+
 import Elements.IElement;
 
 
@@ -58,7 +58,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName("number of user to crawl").hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
 		options.addOption(OptionBuilder.withArgName("graph folder path").hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		options.addOption(FLAG_HELP,false,"show help");
-		options.addOption(OptionBuilder.withArgName("local folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
+		options.addOption(OptionBuilder.withArgName("local users folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
 		return options;
 	}
 	

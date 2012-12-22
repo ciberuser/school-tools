@@ -85,7 +85,7 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 				WriteLineToLog("count ="+userCrawled,ELogLevel.INFORMATION);
 				if (CommonDef.SET_GRAPH && userCrawled %100 == 0)
 				{
-					String msg = String.format("graph updated with %l users",userCrawled);
+					String msg = String.format("graph updated with %d users",userCrawled);
 					WriteLineToLog(msg,ELogLevel.INFORMATION);
 					WriteToConsole(msg);
 				}
@@ -93,11 +93,11 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 			}
 			
 		}
-		String msg = (userCrawled == maxExcution )? String.format("crawler end collecting users number visted users : %l ", userCrawled) : (leftUserToCrawl == 0) ? "crawler don't have users to crawled , need to restart crawling" : "stop from unknow reason ";
+		String msg = (userCrawled == maxExcution )? String.format("crawler end collecting users number visted users : %d ", userCrawled) :
+			(leftUserToCrawl == 0) ? "crawler don't have users to crawled , need to restart crawling" : "stop from unknow reason ";
 		WriteToConsole(msg);
 		WriteLineToLog(msg,ELogLevel.WARNING);
 		return null;
-		
 	}
 	
 	//TODO:: need to change it!!!

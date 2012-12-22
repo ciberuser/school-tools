@@ -3,9 +3,9 @@ package Core.Crawlers;
 import java.io.File;
 
 import Core.CommonDef;
-import Core.ECrawlingType;
+
 import Core.QueueCrawlinTargets;
-import Core.UsersCrawlingTargets;
+
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
 import Elements.IElement;

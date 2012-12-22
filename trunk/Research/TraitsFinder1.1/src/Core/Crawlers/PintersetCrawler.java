@@ -10,7 +10,7 @@ import Elements.StringDataElement;
 import Core.CommonDef;
 import Core.QueueCrawlinTargets;
 
-import Core.UsersCrawlingTargets;
+
 import Core.Interfaces.*;
 import Services.Dom.DomDocument;
 import Services.Dom.DomNode;

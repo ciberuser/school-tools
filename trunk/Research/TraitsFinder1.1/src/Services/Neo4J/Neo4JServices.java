@@ -29,14 +29,14 @@ public class Neo4JServices extends CommonCBase
 	
 	GraphDatabaseService m_services;
 	private Index<Node> m_indexNode;
-	private Index<Relationship> m_indexRelation; 
+	//private Index<Relationship> m_indexRelation; 
 			
 	public Neo4JServices(GraphDatabaseService service)
 	{
 		
 			m_services = service;
 			m_indexNode =  m_services.index().forNodes(EProperty.name.toString());
-			m_indexRelation = m_services.index().forRelationships(RelType.Users.toString());
+			//m_indexRelation = m_services.index().forRelationships(RelType.Users.toString());
 	}
 	
 	public long CreateNode(IElement element)
@@ -100,7 +100,7 @@ public class Neo4JServices extends CommonCBase
 			found = rel.getEndNode().equals(traget);
 			if (found)
 			{
-				WriteLineToLog("found relation ", ELogLevel.INFORMATION);
+				WriteLineToLog("found relation: id="+ rel.getId() , ELogLevel.INFORMATION);
 				return rel;
 			}
 		}
@@ -154,16 +154,15 @@ public class Neo4JServices extends CommonCBase
 			{
 				WriteLineToLog("set weight to 1",ELogLevel.INFORMATION);
 				rel.setProperty(CommonDef.NEO_WEIGHT, 1);
-				status = true;
 			}
 			else
 			{
-				int count = (Integer)rel.getProperty(CommonDef.NEO_WEIGHT);
-				WriteLineToLog("the wight is " + count +"increase weight",ELogLevel.INFORMATION);
+				Integer count = (Integer)rel.getProperty(CommonDef.NEO_WEIGHT);
+				WriteLineToLog("the weight is " + count +"increase weight",ELogLevel.INFORMATION);
 				count++;
 				rel.setProperty(CommonDef.NEO_WEIGHT, count);
-				status = true;
 			}
+			status = true;
 			tx.success();
 			tx.finish();
 			return status;
