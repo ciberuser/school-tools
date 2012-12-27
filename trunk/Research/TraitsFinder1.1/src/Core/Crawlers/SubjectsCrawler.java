@@ -185,7 +185,6 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					if (userfollow!="") 
 					{
 						userfollow = userfollow.replaceAll("/","");
-						//UsersCrawlingTargets.GetInstance().AddTarget(userfollow);
 						QueueCrawlinTargets.GetInstance().AddTarget(userfollow);
 					}
 				}

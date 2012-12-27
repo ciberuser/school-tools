@@ -82,6 +82,12 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 		{
 			if (CrawlTopUserTarget(headElement)!=null)
 			{
+				if (userCrawled % 50 == 0)
+				{
+					
+					WriteToConsole("crawling proceed with " + userCrawled + " users !!");
+					WriteToConsole("queue exist with " + QueueCrawlinTargets.GetInstance().NumbertOfTargets() +" users are waiting to crawl...");
+				}
 				WriteLineToLog("count ="+userCrawled,ELogLevel.INFORMATION);
 				if (CommonDef.SET_GRAPH && userCrawled %100 == 0)
 				{
@@ -93,19 +99,18 @@ public class CrawlerProccessor extends CommonCBase implements ICrawlerProcessor
 			}
 			
 		}
-		String msg = (userCrawled == maxExcution )? String.format("crawler end collecting users number visted users : %d ", userCrawled) :
+		String msg = (userCrawled == maxExcution )? String.format("crawler end collecting %d users ", userCrawled) :
 			(leftUserToCrawl == 0) ? "crawler don't have users to crawled , need to restart crawling" : "stop from unknow reason ";
 		WriteToConsole(msg);
 		WriteLineToLog(msg,ELogLevel.WARNING);
 		return null;
 	}
 	
-	//TODO:: need to change it!!!
+
 	public CrawlerRunner CrawlTopUserTarget(IElement headElement)
 	{
 		CrawlerRunner runner = null;
-		
-		
+			
 	//	WriteLineToLog("activeCount= "+CrawlerRunner.activeCount(),ELogLevel.INFORMATION);
 		if (m_maxThread == 1)
 		{

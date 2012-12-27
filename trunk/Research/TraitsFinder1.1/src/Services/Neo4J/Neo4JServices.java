@@ -162,9 +162,10 @@ public class Neo4JServices extends CommonCBase
 			else
 			{
 				Integer count = (Integer)rel.getProperty(CommonDef.NEO_WEIGHT);
-				WriteLineToLog("the weight is " + count +"increase weight",ELogLevel.INFORMATION);
+				WriteLineToLog("the weight is " + count +"increase weight by 1 ",ELogLevel.INFORMATION);
 				count++;
 				rel.setProperty(CommonDef.NEO_WEIGHT, count);
+				WriteLineToLog("weight increased to "+count ,ELogLevel.INFORMATION);
 			}
 			status = true;
 			tx.success();

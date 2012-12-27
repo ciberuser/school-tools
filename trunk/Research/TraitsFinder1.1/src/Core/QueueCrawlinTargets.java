@@ -51,10 +51,10 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 			
 				if ( m_readLockObj.tryLock())
 				{
-					 WriteLineToLog("success to lock get the size", ELogLevel.INFORMATION);
+					 WriteLineToLog("success to lock get the size", ELogLevel.VERBOS);
 					 exist= m_targets.contains(starget);
 					 m_readLockObj.unlock();
-					 WriteLineToLog("unlock", ELogLevel.INFORMATION);
+					 WriteLineToLog("unlock", ELogLevel.VERBOS);
 					 break;
 				}
 				Thread.sleep(LOCK_TIME);
@@ -81,10 +81,10 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 			
 				if ( m_readLockObj.tryLock())
 				{
-					 WriteLineToLog("success to lock get the size", ELogLevel.INFORMATION);
+					 WriteLineToLog("success to lock get the size", ELogLevel.VERBOS);
 					 size = m_targets.size();
 					 m_readLockObj.unlock();
-					 WriteLineToLog("unlock", ELogLevel.INFORMATION);
+					 WriteLineToLog("unlock", ELogLevel.VERBOS);
 					 break;
 				}
 				Thread.sleep(LOCK_TIME);
@@ -113,13 +113,13 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 			
 				if ( m_writeLockObj.tryLock())
 				{
-					 WriteLineToLog("success to lock get next target", ELogLevel.INFORMATION);
+					 WriteLineToLog("success to lock get next target", ELogLevel.VERBOS);
 					 nextTarget= m_targets.poll();
 					 m_writeLockObj.unlock();
-					 WriteLineToLog("unlock", ELogLevel.INFORMATION);
+					 WriteLineToLog("unlock", ELogLevel.VERBOS);
 					 break;
 				}
-				 WriteLineToLog("sleep for half sec...",ELogLevel.INFORMATION);
+				 WriteLineToLog("sleep for half sec...",ELogLevel.VERBOS);
 				Thread.sleep(LOCK_TIME);
 			}	
 					
@@ -147,13 +147,13 @@ public class QueueCrawlinTargets extends CommonCBase implements ICrawlingTargets
 				
 					if ( m_writeLockObj.tryLock())
 					{
-						 WriteLineToLog("success to lock get next target", ELogLevel.INFORMATION);
+						 WriteLineToLog("success to lock get next target", ELogLevel.VERBOS);
 						 if (m_targets.size()<= CommonDef.MAX_NUMBER_IN_Q && !IsExist(sTarget)) m_targets.add(sTarget);
 						 m_writeLockObj.unlock();
-						 WriteLineToLog("unlock", ELogLevel.INFORMATION);
+						 WriteLineToLog("unlock", ELogLevel.VERBOS);
 						 return true;
 					}
-					WriteLineToLog("sleep for half sec...",ELogLevel.INFORMATION);
+					WriteLineToLog("sleep for half sec...",ELogLevel.VERBOS);
 					Thread.sleep(LOCK_TIME);
 				}	
 						

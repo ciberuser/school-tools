@@ -1,3 +1,3 @@
 package Services.Log;
 
-public enum ELogLevel {INFORMATION,WARNING,ERROR}
+public enum ELogLevel {VERBOS,INFORMATION,WARNING,ERROR}
