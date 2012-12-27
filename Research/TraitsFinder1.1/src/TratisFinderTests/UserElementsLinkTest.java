@@ -26,6 +26,7 @@ public class UserElementsLinkTest extends test{
 	{
 		super.setUp();
 		
+		
 		if (FileServices.PathExist(USER_LINK_GRAPH_TEST)) FileServices.DeleteFolder(GetClassName(), USER_LINK_GRAPH_TEST);
 		CommonDef.GRAPH_DB_DIR = USER_LINK_GRAPH_TEST;
 		CommonDef.SET_GRAPH = true;

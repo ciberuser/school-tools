@@ -59,7 +59,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 		
 		IElement userElement = null;
 		m_userUrl = userUrl;
-		if (m_userName.isEmpty() || m_userPath.isEmpty() || m_userXmlPath.isEmpty()) return null;
+		if (m_userName.isEmpty() || m_userPath.isEmpty() || m_userXmlPath.isEmpty()) return null; //need to refactor!!!
 		try {
 				if (DownloadFile(m_userXmlPath, m_userUrl))
 				{
@@ -72,7 +72,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 						userElement = new UserElement(m_userName);
 						for(int i =0 ; i<allSubjects.getLength() ;++i)
 						{
-							if(recursive)
+							if(recursive) //need to remove , don't needed !!
 							{
 								Node n =  allSubjects.item(i);
 								if (n.getNodeType() == node.ELEMENT_NODE)
@@ -92,6 +92,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 										WriteLineToLog("missing subject url or name skip this node...", ELogLevel.WARNING);
 										continue;
 									}
+									subjectUrl = subjectUrl.replaceAll("api.", ""); //test it!!!
 									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
 									IElement subjectElm = subjectCrawler.Crawl(CrawlerProccessor.GetInstance().GetDepthCrawling(ECrawlingType.Subject));//TODO:: Add b
 									if (subjectElm == null)

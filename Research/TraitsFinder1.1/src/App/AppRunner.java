@@ -28,6 +28,7 @@ public class AppRunner extends CommonCBase {
 	
 	//commands 
 	private final static String FLAG_DEBUG 		= "debug";
+	private final static String FLAG_VERBOS		= "verbos";
 	private final static String FLAG_RUNNERS 	= "runners";
 	private final static String FLAG_MAX_USERS  = "users";
 	private final static String FLAG_HELP 		= "help";
@@ -54,7 +55,8 @@ public class AppRunner extends CommonCBase {
 	{
 		Options options = new Options();
 		options.addOption(OptionBuilder.withArgName(FLAG_RUNNERS).hasArg().withDescription("number of runners").create(FLAG_RUNNERS));
-		options.addOption(FLAG_DEBUG,false,"set debug node - will increase loglevel to information");
+		options.addOption(FLAG_DEBUG,false,"set debug mode - will increase loglevel to information");
+		options.addOption(FLAG_VERBOS,false,"set to full debug mode. (will show more debug information)");
 		options.addOption(OptionBuilder.withArgName("number of user to crawl").hasArg().withDescription("maximum number of users to crawl").create(FLAG_MAX_USERS));
 		options.addOption(OptionBuilder.withArgName("graph folder path").hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		options.addOption(FLAG_HELP,false,"show help");
@@ -107,11 +109,17 @@ public class AppRunner extends CommonCBase {
 	        	CommonDef.LOGGER_LEVEL = ELogLevel.INFORMATION;
 	        }
 	        
+	        if (line.hasOption(FLAG_VERBOS))
+	        {
+	        	CommonDef.LOGGER_LEVEL = ELogLevel.VERBOS;
+	        }
+	        
 	        if (line.hasOption(FLAG_RUNNERS))
 	        {
 	        	int maxRunner = Integer.parseInt(line.getOptionValue(FLAG_RUNNERS));
 	        	CommonDef.MAX_RUNNERS = maxRunner;
 	        }
+	        
 	        if (line.hasOption(FLAG_MAX_USERS))
 	        {
 	        	maxUser = Long.parseLong(line.getOptionValue(FLAG_MAX_USERS));
@@ -133,9 +141,10 @@ public class AppRunner extends CommonCBase {
 	        if (line.hasOption(FLAG_OFF_LINE))
 	        {
 	        	CommonDef.OFF_LINE_MODE = true;
-	        	
-	        	offLineDirPath = line.getOptionValue(FLAG_OFF_LINE);
+	           	offLineDirPath = line.getOptionValue(FLAG_OFF_LINE);
 	        }
+	        
+	       
 	        
 	    }
 	    catch( ParseException exp ) {

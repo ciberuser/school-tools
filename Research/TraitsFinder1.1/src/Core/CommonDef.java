@@ -6,7 +6,7 @@ public class CommonDef
 {
 	
 	
-	public final static String CORE_VERSION = "1.0.1.4";
+	public final static String CORE_VERSION = "1.0.1.8";
 	public final static String ROOT_DATA_FOLDER = "data/";
 	public final static String USERS_FOLDER_POOL_PATH = ROOT_DATA_FOLDER + "users";
 	
