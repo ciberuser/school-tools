@@ -8,7 +8,7 @@ if "%LST_PATH%"=="" (
 )
 
 if not exist %LST_PATH% (
-	echo error no lst file found ...
+	echo error no lst file found ... path entered:%LST_PATH%
 	goto end
 )
 
