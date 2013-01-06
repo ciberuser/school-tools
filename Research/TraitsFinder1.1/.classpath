@@ -18,7 +18,7 @@
 	<classpathentry kind="lib" path="../Libs/neo4j-community-1.7.2-windows/neo4j-community-1.7.2/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar"/>
 	<classpathentry kind="lib" path="../Libs/neo4j-community-1.7.2-windows/neo4j-community-1.7.2/lib/scala-library-2.9.0-1.jar"/>
 	<classpathentry kind="lib" path="../Libs/jedis-2.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/SchoolLocalSVN/trunk/Research/Libs/commons-cli-1.2/commons-cli-1.2.jar" sourcepath="C:/SchoolLocalSVN/trunk/Research/Libs/commons-cli-1.2"/>
-	<classpathentry kind="lib" path="C:/SchoolLocalSVN/trunk/Research/Libs/commons-cli-1.2/commons-cli-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="../Libs/commons-cli-1.2/commons-cli-1.2.jar" sourcepath="C:/SchoolLocalSVN/trunk/Research/Libs/commons-cli-1.2"/>
+	<classpathentry kind="lib" path="../Libs/commons-cli-1.2/commons-cli-1.2-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
