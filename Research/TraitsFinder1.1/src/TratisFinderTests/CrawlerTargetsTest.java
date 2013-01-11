@@ -7,7 +7,6 @@ import org.junit.Test;
 import Services.Log.ELogLevel;
 
 import Core.QueueCrawlinTargets;
-import Core.UsersCrawlingTargets;
 import Core.Interfaces.ICrawlingTargets;
 
 public class CrawlerTargetsTest extends test {
