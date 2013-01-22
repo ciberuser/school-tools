@@ -2,7 +2,7 @@
 
 
 set LST_PATH=%1
-
+set PWD=%~p0
 if "%LST_PATH%"=="" (
 	set LST_PATH=CopyBuild.lst
 )

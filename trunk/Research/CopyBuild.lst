@@ -1,5 +1,7 @@
 ;============================================================================
 ;		source		    |		  destination
 ;============================================================================
-TraitsFinderCLI.jar			D:\Dropbox\TraitsFinder
-DeleteVisit					D:\Dropbox\TraitsFinder
+TraitsFinderCLI.jar				D:\Dropbox\TraitsFinder
+TraitsFinderTool.jar			D:\Dropbox\TraitsFinder
+TraitsFinderFramwork.jar		D:\Dropbox\TraitsFinder
+DeleteVisit						D:\Dropbox\TraitsFinder
