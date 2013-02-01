@@ -1,0 +1,50 @@
+#!/bin/sh
+#  delete all visit files  
+##
+	
+USER_FOLDER_ENTERED=$1
+
+CURRENT_DIR=$(pwd)
+
+VISIT_FILE=visited.txt
+echo USER_FOLDER_ENTERED=$USER_FOLDER_ENTERED ,CURRENT_DIR=$CURRENT_DIR
+
+#will delete all visit files inside userPath
+DeleteVisit()
+{
+	userPath=$1
+	echo goind to delete all files inside $userPath...
+	for dir in $(find $userPath -depth -type d ) ; 
+		do 
+			if [ -f $dir/$VISIT_FILE ] ;
+			then	
+				echo delete file :$dir/$VISIT_FILE 
+				rm -f $dir/$VISIT_FILE
+			fi ;
+	done
+	echo done!
+	return
+}
+
+#main 
+
+if [ -d "$USER_FOLDER_ENTERED" ];
+then
+	USERS_FOLDER_PATH=$USER_FOLDER_ENTERED
+else
+	echo adding current dir to user dir...
+	USERS_FOLDER_PATH=$CURRENT_DIR/$USER_FOLDER_ENTERED
+fi
+
+if [ -d "$USERS_FOLDER_PATH" ] ; 
+then
+	echo delete all visit files in user folder path=$USERS_FOLDER_PATH
+	DeleteVisit $USERS_FOLDER_PATH
+fi
+
+
+
+#echo user folder was entered is not exist  not exist 
+
+
+
