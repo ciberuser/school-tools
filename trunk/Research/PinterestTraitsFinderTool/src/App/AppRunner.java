@@ -37,7 +37,7 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_OFF_LINE 	= "offline";
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
-	private final static String CLI_VERSION ="1.0.1.0";
+	private final static String CLI_VERSION ="1.0.1.1";
 
 	private static void  Init()
 	{

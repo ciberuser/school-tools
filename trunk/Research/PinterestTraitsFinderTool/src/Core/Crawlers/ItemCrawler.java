@@ -24,9 +24,16 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 		IElement itemElement = null;
 		if (m_itemURL.length()>0 && m_ItemPath.length()>0) 
 		{
-			if (!DownloadFile(m_ItemPath, m_itemURL))
+			try
 			{
-				WriteLineToLog("failed to download Item itemPath:" +m_ItemPath +" item URL:" +m_itemURL, ELogLevel.ERROR);
+				if (!DownloadFile(m_ItemPath, m_itemURL))
+				{
+					WriteLineToLog("failed to download Item itemPath:" +m_ItemPath +" item URL:" +m_itemURL, ELogLevel.ERROR);
+					return null;
+				}
+			} catch (InterruptedException e)
+			{
+				WriteLineToLog("problem with when download file ", ELogLevel.ERROR);
 				return null;
 			}
 			itemElement = new ItemElement(m_itemName);	
