@@ -28,7 +28,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 	final static String PINTEREST_SCOUTER = "PinterstScouter";
 	final static String USER_ALL_USERS_COMMENT_PATH = PinterestContext.CONTANIER_XPATH + "/div/div[@class='convo attribution clearfix']/a";
 	final static String PINTEREST_PATH = PinterestContext.ROOT_DATA_FOLDER + PinterestContext.PINTERSET_XML;
-	
+	final static String PINTERES_MAIN_PAGE_URL = PinterestContext.PINTERSET_URL+"/all";
 	private String m_FilePath;
 	
 	
@@ -51,7 +51,7 @@ public class PintersetCrawler extends ACrawler  implements ICrawler {
 		IElement main = null;
 		try
 		{
-			if (ForceDownLoadFile(m_FilePath, PinterestContext.PINTERSET_URL))
+			if (ForceDownLoadFile(m_FilePath, PINTERES_MAIN_PAGE_URL))
 				 main = StartCrawling();
 		} 
 		catch (Exception e)

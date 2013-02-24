@@ -97,64 +97,70 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 		
 		if (!FileServices.PathExist(m_subjectPath)) FileServices.CreateFolder(GetClassName(), m_subjectPath);
 		IElement subjectElem =null;
-		if (DownloadFile(m_subjectXmlPath, m_subjectURL))
-		{
-			try 
+		try {
+			
+			if (DownloadFile(m_subjectXmlPath, m_subjectURL))
 			{
-				subjectElem = new SubjectElement(m_subjectName);
-				m_documnet = new DomDocument(m_subjectXmlPath);
-				Node itemsNode = m_documnet.GetNode(PinterestContext.CONTANIER_XPATH);
-				m_itemsNode = new DomNode(itemsNode);
-				NodeList allItems =  itemsNode.getChildNodes();
-				
-				for(int i =0 ; i<allItems.getLength() ;++i)
+				try 
 				{
+					subjectElem = new SubjectElement(m_subjectName);
+					m_documnet = new DomDocument(m_subjectXmlPath);
+					Node itemsNode = m_documnet.GetNode(PinterestContext.CONTANIER_XPATH);
+					m_itemsNode = new DomNode(itemsNode);
+					NodeList allItems =  itemsNode.getChildNodes();
 					
-					Node n =  allItems.item(i);
-					if (n.getNodeType() == itemsNode.ELEMENT_NODE)
+					for(int i =0 ; i<allItems.getLength() ;++i)
 					{
-						String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH); //can drop
-						String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       // can be drop
-						String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
 						
-						DomNode urlNode = new DomNode(m_itemsNode.GetNode(ITEM_URL_XPATH, n));
-						String ItemURL = (urlNode!=null) ? urlNode.GetAttribute("href") : "";		
+						Node n =  allItems.item(i);
+						if (n.getNodeType() == itemsNode.ELEMENT_NODE)
+						{
+							String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH); //can drop
+							String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       // can be drop
+							String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
+							
+							DomNode urlNode = new DomNode(m_itemsNode.GetNode(ITEM_URL_XPATH, n));
+							String ItemURL = (urlNode!=null) ? urlNode.GetAttribute("href") : "";		
+							
+							if (ItemURL=="") WriteLineToLog("Item Url Not Found", ELogLevel.ERROR);
+							else
+							{
+								if (recursive) 
+								{
+									
+									ICrawler itemCrawler = new ItemCrawler(PinterestContext.PINTERSET_URL+ItemURL, m_subjectPath + "//" +itemName+".xml", itemName);
+									IElement itemElm = itemCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling((ECrawlingType)EPinterestCrawlingType.Item)); //TODO::add actions
+									itemElm.AddProperty(EProperty.description.toString(), itemDes);
+									if(itemLikes.length() > 0) itemElm.AddProperty(EProperty.likes.toString(), itemLikes); 
+									subjectElem.AddElement(itemElm);
+								}
+							}
 						
-						if (ItemURL=="") WriteLineToLog("Item Url Not Found", ELogLevel.ERROR);
+						}
+					}
+					if (!PinterestContext.OFF_LINE_MODE)
+					{
+						DownloadFile(m_followersXmlPath, m_followersUrl);
+						if (!FileServices.PathExist(m_followersXmlPath))
+						{
+							WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
+						}
 						else
 						{
-							if (recursive) 
-							{
-								
-								ICrawler itemCrawler = new ItemCrawler(PinterestContext.PINTERSET_URL+ItemURL, m_subjectPath + "//" +itemName+".xml", itemName);
-								IElement itemElm = itemCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling((ECrawlingType)EPinterestCrawlingType.Item)); //TODO::add actions
-								itemElm.AddProperty(EProperty.description.toString(), itemDes);
-								if(itemLikes.length() > 0) itemElm.AddProperty(EProperty.likes.toString(), itemLikes); 
-								subjectElem.AddElement(itemElm);
-							}
+							CrawlFollowers(m_followersXmlPath, itemsNode);			
 						}
-					
 					}
+					return subjectElem;
+				} 
+				catch (Exception e) {
+					WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
+				//	WriteLineToLog("cause="+e.getCause().toString(), ELogLevel.ERROR); 
+					return subjectElem;
 				}
-				if (!PinterestContext.OFF_LINE_MODE)
-				{
-					DownloadFile(m_followersXmlPath, m_followersUrl);
-					if (!FileServices.PathExist(m_followersXmlPath))
-					{
-						WriteLineToLog("followers didn't run...", ELogLevel.ERROR);
-					}
-					else
-					{
-						CrawlFollowers(m_followersXmlPath, itemsNode);			
-					}
-				}
-				return subjectElem;
-			} 
-			catch (Exception e) {
-				WriteLineToLog("excpetion happen:" + e.getMessage(),ELogLevel.ERROR);
-			//	WriteLineToLog("cause="+e.getCause().toString(), ELogLevel.ERROR); 
-				return subjectElem;
 			}
+		} catch (InterruptedException e) 
+		{
+			WriteLineToLog("error when downloading file msg=" +e.getMessage(), ELogLevel.ERROR);
 		}
 		
 		return null;
