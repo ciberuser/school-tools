@@ -14,7 +14,7 @@ import Services.Log.*;
 import Services.Neo4J.Neo4JActivation;
 import Core.CommonCBase;
 import Core.CoreContext;
-import Core.ACrawlerProcessor;
+
 import Core.CrawlerRunner;
 import Core.EPinterestCrawlingType;
 import Core.PinterestContext;
@@ -37,11 +37,14 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_OFF_LINE 	= "offline";
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
-	private final static String CLI_VERSION ="1.0.1.1";
+	private final static String CLI_VERSION ="1.0.1.2";
 
+	private StatisticsDumper m_statDumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
+	
+	
 	private static void  Init()
 	{
-		
+		Logger.GetLogger().SetPrintLevel(ELogLevel.WARNING);
 		CleanRun();
 		if (!FileServices.PathExist(CoreContext.ROOT_DATA_FOLDER))
 		{
@@ -49,7 +52,8 @@ public class AppRunner extends CommonCBase {
 		}
 		if (!FileServices.PathExist(PinterestContext.USERS_FOLDER_POOL_PATH)) FileServices.CreateFolder(APP_NAME,PinterestContext.USERS_FOLDER_POOL_PATH);
 		if (!FileServices.PathExist(CoreContext.GRAPH_DB_DIR) )FileServices.CreateFolder(APP_NAME, CoreContext.GRAPH_DB_DIR);
-		Logger.SetPrintLevel(ELogLevel.WARNING);
+		
+		RegisterDumpStatic();
 	}
 	
 	private static Options InitOptions()
@@ -70,6 +74,7 @@ public class AppRunner extends CommonCBase {
 		HelpFormatter hf = new HelpFormatter();
 		hf.printHelp(APP_NAME, options);
 	}
+	
 	private static void PrintLine()
 	{
 		for(int i=0;i<65;i++) System.out.print("=");
@@ -82,6 +87,19 @@ public class AppRunner extends CommonCBase {
 		System.out.println("\nCLI version="+CLI_VERSION +" ,core version=" + CoreContext.CORE_VERSION);
 		PrintLine();
 		System.out.println("");
+	}
+	
+	private static void RegisterDumpStatic()
+	{
+		Runtime.getRuntime().addShutdownHook( new Thread()
+        {
+			@Override
+            public void run()
+            {
+                StatisticsDumper dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
+                dumper.DumpStatistics();
+            }
+        } );
 	}
 	
 		
@@ -102,17 +120,21 @@ public class AppRunner extends CommonCBase {
 		CommandLineParser parser = new PosixParser();
 		PrintHead();
 		
+		
 		try {
 	        // parse the command line arguments
 	        CommandLine line = parser.parse( options, args );
 	        if (line.hasOption(FLAG_DEBUG)) 
 	        {
 	        	CoreContext.LOGGER_LEVEL = ELogLevel.INFORMATION;
+	        	Logger.SetPrintLevel(ELogLevel.INFORMATION);
 	        }
+	        
 	        
 	        if (line.hasOption(FLAG_VERBOS))
 	        {
 	        	CoreContext.LOGGER_LEVEL = ELogLevel.VERBOS;
+	        	Logger.SetPrintLevel(ELogLevel.VERBOS);
 	        }
 	        
 	        if (line.hasOption(FLAG_RUNNERS))

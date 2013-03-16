@@ -7,7 +7,6 @@ import Elements.EProperty;
 import Elements.IElement;
 import Elements.StringDataElement;
 
-import Core.CoreContext;
 import Core.PinterestContext;
 import Core.QueueCrawlinTargets;
 

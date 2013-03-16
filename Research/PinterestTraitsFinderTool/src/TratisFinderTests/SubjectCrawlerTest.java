@@ -11,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Core.CommonCBase;
 import Core.CoreContext;
 import Core.PinterestContext;
 import Core.Crawlers.SubjectsCrawler;

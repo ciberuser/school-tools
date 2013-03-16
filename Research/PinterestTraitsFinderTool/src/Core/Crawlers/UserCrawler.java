@@ -6,8 +6,8 @@ import org.w3c.dom.NodeList;
 
 
 import Core.PinterestContext;
-import Core.ACrawlerProcessor;
 import Core.EPinterestCrawlingType;
+import Core.StatisticsBuilder;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Elements.UserElement;
@@ -75,7 +75,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 							if(recursive) //need to remove , don't needed !!
 							{
 								Node n =  allSubjects.item(i);
-								if (n.getNodeType() == node.ELEMENT_NODE)
+								if (n.getNodeType() == Node.ELEMENT_NODE)
 								{
 												
 									String subjectUrl = new DomNode(m_node.GetNode(SUBJECT_NAME_XPATH,n)).GetAttribute("href");
@@ -93,6 +93,7 @@ public class UserCrawler extends ACrawler  implements ICrawler
 										continue;
 									}
 									subjectUrl = subjectUrl.replaceAll("api.", ""); //test it!!!
+									StatisticsBuilder.GetInstance().AddHit(m_userName, subjectName);
 									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
 									IElement subjectElm = subjectCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling(EPinterestCrawlingType.Subject));//TODO:: Add b
 									if (subjectElm == null)
