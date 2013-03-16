@@ -10,10 +10,7 @@ import org.w3c.dom.NodeList;
 
 import Core.ECrawlingType;
 import Core.PinterestContext;
-import Core.ACrawlerProcessor;
 import Core.EPinterestCrawlingType;
-import Core.PinterestContext;
-import Core.PinterestCrawlersProcessor;
 import Core.QueueCrawlinTargets;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
@@ -113,7 +110,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 					{
 						
 						Node n =  allItems.item(i);
-						if (n.getNodeType() == itemsNode.ELEMENT_NODE)
+						if (n.getNodeType() == Node.ELEMENT_NODE)
 						{
 							String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH); //can drop
 							String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       // can be drop
@@ -183,7 +180,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 			{
 				Node n = foolowersNodes.item(i);
 				
-				if (n.getNodeType() == elementNode.ELEMENT_NODE) 
+				if (n.getNodeType() == Node.ELEMENT_NODE) 
 				{
 					DomNode ns = new DomNode(n);
 					String  userfollow =null;
