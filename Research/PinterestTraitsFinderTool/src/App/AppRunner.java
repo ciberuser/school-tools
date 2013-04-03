@@ -35,6 +35,7 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_HELP 		= "help";
 	private final static String FLAG_GRAPH		= "graphPath";
 	private final static String FLAG_OFF_LINE 	= "offline";
+	private final static String FLAG_MEMORY_GRAPH    ="memoryGraph";
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
 	private final static String CLI_VERSION ="1.0.1.2";
@@ -56,6 +57,7 @@ public class AppRunner extends CommonCBase {
 		RegisterDumpStatic();
 	}
 	
+	
 	private static Options InitOptions()
 	{
 		Options options = new Options();
@@ -66,6 +68,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName("graph folder path").hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		options.addOption(FLAG_HELP,false,"show help");
 		options.addOption(OptionBuilder.withArgName("local users folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
+		options.addOption(FLAG_MEMORY_GRAPH , false ,"graph will cache into memeory");
 		return options;
 	}
 	
@@ -77,7 +80,7 @@ public class AppRunner extends CommonCBase {
 	
 	private static void PrintLine()
 	{
-		for(int i=0;i<65;i++) System.out.print("=");
+		for(int i=0;i<80;i++) System.out.print("=");
 	}
 	
 	private static void PrintHead()
@@ -148,6 +151,12 @@ public class AppRunner extends CommonCBase {
 	        	maxUser = Long.parseLong(line.getOptionValue(FLAG_MAX_USERS));
 	        	CoreContext.MAX_CRAWLING_USER = maxUser;
 	        }
+	        
+	        if (line.hasOption(FLAG_MEMORY_GRAPH) && line.hasOption(FLAG_GRAPH))
+	        {
+	        	CoreContext.DB_MEMORY_MODE = true;
+	        }
+	        
 	        if (line.hasOption(FLAG_HELP))
 	        {
 	        	PrintHelp(options);
