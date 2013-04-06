@@ -41,7 +41,7 @@ public class AppRunner extends CommonCBase {
 	private final static String CLI_VERSION ="1.0.1.2";
 
 	private StatisticsDumper m_statDumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
-	
+	private static boolean b_help;
 	
 	private static void  Init()
 	{
@@ -55,6 +55,7 @@ public class AppRunner extends CommonCBase {
 		if (!FileServices.PathExist(CoreContext.GRAPH_DB_DIR) )FileServices.CreateFolder(APP_NAME, CoreContext.GRAPH_DB_DIR);
 		
 		RegisterDumpStatic();
+		b_help = false;
 	}
 	
 	
@@ -99,8 +100,11 @@ public class AppRunner extends CommonCBase {
 			@Override
             public void run()
             {
-                StatisticsDumper dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
-                dumper.DumpStatistics();
+				if (!b_help)
+				{
+					StatisticsDumper dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
+					dumper.DumpStatistics();
+				}
             }
         } );
 	}
@@ -160,6 +164,7 @@ public class AppRunner extends CommonCBase {
 	        if (line.hasOption(FLAG_HELP))
 	        {
 	        	PrintHelp(options);
+	        	b_help = true;
 	        	return ;
 	        }
 	        if (line.hasOption(FLAG_GRAPH))

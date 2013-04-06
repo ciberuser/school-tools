@@ -8,10 +8,13 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import Core.CoreContext;
 import Core.ECrawlingType;
 import Core.PinterestContext;
 import Core.EPinterestCrawlingType;
+import Core.PinterestStatisticsBuilder;
 import Core.QueueCrawlinTargets;
+import Core.StatisticsBuilder;
 import Core.Interfaces.ICrawler;
 import Elements.EProperty;
 import Elements.IElement;
@@ -113,9 +116,11 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						if (n.getNodeType() == Node.ELEMENT_NODE)
 						{
 							String itemDes = GetItemProperty(n, ITEM_DESCRIPTION_XPATH); //can drop
-							String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       // can be drop
+							String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       
 							String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
 							
+							StatisticsBuilder.GetInstance().AddHit(PinterestStatisticsBuilder.EPinStatsType.eSubjectItem, m_subjectName, itemName);
+														
 							DomNode urlNode = new DomNode(m_itemsNode.GetNode(ITEM_URL_XPATH, n));
 							String ItemURL = (urlNode!=null) ? urlNode.GetAttribute("href") : "";		
 							
@@ -135,7 +140,7 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 						
 						}
 					}
-					if (!PinterestContext.OFF_LINE_MODE)
+					if (!CoreContext.OFF_LINE_MODE)
 					{
 						DownloadFile(m_followersXmlPath, m_followersUrl);
 						if (!FileServices.PathExist(m_followersXmlPath))
