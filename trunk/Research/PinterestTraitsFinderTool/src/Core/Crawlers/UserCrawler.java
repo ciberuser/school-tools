@@ -7,7 +7,10 @@ import org.w3c.dom.NodeList;
 
 import Core.PinterestContext;
 import Core.EPinterestCrawlingType;
+import Core.PinterestStatisticsBuilder;
+import Core.Statistics;
 import Core.StatisticsBuilder;
+import Core.StatisticsBuilder.EStatsType;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Elements.UserElement;
@@ -93,7 +96,8 @@ public class UserCrawler extends ACrawler  implements ICrawler
 										continue;
 									}
 									subjectUrl = subjectUrl.replaceAll("api.", ""); //test it!!!
-									StatisticsBuilder.GetInstance().AddHit(m_userName, subjectName);
+									
+									StatisticsBuilder.GetInstance().AddHit(PinterestStatisticsBuilder.EPinStatsType.eUserSubject,m_userName, subjectName);
 									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
 									IElement subjectElm = subjectCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling(EPinterestCrawlingType.Subject));//TODO:: Add b
 									if (subjectElm == null)
