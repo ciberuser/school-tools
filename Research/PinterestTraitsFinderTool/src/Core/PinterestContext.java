@@ -5,7 +5,7 @@ public class PinterestContext extends CoreContext
 	
 	
 		
-	public final static String USERS_FOLDER_POOL_PATH = ROOT_DATA_FOLDER + "users";
+	public static String USERS_FOLDER_POOL_PATH = ROOT_DATA_FOLDER + "users";
 	public final static String BIN_PATH = "bin/";
 	public final static String CONTANIER_XPATH = "//body/div[@id='wrapper']/div[@id='ColumnContainer']";
 	
@@ -13,6 +13,8 @@ public class PinterestContext extends CoreContext
 	public final static String PINTERSET_XML = "pinterest_main.xml";
 	public final static String FOLLOWER_FILE_NAME ="followers.xml";
 	
+	public final static String SERIALIZE_MAIN_ELEMNET_PATH = ROOT_DATA_FOLDER + "/MainElm.fte";
+	public final static String MAIN_ELM_OBJECT_FILE =ROOT_DATA_FOLDER + "/fileElm.tfe";
 
 	public PinterestContext()
 	{

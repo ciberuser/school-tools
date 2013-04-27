@@ -2,6 +2,7 @@ package Elements;
 
 import Core.CoreContext;
 import Core.Serialization.ESerializerType;
+import Core.Serialization.IElementSerializer;
 import Core.Serialization.SerializerFactory;
 import Elements.IElement;
 import Services.Log.ELogLevel;
@@ -12,10 +13,14 @@ public class SubjectElement extends  EnumElement implements IElement
 	public SubjectElement(String subjectName)
 	{
 		super(subjectName);
-		if (m_serializer == null && CoreContext.SET_GRAPH)
+		if( CoreContext.SET_GRAPH)
 		{
 			WriteLineToLog("attach serializer", ELogLevel.INFORMATION);
-			m_serializer = SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, this, CoreContext.GRAPH_DB_DIR);
+			IElementSerializer graphSerialzer =  SerializerFactory.GetInstance().AllocateSerializer(ESerializerType.eNeo4J, this, CoreContext.GRAPH_DB_DIR);
+			if (graphSerialzer != null)
+			{
+				m_serializerList.add(graphSerialzer);
+			}
 		}
 		AddProperty(EProperty.name.toString(), subjectName);
 	}
@@ -34,26 +39,13 @@ public class SubjectElement extends  EnumElement implements IElement
 	@Override
 	public void Serialize() 
 	{
-		if ( m_serializer == null)
-		{
-			WriteLineToLog("no serializer for saving process ", ELogLevel.ERROR);	
-			return;
-		}
-		m_serializer.Save();
-		
-		
+		ActivateSerialiers();	
 	}
 
 	@Override
 	public void Link(IElement elment)
 	{
-		if (m_serializer==null)
-		{
-			WriteLineToLog("no serializer for linking process",ELogLevel.ERROR);
-			return;
-		}
-		m_serializer.Link(elment);
-		
+		ActivateLinker(elment);
 	}
 
 	

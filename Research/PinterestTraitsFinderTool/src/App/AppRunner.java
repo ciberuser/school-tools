@@ -21,6 +21,9 @@ import Core.PinterestContext;
 import Core.QueueCrawlinTargets;
 import Core.Crawlers.OffLineUsersCrawler;
 import Core.Crawlers.PintersetCrawler;
+import Core.Serialization.ESerializerType;
+import Core.Serialization.IElementSerializer;
+import Core.Serialization.SerializerFactory;
 
 import Elements.IElement;
 
@@ -36,16 +39,23 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_GRAPH		= "graphPath";
 	private final static String FLAG_OFF_LINE 	= "offline";
 	private final static String FLAG_MEMORY_GRAPH    ="memoryGraph";
+	private final static String FLAG_LOAD_ELM		 ="loadElm";	
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
-	private final static String CLI_VERSION ="1.0.1.2";
+	private final static String CLI_VERSION ="1.0.1.4";
 
-	private StatisticsDumper m_statDumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
+	private static boolean DESERIALIZE_MODE = false;
+	
+	//private StatisticsDumper m_statDumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
 	private static boolean b_help;
 	
+	
+	
+		
 	private static void  Init()
 	{
-		Logger.GetLogger().SetPrintLevel(ELogLevel.WARNING);
+		
+		Logger.GetLogger().SetPrintLevel(Core.CoreContext.LOGGER_LEVEL);
 		CleanRun();
 		if (!FileServices.PathExist(CoreContext.ROOT_DATA_FOLDER))
 		{
@@ -54,8 +64,18 @@ public class AppRunner extends CommonCBase {
 		if (!FileServices.PathExist(PinterestContext.USERS_FOLDER_POOL_PATH)) FileServices.CreateFolder(APP_NAME,PinterestContext.USERS_FOLDER_POOL_PATH);
 		if (!FileServices.PathExist(CoreContext.GRAPH_DB_DIR) )FileServices.CreateFolder(APP_NAME, CoreContext.GRAPH_DB_DIR);
 		
-		RegisterDumpStatic();
+		RegisterFinishFunction();
 		b_help = false;
+	}
+	
+	private static boolean SaveElement(IElement element)
+	{
+		if (element != null)
+		{
+			element.Serialize();
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -69,6 +89,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName("graph folder path").hasArg().withDescription("save data to graph : set the graph path ").create(FLAG_GRAPH));
 		options.addOption(FLAG_HELP,false,"show help");
 		options.addOption(OptionBuilder.withArgName("local users folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
+		options.addOption(OptionBuilder.withArgName("element file (tfe) ").hasArg().withDescription("load element from file file ").create(FLAG_LOAD_ELM));
 		options.addOption(FLAG_MEMORY_GRAPH , false ,"graph will cache into memeory");
 		return options;
 	}
@@ -93,17 +114,22 @@ public class AppRunner extends CommonCBase {
 		System.out.println("");
 	}
 	
-	private static void RegisterDumpStatic()
+	private static void RegisterFinishFunction()
 	{
 		Runtime.getRuntime().addShutdownHook( new Thread()
         {
 			@Override
             public void run()
             {
-				if (!b_help)
+				if (!b_help && !DESERIALIZE_MODE)
 				{
 					StatisticsDumper dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
 					dumper.DumpStatistics();
+					if ( !ElementDumper.GetInstance().DumpElemenet())
+					{
+						System.out.println("fail to dump element !");
+					}
+					
 				}
             }
         } );
@@ -127,6 +153,8 @@ public class AppRunner extends CommonCBase {
 		CommandLineParser parser = new PosixParser();
 		PrintHead();
 		
+		IElement mainElement  = null;
+		String elmFile = null;
 		
 		try {
 	        // parse the command line arguments
@@ -136,8 +164,7 @@ public class AppRunner extends CommonCBase {
 	        	CoreContext.LOGGER_LEVEL = ELogLevel.INFORMATION;
 	        	Logger.SetPrintLevel(ELogLevel.INFORMATION);
 	        }
-	        
-	        
+	    	        
 	        if (line.hasOption(FLAG_VERBOS))
 	        {
 	        	CoreContext.LOGGER_LEVEL = ELogLevel.VERBOS;
@@ -178,11 +205,23 @@ public class AppRunner extends CommonCBase {
 	        if (line.hasOption(FLAG_OFF_LINE))
 	        {
 	        	CoreContext.OFF_LINE_MODE = true;
-	           	offLineDirPath = line.getOptionValue(FLAG_OFF_LINE);
+	        	offLineDirPath = line.getOptionValue(FLAG_OFF_LINE);
+	           	CoreContext.OFF_LINE_PATH = offLineDirPath;
+	           	PinterestContext.USERS_FOLDER_POOL_PATH = offLineDirPath;
 	        }
 	        
-	       
-	        
+	        if (line.hasOption(FLAG_LOAD_ELM))
+	        {
+	        	elmFile = line.getOptionValue(FLAG_LOAD_ELM);
+	        	if (!FileServices.PathExist(elmFile))
+	        	{
+	        		System.out.println("Error! the file "+ elmFile+" not exist !!! will exit");
+	        		return;
+	        	}
+	        	DESERIALIZE_MODE = true;
+	        	System.out.println("deserialize mode!!");
+	        }
+	    	        
 	    }
 	    catch( ParseException exp ) {
 	        // oops, something went wrong
@@ -191,28 +230,71 @@ public class AppRunner extends CommonCBase {
 	    	
 	    	return ;
 	    }
-
 		
-		IElement mainElement  = null;
-		System.out.print("start crawling main page...");
+				
+		if (DESERIALIZE_MODE && CoreContext.OFF_LINE_MODE )
+		{
+			System.out.println("offline mode can't work with serialize file mode ");
+			return ;
+		}
+		
 		boolean depMain = PinterestContext.GetProcessor().GetDepthCrawling(EPinterestCrawlingType.Main);
-		mainElement = (!CoreContext.OFF_LINE_MODE)? new PintersetCrawler().Crawl(depMain) : new OffLineUsersCrawler(offLineDirPath).Crawl(depMain) ;
+		if (CoreContext.OFF_LINE_MODE)
+		{
+			System.out.println("creating user list, searching for user inside " +offLineDirPath + "path ");
+			mainElement = new OffLineUsersCrawler(offLineDirPath).Crawl(depMain) ;
+		}
+		else
+		{
+			if (DESERIALIZE_MODE)
+			{
+				if (elmFile!=null)
+				{
+					System.out.println("deserialize "+elmFile + " file!");
+					IElementSerializer elmSer =  SerializerFactory.GetInstance().AllocateSerializer(ESerializerType.eElemnetObj, mainElement, elmFile);
+					mainElement = elmSer.Load();
+					if (CoreContext.SET_GRAPH == true)
+					{
+						System.out.println("load to grave is not yet implemented will show all elemenets:");
+					}
+					int i= 0;
+					if (mainElement == null)
+					{
+						System.out.println("Error !!! failed to load main element !!!");
+						return;
+					}
+					for (IElement elm : mainElement.GetElements())
+					{ 
+						i++;
+						System.out.println(i+ ". "+ elm.GetName());
+					}
+				}
+			}
+			else
+			{
+				System.out.println("start crawling main page...");
+				mainElement = new PintersetCrawler().Crawl(depMain);
+			}
+		}
+			
+		//mainElement = (!CoreContext.OFF_LINE_MODE)? new PintersetCrawler().Crawl(depMain) : new OffLineUsersCrawler(offLineDirPath).Crawl(depMain) ;
 		if (CoreContext.OFF_LINE_MODE) 
 		{
 			maxUser = QueueCrawlinTargets.GetInstance().NumbertOfTargets();
 		}
 		System.out.print("done!\n");
 		
-		if (mainElement !=null)
+		if (mainElement !=null && !DESERIALIZE_MODE)
 		{
+			ElementDumper.GetInstance().SetElemenet(mainElement);
 			PinterestContext.GetProcessor().ExcuteCrawler(mainElement, EPinterestCrawlingType.User,  maxUser) ;
 		}
 		else 
 		{
+			if (mainElement==null)
 			System.out.println("Error !!!! end run failed to create main element!");
 		}
 		//System.out.println("done!!! check result");
-
 	}
 
 }

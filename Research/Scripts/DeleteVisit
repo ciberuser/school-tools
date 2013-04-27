@@ -14,7 +14,7 @@ DeleteVisit()
 {
 	userPath=$1
 	echo goind to delete all files inside $userPath...
-	for dir in $(find $userPath -depth -type d ) ; 
+	for dir in $(bash find $userPath -depth -type d ) ; 
 		do 
 			if [ -f $dir/$VISIT_FILE ] ;
 			then	
