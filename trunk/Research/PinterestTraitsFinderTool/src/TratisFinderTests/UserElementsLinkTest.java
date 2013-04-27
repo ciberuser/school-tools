@@ -45,8 +45,8 @@ public class UserElementsLinkTest extends test{
 		user2.AddElement(sbElmShared1);
 		user2.AddElement(new SubjectElement("biff"));
 		
-		user1.SetSerializer(SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, user1, USER_LINK_GRAPH_TEST));
-		user2.SetSerializer(SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, user2, USER_LINK_GRAPH_TEST));
+		user1.AddSerializer(SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, user1, USER_LINK_GRAPH_TEST));
+		user2.AddSerializer(SerializerFactory.GetInstance().GetSerializer(ESerializerType.eNeo4J, user2, USER_LINK_GRAPH_TEST));
 		
 		
 	}
