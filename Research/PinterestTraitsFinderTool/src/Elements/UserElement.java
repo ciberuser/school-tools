@@ -1,8 +1,13 @@
 package Elements;
 
+import org.hamcrest.core.IsEqual;
+
 import Services.FileServices;
 import Core.CoreContext;
 import Core.PinterestContext;
+import Core.Serialization.ESerializerType;
+import Core.Serialization.IElementSerializer;
+import Core.Serialization.SerializerFactory;
 
 public class UserElement extends StringDataElement
 {
@@ -12,6 +17,11 @@ public class UserElement extends StringDataElement
 		
 		if (!IsVisited())
 		{
+			for(IElementSerializer ser :m_serializerList)
+			{
+				ser.Open(); //TODO need to be tested!!
+			}
+			
 			for(IElement element :m_elements)
 			{
 				element.Serialize();
@@ -25,12 +35,17 @@ public class UserElement extends StringDataElement
 				}
 			}
 			FileServices.CreateTextFile(GetClassName(), GetVisitFilePath());
+			for(IElementSerializer ser :m_serializerList)
+			{
+				ser.Close(); //TODO need a test
+			}
 		}
 		
 	}
 	public UserElement(String name)
 	{
 		super(EProperty.name.toString(), name);
+		AddSerializer(SerializerFactory.GetInstance().AllocateSerializer(ESerializerType.eNeo4J, this, CoreContext.GRAPH_DB_DIR));
 	}
 	
 	@Override

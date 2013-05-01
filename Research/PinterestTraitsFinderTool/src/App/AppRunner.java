@@ -1,6 +1,11 @@
 package App;
 
-	import org.apache.commons.cli.CommandLine;
+	import java.io.ObjectInputStream.GetField;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
@@ -42,7 +47,7 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_LOAD_ELM		 ="loadElm";	
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
-	private final static String CLI_VERSION ="1.0.1.4";
+	private final static String CLI_VERSION ="1.0.2.0";
 
 	private static boolean DESERIALIZE_MODE = false;
 	
@@ -109,7 +114,7 @@ public class AppRunner extends CommonCBase {
 	{
 		System.out.println("\n"+APP_NAME);
 		PrintLine();			
-		System.out.println("\nCLI version="+CLI_VERSION +" ,core version=" + CoreContext.CORE_VERSION);
+		System.out.println("\nCLI version="+CLI_VERSION +" ,core version=" + CoreContext.CORE_VERSION +" start time:" +GetTime());
 		PrintLine();
 		System.out.println("");
 	}
@@ -131,6 +136,7 @@ public class AppRunner extends CommonCBase {
 					}
 					
 				}
+				System.out.println("PinterestTraitsFinderTool ended endtime = " +GetTime());
             }
         } );
 	}
@@ -295,6 +301,13 @@ public class AppRunner extends CommonCBase {
 			System.out.println("Error !!!! end run failed to create main element!");
 		}
 		//System.out.println("done!!! check result");
+	}
+	
+	private static  String GetTime()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		return dateFormat.format(cal.getTime());
 	}
 
 }
