@@ -39,7 +39,7 @@ public class SubjectElement extends  EnumElement implements IElement
 	@Override
 	public void Serialize() 
 	{
-		ActivateSerialiers();	
+		ActivateSerialiers(false);	
 	}
 
 	@Override
