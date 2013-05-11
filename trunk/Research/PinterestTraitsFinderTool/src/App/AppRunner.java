@@ -45,18 +45,15 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_OFF_LINE 	= "offline";
 	private final static String FLAG_MEMORY_GRAPH    ="memoryGraph";
 	private final static String FLAG_LOAD_ELM		 ="loadElm";	
+	private final static String FLAG_NO_STATISTICS  		 ="noStat";
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
 	private final static String CLI_VERSION ="1.0.2.0";
 
 	private static boolean DESERIALIZE_MODE = false;
-	
 	//private StatisticsDumper m_statDumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
 	private static boolean b_help;
-	
-	
-	
-		
+			
 	private static void  Init()
 	{
 		
@@ -96,6 +93,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName("local users folder path").hasArg().withDescription("activate crawler from local folder").create(FLAG_OFF_LINE));
 		options.addOption(OptionBuilder.withArgName("element file (tfe) ").hasArg().withDescription("load element from file file ").create(FLAG_LOAD_ELM));
 		options.addOption(FLAG_MEMORY_GRAPH , false ,"graph will cache into memeory");
+		options.addOption(FLAG_NO_STATISTICS,false,"cancel statistics collection");
 		return options;
 	}
 	
@@ -129,7 +127,10 @@ public class AppRunner extends CommonCBase {
 				if (!b_help && !DESERIALIZE_MODE)
 				{
 					StatisticsDumper dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
-					dumper.DumpStatistics();
+					if (CoreContext.COLLECT_STATISIC)
+					{
+						dumper.DumpStatistics();
+					}
 					if ( !ElementDumper.GetInstance().DumpElemenet())
 					{
 						System.out.println("fail to dump element !");
@@ -228,6 +229,10 @@ public class AppRunner extends CommonCBase {
 	        	System.out.println("deserialize mode!!");
 	        }
 	    	        
+	        if (line.hasOption(FLAG_NO_STATISTICS))
+	        {
+	        	CoreContext.COLLECT_STATISIC = false;
+	        }
 	    }
 	    catch( ParseException exp ) {
 	        // oops, something went wrong

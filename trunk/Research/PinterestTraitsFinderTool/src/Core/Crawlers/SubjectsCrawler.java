@@ -119,8 +119,11 @@ public class SubjectsCrawler extends ACrawler implements ICrawler
 							String itemName = GetItemProperty(n, ITEM_NAME_XPATH);       
 							String itemLikes = GetItemProperty(n,ITEM_NUM_LIKES_XPATH);
 							
-							StatisticsBuilder.GetInstance().AddHit(PinterestStatisticsBuilder.EPinStatsType.eSubjectItem, m_subjectName, itemName);
-														
+							if (CoreContext.COLLECT_STATISIC)
+							{
+								StatisticsBuilder.GetInstance().AddHit(PinterestStatisticsBuilder.EPinStatsType.eSubjectItem, m_subjectName, itemName);
+							}
+							
 							DomNode urlNode = new DomNode(m_itemsNode.GetNode(ITEM_URL_XPATH, n));
 							String ItemURL = (urlNode!=null) ? urlNode.GetAttribute("href") : "";		
 							
