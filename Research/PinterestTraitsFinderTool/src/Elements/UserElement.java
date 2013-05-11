@@ -3,6 +3,7 @@ package Elements;
 import org.hamcrest.core.IsEqual;
 
 import Services.FileServices;
+import Services.Log.ELogLevel;
 import Core.CoreContext;
 import Core.PinterestContext;
 import Core.Serialization.ESerializerType;
@@ -17,11 +18,13 @@ public class UserElement extends StringDataElement
 		
 		if (!IsVisited())
 		{
+			
 			for(IElementSerializer ser :m_serializerList)
 			{
 				ser.Open(); //TODO need to be tested!!
 			}
 			
+		//	StartWrite();
 			for(IElement element :m_elements)
 			{
 				element.Serialize();
@@ -34,18 +37,25 @@ public class UserElement extends StringDataElement
 					if(i != j) m_elements.get(i).Link(m_elements.get(j));
 				}
 			}
+		//	CloseWrite();
 			FileServices.CreateTextFile(GetClassName(), GetVisitFilePath());
+			
+			
 			for(IElementSerializer ser :m_serializerList)
 			{
 				ser.Close(); //TODO need a test
 			}
+			
 		}
 		
 	}
 	public UserElement(String name)
 	{
 		super(EProperty.name.toString(), name);
-		AddSerializer(SerializerFactory.GetInstance().AllocateSerializer(ESerializerType.eNeo4J, this, CoreContext.GRAPH_DB_DIR));
+		if (CoreContext.SET_GRAPH)
+		{
+			AddSerializer(SerializerFactory.GetInstance().AllocateSerializer(ESerializerType.eNeo4J, this, CoreContext.GRAPH_DB_DIR));
+		}
 	}
 	
 	@Override
@@ -67,5 +77,20 @@ public class UserElement extends StringDataElement
 		return (FileServices.PathExist(userPath))? userPath : "";
 	}
 	
+	private void StartWrite()
+	{
+		for(IElementSerializer ser :m_serializerList)
+		{
+			ser.Open(); //TODO need to be tested!!
+		}
+	}
+	
+	private void CloseWrite()
+	{
+		for(IElementSerializer ser :m_serializerList)
+		{
+			ser.Open(); //TODO need to be tested!!
+		}
+	}
 	
 }
