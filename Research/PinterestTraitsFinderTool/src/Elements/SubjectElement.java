@@ -37,15 +37,15 @@ public class SubjectElement extends  EnumElement implements IElement
 	}
 
 	@Override
-	public void Serialize() 
+	public boolean Serialize() 
 	{
-		ActivateSerialiers(false);	
+		return ActivateSerialiers(false);	
 	}
 
 	@Override
-	public void Link(IElement elment)
+	public boolean Link(IElement elment)
 	{
-		ActivateLinker(elment);
+		return ActivateLinker(elment);
 	}
 
 	

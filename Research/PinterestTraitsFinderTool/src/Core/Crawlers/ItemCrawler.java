@@ -1,5 +1,6 @@
 package Core.Crawlers;
 
+import Core.CoreContext;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
 import Elements.ItemElement;
@@ -28,7 +29,10 @@ public class ItemCrawler extends ACrawler implements ICrawler {
 			{
 				if (!DownloadFile(m_ItemPath, m_itemURL))
 				{
-					WriteLineToLog("failed to download Item itemPath:" +m_ItemPath +" item URL:" +m_itemURL, ELogLevel.ERROR);
+					if(!CoreContext.OFF_LINE_MODE)
+					{
+						WriteLineToLog("failed to download Item itemPath:" +m_ItemPath +" item URL:" +m_itemURL, ELogLevel.ERROR);
+					}
 					return null;
 				}
 			} catch (InterruptedException e)

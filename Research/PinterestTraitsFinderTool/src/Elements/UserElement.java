@@ -13,42 +13,45 @@ import Core.Serialization.SerializerFactory;
 public class UserElement extends StringDataElement
 {
 	@Override
-	public void Serialize()
+	public boolean Serialize()
 	{
-		
+		boolean status = true;
 		if (!IsVisited())
 		{
 			
 			for(IElementSerializer ser :m_serializerList)
 			{
-				ser.Open(); //TODO need to be tested!!
+				status &= ser.Open(); //TODO need to be tested!!
 			}
 			
 		//	StartWrite();
 			for(IElement element :m_elements)
 			{
-				element.Serialize();
+				status &= element.Serialize();
 			}
-		
+					
 			for (int i=0 ; i<m_elements.size() ; ++i)
 			{
 				for (int j=i ; j<m_elements.size() ; ++j)
 				{
-					if(i != j) m_elements.get(i).Link(m_elements.get(j));
+					if(i != j)
+					{
+						status &= m_elements.get(i).Link(m_elements.get(j));
+					}
 				}
 			}
 		//	CloseWrite();
 			FileServices.CreateTextFile(GetClassName(), GetVisitFilePath());
-			
-			
+						
 			for(IElementSerializer ser :m_serializerList)
 			{
-				ser.Close(); //TODO need a test
+				status &= ser.Close(status); //TODO need a test
 			}
 			
 		}
-		
+		return status;
 	}
+	
 	public UserElement(String name)
 	{
 		super(EProperty.name.toString(), name);
@@ -59,7 +62,7 @@ public class UserElement extends StringDataElement
 	}
 	
 	@Override
-	public void Link(IElement elment) { }
+	public boolean Link(IElement elment) {return false; }
 	
 	private String GetVisitFilePath()
 	{
@@ -77,6 +80,8 @@ public class UserElement extends StringDataElement
 		return (FileServices.PathExist(userPath))? userPath : "";
 	}
 	
+	
+	// for future debug...
 	private void StartWrite()
 	{
 		for(IElementSerializer ser :m_serializerList)
@@ -91,6 +96,21 @@ public class UserElement extends StringDataElement
 		{
 			ser.Open(); //TODO need to be tested!!
 		}
+	}
+	
+	private boolean trySaveNode()
+	{
+		boolean stat =true;
+		for(IElement element :m_elements)
+		{
+			stat &= element.Serialize();
+		}
+		return stat;
+	}
+	
+	private boolean tryLink()
+	{
+		return false;
 	}
 	
 }

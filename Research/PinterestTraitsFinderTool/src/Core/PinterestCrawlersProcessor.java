@@ -2,6 +2,7 @@ package Core;
 
 import java.util.HashMap;
 
+import App.StatisticsDumper;
 import Core.Crawlers.PinterestCrawlerFactory;
 import Core.Interfaces.ICrawlerProcessor;
 
@@ -18,6 +19,7 @@ public class PinterestCrawlersProcessor extends ACrawlerProcessor implements ICr
 		m_depthbehavior.put(EPinterestCrawlingType.User, true);
 		m_depthbehavior.put(EPinterestCrawlingType.Subject, false);
 		m_depthbehavior.put(EPinterestCrawlingType.Item,false);
+		m_dumper = new StatisticsDumper(CoreContext.ROOT_DATA_FOLDER);
 	}
 	
 	public boolean GetDepthCrawling(String className)  //TODO upgrage this function !!!
@@ -42,5 +44,14 @@ public class PinterestCrawlersProcessor extends ACrawlerProcessor implements ICr
 		
 		return m_depthbehavior.get(crawlType);
 	}
+	
+	@Override
+	public IStatisticsDumper GetDumper()
+	{
+		return m_dumper;
+	}
 
+	private StatisticsDumper m_dumper ;
+	
+	
 }
