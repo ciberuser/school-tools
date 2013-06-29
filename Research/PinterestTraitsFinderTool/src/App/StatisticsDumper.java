@@ -9,6 +9,7 @@ import java.util.Map;
 import Services.CSVBuilder;
 import Services.Log.ELogLevel;
 import Core.CommonCBase;
+import Core.CoreContext;
 import Core.IStatisticsDumper;
 import Core.PinterestStatisticsBuilder;
 import Core.StatisticsBuilder;
@@ -53,15 +54,19 @@ public class StatisticsDumper extends CommonCBase implements IStatisticsDumper
 			errMsg+= "\n" + errMsguser;
 		}
 		
-		WriteLineToLog("going to write item statictics file... filepath = "+ m_csvItemCount, ELogLevel.INFORMATION);
-		if(!DumpCountStatistics(StatisticsBuilder.GetInstance().GetStatistics(PinterestStatisticsBuilder.EPinStatsType.eSubjectItem).getTargetToSubTargetDB(), m_csvItemCount, EState.esubject2Item))
+		if(!CoreContext.FAST_MODE)
 		{
-			String errMsguser = "Failed to dump number of items statistics !";
-			ret&=false;
-			WriteLineToLog(errMsguser, ELogLevel.ERROR);
-			errMsg+= "\n" + errMsguser;
+			WriteLineToLog("going to write item statictics file... filepath = "+ m_csvItemCount, ELogLevel.INFORMATION);
+		
+			if(!DumpCountStatistics(StatisticsBuilder.GetInstance().GetStatistics(PinterestStatisticsBuilder.EPinStatsType.eSubjectItem).getTargetToSubTargetDB(), m_csvItemCount, EState.esubject2Item))
+			{
+				String errMsguser = "Failed to dump number of items statistics !";
+				ret&=false;
+				WriteLineToLog(errMsguser, ELogLevel.ERROR);
+				errMsg+= "\n" + errMsguser;
+			}
+			if (!ret) WriteToConsole(errMsg);
 		}
-		if (!ret) WriteToConsole(errMsg);
 		return ret;
 	}
 	
@@ -115,7 +120,11 @@ public class StatisticsDumper extends CommonCBase implements IStatisticsDumper
 		while(it.hasNext())
 		{
 			Map.Entry<String, List<String>> mapEntry = (Map.Entry<String, List<String>>) it.next();
-			mapEntry.getValue().add(0, mapEntry.getKey());
+			if (!mapEntry.getValue().contains(mapEntry.getKey()))
+			{
+				mapEntry.getValue().add(0, mapEntry.getKey());
+			}
+			
 			String[] line = mapEntry.getValue().toArray(new String[0]);
 			//(String.format("add the line{%s,%s} to statistics %s file ", filePath,line[0],line[1]), ELogLevel.INFORMATION);
  			res &= builer.WriteLine(line);
