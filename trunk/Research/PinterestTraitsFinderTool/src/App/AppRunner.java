@@ -45,7 +45,8 @@ public class AppRunner extends CommonCBase {
 	private final static String FLAG_OFF_LINE 	= "offline";
 	private final static String FLAG_MEMORY_GRAPH    ="memoryGraph";
 	private final static String FLAG_LOAD_ELM		 ="loadElm";	
-	private final static String FLAG_NO_STATISTICS  		 ="noStat";
+	private final static String FLAG_NO_STATISTICS   ="noStat";
+	private final static String FLAG_FAST 			 = "fast";
 		
 	private final static String APP_NAME = "Traits Finder Research tool"; 
 	private final static String CLI_VERSION ="1.0.2.0";
@@ -94,6 +95,7 @@ public class AppRunner extends CommonCBase {
 		options.addOption(OptionBuilder.withArgName("element file (tfe) ").hasArg().withDescription("load element from file file ").create(FLAG_LOAD_ELM));
 		options.addOption(FLAG_MEMORY_GRAPH , false ,"graph will cache into memeory");
 		options.addOption(FLAG_NO_STATISTICS,false,"cancel statistics collection");
+		options.addOption(FLAG_FAST ,false,"fast mode - will crawl only users files , no subject");
 		return options;
 	}
 	
@@ -105,7 +107,7 @@ public class AppRunner extends CommonCBase {
 	
 	private static void PrintLine()
 	{
-		for(int i=0;i<80;i++) System.out.print("=");
+		for(int i = 0 ; i < 80 ; ++i) System.out.print("=");
 	}
 	
 	private static void PrintHead()
@@ -130,6 +132,7 @@ public class AppRunner extends CommonCBase {
 					if (CoreContext.COLLECT_STATISIC)
 					{
 						dumper.DumpStatistics();
+						dumper.DumpAllTargetsStatData();
 					}
 					if ( !ElementDumper.GetInstance().DumpElemenet())
 					{
@@ -201,6 +204,16 @@ public class AppRunner extends CommonCBase {
 	        	b_help = true;
 	        	return ;
 	        }
+	        if (line.hasOption(FLAG_FAST))
+	        {
+	        	if (!line.hasOption(FLAG_OFF_LINE))
+	        	{
+	        		System.out.println("fast mode can work only at off-line mode cant' will exit");
+	        		return ;
+	        	}
+	        	CoreContext.FAST_MODE = true;
+	        }
+	        
 	        if (line.hasOption(FLAG_GRAPH))
 	        {
 	        	String graphPath = line.getOptionValue(FLAG_GRAPH);

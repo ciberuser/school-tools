@@ -14,6 +14,7 @@ import Core.StatisticsBuilder;
 import Core.StatisticsBuilder.EStatsType;
 import Core.Interfaces.ICrawler;
 import Elements.IElement;
+import Elements.SubjectElement;
 import Elements.UserElement;
 import Services.FileServices;
 import Services.Dom.*;
@@ -101,9 +102,17 @@ public class UserCrawler extends ACrawler  implements ICrawler
 									{
 										StatisticsBuilder.GetInstance().AddHit(PinterestStatisticsBuilder.EPinStatsType.eUserSubject,m_userName, subjectName);
 									}
-									
-									ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
-									IElement subjectElm = subjectCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling(EPinterestCrawlingType.Subject));//TODO:: Add b
+									IElement subjectElm =null;
+									if (!CoreContext.FAST_MODE)
+									{
+										ICrawler subjectCrawler = new SubjectsCrawler(m_userName, subjectName,subjectUrl);
+										subjectElm = subjectCrawler.Crawl(PinterestContext.GetProcessor().GetDepthCrawling(EPinterestCrawlingType.Subject));//TODO:: Add b
+										
+									}
+									else
+									{
+										subjectElm  = new SubjectElement(subjectName);
+									}
 									if (subjectElm == null)
 									{
 										WriteLineToLog("subject element is null!! subjectname=" +subjectName, ELogLevel.ERROR);
