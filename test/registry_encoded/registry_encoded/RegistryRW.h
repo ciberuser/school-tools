@@ -13,7 +13,7 @@ public:
 
 	 std::string ReadValue2Reg(const std::string& path,const std::string& valueName) const;
 	 void WriteValue2Reg(const std::string& path,const std::string& valueName,const std::string& value) const; 
-	 bool KeyExist(const std::string& path) const;
+	 bool KeyExist(const std::string& path,long &ret =0) const;
 	 long CreateRegistryKeyLibrary(const std::string& path,const std::string& name) const;
 	 long CreateRegistryValue(const std::string& path,const std::string& valueName,const std::string& value) const;
 private:

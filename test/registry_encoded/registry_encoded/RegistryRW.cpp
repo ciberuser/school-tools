@@ -13,11 +13,9 @@ RegistryRW::RegistryRW(const HKEY rootPath):m_root(rootPath)
 
 }
 
-
 RegistryRW::~RegistryRW(void)
 {
 }
-
 
 long RegistryRW::OpenRegKey(const std::string& path,HKEY& key) const
 {
@@ -33,10 +31,16 @@ std::string RegistryRW::CreateErrorMsg(const long ret,bool alarm) const
 				errMsg.append(" didn't found value ");
 				break;
 			case ERROR_NO_MATCH:
-				errMsg.append("did not match ");
+				errMsg.append(" did not match ");
+				break;
+			case ERROR_ACCESS_DENIED:
+				errMsg.append(" acceess denied");
+				break;
+			case ERROR_INVALID_PARAMETER:
+				errMsg.append(" invalid parameter ");
 				break;
 			default : 
-				errMsg.append("Error :ret=" + std::to_string((long double)ret));
+				errMsg.append("ret=" + std::to_string((long double)ret));
 		}
 	if (alarm)
 		std::cout<<errMsg<<std::endl;
@@ -67,7 +71,6 @@ std::string RegistryRW::ReadValue2Reg(const std::string& path,const std::string&
 	{
 		errMsg.append("some kind of problem : ");
 		errMsg+ std::to_string((long double)ret);
-			
 		return errMsg;
     }
     std::string stringValue = std::string(value, (size_t)bufLen - 1);
@@ -80,13 +83,13 @@ std::string RegistryRW::ReadValue2Reg(const std::string& path,const std::string&
 
 void RegistryRW::WriteValue2Reg(const std::string& path,const std::string& valueName,const std::string& value) const
 {
-	
+		
 }
 
-bool RegistryRW::KeyExist(const std::string& path) const
+bool RegistryRW::KeyExist(const std::string& path ,long &ret) const
 {
 	HKEY key;
-	long ret =  OpenRegKey(path,key);
+	ret =  OpenRegKey(path,key);
 	if (ret == ERROR_SUCCESS)
 	{
 		RegCloseKey(key);
@@ -97,9 +100,27 @@ bool RegistryRW::KeyExist(const std::string& path) const
 
 long RegistryRW::CreateRegistryKeyLibrary(const std::string& path,const std::string& keyName) const
 {
+	long ret ;
+	if (!KeyExist(path,ret)) 
+	{
+		CreateErrorMsg(ret,true);
+		return ret;
+	}
+	std::string NewKeyPath = path + "\\" + keyName;
+	if (KeyExist(NewKeyPath)) return -2;
 	HKEY key ;
-	if (!KeyExist(path)) return -1; //need to change that...
-
+	
+	//need to omit 
+	ret = OpenRegKey(path,key);
+	if (ret != ERROR_SUCCESS)
+	{
+			CreateErrorMsg(ret,true);
+			return ret;
+	}
+		
+	ret= RegCreateKeyEx(m_root, NewKeyPath.c_str(), 0L, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &key, NULL );
+	if (ret != ERROR_SUCCESS ) CreateErrorMsg(ret,false);
+	RegCloseKey(key);
 	return 0;
 }
 
