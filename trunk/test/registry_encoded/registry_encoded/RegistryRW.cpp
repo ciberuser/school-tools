@@ -3,7 +3,9 @@
 
 #define VALUE_SIZE 1024
 
-RegistryRW::RegistryRW(void):m_root(HKEY_LOCAL_MACHINE)
+//HKEY_LOCAL_MACHINE
+
+RegistryRW::RegistryRW(void):m_root(HKEY_CURRENT_USER)
 {
 
 }
@@ -21,6 +23,7 @@ long RegistryRW::OpenRegKey(const std::string& path,HKEY& key) const
 {
 	return RegOpenKeyExA(m_root , path.c_str(),0, KEY_QUERY_VALUE, &key);
 }
+
 
 std::string RegistryRW::CreateErrorMsg(const long ret,bool alarm) const
 {
@@ -52,8 +55,8 @@ std::string RegistryRW::ReadValue2Reg(const std::string& path,const std::string&
 {
 	HKEY hkey ;
 	long ret;
-	TCHAR value[VALUE_SIZE]; 
-    DWORD bufLen = VALUE_SIZE*sizeof(TCHAR);
+	TCHAR value[MAX_VALUE_NAME]; 
+    DWORD bufLen = MAX_VALUE_NAME*sizeof(TCHAR);
 	ret=OpenRegKey(path,hkey);
 	std::string errMsg("Error:");
 	if (ret != ERROR_SUCCESS )
@@ -81,11 +84,6 @@ std::string RegistryRW::ReadValue2Reg(const std::string& path,const std::string&
     return stringValue.substr(0,i); 
 }
 
-void RegistryRW::WriteValue2Reg(const std::string& path,const std::string& valueName,const std::string& value) const
-{
-		
-}
-
 bool RegistryRW::KeyExist(const std::string& path ,long &ret) const
 {
 	HKEY key;
@@ -107,7 +105,7 @@ long RegistryRW::CreateRegistryKeyLibrary(const std::string& path,const std::str
 		return ret;
 	}
 	std::string NewKeyPath = path + "\\" + keyName;
-	if (KeyExist(NewKeyPath)) return -2;
+	if (KeyExist(NewKeyPath,ret)) return -2;
 	HKEY key ;
 	
 	//need to omit 
@@ -126,7 +124,96 @@ long RegistryRW::CreateRegistryKeyLibrary(const std::string& path,const std::str
 
 long RegistryRW::CreateRegistryValue(const std::string& path,const std::string& valueName,const std::string& value) const
 {
+	long ret= 0;
+	if (!KeyExist(path,ret)) return ret;
+	HKEY key ;
+
+	ret = RegOpenKeyExA(m_root , path.c_str(),0, KEY_WRITE, &key);
+	if (ret != ERROR_SUCCESS ) 
+	{
+		CreateErrorMsg(ret,true);
+		return ret;
+	}
+	if (key!=NULL)
+	{
+		ret = RegSetValueEx(key,valueName.c_str(),0,REG_SZ,(LPBYTE)value.c_str(),value.size());
+	}
+	if (ret != ERROR_SUCCESS)
+	{
+		CreateErrorMsg(ret,true);
+	}
+	RegCloseKey(key);
+
+	return ret;
+}
+
+bool RegistryRW::SubKeyExist(const std::string& path,const std::string& subKey) const 
+{
+	bool found = false;
+	HKEY key ;
+	long ret;
+	DWORD numItems ,security;
+	TCHAR  achValue[MAX_VALUE_NAME]; 
+    DWORD cchValue = MAX_VALUE_NAME;
+	achValue[0] ='\0';
+	ret = RegOpenKeyExA(m_root , path.c_str(),0, KEY_READ, &key);
+	if (ret != ERROR_SUCCESS)
+	{
+		CreateErrorMsg(ret,true);
+		return false;
+	}
+	ret= GetInfoKey(key,numItems,security);
+	for (int i = 0 ; i<(int) numItems ; ++i)
+	{
+		ret =  RegEnumValue(key,i,achValue,&cchValue,NULL,NULL,NULL,NULL);
+		if (ret!=ERROR_SUCCESS)
+		{
+			CreateErrorMsg(ret,true);
+		}
+		std::string name= std::string (achValue,cchValue);
+		if (name == subKey)
+		{
+			found = true;
+			break;
+		}
+	}
+	RegCloseKey(key);
+	return found;
+	
+}
+
+int RegistryRW::Get_numKeyItems(const std::string& key) const
+{
+	HKEY hkey;
+	long ret ;
 	return 0;
 }
 
+long RegistryRW::GetInfoKey(const HKEY& key ,DWORD & numItems,DWORD&  securityDescriptor) const
+{
+	long ret;
 
+    TCHAR    achClass[MAX_PATH] = TEXT("");  // buffer for class name 
+    DWORD    cchClassName = MAX_PATH;  // size of class string 
+    DWORD    cValues;              // number of values for key 
+    DWORD    cbSecurityDescriptor; // size of security descriptor 
+   
+
+	 ret = RegQueryInfoKey(
+        key,                    // key handle 
+        achClass,                // buffer for class name 
+        &cchClassName,           // size of class string 
+        NULL,                    // reserved 
+        NULL,               // number of subkeys 
+       NULL,            // longest subkey size 
+       NULL,            // longest class string 
+        &cValues,                // number of values for this key 
+        NULL,            // longest value name 
+       NULL,         // longest value data 
+        &cbSecurityDescriptor,   // security descriptor 
+        NULL);
+
+	 numItems = cValues;
+	 securityDescriptor =cbSecurityDescriptor;
+	 return ret;
+}
