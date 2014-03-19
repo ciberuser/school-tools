@@ -66,15 +66,13 @@ std::string RegistryRW::ReadValue2Reg(const std::string& path,const std::string&
 
 	ret = RegQueryValueExA(hkey, valueName.c_str(), 0, 0, (LPBYTE) value, &bufLen);
     RegCloseKey(hkey);
-	if (bufLen  > VALUE_SIZE*sizeof(TCHAR))
+	if (bufLen  > MAX_VALUE_NAME*sizeof(TCHAR))
 	{
 		return std::string("Error: value is bigget them buffer size");
 	}
     if ( (ret != ERROR_SUCCESS) )
 	{
-		errMsg.append("some kind of problem : ");
-		errMsg+ std::to_string((long double)ret);
-		return errMsg;
+		return CreateErrorMsg(ret,false);
     }
     std::string stringValue = std::string(value, (size_t)bufLen - 1);
     size_t i = stringValue.length();
@@ -127,7 +125,9 @@ long RegistryRW::CreateRegistryValue(const std::string& path,const std::string& 
 	long ret= 0;
 	if (!KeyExist(path,ret)) return ret;
 	HKEY key ;
-
+	TCHAR valueBuf[MAX_VALUE_NAME] ={0};
+	strncpy(valueBuf, value.c_str(),value.length());
+	valueBuf[value.length()]='\0';
 	ret = RegOpenKeyExA(m_root , path.c_str(),0, KEY_WRITE, &key);
 	if (ret != ERROR_SUCCESS ) 
 	{
@@ -136,7 +136,7 @@ long RegistryRW::CreateRegistryValue(const std::string& path,const std::string& 
 	}
 	if (key!=NULL)
 	{
-		ret = RegSetValueEx(key,valueName.c_str(),0,REG_SZ,(LPBYTE)value.c_str(),value.size());
+		ret = RegSetValueEx(key,valueName.c_str(),0,REG_SZ,(LPBYTE)valueBuf,MAX_VALUE_NAME);
 	}
 	if (ret != ERROR_SUCCESS)
 	{
@@ -152,7 +152,7 @@ bool RegistryRW::SubKeyExist(const std::string& path,const std::string& subKey) 
 	bool found = false;
 	HKEY key ;
 	long ret;
-	DWORD numItems ,security;
+	DWORD numItems ;
 	TCHAR  achValue[MAX_VALUE_NAME]; 
     DWORD cchValue = MAX_VALUE_NAME;
 	achValue[0] ='\0';
@@ -162,7 +162,7 @@ bool RegistryRW::SubKeyExist(const std::string& path,const std::string& subKey) 
 		CreateErrorMsg(ret,true);
 		return false;
 	}
-	ret= GetInfoKey(key,numItems,security);
+	ret= GetInfoKey(key,numItems);
 	for (int i = 0 ; i<(int) numItems ; ++i)
 	{
 		ret =  RegEnumValue(key,i,achValue,&cchValue,NULL,NULL,NULL,NULL);
@@ -179,17 +179,24 @@ bool RegistryRW::SubKeyExist(const std::string& path,const std::string& subKey) 
 	}
 	RegCloseKey(key);
 	return found;
-	
 }
 
-int RegistryRW::Get_numKeyItems(const std::string& key) const
+int RegistryRW::Get_numKeyItems(const std::string& path) const
 {
 	HKEY hkey;
+	DWORD numItems = 0;
 	long ret ;
-	return 0;
+	ret = OpenRegKey(path,hkey);
+	if (ret != ERROR_SUCCESS)
+	{
+		CreateErrorMsg(ret,true);
+		return -1; //error 
+	}
+	GetInfoKey(hkey,numItems);
+	return numItems;
 }
 
-long RegistryRW::GetInfoKey(const HKEY& key ,DWORD & numItems,DWORD&  securityDescriptor) const
+long RegistryRW::GetInfoKey(const HKEY& key ,DWORD & numItems) const
 {
 	long ret;
 
@@ -205,15 +212,14 @@ long RegistryRW::GetInfoKey(const HKEY& key ,DWORD & numItems,DWORD&  securityDe
         &cchClassName,           // size of class string 
         NULL,                    // reserved 
         NULL,               // number of subkeys 
-       NULL,            // longest subkey size 
-       NULL,            // longest class string 
+        NULL,            // longest subkey size 
+        NULL,            // longest class string 
         &cValues,                // number of values for this key 
         NULL,            // longest value name 
-       NULL,         // longest value data 
-        &cbSecurityDescriptor,   // security descriptor 
+        NULL,         // longest value data 
+	    NULL,   // security descriptor 
         NULL);
 
 	 numItems = cValues;
-	 securityDescriptor =cbSecurityDescriptor;
 	 return ret;
 }

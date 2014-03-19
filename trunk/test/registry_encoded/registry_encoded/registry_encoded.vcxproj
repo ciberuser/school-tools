@@ -62,11 +62,13 @@
   <ItemGroup>
     <ClInclude Include="app.h" />
     <ClInclude Include="RegistryRW.h" />
+    <ClInclude Include="StoreEncoder.h" />
     <ClInclude Include="StoreManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="RegistryRW.cpp" />
+    <ClCompile Include="StoreEncoder.cpp" />
     <ClCompile Include="StoreManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

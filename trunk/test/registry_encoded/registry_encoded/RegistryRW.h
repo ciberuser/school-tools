@@ -19,12 +19,12 @@ public:
 	 bool KeyExist(const std::string& path,long &ret) const;
 	 bool SubKeyExist(const std::string& path,const std::string& subKey) const;
 	 long CreateRegistryKeyLibrary(const std::string& path,const std::string& name) const;
-	 int Get_numKeyItems(const std::string& key) const;
+	 int Get_numKeyItems(const std::string& path) const;
 
 	 
 	 long CreateRegistryValue(const std::string& path,const std::string& valueName,const std::string& value) const;
 private:
-	 long GetInfoKey(const HKEY& key ,DWORD & numItems,DWORD&  securityDescriptor) const;
+	 long GetInfoKey(const HKEY& key ,DWORD & numItems) const;
 	 long OpenRegKey(const std::string& path, HKEY& key) const;
 	 std::string CreateErrorMsg(const long ret,bool alarm) const;
 	 HKEY m_root ;
