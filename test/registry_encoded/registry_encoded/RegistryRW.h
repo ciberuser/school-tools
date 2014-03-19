@@ -31,6 +31,12 @@ public:
 
 	~RegistryRW(void);
 
+	 inline void SetRoot(const HKEY rootPath)
+	 {
+		 m_root = rootPath;
+	 }
+
+
 	 std::string ReadValueFromReg(const std::string& path,const std::string& valueName) const;
 	 bool KeyExist(const std::string& path,long &ret) const;
 	 bool SubKeyExist(const std::string& path,const std::string& subKey) const;

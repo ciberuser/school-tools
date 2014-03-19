@@ -25,6 +25,9 @@ class  StoreManager
 public:
 	StoreManager(void);
 	StoreManager(const int maxItems);
+	StoreManager(const int maxItems ,const std::string& storeName);
+	StoreManager(ERegRoot root);
+	StoreManager(const int maxItems ,const std::string& storeName,ERegRoot root);
 	~StoreManager(void);
 	
 	inline void SetMaxItems(const int maxItems) 
@@ -37,6 +40,19 @@ public:
 		m_storeStrPath = storeName;
 	}
 
+	inline void SetRegistryRoot(ERegRoot root)
+	{
+		if (root = eHKEY_CURRENT_USER)
+		{
+			m_regRW.SetRoot(HKEY_CURRENT_USER);
+		}
+		else
+		{
+			m_regRW.SetRoot(HKEY_LOCAL_MACHINE);
+		}
+
+	}
+
 	//BASIC API
 	 long Set(const std::string& key , const std::string& val) ;
 	std::string Get(const std::string& key) const;
@@ -44,19 +60,20 @@ public:
 	
 	//EXTEND API
 	long DeleveKey(const std::string& key);
-	long DeleteStore();
-	long DeleleStore(const std::string& storeRegstiryPath);
+	//long DeleteStore();
+	long DeleleStore(const std::string& storeRegstiryPath = std::string(""));
 	bool CreateNewStore();
 	bool CreateNewStore(const std::string& storePath);
 
 
 private:
-	void Init();
+	void Init(const std::string& storePath=std::string(""));
 
 	int m_maxItems ;
 	IStoreEncoder* m_encoder;  //interface - if we whant to replace the encoder
 	std::string m_storeStrPath ;
 	RegistryRW m_regRW;
+	
 
 
 };
