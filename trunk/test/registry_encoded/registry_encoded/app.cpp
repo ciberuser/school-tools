@@ -45,10 +45,11 @@ void main()
 	//rw.DeleteKey("","store");
 	
 	int a;
-	//StoreManager sm1(HKEY_LOCAL_MACHINE);
+	StoreManager sm1(eHKEY_LOCAL_MACHINE);
+	
 	StoreManager sm ;
 	
-	sm.DeleteStore();
+	sm.DeleleStore();
 	sm.CreateNewStore();
 	if (sm.Has("str5")) std::cout<<"great1" <<std::endl;
 	for (int i =0;i <258 ; ++i)

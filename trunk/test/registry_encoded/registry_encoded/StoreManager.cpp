@@ -14,26 +14,34 @@ StoreManager::StoreManager(const int maxItems):m_maxItems(maxItems)
 	Init();
 }
 
+StoreManager::StoreManager(const int maxItems ,const std::string& storeName):m_maxItems(maxItems),m_storeStrPath(storeName)
+{
+	Init();
+}
+
+StoreManager::StoreManager(ERegRoot root):m_maxItems(MAX_DEFUALT_ITEMS),m_storeStrPath("store"),m_encoder(NULL)
+{
+	SetRegistryRoot(root);
+	Init();
+}
+
+StoreManager::StoreManager(const int maxItems ,const std::string& storeName,ERegRoot root):m_maxItems(maxItems),m_storeStrPath(storeName)
+{
+	SetRegistryRoot(root);
+	Init();
+}
+
+
+
 StoreManager::~StoreManager(void)
 {
 	if (m_encoder != NULL) delete m_encoder;
 }
 
-void StoreManager::Init()
+void StoreManager::Init(const std::string& storePath)
 {
-	
-	/*if (!m_regRW.KeyExist(m_storeStrPath,ret))
-	{
-		m_regRW.CreateRegistryKeyLibrary("",m_storeStrPath);
-	}
-	*/
-	CreateNewStore("");
+	CreateNewStore(storePath);
 	m_encoder = new StoreEncoder();
-
-}
-long StoreManager::DeleteStore()
-{
-	return DeleleStore("");	
 }
 
 long StoreManager::DeleleStore(const std::string& storeRegstiryPath)
@@ -89,4 +97,3 @@ bool StoreManager::Has(const std::string& key) const
 {
 	return  m_regRW.SubKeyExist(m_storeStrPath,key); 
 }
-
