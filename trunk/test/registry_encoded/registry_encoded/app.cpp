@@ -41,14 +41,26 @@ void main()
 		std::cout <<"we hava a problem ..."<<std::endl;
 	}
 	
-
+	
 	int a;
 	StoreManager sm ;
-
-	sm.Set("koko","cskjfeiopm");
-	std::string val =  sm.Get("koko");
-	std::cout <<"val=" <<val << std::endl; 
-	if (sm.Has("koko") ) std::cout << "great!!!" << std::endl;
+	if (sm.Has("str5")) std::cout<<"great1" <<std::endl;
+	for (int i =0;i <258 ; ++i)
+	{
+		std::string data ="data";
+		std::string str ="str";
+		str= str+std::to_string((long double)i);
+		data= data+std::to_string((long double)i);
+		sm.Set(str,data);
+		//sm.Set("koko","cskjfeiopm");
+		std::string val =  sm.Get(str);
+		std::cout <<"val=" <<val << std::endl;
+		sm.Set(str,data);
+		if (sm.Has(str) ) std::cout << "great!!!" << std::endl;
+		 val =  sm.Get(str);
+		std::cout <<"val=" <<val << std::endl;
+	}
 	std::cin >>a ;
+
 	delete encoder;
 }

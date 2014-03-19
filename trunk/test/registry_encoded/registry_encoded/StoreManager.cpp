@@ -40,41 +40,23 @@ long StoreManager::Set(const std::string& key , const std::string& val)
 	{
 		return ERROR_STORE_MAX_ITEMS;
 	}
-	
-	keyStr =  (key.length() > MAX_KEY_SIZE) ?  key.substr(0,MAX_KEY_SIZE-1) : key ;
-	
-
-	if (Has(keyStr))
-	{
-		return ERROR_STORE_KEY_EXIST;
-		//check what are we need to do - for now key exist !!!
-	}
-	/*else
-	{ 
-		keyStr= key;
-		keyStr.resize(MAX_KEY_SIZE,' ');
-	}*/
+	//validate string size - if not will shrink
+	keyStr =  (key.length() > MAX_KEY_SIZE) ?  key.substr(0,MAX_KEY_SIZE-1) : key ; 
 	valStr = (val.size() >  MAX_VALUE_NAME) ? val.substr(0,MAX_VALUE_NAME-1) :val;
-	
-	/*else
-	{
-		valStr = val;
-		valStr.resize(MAX_VALUE_NAME-1,' '); 
-	}*/
-
 	valStrEnc= (m_encoder!=NULL)? m_encoder->Encrypt(valStr):valStr;
 	ret = m_regRW.CreateRegistryValue(m_storeStrPath,keyStr,valStrEnc);
 
 	return ret;
 }
 
-std::string StoreManager::Get(const std::string& key)
+std::string StoreManager::Get(const std::string& key) const
 { 
-	std::string encVal =  m_regRW.ReadValue2Reg(m_storeStrPath,key);
+	if (!Has(key)) return std::string(" Key not exist!!");
+	std::string encVal =  m_regRW.ReadValueFromReg(m_storeStrPath,key);
 	return (m_encoder!=NULL) ? m_encoder->Decrypt(encVal) :encVal ;
 }
 
-bool StoreManager::Has(const std::string& key)
+bool StoreManager::Has(const std::string& key) const
 {
 	return  m_regRW.SubKeyExist(m_storeStrPath,key); 
 }

@@ -12,10 +12,12 @@ StoreEncoder::~StoreEncoder(void)
 
 std::string StoreEncoder::Encrypt(const std::string& str)
 {
-	std::string encryptStr(str);
+	std::string encryptStr;
+	encryptStr.resize(str.size(),' ');
 	for (unsigned int i = 0 ; i< str.length(); i++)
 	{
-		encryptStr[i]=(str[i])^m_key;
+		//encryptStr[i]=str[i]^m_key;
+		encryptStr[i]=str[i]+m_key;
 	}
 	return encryptStr;
 }
@@ -25,7 +27,8 @@ std::string StoreEncoder::Decrypt(const std::string& str)
 	std::string decryptStr(str);
 	for (unsigned int i = 0 ; i< str.length(); i++)
 	{
-		decryptStr[i]=(str[i])^m_key;
+		//decryptStr[i]=str[i]^m_key;
+		decryptStr[i]=str[i]-m_key;
 	}
 	return decryptStr;
 }
