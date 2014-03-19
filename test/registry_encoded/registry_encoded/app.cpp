@@ -40,10 +40,16 @@ void main()
 	{
 		std::cout <<"we hava a problem ..."<<std::endl;
 	}
-	
+	//RegistryRW rw ;
+	//rw.DeleteValue("store","str1");
+	//rw.DeleteKey("","store");
 	
 	int a;
+	//StoreManager sm1(HKEY_LOCAL_MACHINE);
 	StoreManager sm ;
+	
+	sm.DeleteStore();
+	sm.CreateNewStore();
 	if (sm.Has("str5")) std::cout<<"great1" <<std::endl;
 	for (int i =0;i <258 ; ++i)
 	{
@@ -60,6 +66,7 @@ void main()
 		 val =  sm.Get(str);
 		std::cout <<"val=" <<val << std::endl;
 	}
+	sm.DeleveKey("str2");
 	std::cin >>a ;
 
 	delete encoder;

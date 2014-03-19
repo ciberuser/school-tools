@@ -4,6 +4,21 @@
 
 #include <string>
 
+#ifdef _DLL
+	#ifdef _WIN32 
+		#define DLL_EXPORT __declspec(dllexport)
+	#else
+		#define DLL_EXPORT
+	#endif
+
+	#ifdef _WIN64
+		#define DLL_EXPORT __declspec(dllexport)
+	#endif
+#else
+	#define DLL_EXPORT
+#endif
+
+
 
 class IStoreEncoder
 {
@@ -13,7 +28,7 @@ public:
 
 };
 
-class StoreEncoder : public IStoreEncoder
+class  StoreEncoder : public IStoreEncoder
 {
 public:
 	std::string Encrypt(const std::string& str);

@@ -2,6 +2,21 @@
 #ifndef REAGISTRY_RW_H
 #define REAGISTRY_RW_H
 
+
+#ifdef _DLL
+	#ifdef _WIN32 
+		#define DLL_EXPORT __declspec(dllexport)
+	#else
+		#define DLL_EXPORT
+	#endif
+
+	#ifdef _WIN64
+		#define DLL_EXPORT __declspec(dllexport)
+	#endif
+#else
+	#define DLL_EXPORT
+#endif
+
 #include <Windows.h>
 #include <string>
 
@@ -21,8 +36,8 @@ public:
 	 bool SubKeyExist(const std::string& path,const std::string& subKey) const;
 	 long CreateRegistryKeyLibrary(const std::string& path,const std::string& name) const;
 	 int Get_numKeyItems(const std::string& path) const;
-	 long DeleteKey(const std::string& path) const ;
-	 
+	 long DeleteKey(const std::string& path,const std::string& subKey) const ;
+	 long DeleteValue(const std::string & path,const std::string& name) const;
 	 long CreateRegistryValue(const std::string& path,const std::string& valueName,const std::string& value) const;
 private:
 	 long GetValueFromKey(const std::string& path,const std::string& valueName,LPBYTE value) const;
