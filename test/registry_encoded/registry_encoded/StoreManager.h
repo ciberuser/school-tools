@@ -10,6 +10,7 @@
 class StoreManager
 {
 
+
 #define MAX_DEFUALT_ITEMS 256
 
 #define ERROR_STORE_MAX_ITEMS -2
@@ -20,24 +21,20 @@ public:
 	StoreManager(void);
 	StoreManager(const int maxItems);
 	~StoreManager(void);
+	
+	inline void SetMaxItems(const int maxItems) 
+	{
+		m_maxItems = maxItems;
+	}
+
 	//API
-	long Set(const std::string& key , const std::string& val);
-	std::string Get(const std::string& key);
-	bool Has(const std::string& key);
+	long Set(const std::string& key , const std::string& val) ;
+	std::string Get(const std::string& key) const;
+	bool Has(const std::string& key) const;
 
 
 private:
-	/*
-	inline bool AssertKeySize(const std::string& key) const
-	{
-		return (key.size() <  m_maxKeySize);
-	}
-
-	inline bool AssertValSize(const std::string& val) const
-	{
-		return (val.size() < m_maxValueSize) ;
-	}
-	*/
+	
 
 
 	void Init();
@@ -45,7 +42,7 @@ private:
 	int m_maxItems ;
 	int m_maxKeySize;
 	int m_maxValueSize;
-	IStoreEncoder* m_encoder;
+	IStoreEncoder* m_encoder;  //interface - if we whant to replace the encoder
 	std::string m_storeStrPath ;
 	RegistryRW m_regRW;
 };
