@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "registry_encoded", "registry_encoded\registry_encoded.vcxproj", "{1AE5D269-8725-4D29-B279-8B4CE53F0CE7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "registry_encoded_store", "registry_encoded_store\registry_encoded_store.vcxproj", "{31C94503-2330-4291-8755-6F79893B2F47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{1AE5D269-8725-4D29-B279-8B4CE53F0CE7}.Debug|Win32.Build.0 = Debug|Win32
 		{1AE5D269-8725-4D29-B279-8B4CE53F0CE7}.Release|Win32.ActiveCfg = Release|Win32
 		{1AE5D269-8725-4D29-B279-8B4CE53F0CE7}.Release|Win32.Build.0 = Release|Win32
+		{31C94503-2330-4291-8755-6F79893B2F47}.Debug|Win32.ActiveCfg = Debug|Win32
+		{31C94503-2330-4291-8755-6F79893B2F47}.Debug|Win32.Build.0 = Debug|Win32
+		{31C94503-2330-4291-8755-6F79893B2F47}.Release|Win32.ActiveCfg = Release|Win32
+		{31C94503-2330-4291-8755-6F79893B2F47}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

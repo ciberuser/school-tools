@@ -6,8 +6,13 @@
 #include "RegistryRW.h"
 #include "StoreEncoder.h"
 
+enum ERegRoot
+{
+	eHKEY_LOCAL_MACHINE , 
+	eHKEY_CURRENT_USER
+};
 
-class StoreManager
+class  StoreManager
 {
 
 
@@ -27,23 +32,32 @@ public:
 		m_maxItems = maxItems;
 	}
 
-	//API
-	long Set(const std::string& key , const std::string& val) ;
+	inline void SetStoreKeyName(const std::string& storeName)
+	{
+		m_storeStrPath = storeName;
+	}
+
+	//BASIC API
+	 long Set(const std::string& key , const std::string& val) ;
 	std::string Get(const std::string& key) const;
 	bool Has(const std::string& key) const;
+	
+	//EXTEND API
+	long DeleveKey(const std::string& key);
+	long DeleteStore();
+	long DeleleStore(const std::string& storeRegstiryPath);
+	bool CreateNewStore();
+	bool CreateNewStore(const std::string& storePath);
 
 
 private:
-	
-
-
 	void Init();
 
 	int m_maxItems ;
-	int m_maxKeySize;
-	int m_maxValueSize;
 	IStoreEncoder* m_encoder;  //interface - if we whant to replace the encoder
 	std::string m_storeStrPath ;
 	RegistryRW m_regRW;
+
+
 };
 #endif

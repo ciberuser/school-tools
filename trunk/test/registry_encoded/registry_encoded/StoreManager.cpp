@@ -21,14 +21,43 @@ StoreManager::~StoreManager(void)
 
 void StoreManager::Init()
 {
-	long ret;
-	//check if delete ...
-	if (!m_regRW.KeyExist(m_storeStrPath,ret))
+	
+	/*if (!m_regRW.KeyExist(m_storeStrPath,ret))
 	{
 		m_regRW.CreateRegistryKeyLibrary("",m_storeStrPath);
 	}
+	*/
+	CreateNewStore("");
 	m_encoder = new StoreEncoder();
 
+}
+long StoreManager::DeleteStore()
+{
+	return DeleleStore("");	
+}
+
+long StoreManager::DeleleStore(const std::string& storeRegstiryPath)
+{
+	return  m_regRW.DeleteKey(storeRegstiryPath,m_storeStrPath);
+}
+bool StoreManager::CreateNewStore()
+{
+	return CreateNewStore("");
+}
+
+long StoreManager::DeleveKey(const std::string& key)
+{
+	return m_regRW.DeleteValue(m_storeStrPath,key);
+}
+
+bool StoreManager::CreateNewStore(const std::string& storePath)
+{
+	long ret;
+	if (!m_regRW.KeyExist(m_storeStrPath,ret))
+	{
+		ret = m_regRW.CreateRegistryKeyLibrary(storePath,m_storeStrPath);
+	}
+	return (ret==ERROR_SUCCESS);
 }
 
 long StoreManager::Set(const std::string& key , const std::string& val)

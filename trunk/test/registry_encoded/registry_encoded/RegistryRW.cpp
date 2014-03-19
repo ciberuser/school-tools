@@ -134,11 +134,30 @@ long RegistryRW::CreateRegistryKeyLibrary(const std::string& path,const std::str
 	return 0;
 }
 
-long RegistryRW::DeleteKey(const std::string& path) const
+long RegistryRW::DeleteKey(const std::string& path,const std::string& subKey) const
 { 
-	return 0;
+	HKEY key;
+	long
+	ret = OpenRegKey(path,key);
+	if (ret!=ERROR_SUCCESS) return ret;
+#ifdef _WIN32 
+	ret =RegDeleteKeyEx(key, subKey.c_str(), KEY_WOW64_32KEY, 0);
+#else
+	ret= RegDeleteKeyEx(key, subKey.c_str(), KEY_WOW64_64KEY, 0);
+#endif
+	
+	return ret;
 }
 
+long RegistryRW::DeleteValue(const std::string & path,const std::string& name) const
+{
+	long ret;
+	if (KeyExist(path,ret) && SubKeyExist(path,name))
+	{
+		ret= RegDeleteKeyValue(m_root,path.c_str(),name.c_str());
+	}
+	return ret;
+}
 long RegistryRW::CreateRegistryValue(const std::string& path,const std::string& valueName,const std::string& value) const
 {
 	long ret= 0;
