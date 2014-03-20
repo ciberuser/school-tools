@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1AE5D269-8725-4D29-B279-8B4CE53F0CE7}</ProjectGuid>
-    <RootNamespace>registry_encoded</RootNamespace>
+    <ProjectGuid>{31C94503-2330-4291-8755-6F79893B2F47}</ProjectGuid>
+    <RootNamespace>registry_encoded_store</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>MYDLLBUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -60,14 +61,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="RegistryRW.h" />
-    <ClInclude Include="StoreEncoder.h" />
-    <ClInclude Include="StoreManager.h" />
+    <ClCompile Include="RegistryStore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RegistryRW.cpp" />
-    <ClCompile Include="StoreEncoder.cpp" />
-    <ClCompile Include="StoreManager.cpp" />
+    <ClInclude Include="RegistryStore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

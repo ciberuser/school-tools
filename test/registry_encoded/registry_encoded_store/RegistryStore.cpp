@@ -1,10 +1,42 @@
-#include "RegistryRW.h"
+#include "RegistryStore.h"
 #include <iostream>
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//StoreEncoder class functions
+StoreEncoder::StoreEncoder(void):m_key('g')
+{
+}
+
+StoreEncoder::~StoreEncoder(void)
+{
+}
+
+std::string StoreEncoder::Encrypt(const std::string& str)
+{
+	std::string encryptStr;
+	encryptStr.resize(str.size(),' ');
+	for (unsigned int i = 0 ; i< str.length(); i++)
+	{
+		encryptStr[i]=str[i]+m_key;
+	}
+	return encryptStr;
+}
+
+std::string StoreEncoder::Decrypt(const std::string& str)
+{
+	std::string decryptStr(str);
+	for (unsigned int i = 0 ; i< str.length(); i++)
+	{
+		decryptStr[i]=str[i]-m_key;
+	}
+	return decryptStr;
+}
 
 #define VALUE_SIZE 1024
 
-//HKEY_LOCAL_MACHINE
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//RegistryRW - class functions
 RegistryRW::RegistryRW(void):m_root(HKEY_CURRENT_USER)
 {
 
@@ -236,4 +268,98 @@ long RegistryRW::GetInfoKey(const HKEY& key ,DWORD & numItems,DWORD & biggestVal
 	 biggestValueSize = maxValueSize;
 	 return ret;
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//StoreManager  (API)- class functions 
+#define MAX_KEY_SIZE 8
 
+StoreManager::StoreManager(void):m_maxItems(MAX_DEFUALT_ITEMS),m_storeStrPath("store"),m_encoder(NULL)
+{
+	Init();
+}
+
+StoreManager::StoreManager(const int maxItems):m_maxItems(maxItems)
+{
+	Init();
+}
+
+StoreManager::StoreManager(const int maxItems ,const std::string& storeName):m_maxItems(maxItems),m_storeStrPath(storeName)
+{
+	Init();
+}
+
+StoreManager::StoreManager(ERegRoot root):m_maxItems(MAX_DEFUALT_ITEMS),m_storeStrPath("store"),m_encoder(NULL)
+{
+	SetRegistryRoot(root);
+	Init();
+}
+
+StoreManager::StoreManager(const int maxItems ,const std::string& storeName,ERegRoot root):m_maxItems(maxItems),m_storeStrPath(storeName)
+{
+	SetRegistryRoot(root);
+	Init();
+}
+
+StoreManager::~StoreManager(void)
+{
+	if (m_encoder != NULL) delete m_encoder;
+}
+
+void StoreManager::Init(const std::string& storePath)
+{
+	CreateNewStore(storePath);
+	m_encoder = new StoreEncoder();
+}
+
+long StoreManager::DeleleStore(const std::string& storeRegstiryPath)
+{
+	return  m_regRW.DeleteKey(storeRegstiryPath,m_storeStrPath);
+}
+bool StoreManager::CreateNewStore()
+{
+	return CreateNewStore("");
+}
+
+long StoreManager::DeleveKey(const std::string& key)
+{
+	return m_regRW.DeleteValue(m_storeStrPath,key);
+}
+
+bool StoreManager::CreateNewStore(const std::string& storePath)
+{
+	long ret;
+	if (!m_regRW.KeyExist(m_storeStrPath,ret))
+	{
+		ret = m_regRW.CreateRegistryKeyLibrary(storePath,m_storeStrPath);
+	}
+	return (ret==ERROR_SUCCESS);
+}
+
+long StoreManager::Set(const std::string& key , const std::string& val)
+{
+	long ret;
+	std::string keyStr,valStr,valStrEnc;
+
+	if (m_regRW.Get_numKeyItems(m_storeStrPath) >= m_maxItems)
+	{
+		return ERROR_STORE_MAX_ITEMS;
+	}
+	//validate string size - if not will shrink
+	keyStr =  (key.length() > MAX_KEY_SIZE) ?  key.substr(0,MAX_KEY_SIZE-1) : key ; 
+	valStr = (val.size() >  MAX_VALUE_NAME) ? val.substr(0,MAX_VALUE_NAME-1) :val;
+	valStrEnc= (m_encoder!=NULL)? m_encoder->Encrypt(valStr):valStr;
+	ret = m_regRW.CreateRegistryValue(m_storeStrPath,keyStr,valStrEnc);
+
+	return ret;
+}
+
+std::string StoreManager::Get(const std::string& key) const
+{ 
+	if (!Has(key)) return std::string(" Key not exist!!");
+	std::string encVal =  m_regRW.ReadValueFromReg(m_storeStrPath,key);
+	return (m_encoder!=NULL) ? m_encoder->Decrypt(encVal) :encVal ;
+}
+
+bool StoreManager::Has(const std::string& key) const
+{
+	return  m_regRW.SubKeyExist(m_storeStrPath,key); 
+}
