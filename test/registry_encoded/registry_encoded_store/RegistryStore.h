@@ -5,16 +5,24 @@
 #include <Windows.h>
 
 #pragma warning(disable:4251) //dll import issue 
-#pragma warning(disable:4996) //strncpy - i know the issue that it's not adding null termination at end of string - i deal with this
+#pragma warning(disable:4996) //strncpy - i know the issue that it's not adding null termination at end of string - i deal with this.
 
 #ifdef _WINDLL
 #          define DLL_EXPORT __declspec(dllexport)
 #          define DLL_TEMPLATE
 #          define DLL_DECLSPECIFIER    __declspec(dllexport)
 #else
-#          define DLL_EXPORT __declspec(dllimport)
-#          define DLL_TEMPLATE  extern
-#          define DLL_DECLSPECIFIER    __declspec(dllimport)
+	#ifdef STATIC_LIB
+	#          define DLL_EXPORT
+	#		   define DLL_TEMPLATE
+	#		   define DLL_DECLSPECIFIER
+	#else
+	#          define DLL_EXPORT __declspec(dllimport)
+	#          define DLL_TEMPLATE  extern
+	#          define DLL_DECLSPECIFIER    __declspec(dllimport)
+	
+	#endif
+
 #endif
 
 DLL_TEMPLATE template class DLL_DECLSPECIFIER std::basic_string<char>;
