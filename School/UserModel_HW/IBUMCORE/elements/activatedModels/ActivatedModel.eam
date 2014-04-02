@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<activatedModel>
+    <infoBeads>CoreHellowWorld_0,UM1</infoBeads>
+    <infoBeads>CoreRTDisplayPort_1,UM1</infoBeads>
+    <infoLinks>CoreHellowWorld_0,CoreRTDisplayPort_1</infoLinks>
+</activatedModel>

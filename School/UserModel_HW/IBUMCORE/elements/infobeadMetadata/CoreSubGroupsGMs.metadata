@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <output-interface>displayTriplet</output-interface>
+    <output-interface>HMPSSubGroupsGMs</output-interface>
+    <input-interface>HMPSGroupIdInfobead</input-interface>
+</metadata>
