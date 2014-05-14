@@ -1,11 +1,17 @@
 package infobeadCollection;
 
+import java.sql.Time;
+
 import genericInfoBead.InfoBead;
+import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
+import java.util.Random;
+
 
 public class UserPhysicalLocation extends InfoBead implements Runnable{
 
 	
+		
 	
 	public UserPhysicalLocation()
 	{
@@ -38,8 +44,30 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	int m_x_location;
 	int m_y_location;
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	public void run() 
+	{
+		Triplet tripletloc = new Triplet("location triplet");
+		for (int ix =0, iy=0; ix< 10 ; ix+=10,iy+=10 )
+		{
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				
+			}
+			
+			Location loc = new Location(ix, iy);
+			Time t = new Time(System.currentTimeMillis());
+			InfoItem locationItem = new InfoItem();
+			locationItem.setInfoType(Location.LOCATION_ID);
+			locationItem.setInferenceTime(t);
+			locationItem.setInfoValue(loc);
+			
+			tripletloc.setInfoItem(locationItem);
+			pushData(tripletloc);
+			
+		}
+		
+		
 		
 	}
 

@@ -5,7 +5,9 @@ import genericInfoBead.Triplet;
 
 public class UserNearCoffeeShop extends InfoBead {
 
-		
+	public static final int COFFEE_SHOP_X_LOCATION = 100;
+	public static final int COFFEE_SHOP_Y_LOCATION = 100;
+	
 	public UserNearCoffeeShop()
 	{
 		super();
@@ -23,4 +25,6 @@ public class UserNearCoffeeShop extends InfoBead {
 
 	}
 
+	
+	
 }
