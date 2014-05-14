@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <activatedModel>
     <infoBeads>UserPhysicalLocation_0,UM1</infoBeads>
-    <infoBeads>UserPhysicalCondition_1,UM1</infoBeads>
-    <infoBeads>UserTemperature_2,UM1</infoBeads>
-    <infoLinks>UserPhysicalLocation_0,UserPhysicalCondition_1</infoLinks>
-    <infoLinks>UserTemperature_2,UserPhysicalCondition_1</infoLinks>
+    <infoBeads>UserTemperature_1,UM1</infoBeads>
+    <infoBeads>UserPhysicalCondition_2,UM1</infoBeads>
+    <infoLinks>UserTemperature_1,UserPhysicalCondition_2</infoLinks>
+    <infoLinks>UserPhysicalLocation_0,UserPhysicalCondition_2</infoLinks>
 </activatedModel>
