@@ -45,7 +45,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	@Override
 	public void run() 
 	{
-		Triplet tripletloc = new Triplet("location triplet");
+		Triplet tripletloc = new Triplet(Location.TRIPLET_ID);
 		for (int ix =0, iy=0; ix< 10 ; ix+=10,iy+=10 )
 		{
 			try {
@@ -63,7 +63,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 			
 			tripletloc.setInfoItem(locationItem);
 			pushData(tripletloc);
-			
+				
 		}
 		
 		
