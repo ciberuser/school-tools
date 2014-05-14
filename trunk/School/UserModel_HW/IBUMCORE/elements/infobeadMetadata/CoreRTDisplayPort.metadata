@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metadata>
-    <input-interface>displayTriplet</input-interface>
+    <input-interface>temp_triplet</input-interface>
 </metadata>

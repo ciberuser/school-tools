@@ -29,23 +29,32 @@ public class ActivatedModel {
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
-			Class<?> cls_0 = Class.forName("infobeadCollection.CoreRTDisplayPort", true, classLoader);
-			InfoBead CoreRTDisplayPort_0= (InfoBead)cls_0.newInstance();
-			CoreRTDisplayPort_0.setInfoBeadId("CoreRTDisplayPort_0");
-			CoreRTDisplayPort_0.setInfobeadModelId("UM1");
+			Class<?> cls_0 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_0= (InfoBead)cls_0.newInstance();
+			UserPhysicalLocation_0.setInfoBeadId("UserPhysicalLocation_0");
+			UserPhysicalLocation_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_1 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
-			InfoBead UserTemperature_1= (InfoBead)cls_1.newInstance();
-			UserTemperature_1.setInfoBeadId("UserTemperature_1");
-			UserTemperature_1.setInfobeadModelId("UM1");
+			Class<?> cls_1 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
+			InfoBead UserPhysicalCondition_1= (InfoBead)cls_1.newInstance();
+			UserPhysicalCondition_1.setInfoBeadId("UserPhysicalCondition_1");
+			UserPhysicalCondition_1.setInfobeadModelId("UM1");
+
+			Class<?> cls_2 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
+			InfoBead UserTemperature_2= (InfoBead)cls_2.newInstance();
+			UserTemperature_2.setInfoBeadId("UserTemperature_2");
+			UserTemperature_2.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserTemperature_1.connect(CoreRTDisplayPort_0);
+			UserPhysicalLocation_0.connect(UserPhysicalCondition_1);
+
+			UserTemperature_2.connect(UserPhysicalCondition_1);
 
 			//Step 3: Initialize info-beads
-			CoreRTDisplayPort_0.initialize();
+			UserPhysicalLocation_0.initialize();
 
-			UserTemperature_1.initialize();
+			UserPhysicalCondition_1.initialize();
+
+			UserTemperature_2.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
