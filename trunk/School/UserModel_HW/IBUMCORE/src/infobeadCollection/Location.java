@@ -12,8 +12,15 @@ public class Location
 	public static final String LOCATION_ID="location";
 	public static final String TRIPLET_ID ="location_triplet";
 	
-	int m_x;
+	@Override
+	public String toString()
+	{
+		return "location is x=" +m_x +" y=" +m_y;
+	};
+	
+	private int m_x;
 	public int getM_x() {
+		
 		return m_x;
 	}
 	public void setM_x(int m_x) {
@@ -25,5 +32,5 @@ public class Location
 	public void setM_y(int m_y) {
 		this.m_y = m_y;
 	}
-	int m_y;
+	private int m_y;
 }

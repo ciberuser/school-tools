@@ -31,6 +31,8 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	{
 		m_x_location=0;
 		m_y_location =0;
+		Thread locationThread = new Thread(this,"HelloWorld");
+		locationThread.start();
 	}
 	
 	public void GoTo(int x , int y)

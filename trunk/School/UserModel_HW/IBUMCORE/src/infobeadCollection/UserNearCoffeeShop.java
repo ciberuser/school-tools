@@ -14,31 +14,33 @@ public class UserNearCoffeeShop extends InfoBead {
 	{
 		super();
 	}
-	private CoreRTDisplayService m_display;
+	//private CoreRTDisplayService m_display;
 	@Override
 	public void handleData(Triplet data) {
 		
-		m_display = new CoreRTDisplayService();
+		System.out.println("got triplet!!!");
 		
 		if(data.getId() ==  Location.TRIPLET_ID)
 		{
 			InfoItem infoData = data.getInfoItem();
 			if (infoData.getInfoType() == Location.LOCATION_ID)
 			{
+			
 				Location loc =  (Location) infoData.getInfoValue();
-				if (loc.m_x == COFFEE_SHOP_X_LOCATION && loc.m_y ==  COFFEE_SHOP_Y_LOCATION);
+				System.out.println("got user location!! x="+loc.getM_x()+" y=" + loc.getM_y() );
+				if ((loc.getM_x()==COFFEE_SHOP_X_LOCATION) && (loc.getM_y()==COFFEE_SHOP_Y_LOCATION));
 				{
 					System.out.print( "user is in the coffeeShop");
 				}
 				
 			}
 		}
-		m_display.displayTriplet(data);
+		//m_display.displayTriplet(data);
 	}
 
 	@Override
 	public void initialize() {
-		m_display = new CoreRTDisplayService();
+		//m_display = new CoreRTDisplayService();
 
 	}
 
