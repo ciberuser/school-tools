@@ -29,14 +29,14 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 		
 		while(this.location == null && this.temp == null){}
 		
-		Thread physicalConThread = new Thread(this, "user physical condition thread");
-		physicalConThread.start();
-		
+
 	}
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		Thread physicalConThread = new Thread(this, "user physical condition thread");
+		physicalConThread.start();
+		
 		
 	}
 
