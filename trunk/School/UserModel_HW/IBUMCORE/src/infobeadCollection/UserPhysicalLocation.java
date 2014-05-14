@@ -31,7 +31,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	{
 		m_x_location=0;
 		m_y_location =0;
-		Thread locationThread = new Thread(this,"HelloWorld");
+		Thread locationThread = new Thread(this,"");
 		locationThread.start();
 	}
 	
@@ -48,10 +48,11 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	public void run() 
 	{
 		Triplet tripletloc = new Triplet(Location.TRIPLET_ID);
-		for (int ix =0, iy=0; ix< 10 ; ix+=10,iy+=10 )
+		for (int ix =0, iy=0; ix< 120 ; ix+=10,iy+=10 )
 		{
+			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				
 			}

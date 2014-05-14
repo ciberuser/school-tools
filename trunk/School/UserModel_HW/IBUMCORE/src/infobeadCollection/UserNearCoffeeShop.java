@@ -18,7 +18,7 @@ public class UserNearCoffeeShop extends InfoBead {
 	@Override
 	public void handleData(Triplet data) {
 		
-		System.out.println("got triplet!!!");
+		//System.out.println("got triplet!!!");
 		
 		if(data.getId() ==  Location.TRIPLET_ID)
 		{
@@ -27,11 +27,13 @@ public class UserNearCoffeeShop extends InfoBead {
 			{
 			
 				Location loc =  (Location) infoData.getInfoValue();
-				System.out.println("got user location!! x="+loc.getM_x()+" y=" + loc.getM_y() );
-				if ((loc.getM_x()==COFFEE_SHOP_X_LOCATION) && (loc.getM_y()==COFFEE_SHOP_Y_LOCATION));
+				System.out.println("got user location:"+loc.toString());
+								
+				if ((loc.getM_x()==COFFEE_SHOP_X_LOCATION))
 				{
-					System.out.print( "user is in the coffeeShop");
+					System.out.println( "user is in the coffeeShop!!!");
 				}
+				
 				
 			}
 		}
