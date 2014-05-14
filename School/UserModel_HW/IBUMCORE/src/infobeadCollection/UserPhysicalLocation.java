@@ -50,25 +50,32 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		Triplet tripletloc = new Triplet(Location.TRIPLET_ID);
 		for (int ix =0, iy=0; ix< 120 ; ix+=10,iy+=10 )
 		{
-			
 			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
+					Thread.sleep(500);
 				
+				
+				Location loc = new Location(ix, iy);
+				Time t = new Time(System.currentTimeMillis());
+				InfoItem locationItem = new InfoItem();
+				locationItem.setInfoType(Location.LOCATION_ID);
+				locationItem.setExplainInfo("user change location!!");
+				
+				locationItem.setInferenceTime(t);
+				locationItem.setInfoValue(loc);
+				
+				tripletloc.setInfoItem(locationItem);
+				tripletloc.setTime(t);
+				pushData(tripletloc);
+	
+				if (ix==100)
+				{
+					Thread.sleep(3000);
+				}
 			}
-			
-			Location loc = new Location(ix, iy);
-			Time t = new Time(System.currentTimeMillis());
-			InfoItem locationItem = new InfoItem();
-			locationItem.setInfoType(Location.LOCATION_ID);
-			locationItem.setExplainInfo("user change location!!");
-			
-			locationItem.setInferenceTime(t);
-			locationItem.setInfoValue(loc);
-			
-			tripletloc.setInfoItem(locationItem);
-			tripletloc.setTime(t);
-			pushData(tripletloc);
+			catch (InterruptedException e) 
+			{
+				System.out.println("shit ... we have a problem!!\nerr:" +e.getMessage());
+			}
 				
 		}
 		
