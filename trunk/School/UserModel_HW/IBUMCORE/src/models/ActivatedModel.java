@@ -34,27 +34,27 @@ public class ActivatedModel {
 			UserPhysicalLocation_0.setInfoBeadId("UserPhysicalLocation_0");
 			UserPhysicalLocation_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_1 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
-			InfoBead UserPhysicalCondition_1= (InfoBead)cls_1.newInstance();
-			UserPhysicalCondition_1.setInfoBeadId("UserPhysicalCondition_1");
-			UserPhysicalCondition_1.setInfobeadModelId("UM1");
+			Class<?> cls_1 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
+			InfoBead UserTemperature_1= (InfoBead)cls_1.newInstance();
+			UserTemperature_1.setInfoBeadId("UserTemperature_1");
+			UserTemperature_1.setInfobeadModelId("UM1");
 
-			Class<?> cls_2 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
-			InfoBead UserTemperature_2= (InfoBead)cls_2.newInstance();
-			UserTemperature_2.setInfoBeadId("UserTemperature_2");
-			UserTemperature_2.setInfobeadModelId("UM1");
+			Class<?> cls_2 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
+			InfoBead UserPhysicalCondition_2= (InfoBead)cls_2.newInstance();
+			UserPhysicalCondition_2.setInfoBeadId("UserPhysicalCondition_2");
+			UserPhysicalCondition_2.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserPhysicalLocation_0.connect(UserPhysicalCondition_1);
+			UserTemperature_1.connect(UserPhysicalCondition_2);
 
-			UserTemperature_2.connect(UserPhysicalCondition_1);
+			UserPhysicalLocation_0.connect(UserPhysicalCondition_2);
 
 			//Step 3: Initialize info-beads
 			UserPhysicalLocation_0.initialize();
 
-			UserPhysicalCondition_1.initialize();
+			UserTemperature_1.initialize();
 
-			UserTemperature_2.initialize();
+			UserPhysicalCondition_2.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
