@@ -15,7 +15,7 @@ public class Location
 	@Override
 	public String toString()
 	{
-		return "location is x=" +m_x +" y=" +m_y;
+		return "x=" +m_x +" y=" +m_y;
 	};
 	
 	private int m_x;
