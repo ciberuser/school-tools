@@ -1,5 +1,6 @@
 package infobeadCollection;
 
+import services.CoreRTDisplayService;
 import genericInfoBead.InfoBead;
 import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
@@ -13,9 +14,11 @@ public class UserNearCoffeeShop extends InfoBead {
 	{
 		super();
 	}
-	
+	private CoreRTDisplayService m_display;
 	@Override
 	public void handleData(Triplet data) {
+		
+		m_display = new CoreRTDisplayService();
 		
 		if(data.getId() ==  Location.TRIPLET_ID)
 		{
@@ -30,12 +33,12 @@ public class UserNearCoffeeShop extends InfoBead {
 				
 			}
 		}
-
+		m_display.displayTriplet(data);
 	}
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		m_display = new CoreRTDisplayService();
 
 	}
 
