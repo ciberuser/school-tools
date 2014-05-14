@@ -1,13 +1,16 @@
 package infobeadCollection;
 
+import java.sql.Time;
+
 import genericInfoBead.InfoBead;
+import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
-public class UserPhysicalCondition extends InfoBead {
+public class UserPhysicalCondition extends InfoBead implements Runnable {
 
 	
-	Location location; 
-	UserTemperature temp;
+	Location location = null; 
+	UserTemperature temp = null;
 	
 	@Override
 	public void handleData(Triplet data) {
@@ -24,11 +27,35 @@ public class UserPhysicalCondition extends InfoBead {
 			
 		}
 		
+		while(this.location == null && this.temp == null){}
+		
+		Thread physicalConThread = new Thread(this, "user physical condition thread");
+		physicalConThread.start();
+		
 	}
 
 	@Override
 	public void initialize() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		Triplet tripletTest = new Triplet("user physical condition info bead");
+
+			int randomSleep = 500 + (int)(Math.random() * ((2000 - 500) + 1));
+
+			Time t = new Time(System.currentTimeMillis());
+			InfoItem data = new InfoItem();
+			data.setInferenceTime(t);
+			data.setExplainInfo("Main >> Testing Display Services");
+			data.setInfoType("test");
+			data.setInfoUnits("testUnits");
+			//data.setInfoValue();
+			tripletTest.setTime(t);
+			tripletTest.setInfoItem(data);
+			pushData(tripletTest);
 		
 	}
 
