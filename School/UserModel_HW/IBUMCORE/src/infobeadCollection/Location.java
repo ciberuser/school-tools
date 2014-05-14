@@ -10,6 +10,7 @@ public class Location
 	
 	public Location(){};
 	public static final String LOCATION_ID="location";
+	public static final String TRIPLET_ID ="location_triplet";
 	
 	int m_x;
 	public int getM_x() {
