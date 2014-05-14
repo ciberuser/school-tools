@@ -267,7 +267,9 @@ public CoreRTDisplayService(){
 		String timeS = "Not Available";
 		if (t.getInfoItem() != null){
 			typeS = t.getInfoItem().getInfoType();
-			if (t.getInfoItem().getInfoValue() != null){
+			if (t.getInfoItem().getInfoValue() != null)
+			{
+				
 				valueS = t.getInfoItem().getInfoValue().toString();
 			}
 			unitS = t.getInfoItem().getInfoUnits();
