@@ -58,10 +58,13 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem locationItem = new InfoItem();
 			locationItem.setInfoType(Location.LOCATION_ID);
+			locationItem.setExplainInfo("user change location!!");
+			
 			locationItem.setInferenceTime(t);
 			locationItem.setInfoValue(loc);
 			
 			tripletloc.setInfoItem(locationItem);
+			tripletloc.setTime(t);
 			pushData(tripletloc);
 				
 		}
