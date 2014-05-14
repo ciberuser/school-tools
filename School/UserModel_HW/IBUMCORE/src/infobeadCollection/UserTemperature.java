@@ -42,12 +42,18 @@ public class UserTemperature extends InfoBead implements Runnable{
 	@Override
 	public void run() {
 		
-		
+		Triplet tripletTest = new Triplet("temperature_triplet");
+
 		
 		for(int i = 0; i<11; i++)
 		{
+			//lockerCondition.getInstance().Lock();
+			try{ Thread.sleep(500);}
+			catch(Exception e)
+			{}
+				
+				
 			Integer temperature = this.minTemp + (int)(Math.random() * ((this.maxTemp-this.minTemp)+1));
-			Triplet tripletTest = new Triplet("temperature_triplet");
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem data = new InfoItem();
 			data.setInferenceTime(t);
@@ -60,6 +66,10 @@ public class UserTemperature extends InfoBead implements Runnable{
 			tripletTest.setTime(t);
 			tripletTest.setInfoItem(data);
 			pushData(tripletTest);
+			//lockerCondition.getInstance().unLock();
+			
+			
+			
 		}
 	}
 

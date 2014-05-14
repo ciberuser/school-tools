@@ -27,25 +27,28 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 			
 		}
 		
+		
+		
 		if(data.getId().equals(Location.TRIPLET_ID))
 		{
 			this.location = (Location)data.getInfoItem().getInfoValue();
 			System.out.println(this.location.toString());
 		}
 		
+		
 	}
 
 	@Override
 	public void initialize() {
 		Thread physicalConThread = new Thread(this, "user physical condition thread");
-		//physicalConThread.start();
+		physicalConThread.start();
 		
 		
 	}
 
 	@Override
 	public void run() {
-	/*	Triplet tripletTest = new Triplet("user physical condition info bead");
+		Triplet tripletTest = new Triplet("user physical condition info bead");
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem data = new InfoItem();
 			data.setInferenceTime(t);
@@ -56,7 +59,7 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 			tripletTest.setTime(t);
 			tripletTest.setInfoItem(data);
 			pushData(tripletTest);
-		*/
+		
 	}
 
 }
