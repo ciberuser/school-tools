@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class UserPhysicalLocation extends InfoBead implements Runnable{
 
-	
 		
 	
 	public UserPhysicalLocation()
