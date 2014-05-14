@@ -21,7 +21,7 @@ public class UserTemperature extends InfoBead implements Runnable{
 	
 	@Override
 	public void handleData(Triplet data) {
-		// TODO Auto-generated method stub
+		 
 		
 	}
 

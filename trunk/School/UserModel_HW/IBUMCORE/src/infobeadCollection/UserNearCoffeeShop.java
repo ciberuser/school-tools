@@ -1,6 +1,7 @@
 package infobeadCollection;
 
 import genericInfoBead.InfoBead;
+import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
 public class UserNearCoffeeShop extends InfoBead {
@@ -15,7 +16,20 @@ public class UserNearCoffeeShop extends InfoBead {
 	
 	@Override
 	public void handleData(Triplet data) {
-		// TODO Auto-generated method stub
+		
+		if(data.getId() ==  Location.TRIPLET_ID)
+		{
+			InfoItem infoData = data.getInfoItem();
+			if (infoData.getInfoType() == Location.LOCATION_ID)
+			{
+				Location loc =  (Location) infoData.getInfoValue();
+				if (loc.m_x == COFFEE_SHOP_X_LOCATION && loc.m_y ==  COFFEE_SHOP_Y_LOCATION);
+				{
+					System.out.print( "user is in the coffeeShop");
+				}
+				
+			}
+		}
 
 	}
 
