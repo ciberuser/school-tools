@@ -9,8 +9,10 @@ import java.util.Random;
 
 
 public class UserPhysicalLocation extends InfoBead implements Runnable{
+	
 
-		
+	private static final long serialVersionUID = 1L;
+	
 	
 	public UserPhysicalLocation()
 	{
