@@ -8,6 +8,9 @@ import genericInfoBead.Triplet;
 
 public class userNeedForColdDrink extends InfoBead implements Runnable {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	public boolean needForColdDrink;
 	
 	public static final String TRIPLET_ID="need_of_cold_drink_triplet";
