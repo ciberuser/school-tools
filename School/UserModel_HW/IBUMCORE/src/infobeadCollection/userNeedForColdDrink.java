@@ -1,0 +1,46 @@
+package infobeadCollection;
+
+import java.sql.Time;
+
+import genericInfoBead.InfoBead;
+import genericInfoBead.InfoItem;
+import genericInfoBead.Triplet;
+
+public class userNeedForColdDrink extends InfoBead implements Runnable {
+	
+	public boolean needForColdDrink;
+	
+	public static final String TRIPLET_ID="need_of_cold_drink_triplet";
+
+	@Override
+	public void handleData(Triplet data) {
+
+		if((Integer)data.getInfoItem().getInfoValue() > 38)
+		{
+			this.needForColdDrink = true; 
+		}
+	}
+
+	@Override
+	public void initialize() {
+		Thread coldDrink = new Thread(this, "");
+		coldDrink.start();
+		
+	}
+
+	@Override
+	public void run() {
+		Triplet tripletTest = new Triplet("need_of_cold_drink_triplet");
+		Time t = new Time(System.currentTimeMillis());
+		InfoItem data = new InfoItem();
+		data.setInferenceTime(t);
+		data.setExplainInfo("");
+		data.setInfoType("needOfColdDrinkBoolean");
+		data.setInfoValue(this.needForColdDrink);
+		tripletTest.setTime(t);
+		tripletTest.setInfoItem(data);
+		pushData(tripletTest);
+		
+	}
+
+}
