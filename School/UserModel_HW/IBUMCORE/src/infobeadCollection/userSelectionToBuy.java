@@ -4,13 +4,14 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 import javax.swing.JOptionPane;
 
-public class userSelectionToBuy extends InfoBead implements Runnable  {
+public class userSelectionToBuy extends InfoBead   {
 
 
 
 	@Override
-	public void handleData(Triplet data) {
-		
+	public void handleData(Triplet data) 
+	{
+		System.out.println("got somthing... "+data.getId());
 		 
 		 userPreferences p = (userPreferences)data.getInfoItem().getInfoValue(); 
 		 
@@ -23,15 +24,10 @@ public class userSelectionToBuy extends InfoBead implements Runnable  {
 	@Override
 	public void initialize() {
 		
-		Thread buy = new Thread(this, "");
-		buy.start();
+		
 		
 	}
 	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

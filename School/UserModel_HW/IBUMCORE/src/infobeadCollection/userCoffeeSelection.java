@@ -7,7 +7,7 @@ import genericInfoBead.InfoItem;
 
 import genericInfoBead.Triplet;
 
-public class userCoffeeSelection extends InfoBead implements Runnable {
+public class userCoffeeSelection extends InfoBead  {
 
 	public static final String TRIPLET_ID="user_coffee_selection_triplet";
 	
@@ -21,11 +21,13 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 	private userPreferences m_finalPrefs;
 	private boolean m_sendPref =false;
 
+	
+	
 	@Override
 	public void handleData(Triplet data) 
 	{
 		
-	
+		PrintMsg("got triplet id =" +data.getId());
 		if((String)data.getId() ==  userMilkTypePref.TRIPLET_ID)
 		{
 			m_milkType = (userPreferences.EmilkPrefs)data.getInfoItem().getInfoValue();
@@ -48,6 +50,7 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 		
 		if (m_finalPrefs!=null)
 		{
+			System.out.print("we have triplet with m_cupSize="+m_cupSize + " m_coffeeBlend=" +m_coffeeBlend +" m_milkType=" +m_milkType );
 			if (m_cupSize!=null)
 			{
 				m_finalPrefs.setCupSize(m_cupSize);
@@ -60,12 +63,25 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 			{
 				m_finalPrefs.setMilkType(m_milkType);
 			}
+		
+			if (m_cupSize!=null && m_coffeeBlend!=null && m_milkType!=null)
+			{
+				PrintMsg("all prefrences ... will send it ");
+				Triplet tripletTest = new Triplet(this.TRIPLET_ID);
+				Time t = new Time(System.currentTimeMillis());
+				InfoItem dataItem = new InfoItem();
+				dataItem.setInferenceTime(t);
+				dataItem.setExplainInfo("");
+				dataItem.setInfoType("userPreferences");
+				dataItem.setInfoValue(m_finalPrefs);
+				tripletTest.setTime(t);
+				tripletTest.setInfoItem(dataItem);
+				pushData(tripletTest);
+				m_sendPref = true;
+			}
 		}
-		if (m_cupSize!=null && m_coffeeBlend!=null && m_milkType!=null)
-		{
-			PrintMsg("all prefrences ... will send it ");
-			m_sendPref = true;
-		}
+		
+		
 		//and now just to send !!!
 		
 	}
@@ -75,32 +91,10 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 
 	@Override
 	public void initialize() {
-		Thread coffeeSelection = new Thread(this, "");
-		coffeeSelection.start();
+		
 		
 	}
 
-	@Override
-	public void run() {
-		while(true)
-		{ 
-			if (m_sendPref)
-			{
-				Triplet tripletTest = new Triplet(this.TRIPLET_ID);
-				Time t = new Time(System.currentTimeMillis());
-				InfoItem data = new InfoItem();
-				data.setInferenceTime(t);
-				data.setExplainInfo("");
-				data.setInfoType("userPreferences");
-				data.setInfoValue(m_finalPrefs);
-				tripletTest.setTime(t);
-				tripletTest.setInfoItem(data);
-				pushData(tripletTest);
-				m_sendPref=false;
-			}
-		}
-		
-		
-	}
+	
 
 }

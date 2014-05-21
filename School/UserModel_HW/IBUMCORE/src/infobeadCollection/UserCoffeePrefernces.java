@@ -57,19 +57,19 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 		case userNeedForHotDrink.TRIPLET_ID : 
 			m_want_hot = (boolean)data.getInfoItem().getInfoValue();
 			m_want_cold =!m_want_hot;
-			PrintMsg("Got triplet cold"); 
+			
 		break;
 		
 		
 		case UserNearCoffeeShop.TRIPLET_ID: 
 		m_neerCoffeeShop =  (boolean)data.getInfoItem().getInfoValue();
-		PrintMsg("Got triplet neer got..." +m_neerCoffeeShop  ); 
+		//PrintMsg("Got triplet neer got..." +m_neerCoffeeShop  ); 
 		break;
 		}
 		
 		if (!m_neerCoffeeShop)
 		{
-			m_neer_show =false;
+			
 			if (m_showOneNotNear) 
 			{
 				PrintMsg("user is not in  the coffee shop ...:(");
