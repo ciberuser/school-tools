@@ -25,7 +25,7 @@ public class ActivatedModel {
 			
 			// Step 1: load the info-beads from the Eclipse work folder
 			URL[] urls;
-			URL filePath = new URL(" file:/C:/LocalSVN/UserModel_HW/IBUMCORE/bin/..//bin/infobeadCollection/");
+			URL filePath = new URL(" file:/C:/LocalSVN/trunk/School/UserModel_HW/IBUMCORE/bin/..//bin/infobeadCollection/");
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
@@ -34,27 +34,18 @@ public class ActivatedModel {
 			UserPhysicalLocation_0.setInfoBeadId("UserPhysicalLocation_0");
 			UserPhysicalLocation_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_1 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
-			InfoBead UserTemperature_1= (InfoBead)cls_1.newInstance();
-			UserTemperature_1.setInfoBeadId("UserTemperature_1");
-			UserTemperature_1.setInfobeadModelId("UM1");
-
-			Class<?> cls_2 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
-			InfoBead UserPhysicalCondition_2= (InfoBead)cls_2.newInstance();
-			UserPhysicalCondition_2.setInfoBeadId("UserPhysicalCondition_2");
-			UserPhysicalCondition_2.setInfobeadModelId("UM1");
+			Class<?> cls_1 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
+			InfoBead UserNearCoffeeShop_1= (InfoBead)cls_1.newInstance();
+			UserNearCoffeeShop_1.setInfoBeadId("UserNearCoffeeShop_1");
+			UserNearCoffeeShop_1.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserTemperature_1.connect(UserPhysicalCondition_2);
-
-			UserPhysicalLocation_0.connect(UserPhysicalCondition_2);
+			UserPhysicalLocation_0.connect(UserNearCoffeeShop_1);
 
 			//Step 3: Initialize info-beads
 			UserPhysicalLocation_0.initialize();
 
-			UserTemperature_1.initialize();
-
-			UserPhysicalCondition_2.initialize();
+			UserNearCoffeeShop_1.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();

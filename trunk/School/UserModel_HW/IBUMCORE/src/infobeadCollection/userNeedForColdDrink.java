@@ -33,12 +33,12 @@ public class userNeedForColdDrink extends InfoBead implements Runnable {
 
 	@Override
 	public void run() {
-		Triplet tripletTest = new Triplet("need_of_cold_drink_triplet");
+		Triplet tripletTest = new Triplet(TRIPLET_ID);
 		Time t = new Time(System.currentTimeMillis());
 		InfoItem data = new InfoItem();
 		data.setInferenceTime(t);
 		data.setExplainInfo("");
-		data.setInfoType("needOfColdDrinkBoolean");
+		data.setInfoType(TRIPLET_ID + "boolean");
 		data.setInfoValue(this.needForColdDrink);
 		tripletTest.setTime(t);
 		tripletTest.setInfoItem(data);
