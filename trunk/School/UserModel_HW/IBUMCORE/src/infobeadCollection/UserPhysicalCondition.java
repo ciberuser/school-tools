@@ -15,6 +15,7 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 	private static final long serialVersionUID = 1L;
 	Location location = null; 
 	UserTemperature temp = null;
+	public static final String TRIPLET_ID="pysicalCondition_triplet";
 	
 	@Override
 	public void handleData(Triplet data) {
@@ -48,13 +49,13 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 
 	@Override
 	public void run() {
-		Triplet tripletTest = new Triplet("user physical condition info bead");
+		Triplet tripletTest = new Triplet("pysicalCondition_triplet");
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem data = new InfoItem();
 			data.setInferenceTime(t);
-			data.setExplainInfo("Main >> Testing Display Services");
-			data.setInfoType("test");
-			data.setInfoUnits("testUnits");
+			data.setExplainInfo("user physical condition");
+			data.setInfoType("");
+			data.setInfoUnits("");
 			//data.setInfoValue();
 			tripletTest.setTime(t);
 			tripletTest.setInfoItem(data);
