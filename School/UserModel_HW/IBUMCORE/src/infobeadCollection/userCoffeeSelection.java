@@ -11,47 +11,66 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 
 	public static final String TRIPLET_ID="user_coffee_selection_triplet";
 	
-	userPreferences.EmilkPrefs milkType = null; 
-	userPreferences.coffeeBlend coffeeBlend= null; 
-	userPreferences.EcupSize cupSize = null; 
+	private userPreferences.EmilkPrefs m_milkType = null; 
+	private userPreferences.EcoffeeBlend m_coffeeBlend= null; 
+	private userPreferences.EcupSize m_cupSize = null; 
 	
-	userPreferences.EdrinkPrefs drinkPrefs = null;
-	userPreferences.EdrinkTemp drinkTemp = null; 
+	private userPreferences.EdrinkPrefs m_drinkPrefs = null;
+	private userPreferences.EdrinkTemp m_drinkTemp = null; 
 	
-	userPreferences finalPrefs;
+	private userPreferences m_finalPrefs;
 
 
 	@Override
-	public void handleData(Triplet data) {
+	public void handleData(Triplet data) 
+	{
 		
-		
-		
-		if((String)data.getId() == "milk_type_triplet")
+	
+		if((String)data.getId() ==  userMilkTypePref.TRIPLET_ID)
 		{
-			this.milkType = (userPreferences.EmilkPrefs)data.getInfoItem().getInfoValue();
+			m_milkType = (userPreferences.EmilkPrefs)data.getInfoItem().getInfoValue();
 		}
 		
-		if((String)data.getId() == "cup_size_triplet")
+		if((String)data.getId() == userCupSizePref.TRIPLET_ID)
 		{
-			this.cupSize = (userPreferences.EcupSize)data.getInfoItem().getInfoValue();
+			m_cupSize = (userPreferences.EcupSize)data.getInfoItem().getInfoValue();
 		}
 		
-		if((String)data.getId() == "blend_type_triplet")
+		if((String)data.getId() == userCoffeeBlendPref.TRIPLET_ID)
 		{
-			this.coffeeBlend =  (userPreferences.coffeeBlend)data.getInfoItem().getInfoValue();
+			m_coffeeBlend =  (userPreferences.EcoffeeBlend)data.getInfoItem().getInfoValue();
 		}
 		
+		if ( data.getId() == UserCoffeePrefernces.TRIPLET_ID)
+		{
+			m_finalPrefs = (userPreferences) data.getInfoItem().getInfoValue();
+		}
 		
-		userPreferences p = new userPreferences();
+		if (m_finalPrefs!=null)
+		{
+			if (m_cupSize!=null)
+			{
+				m_finalPrefs.setCupSize(m_cupSize);
+			}
+			if (m_coffeeBlend!=null)
+			{
+				m_finalPrefs.setBlend(m_coffeeBlend);
+			}
+			if (m_milkType!=null)
+			{
+				m_finalPrefs.setMilkType(m_milkType);
+			}
+		}
+		//and now just to send !!!
 		
-
-		this.drinkPrefs =  userPreferences.EdrinkPrefs.getRandom();
-		
-		p.SetWhatToDrink(this.drinkPrefs, this.drinkTemp, this.milkType);
-		
-		this.finalPrefs = p; 
-
 	}
+		
+		
+
+		
+		
+	
+
 
 	@Override
 	public void initialize() {
@@ -68,7 +87,7 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 		data.setInferenceTime(t);
 		data.setExplainInfo("");
 		data.setInfoType("userPreferences");
-		data.setInfoValue(this.finalPrefs);
+		data.setInfoValue(m_finalPrefs);
 		tripletTest.setTime(t);
 		tripletTest.setInfoItem(data);
 		pushData(tripletTest);

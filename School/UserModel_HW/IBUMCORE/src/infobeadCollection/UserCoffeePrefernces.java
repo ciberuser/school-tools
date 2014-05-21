@@ -1,6 +1,10 @@
 package infobeadCollection;
 
+import java.sql.Time;
+
+
 import genericInfoBead.InfoBead;
+import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
 public class UserCoffeePrefernces extends InfoBead implements Runnable {
@@ -43,12 +47,14 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 		{
 		case userNeedForColdDrink.TRIPLET_ID :
 			m_want_cold = (boolean)data.getInfoItem().getInfoValue();
-			
+			m_want_hot =!m_want_cold;
+			 
 		break;
 		
 		
 		case userNeedForHotDrink.TRIPLET_ID : 
 			m_want_hot = (boolean)data.getInfoItem().getInfoValue();
+			m_want_cold =!m_want_hot;
 		break;
 		
 		
@@ -66,7 +72,29 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 		{
 					
 			m_neer_show =true;
-			if (!m_neer_show) PrintMsg("user at the coffee shop !!!");
+			if (!m_neer_show)
+			{	
+				PrintMsg("user at the coffee shop !!!");
+				userPreferences userPref = new userPreferences();
+				
+				if (m_want_hot)
+				{
+					userPref.SetWhatToDrink(userPreferences.EdrinkTemp.Hot);
+				}
+				else
+				{
+					userPref.SetWhatToDrink(userPreferences.EdrinkTemp.Cold);
+				}
+				Triplet coffeeTriplet =new Triplet(TRIPLET_ID);
+				Time time =new Time( System.currentTimeMillis());
+				coffeeTriplet.setTime(time);
+				InfoItem dataItem  = new InfoItem();
+				dataItem.setInferenceTime(time);
+				dataItem.setInfoValue(userPref);
+				coffeeTriplet.setInfoItem(dataItem);
+				pushData(coffeeTriplet);
+				
+			}
 			
 			
 		}
