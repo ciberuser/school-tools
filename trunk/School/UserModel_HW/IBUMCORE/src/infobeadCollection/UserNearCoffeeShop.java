@@ -33,7 +33,7 @@ public class UserNearCoffeeShop extends InfoBead {
 			{
 			
 				Location loc =  (Location) infoData.getInfoValue();
-				System.out.println("got user location:"+loc.toString());
+				PrintMsg("got user location:"+loc.toString());
 					
 				
 				try {Thread.sleep(1500);} catch (InterruptedException e) {}
@@ -44,7 +44,7 @@ public class UserNearCoffeeShop extends InfoBead {
 				if ((loc.getM_x()==COFFEE_SHOP_X_LOCATION) && loc.getM_y() == COFFEE_SHOP_Y_LOCATION)
 				{
 					at_theCoffeShop= true;
-					System.out.println("user at the coffee shop");
+					PrintMsg("user at the coffee shop!!!!!");
 					
 				}
 				

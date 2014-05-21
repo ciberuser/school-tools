@@ -91,7 +91,10 @@ public abstract class InfoBead extends Observable implements Observer, Serializa
 	}
 	
 	
-
+	protected void PrintMsg(String msg)
+	{
+		System.out.println(this.getClass().getName()+": " + msg);
+	}
 
 	
 	/* -------------------------------------------------------------------------
