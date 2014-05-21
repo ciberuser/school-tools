@@ -8,7 +8,7 @@ import genericInfoBead.Triplet;
 
 public class userCupSizePref extends InfoBead {
 	
-	public static final String TRIPLET_ID="blend_type_triplet";
+	public static final String TRIPLET_ID="cup_size_triplet";
 	userPreferences.EcupSize selectedCupSize; 
 
 	@Override
@@ -17,16 +17,16 @@ public class userCupSizePref extends InfoBead {
 		 this.selectedCupSize = userPreferences.EcupSize.getRandom();
 		 
 		 	PrintMsg("user want " +  selectedCupSize.toString());
-			Triplet tripletTest = new Triplet(this.TRIPLET_ID);
+			Triplet tripletCupSize = new Triplet(this.TRIPLET_ID);
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem dataOut = new InfoItem();
 			dataOut.setInferenceTime(t);
-			dataOut.setExplainInfo("");
+			dataOut.setExplainInfo("user want size of  " +selectedCupSize.toString() +"size cup");
 			dataOut.setInfoType("userPreferences");
 			dataOut.setInfoValue(this.selectedCupSize);
-			tripletTest.setTime(t);
-			tripletTest.setInfoItem(dataOut);
-			pushData(tripletTest);		
+			tripletCupSize.setTime(t);
+			tripletCupSize.setInfoItem(dataOut);
+			pushData(tripletCupSize);		
 		
 	}
 

@@ -16,7 +16,7 @@ public class userCoffeeBlendPref extends InfoBead implements Runnable{
 	@Override
 	public void handleData(Triplet data) {
 			 
-		PrintMsg("got triplet...");
+		
 		 userPreferences.EcoffeeBlend userSelectBlend; 
 		 userSelectBlend = userPreferences.EcoffeeBlend.getRandom();
 		 PrintMsg("user Want " +userSelectBlend );
