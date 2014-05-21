@@ -19,7 +19,7 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 	private userPreferences.EdrinkTemp m_drinkTemp = null; 
 	
 	private userPreferences m_finalPrefs;
-
+	private boolean m_sendPref =false;
 
 	@Override
 	public void handleData(Triplet data) 
@@ -61,14 +61,15 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 				m_finalPrefs.setMilkType(m_milkType);
 			}
 		}
+		if (m_cupSize!=null && m_coffeeBlend!=null && m_milkType!=null)
+		{
+			PrintMsg("all prefrences ... will send it ");
+			m_sendPref = true;
+		}
 		//and now just to send !!!
 		
 	}
-		
-		
 
-		
-		
 	
 
 
@@ -81,16 +82,24 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 
 	@Override
 	public void run() {
-		Triplet tripletTest = new Triplet(this.TRIPLET_ID);
-		Time t = new Time(System.currentTimeMillis());
-		InfoItem data = new InfoItem();
-		data.setInferenceTime(t);
-		data.setExplainInfo("");
-		data.setInfoType("userPreferences");
-		data.setInfoValue(m_finalPrefs);
-		tripletTest.setTime(t);
-		tripletTest.setInfoItem(data);
-		pushData(tripletTest);
+		while(true)
+		{ 
+			if (m_sendPref)
+			{
+				Triplet tripletTest = new Triplet(this.TRIPLET_ID);
+				Time t = new Time(System.currentTimeMillis());
+				InfoItem data = new InfoItem();
+				data.setInferenceTime(t);
+				data.setExplainInfo("");
+				data.setInfoType("userPreferences");
+				data.setInfoValue(m_finalPrefs);
+				tripletTest.setTime(t);
+				tripletTest.setInfoItem(data);
+				pushData(tripletTest);
+				m_sendPref=false;
+			}
+		}
+		
 		
 	}
 

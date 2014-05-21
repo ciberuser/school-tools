@@ -93,7 +93,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		{
 			try
 			{
-				Thread.sleep(6000);
+				Thread.sleep(30000);
 			} catch (InterruptedException e) {	e.printStackTrace();}
 		}
 	}

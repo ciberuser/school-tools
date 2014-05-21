@@ -68,8 +68,9 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 	}
 
 	@Override
-	public void run() {
-	
+	public void run()
+	{
+		
 		/*Triplet tripletTest = new Triplet("pysicalCondition_triplet");
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem data = new InfoItem();

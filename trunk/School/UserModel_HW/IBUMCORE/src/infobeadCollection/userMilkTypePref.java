@@ -14,7 +14,10 @@ public class userMilkTypePref extends InfoBead {
 	@Override
 	public void handleData(Triplet data)
 	{
+		
+		
 		userPreferences.EmilkPrefs milkpref =userPreferences.EmilkPrefs.getRandom();
+		PrintMsg("user want " +milkpref.toString());
 		Triplet tripletTest = new Triplet(this.TRIPLET_ID);
 		Time t = new Time(System.currentTimeMillis());
 		InfoItem dataOut = new InfoItem();
