@@ -9,9 +9,8 @@ public class userPreferences {
 	public userPreferences ()
 	{
 		m_milk =EmilkPrefs.None;
-		m_drink=EdrinkPrefs.None;
+
 		m_temp=EdrinkTemp.None;
-		m_food=EfoodPrefs.None;
 	}
 	
 	
@@ -25,17 +24,32 @@ public class userPreferences {
 	public enum EdrinkPrefs
 	{
 		Tea ,
-		Coffee ,
-		None
+		Coffee;
 		
-		
-		
+		 public static EdrinkPrefs getRandom() {
+	        return values()[(int) (Math.random() * values().length)];
+	    }
 	}
+	
+	public enum cupSize
+	{
+		small, 
+		medium,
+		large,		
+	}
+	
 	public enum EdrinkTemp{
 		Hot,
 		Cold,
 		None,
 		
+	}
+	
+	public enum coffeeBlend
+	{
+		brazilian, 
+		colombian, 
+		african, 
 	}
 	
 	
@@ -46,29 +60,12 @@ public class userPreferences {
 		None
 	}
 	
-	void SetWhatToEat(EfoodPrefs foodType)
-	{
-		m_food = foodType;
-	}
-	
-	public enum EfoodPrefs
-	{
-		Snack,
-		Meal,
-		Pastry,
-		None
-	}
+
 	
 	
 	public EdrinkPrefs getDrink() {
 		return m_drink;
 	}
-
-
-	public EfoodPrefs getFoodType() {
-		return m_food;
-	}
-
 
 	public EmilkPrefs getMilkType() {
 		return m_milk;
@@ -83,21 +80,13 @@ public class userPreferences {
 	public String IWant2Buy()
 	{
 		String  outMsg ="";
-		if (m_drink!=EdrinkPrefs.None)
-		{
-			outMsg+="i want " + m_temp.toString() +" "+ m_drink.toString() +" with " + m_milk.toString() +"\n" ;
-		}
-		
-		if (m_food!= EfoodPrefs.None)
-		{
-			outMsg += "i want to eat " + m_food.toString();
-		}
-		
-		
+
+		outMsg+="i want " + m_temp.toString() +" "+ m_drink.toString() +" with " + m_milk.toString() +"\n" ;
+
 		return outMsg;
 	}
 	
-	private EfoodPrefs m_food;
+
 	private EmilkPrefs m_milk;
 	private EdrinkTemp m_temp;
 	private EdrinkPrefs m_drink;
