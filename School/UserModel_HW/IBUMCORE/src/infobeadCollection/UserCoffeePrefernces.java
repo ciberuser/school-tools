@@ -11,8 +11,12 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean m_neerCoffeeShop; 
+	private boolean m_neer_show;
+	
 	private boolean m_want_cold ;
 	private boolean m_want_hot;
+	
+	
 	
 	public UserCoffeePrefernces()
 	{
@@ -39,6 +43,7 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 		{
 		case userNeedForColdDrink.TRIPLET_ID :
 			m_want_cold = (boolean)data.getInfoItem().getInfoValue();
+			
 		break;
 		
 		
@@ -51,13 +56,19 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 		m_neerCoffeeShop =  (boolean)data.getInfoItem().getInfoValue();
 		break;
 		}
+		
 		if (!m_neerCoffeeShop)
 		{
-			PrintMsg("user is not in  the coffee shop ...:(");
+			m_neer_show =false;
+			//PrintMsg("user is not in  the coffee shop ...:(");
 		}
 		else
 		{
-				
+					
+			m_neer_show =true;
+			if (!m_neer_show) PrintMsg("user at the coffee shop !!!");
+			
+			
 		}
 		
 		

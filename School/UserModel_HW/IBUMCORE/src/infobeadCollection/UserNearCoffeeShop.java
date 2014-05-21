@@ -33,7 +33,7 @@ public class UserNearCoffeeShop extends InfoBead {
 			{
 			
 				Location loc =  (Location) infoData.getInfoValue();
-				PrintMsg("got user location:"+loc.toString());
+				//PrintMsg("got user location:"+loc.toString());
 					
 				
 				try {Thread.sleep(1500);} catch (InterruptedException e) {}

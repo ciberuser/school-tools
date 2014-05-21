@@ -39,7 +39,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	
 	public void GoTo(int x , int y)
 	{
-		//this.PrintMsg("user go location x=" +x +" y= " +y);
+		this.PrintMsg("user go to location x=" +x +" y= " +y);
 		m_x_location =x;
 		m_y_location =y;
 	}
@@ -51,7 +51,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		for (int ix =0, iy=0; ix< 120 ; ix+=10,iy+=10 )
 		{
 			try {
-					Thread.sleep(500);
+					Thread.sleep(300);
 					GoTo(ix, iy);
 					SendLocationTreplet();
 			}
@@ -93,7 +93,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		{
 			try
 			{
-				Thread.sleep(3000);
+				Thread.sleep(6000);
 			} catch (InterruptedException e) {	e.printStackTrace();}
 		}
 	}

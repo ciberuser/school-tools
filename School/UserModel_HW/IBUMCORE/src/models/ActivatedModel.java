@@ -29,23 +29,72 @@ public class ActivatedModel {
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
-			Class<?> cls_0 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_0= (InfoBead)cls_0.newInstance();
-			UserPhysicalLocation_0.setInfoBeadId("UserPhysicalLocation_0");
-			UserPhysicalLocation_0.setInfobeadModelId("UM1");
+			Class<?> cls_0 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
+			InfoBead UserPhysicalCondition_0= (InfoBead)cls_0.newInstance();
+			UserPhysicalCondition_0.setInfoBeadId("UserPhysicalCondition_0");
+			UserPhysicalCondition_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_1 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_1= (InfoBead)cls_1.newInstance();
-			UserNearCoffeeShop_1.setInfoBeadId("UserNearCoffeeShop_1");
-			UserNearCoffeeShop_1.setInfobeadModelId("UM1");
+			Class<?> cls_1 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_1= (InfoBead)cls_1.newInstance();
+			UserPhysicalLocation_1.setInfoBeadId("UserPhysicalLocation_1");
+			UserPhysicalLocation_1.setInfobeadModelId("UM1");
+
+			Class<?> cls_2 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
+			InfoBead UserTemperature_2= (InfoBead)cls_2.newInstance();
+			UserTemperature_2.setInfoBeadId("UserTemperature_2");
+			UserTemperature_2.setInfobeadModelId("UM1");
+
+			Class<?> cls_3 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
+			InfoBead UserNearCoffeeShop_3= (InfoBead)cls_3.newInstance();
+			UserNearCoffeeShop_3.setInfoBeadId("UserNearCoffeeShop_3");
+			UserNearCoffeeShop_3.setInfobeadModelId("UM1");
+
+			Class<?> cls_4 = Class.forName("infobeadCollection.UserCoffeePrefernces", true, classLoader);
+			InfoBead UserCoffeePrefernces_4= (InfoBead)cls_4.newInstance();
+			UserCoffeePrefernces_4.setInfoBeadId("UserCoffeePrefernces_4");
+			UserCoffeePrefernces_4.setInfobeadModelId("UM1");
+
+			Class<?> cls_5 = Class.forName("infobeadCollection.userNeedForColdDrink", true, classLoader);
+			InfoBead userNeedForColdDrink_5= (InfoBead)cls_5.newInstance();
+			userNeedForColdDrink_5.setInfoBeadId("userNeedForColdDrink_5");
+			userNeedForColdDrink_5.setInfobeadModelId("UM1");
+
+			Class<?> cls_6 = Class.forName("infobeadCollection.userNeedForColdDrink", true, classLoader);
+			InfoBead userNeedForColdDrink_6= (InfoBead)cls_6.newInstance();
+			userNeedForColdDrink_6.setInfoBeadId("userNeedForColdDrink_6");
+			userNeedForColdDrink_6.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserPhysicalLocation_0.connect(UserNearCoffeeShop_1);
+			UserPhysicalLocation_1.connect(UserPhysicalCondition_0);
+
+			UserTemperature_2.connect(UserPhysicalCondition_0);
+
+			UserPhysicalLocation_1.connect(UserNearCoffeeShop_3);
+
+			UserNearCoffeeShop_3.connect(UserCoffeePrefernces_4);
+
+			UserPhysicalCondition_0.connect(userNeedForColdDrink_5);
+
+			userNeedForColdDrink_5.connect(UserCoffeePrefernces_4);
+
+			UserPhysicalCondition_0.connect(userNeedForColdDrink_6);
+
+			userNeedForColdDrink_6.connect(UserCoffeePrefernces_4);
 
 			//Step 3: Initialize info-beads
-			UserPhysicalLocation_0.initialize();
+			UserPhysicalCondition_0.initialize();
 
-			UserNearCoffeeShop_1.initialize();
+			UserPhysicalLocation_1.initialize();
+
+			UserTemperature_2.initialize();
+
+			UserNearCoffeeShop_3.initialize();
+
+			UserCoffeePrefernces_4.initialize();
+
+			userNeedForColdDrink_5.initialize();
+
+			userNeedForColdDrink_6.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
