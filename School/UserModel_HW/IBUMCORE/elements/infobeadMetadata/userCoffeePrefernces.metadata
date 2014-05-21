@@ -4,4 +4,5 @@
     <input-interface>user_near_coffee_shop</input-interface>
     <input-interface>need_of_cold_drink_triplet</input-interface>
     <input-interface>need_of_hot_drink_triplet</input-interface>
+    <output-interface>coffee_prefs_triplet</output-interface>
 </metadata>

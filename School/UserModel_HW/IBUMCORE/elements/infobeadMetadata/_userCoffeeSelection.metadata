@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+        <input-interface>cup_size_triplet</input-interface>
+        <input-interface>milk_type_triplet</input-interface>
+        <input-interface>blend_type_triplet</input-interface>
+        <output-interface>user_coffee_selection_triplet</output-interface>
+</metadata>

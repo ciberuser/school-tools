@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+        <input-interface>coffee_prefs_triplet</input-interface>
+        <output-interface>blend_type_triplet</output-interface>
+</metadata>
