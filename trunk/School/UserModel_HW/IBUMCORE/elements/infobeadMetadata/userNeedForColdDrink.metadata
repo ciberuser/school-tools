@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metadata>
-        <input-interface>pysicalCondition_triplet</intput-interface>
+        <input-interface>pysicalCondition_triplet</input-interface>
         <output-interface>need_of_cold_drink_triplet</output-interface>
 </metadata>

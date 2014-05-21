@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metadata>
-    <output-interface>temperature_triplet</output-interface>
-    
+    <output-interface>temperature_triplet</output-interface>  
 </metadata>
