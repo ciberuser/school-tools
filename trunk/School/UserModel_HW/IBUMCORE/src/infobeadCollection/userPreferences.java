@@ -1,26 +1,43 @@
 package infobeadCollection;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import javax.swing.DropMode;
 
 public class userPreferences {
 	
 	
-	
+	private Lock m_lock ;
+	private lockerCondition m_lockerCondition ;
 	public userPreferences ()
 	{
+		m_lock = new ReentrantLock();
+		
 		m_milk =EmilkPrefs.None;
-
 		m_temp=EdrinkTemp.None;
+		
 	}
 	
 	
 	void SetWhatToDrink (EdrinkPrefs type ,EdrinkTemp temp,EmilkPrefs milk)
 	{
+		
+		m_lock.lock();
 		m_drink =type;
 		m_temp =temp;
 		m_milk = milk;
+		m_lock.unlock();
 	}
-		
+	
+	void SetWhatToDrink(EdrinkTemp  temp)
+	{
+		m_lock.lock();
+		m_drink = EdrinkPrefs.getRandom();
+		m_temp = temp;
+		m_lock.unlock();
+	}
+	
 	public enum EdrinkPrefs
 	{
 		Tea ,
@@ -49,13 +66,13 @@ public class userPreferences {
 		
 	}
 	
-	public enum coffeeBlend
+	public enum EcoffeeBlend
 	{
 		brazilian, 
 		colombian, 
 		african; 
 		
-		 public static coffeeBlend getRandom() {
+		 public static EcoffeeBlend getRandom() {
 		        return values()[(int) (Math.random() * values().length)];
 		    }
 	}
@@ -65,7 +82,11 @@ public class userPreferences {
 	{
 		Normal,
 		Soy,
-		None
+		None;
+		
+		 public static EmilkPrefs getRandom() {
+	        return values()[(int) (Math.random() * values().length)];
+	    }
 	}
 	
 
@@ -89,14 +110,38 @@ public class userPreferences {
 	{
 		String  outMsg ="";
 
-		outMsg+="i want " + m_temp.toString() +" "+ m_drink.toString() +" with " + m_milk.toString() +"\n" ;
+		outMsg+="i want " + m_temp.toString() +" " + m_drink.toString() +" with " + m_milk.toString() +"\n" ;
 
 		return outMsg;
 	}
 	
-
+	public void setCupSize(EcupSize cupSize) 
+	{
+		m_lock.lock();
+		this.m_cEcupSize = cupSize;
+		m_lock.unlock();
+	}
+	
+	public void setBlend(EcoffeeBlend blend)
+	{
+		m_lock.lock();
+		this.m_blend = blend;
+		m_lock.unlock();
+		
+	}
+	
+	public void setMilkType(EmilkPrefs milk)
+	{
+		m_lock.lock();
+		m_milk = milk;
+		m_lock.unlock();
+	}
+	
+	
 	private EmilkPrefs m_milk;
 	private EdrinkTemp m_temp;
 	private EdrinkPrefs m_drink;
-
+	private EcupSize m_cEcupSize;
+	private EcoffeeBlend m_blend;
+	
 }

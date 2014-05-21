@@ -54,7 +54,7 @@ public class UserTemperature extends InfoBead implements Runnable{
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem data = new InfoItem();
 			data.setInferenceTime(t);
-			data.setExplainInfo("Main >> Testing Display Services");
+			data.setExplainInfo("user internal temperature");
 			data.setInfoType("user temperature");
 			data.setInfoUnits("C°");
 			
