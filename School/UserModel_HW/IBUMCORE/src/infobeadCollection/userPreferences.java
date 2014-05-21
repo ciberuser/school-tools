@@ -31,11 +31,15 @@ public class userPreferences {
 	    }
 	}
 	
-	public enum cupSize
+	public enum EcupSize
 	{
 		small, 
 		medium,
-		large,		
+		large;		
+		
+		 public static EcupSize getRandom() {
+		        return values()[(int) (Math.random() * values().length)];
+		    }
 	}
 	
 	public enum EdrinkTemp{
@@ -49,7 +53,11 @@ public class userPreferences {
 	{
 		brazilian, 
 		colombian, 
-		african, 
+		african; 
+		
+		 public static coffeeBlend getRandom() {
+		        return values()[(int) (Math.random() * values().length)];
+		    }
 	}
 	
 	
