@@ -39,7 +39,6 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	
 	public void GoTo(int x , int y)
 	{
-		//System.out.println("user go location x=" +x +" y= " +y);
 		//this.PrintMsg("user go location x=" +x +" y= " +y);
 		m_x_location =x;
 		m_y_location =y;

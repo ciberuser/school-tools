@@ -47,9 +47,7 @@ public class UserNearCoffeeShop extends InfoBead {
 					PrintMsg("user at the coffee shop!!!!!");
 					
 				}
-				
-				
-				
+								
 				pushdata.setInfoValue(new Boolean(at_theCoffeShop));
 				
 				tripletNearCoffee.setInfoItem(pushdata);

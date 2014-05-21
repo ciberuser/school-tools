@@ -6,33 +6,40 @@ import genericInfoBead.Triplet;
 public class userCoffeePrefernces extends InfoBead implements Runnable {
 
 
-	private static final long serialVersionUID = 1L;
+	private boolean m_neerCoffeeShop; 
+	private boolean m_want_cold ;
+	private boolean m_want_hot;
+	
+	public userCoffeePrefernces()
+	{
+		super();
+		m_neerCoffeeShop = false;
+		m_want_cold =false;
+		m_want_hot = false;
+		
+	}
 	
 	public static final String TRIPLET_ID="coffee_prefs_triplet";
-	
-	public boolean need_for_hot_drink = false;
-	public boolean need_for_cold_drink = false; 
-	public boolean user_location_near_coffeeShop = false; 
-	public String userPrefs; 
-
+	/*
+    public String  
 			if((Integer)data.getInfoItem().getInfoValue() > 38)
 		{
 			this.needForColdDrink = true; 
 		}
-
+*/
+	
 	@Override
 	public void handleData(Triplet data) {
 		
 		switch(data.getId())
 		{
-		case userNeedForColdDrink.TRIPLET_ID : 
-		if((Boolean)data.getInfoItem().getInfoValue()){this.need_for_cold_drink = true;};
+		case userNeedForColdDrink.TRIPLET_ID :
+			m_want_cold = (boolean)data.getInfoItem().getInfoValue();
 		break;
 		
 		
-		case userNeedForHotDrink.TRIPLET_ID :
-		if((Boolean)data.getInfoItem().getInfoValue())
-		{this.need_for_hot_drink = true;};
+		case userNeedForHotDrink.TRIPLET_ID : 
+			m_want_hot = (boolean)data.getInfoItem().getInfoValue();
 		break;
 		
 		
@@ -40,20 +47,30 @@ public class userCoffeePrefernces extends InfoBead implements Runnable {
 		m_neerCoffeeShop =  (boolean)data.getInfoItem().getInfoValue();
 		break;
 		}
+		if (!m_neerCoffeeShop)
+		{
+			PrintMsg("user is not in  the coffee shop ...:(");
+		}
+		else
+		{
+				
+		}
+		
+		
 
 		
 	}
 
 	@Override
 	public void initialize() {
-				Thread prefs = new Thread(this, "");
-				prefs.start();
-		
+		Thread locationThread = new Thread(this,"userCoffeePreferncesThread");
+		locationThread.start();
 	}
 	
 		@Override
-	public void run() {
-	
+	public void run() 
+	{
+	/*
 			this.userPrefs = this.needForColdDrink.toString() + '|' + this.need_for_hot_drink.toString() + '|' + this.user_location_near_coffeeShop.toString;
 
 			Triplet tripletTest = new Triplet("coffee_prefs_triplet");
@@ -70,7 +87,8 @@ public class userCoffeePrefernces extends InfoBead implements Runnable {
 			tripletTest.setTime(t);
 			tripletTest.setInfoItem(data);
 			pushData(tripletTest); 
-
+*/
+			
 	}
 
 }
