@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+		<input-interface>temperature_triplet</input-interface>
+		<input-interface>location_triplet</input-interface>
+        <output-interface>pysicalCondition_triplet</output-interface>
+</metadata>
