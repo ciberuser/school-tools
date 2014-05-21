@@ -23,7 +23,7 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 		if(data.getId().equals(UserTemperature.TRIPLET_ID))
 		{
 			Integer temp = (Integer)data.getInfoItem().getInfoValue();
-			System.out.println(temp);
+			PrintMsg(temp.toString());
 			
 		}
 		
@@ -32,7 +32,7 @@ public class UserPhysicalCondition extends InfoBead implements Runnable {
 		if(data.getId().equals(Location.TRIPLET_ID))
 		{
 			this.location = (Location)data.getInfoItem().getInfoValue();
-			System.out.println(this.location.toString());
+			this.PrintMsg(this.location.toString());
 		}
 		
 		
