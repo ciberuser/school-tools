@@ -16,6 +16,7 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private boolean m_neerCoffeeShop; 
 	private boolean m_neer_show;
+	private boolean m_showOneNotNear =true;
 	
 	private boolean m_want_cold ;
 	private boolean m_want_hot;
@@ -43,47 +44,59 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 	@Override
 	public void handleData(Triplet data) {
 		
+		
 		switch(data.getId())
 		{
 		case userNeedForColdDrink.TRIPLET_ID :
 			m_want_cold = (boolean)data.getInfoItem().getInfoValue();
 			m_want_hot =!m_want_cold;
-			 
+			
 		break;
 		
 		
 		case userNeedForHotDrink.TRIPLET_ID : 
 			m_want_hot = (boolean)data.getInfoItem().getInfoValue();
 			m_want_cold =!m_want_hot;
+			PrintMsg("Got triplet cold"); 
 		break;
 		
 		
 		case UserNearCoffeeShop.TRIPLET_ID: 
 		m_neerCoffeeShop =  (boolean)data.getInfoItem().getInfoValue();
+		PrintMsg("Got triplet neer got..." +m_neerCoffeeShop  ); 
 		break;
 		}
 		
 		if (!m_neerCoffeeShop)
 		{
 			m_neer_show =false;
-			//PrintMsg("user is not in  the coffee shop ...:(");
+			if (m_showOneNotNear) 
+			{
+				PrintMsg("user is not in  the coffee shop ...:(");
+				m_showOneNotNear = false;
+				m_neer_show =true;
+			}
 		}
 		else
 		{
 					
-			m_neer_show =true;
-			if (!m_neer_show)
-			{	
-				PrintMsg("user at the coffee shop !!!");
+			
+			if (m_neer_show)
+			{
+				m_showOneNotNear =true;
+				
+				
 				userPreferences userPref = new userPreferences();
 				
 				if (m_want_hot)
 				{
 					userPref.SetWhatToDrink(userPreferences.EdrinkTemp.Hot);
+					PrintMsg("user at the coffee shop !!! and he want cold drink" );
 				}
 				else
 				{
 					userPref.SetWhatToDrink(userPreferences.EdrinkTemp.Cold);
+					PrintMsg("user at the coffee shop !!! and he want hot drink" );
 				}
 				Triplet coffeeTriplet =new Triplet(TRIPLET_ID);
 				Time time =new Time( System.currentTimeMillis());
@@ -93,6 +106,7 @@ public class UserCoffeePrefernces extends InfoBead implements Runnable {
 				dataItem.setInfoValue(userPref);
 				coffeeTriplet.setInfoItem(dataItem);
 				pushData(coffeeTriplet);
+				m_neer_show =false;
 				
 			}
 			

@@ -6,7 +6,7 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
-public class userNeedForColdDrink extends InfoBead implements Runnable {
+public class userNeedForColdDrink extends InfoBead  {
 	
 
 	private static final long serialVersionUID = 1L;
@@ -20,35 +20,25 @@ public class userNeedForColdDrink extends InfoBead implements Runnable {
 	{
 	
 		
-		if((Integer)data.getInfoItem().getInfoValue() > 38)
-		{
-			this.needForColdDrink = true; 
-		}
-	}
-
-	@Override
-	public void initialize() {
-		Thread coldDrink = new Thread(this, "");
-		coldDrink.start();
+		this.needForColdDrink = ((Integer)data.getInfoItem().getInfoValue() > 38);
+		
+			Triplet tripletTest = new Triplet(this.TRIPLET_ID);
+			Time t = new Time(System.currentTimeMillis());
+			InfoItem dataItem = new InfoItem();
+			dataItem.setInferenceTime(t);
+			dataItem.setExplainInfo("");
+			dataItem.setInfoType(TRIPLET_ID + "boolean");
+			dataItem.setInfoValue(this.needForColdDrink);
+			tripletTest.setTime(t);
+			tripletTest.setInfoItem(dataItem);
+			pushData(tripletTest);
 		
 	}
 
 	@Override
-	public void run() 
-	{
-		while(true)
-		{
-			Triplet tripletTest = new Triplet(this.TRIPLET_ID);
-			Time t = new Time(System.currentTimeMillis());
-			InfoItem data = new InfoItem();
-			data.setInferenceTime(t);
-			data.setExplainInfo("");
-			data.setInfoType(TRIPLET_ID + "boolean");
-			data.setInfoValue(this.needForColdDrink);
-			tripletTest.setTime(t);
-			tripletTest.setInfoItem(data);
-			pushData(tripletTest);
-		}
+	public void initialize() {
+		
 	}
+
 
 }

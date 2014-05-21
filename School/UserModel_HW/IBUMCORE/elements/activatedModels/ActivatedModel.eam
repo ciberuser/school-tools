@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <activatedModel>
-    <infoBeads>UserPhysicalLocation_0,UM1</infoBeads>
-    <infoBeads>UserNearCoffeeShop_1,UM1</infoBeads>
-    <infoLinks>UserPhysicalLocation_0,UserNearCoffeeShop_1</infoLinks>
+    <infoBeads>UserTemperature_0,UM1</infoBeads>
+    <infoBeads>UserPhysicalLocation_1,UM1</infoBeads>
+    <infoBeads>UserPhysicalCondition_2,UM1</infoBeads>
+    <infoBeads>UserNearCoffeeShop_3,UM1</infoBeads>
+    <infoBeads>userNeedForHotDrink_4,UM1</infoBeads>
+    <infoBeads>userNeedForColdDrink_5,UM1</infoBeads>
+    <infoBeads>UserCoffeePrefernces_6,UM1</infoBeads>
+    <infoBeads>userMilkTypePref_7,UM1</infoBeads>
+    <infoBeads>userCupSizePref_8,UM1</infoBeads>
+    <infoBeads>userCoffeeBlendPref_9,UM1</infoBeads>
+    <infoBeads>userSelectionToBuy_10,UM1</infoBeads>
+    <infoBeads>userCoffeeSelection_11,UM1</infoBeads>
+    <infoLinks>UserTemperature_0,UserPhysicalCondition_2</infoLinks>
+    <infoLinks>UserPhysicalLocation_1,UserPhysicalCondition_2</infoLinks>
+    <infoLinks>UserPhysicalLocation_1,UserNearCoffeeShop_3</infoLinks>
+    <infoLinks>UserPhysicalCondition_2,userNeedForHotDrink_4</infoLinks>
+    <infoLinks>UserPhysicalCondition_2,userNeedForColdDrink_5</infoLinks>
+    <infoLinks>UserNearCoffeeShop_3,UserCoffeePrefernces_6</infoLinks>
+    <infoLinks>userNeedForColdDrink_5,UserCoffeePrefernces_6</infoLinks>
+    <infoLinks>userNeedForHotDrink_4,UserCoffeePrefernces_6</infoLinks>
+    <infoLinks>UserCoffeePrefernces_6,userMilkTypePref_7</infoLinks>
+    <infoLinks>UserCoffeePrefernces_6,userCupSizePref_8</infoLinks>
+    <infoLinks>UserCoffeePrefernces_6,userCoffeeBlendPref_9</infoLinks>
+    <infoLinks>userCupSizePref_8,userCoffeeSelection_11</infoLinks>
+    <infoLinks>userMilkTypePref_7,userCoffeeSelection_11</infoLinks>
+    <infoLinks>userCoffeeBlendPref_9,userCoffeeSelection_11</infoLinks>
+    <infoLinks>userCoffeeSelection_11,userSelectionToBuy_10</infoLinks>
 </activatedModel>

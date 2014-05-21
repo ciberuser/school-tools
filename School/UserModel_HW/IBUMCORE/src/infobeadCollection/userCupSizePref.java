@@ -16,7 +16,7 @@ public class userCupSizePref extends InfoBead {
 
 		 this.selectedCupSize = userPreferences.EcupSize.getRandom();
 		 
-		 
+		 	PrintMsg("user want " +  selectedCupSize.toString());
 			Triplet tripletTest = new Triplet(this.TRIPLET_ID);
 			Time t = new Time(System.currentTimeMillis());
 			InfoItem dataOut = new InfoItem();

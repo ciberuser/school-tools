@@ -7,7 +7,7 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
-public class userCoffeeBlendPref extends InfoBead {
+public class userCoffeeBlendPref extends InfoBead implements Runnable{
 
 	
 	
@@ -16,9 +16,10 @@ public class userCoffeeBlendPref extends InfoBead {
 	@Override
 	public void handleData(Triplet data) {
 			 
+		PrintMsg("got triplet...");
 		 userPreferences.EcoffeeBlend userSelectBlend; 
 		 userSelectBlend = userPreferences.EcoffeeBlend.getRandom();
-		 
+		 PrintMsg("user Want " +userSelectBlend );
 		 
 				Triplet tripletTest = new Triplet(this.TRIPLET_ID);
 				Time t = new Time(System.currentTimeMillis());
@@ -34,9 +35,17 @@ public class userCoffeeBlendPref extends InfoBead {
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		Thread blend = new Thread(this,this.TRIPLET_ID +"thread");
+		blend.start();
 		
 	}
+
+	@Override
+	public void run() {
+		while(true){}
+		
+	}
+	
 	
 
 
