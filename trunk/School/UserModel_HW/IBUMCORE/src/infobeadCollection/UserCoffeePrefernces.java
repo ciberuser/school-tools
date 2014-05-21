@@ -6,6 +6,10 @@ import genericInfoBead.Triplet;
 public class UserCoffeePrefernces extends InfoBead implements Runnable {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean m_neerCoffeeShop; 
 	private boolean m_want_cold ;
 	private boolean m_want_hot;
