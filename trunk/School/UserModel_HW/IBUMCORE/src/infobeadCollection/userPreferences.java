@@ -80,7 +80,8 @@ public class userPreferences {
 	
 	public enum EmilkPrefs
 	{
-		Normal,
+		Regolar,
+		Low_Lactose,
 		Soy,
 		None;
 		
@@ -110,8 +111,17 @@ public class userPreferences {
 	{
 		String  outMsg ="";
 
-		outMsg+="i want " + m_temp.toString() +" " + m_drink.toString() +" with " + m_milk.toString() +"\n" ;
-
+		outMsg+="i want " + m_temp.toString() ;
+		String milkString = (m_milk==EmilkPrefs.None) ? "" :" with " + m_milk.toString() +" milk ";
+		if (m_drink==EdrinkPrefs.Coffee)
+		{
+			outMsg += " " +m_blend.toString()+" " + m_drink.toString() +milkString+ " on a " +m_cEcupSize.toString() +" cup \n" ;
+		}
+		else
+		{
+			outMsg += " " + m_drink.toString() +milkString+ " on a " +m_cEcupSize.toString() +" cup \n" ;
+		
+		}
 		return outMsg;
 	}
 	
