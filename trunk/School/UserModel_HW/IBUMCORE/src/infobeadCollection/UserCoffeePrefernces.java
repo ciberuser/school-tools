@@ -3,14 +3,14 @@ package infobeadCollection;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
-public class userCoffeePrefernces extends InfoBead implements Runnable {
+public class UserCoffeePrefernces extends InfoBead implements Runnable {
 
 
 	private boolean m_neerCoffeeShop; 
 	private boolean m_want_cold ;
 	private boolean m_want_hot;
 	
-	public userCoffeePrefernces()
+	public UserCoffeePrefernces()
 	{
 		super();
 		m_neerCoffeeShop = false;
