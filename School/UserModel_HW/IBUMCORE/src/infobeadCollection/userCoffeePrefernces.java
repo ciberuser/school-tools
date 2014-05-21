@@ -6,8 +6,16 @@ import genericInfoBead.Triplet;
 public class userCoffeePrefernces extends InfoBead implements Runnable {
 
 
-	private static final long serialVersionUID = 1L;
-
+	private boolean m_neerCoffeeShop; 
+	public userCoffeePrefernces()
+	{
+		super();
+		m_neerCoffeeShop = false;
+	}
+	
+	
+	
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -20,12 +28,15 @@ public class userCoffeePrefernces extends InfoBead implements Runnable {
 		switch(data.getId())
 		{
 		case userNeedForColdDrink.TRIPLET_ID : ;
-		
+		break;
 		
 		case userNeedForHotDrink.TRIPLET_ID : ;
+		break;
 		
-		
-		//case userPhysicalLocation.TRIPLET_ID : ;
+		case UserNearCoffeeShop.TRIPLET_ID: 
+			m_neerCoffeeShop =  (boolean)data.getInfoItem().getInfoValue();
+		break;
+			
 		}
 
 		

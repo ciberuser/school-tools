@@ -34,7 +34,7 @@ public class userNeedForHotDrink extends InfoBead implements Runnable{
 
 	@Override
 	public void run() {
-		Triplet tripletTest = new Triplet("need_of_hot_drink_triplet");
+		Triplet tripletTest = new Triplet(TRIPLET_ID);
 		Time t = new Time(System.currentTimeMillis());
 		InfoItem data = new InfoItem();
 		data.setInferenceTime(t);

@@ -39,46 +39,92 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	
 	public void GoTo(int x , int y)
 	{
-		m_x_location +=x;
-		m_y_location +=y;
+		System.out.println("user go location x=" +x +" y= " +y);
+		m_x_location =x;
+		m_y_location =y;
 	}
 	
-	//if location in map  
-	int m_x_location;
-	int m_y_location;
-	@Override
-	public void run() 
+	
+	
+	private void GoingForwad_120()
 	{
-		Triplet tripletloc = new Triplet(Location.TRIPLET_ID);
 		for (int ix =0, iy=0; ix< 120 ; ix+=10,iy+=10 )
 		{
 			try {
 					Thread.sleep(500);
-				
-				
-				Location loc = new Location(ix, iy);
-				Time t = new Time(System.currentTimeMillis());
-				InfoItem locationItem = new InfoItem();
-				locationItem.setInfoType(Location.LOCATION_ID);
-				locationItem.setExplainInfo("user change location!!");
-				
-				locationItem.setInferenceTime(t);
-				locationItem.setInfoValue(loc);
-				
-				tripletloc.setInfoItem(locationItem);
-				tripletloc.setTime(t);
-				pushData(tripletloc);
+					GoTo(ix, iy);
+					SendLocationTreplet();
+			}
+			catch (Exception e){}
+		}
+	}
 	
-				if (ix==100)
-				{
-					Thread.sleep(3000);
-				}
+	private void GoingBack_120()
+	{
+		for (int ix =120, iy=120; ix>0 ; ix-=10,iy-=10 )
+		{
+			try {
+					Thread.sleep(500);
+					GoTo(ix, iy);
+					SendLocationTreplet();
 			}
-			catch (InterruptedException e) 
+			catch (Exception e){}
+		}
+	}
+	
+	
+	void SendLocationTreplet()
+	{
+		Triplet tripletloc = new Triplet(Location.TRIPLET_ID);
+		Location loc = new Location(m_x_location, m_y_location);
+		Time t = new Time(System.currentTimeMillis());
+		InfoItem locationItem = new InfoItem();
+		locationItem.setInfoType(Location.LOCATION_ID);
+		locationItem.setExplainInfo("user change location!!");
+		
+		locationItem.setInferenceTime(t);
+		locationItem.setInfoValue(loc);
+			
+		tripletloc.setInfoItem(locationItem);
+		tripletloc.setTime(t);
+		pushData(tripletloc);
+	
+		if (m_x_location==100 && m_x_location==100)
+		{
+			try
 			{
-				System.out.println("shit ... we have a problem!!\nerr:" +e.getMessage());
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {	e.printStackTrace();}
+		}
+	}
+	
+	
+	
+	
+	//if location in map  
+	private int m_x_location;
+	private int m_y_location;
+	@Override
+	public void run() 
+	{
+		
+		for (int i=0 ; i<30 ; ++i)
+		{
+			
+			if (i%2==0)
+			{
+				GoingForwad_120();
 			}
+			else
+			{
+				GoingBack_120();
+			}
+					
+			
+		}
 				
+				
+		
 		}
 		
 		
@@ -87,4 +133,4 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 
 	
 	
-}
+
