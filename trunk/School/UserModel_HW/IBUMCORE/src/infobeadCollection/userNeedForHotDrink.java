@@ -18,12 +18,8 @@ public class userNeedForHotDrink extends InfoBead implements Runnable{
 	@Override
 	public void handleData(Triplet data) {
 
-		if((Integer)data.getInfoItem().getInfoValue() < 38)
-		{
-			this.needForHotDrink = true; 
+		this.needForHotDrink = ((Integer)data.getInfoItem().getInfoValue() < 38);
 		}
-		
-	}
 
 	@Override
 	public void initialize() {
@@ -33,18 +29,21 @@ public class userNeedForHotDrink extends InfoBead implements Runnable{
 	}
 
 	@Override
-	public void run() {
-		Triplet tripletTest = new Triplet(this.TRIPLET_ID);
-		Time t = new Time(System.currentTimeMillis());
-		InfoItem data = new InfoItem();
-		data.setInferenceTime(t);
-		data.setExplainInfo("Main >> Testing Display Services");
-		data.setInfoType("userNeedForHotDrinkBoolean");
-		data.setInfoValue(this.needForHotDrink);
-		tripletTest.setTime(t);
-		tripletTest.setInfoItem(data);
-		pushData(tripletTest);
-		
+	public void run() 
+	{
+		while(true)
+		{
+			Triplet tripletTest = new Triplet(this.TRIPLET_ID);
+			Time t = new Time(System.currentTimeMillis());
+			InfoItem data = new InfoItem();
+			data.setInferenceTime(t);
+			data.setExplainInfo("Main >> Testing Display Services");
+			data.setInfoType("userNeedForHotDrinkBoolean");
+			data.setInfoValue(this.needForHotDrink);
+			tripletTest.setTime(t);
+			tripletTest.setInfoItem(data);
+			pushData(tripletTest);
+		}
 		
 	}
 
