@@ -13,7 +13,7 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 	
 	userPreferences.EmilkPrefs milkType = null; 
 	userPreferences.coffeeBlend coffeeBlend= null; 
-	userPreferences.cupSize cupSize = null; 
+	userPreferences.EcupSize cupSize = null; 
 	
 	userPreferences.EdrinkPrefs drinkPrefs = null;
 	userPreferences.EdrinkTemp drinkTemp = null; 
@@ -33,7 +33,7 @@ public class userCoffeeSelection extends InfoBead implements Runnable {
 		
 		if((String)data.getId() == "cup_size_triplet")
 		{
-			this.cupSize = (userPreferences.cupSize)data.getInfoItem().getInfoValue();
+			this.cupSize = (userPreferences.EcupSize)data.getInfoItem().getInfoValue();
 		}
 		
 		if((String)data.getId() == "blend_type_triplet")
