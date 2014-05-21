@@ -2,5 +2,4 @@
 <metadata>
     <input-interface>location_triplet</input-interface>
     <output-interface>user_near_coffee_shop</output-interface>
-    
 </metadata>
