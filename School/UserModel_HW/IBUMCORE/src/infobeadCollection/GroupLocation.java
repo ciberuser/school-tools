@@ -42,7 +42,7 @@ public class GroupLocation extends InfoBead implements Runnable {
 		while(true){
 			
 			try {
-			    Thread.sleep(9000);
+			    Thread.sleep(20000);
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
@@ -59,7 +59,8 @@ public class GroupLocation extends InfoBead implements Runnable {
 	        for (int i = 0; i < groupSize; i++) 
 	          {
 	        	
-	            Runnable singleUserThread = new UserPhysicalLocation();
+	        	UserPhysicalLocation singleUserThread = new UserPhysicalLocation();
+	            singleUserThread.isPartOfGoup = true;
 	            usersLocationThreadPool.execute(singleUserThread);
 	          }
 	        
@@ -69,14 +70,14 @@ public class GroupLocation extends InfoBead implements Runnable {
 	        // number of user threads can use this casting in the next info bead
 	        int poolSize = ((ThreadPoolExecutor) usersLocationThreadPool).getLargestPoolSize();
 	        
-	        System.out.println("new group enter coffeeshop, size: " + poolSize);
+	        this.PrintMsg("new group enter coffeeshop, size: " + poolSize);
 	        
 	        // when finished executing all threads, the group is in the right location
 	        Triplet groupLocTrip = new Triplet(this.TRIPLET_ID);
 			Time t = new Time(System.currentTimeMillis());
 	        
 	        InfoItem data = new InfoItem();
-	    	data.setInferenceTime(t);
+	    	data.setInferenceTime(t); 
 			data.setExplainInfo("users groop thread pool");
 			data.setInfoType("user location thread pool ");
 			data.setInfoUnits("Executors.newFixedThreadPool");

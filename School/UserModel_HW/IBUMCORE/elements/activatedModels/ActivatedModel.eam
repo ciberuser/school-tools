@@ -12,7 +12,8 @@
     <infoBeads>userCoffeeSelection_9,UM1</infoBeads>
     <infoBeads>UserCoffeePrefernces_10,UM1</infoBeads>
     <infoBeads>userCoffeeBlendPref_11,UM1</infoBeads>
-    <infoBeads>GroupLocation_12,UM1</infoBeads>
+    <infoBeads>groupMeal_12,UM1</infoBeads>
+    <infoBeads>GroupLocation_13,UM1</infoBeads>
     <infoLinks>UserTemperature_0,UserPhysicalCondition_3</infoLinks>
     <infoLinks>UserPhysicalLocation_2,UserPhysicalCondition_3</infoLinks>
     <infoLinks>UserPhysicalCondition_3,userNeedForHotDrink_4</infoLinks>
@@ -29,4 +30,5 @@
     <infoLinks>UserCoffeePrefernces_10,userCoffeeSelection_9</infoLinks>
     <infoLinks>UserCoffeePrefernces_10,userCoffeeBlendPref_11</infoLinks>
     <infoLinks>userCoffeeBlendPref_11,userCoffeeSelection_9</infoLinks>
+    <infoLinks>GroupLocation_13,groupMeal_12</infoLinks>
 </activatedModel>
