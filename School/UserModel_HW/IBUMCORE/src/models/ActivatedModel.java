@@ -95,6 +95,38 @@ public class ActivatedModel {
 			GroupLocation_12.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
+			UserTemperature_0.connect(UserPhysicalCondition_3);
+
+			UserPhysicalLocation_2.connect(UserPhysicalCondition_3);
+
+			UserPhysicalCondition_3.connect(userNeedForHotDrink_4);
+
+			UserPhysicalCondition_3.connect(userNeedForColdDrink_5);
+
+			UserPhysicalLocation_2.connect(UserNearCoffeeShop_6);
+
+			userCupSizePref_8.connect(userCoffeeSelection_9);
+
+			userMilkTypePref_7.connect(userCoffeeSelection_9);
+
+			userCoffeeSelection_9.connect(userSelectionToBuy_1);
+
+			UserNearCoffeeShop_6.connect(UserCoffeePrefernces_10);
+
+			userNeedForColdDrink_5.connect(UserCoffeePrefernces_10);
+
+			userNeedForHotDrink_4.connect(UserCoffeePrefernces_10);
+
+			UserCoffeePrefernces_10.connect(userMilkTypePref_7);
+
+			UserCoffeePrefernces_10.connect(userCupSizePref_8);
+
+			UserCoffeePrefernces_10.connect(userCoffeeSelection_9);
+
+			UserCoffeePrefernces_10.connect(userCoffeeBlendPref_11);
+
+			userCoffeeBlendPref_11.connect(userCoffeeSelection_9);
+
 			//Step 3: Initialize info-beads
 			UserTemperature_0.initialize();
 

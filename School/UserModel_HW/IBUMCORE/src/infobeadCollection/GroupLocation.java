@@ -1,7 +1,9 @@
 package infobeadCollection;
 
 
+
 import java.sql.Time;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -11,7 +13,7 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
-public class GroupLocation extends InfoBead {
+public class GroupLocation extends InfoBead implements Runnable {
 	
 	/**
 	 * 
@@ -28,7 +30,23 @@ public class GroupLocation extends InfoBead {
 
 	@Override
 	public void initialize() {
-	
+		Thread groupThread = new Thread(this, "");
+		groupThread.start();
+
+	}
+
+	@Override
+	public void run() {
+		
+		
+		while(true){
+			
+			try {
+			    Thread.sleep(9000);
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+			
 		  int Min = 5;
 		  int Max = 20; 
 		 
@@ -40,9 +58,12 @@ public class GroupLocation extends InfoBead {
 
 	        for (int i = 0; i < groupSize; i++) 
 	          {
+	        	
 	            Runnable singleUserThread = new UserPhysicalLocation();
 	            usersLocationThreadPool.execute(singleUserThread);
 	          }
+	        
+	       
 	        
 	        
 	        // number of user threads can use this casting in the next info bead
@@ -69,6 +90,8 @@ public class GroupLocation extends InfoBead {
 			
 			
 			pushData(groupLocTrip);
+		}
+		
 	}
 
 }
