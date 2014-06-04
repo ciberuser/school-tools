@@ -18,9 +18,9 @@ public class groupMeal extends InfoBead{
 
 		 
 
-		ThreadPoolExecutor pool = (ThreadPoolExecutor)(data.getInfoItem().getInfoValue());
+		int numberOfUsers = (int)(data.getInfoItem().getInfoValue());
 		
-		int numberOfUsers = pool.getLargestPoolSize();
+		//int numberOfUsers = pool.getLargestPoolSize();
 		
 		Date time = data.getTime();
 		
@@ -28,8 +28,8 @@ public class groupMeal extends InfoBead{
 		
 		String suggestedMeal = su.getSuggestion(numberOfUsers, time).toString();
 		
-		JOptionPane.showMessageDialog(null,"System suggestion to the group: " + suggestedMeal ,"Group suggestion",JOptionPane.YES_NO_OPTION);
-		
+		//JOptionPane.showMessageDialog(null,"System suggestion to the group: " + suggestedMeal ,"Group suggestion",JOptionPane.YES_NO_OPTION);
+		System.out.println("System suggestion to the group: " + suggestedMeal);
 	}
 
 	@Override

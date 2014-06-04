@@ -38,11 +38,11 @@ public class GroupLocation extends InfoBead implements Runnable {
 	@Override
 	public void run() {
 		
-		
+		System.out.println("going to run group location");
 		while(true){
 			
 			try {
-			    Thread.sleep(20000);
+			    Thread.sleep(2000);
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
@@ -81,11 +81,9 @@ public class GroupLocation extends InfoBead implements Runnable {
 			data.setExplainInfo("users groop thread pool");
 			data.setInfoType("user location thread pool ");
 			data.setInfoUnits("Executors.newFixedThreadPool");
-			data.setInfoValue(usersLocationThreadPool);
+			data.setInfoValue(poolSize);
 			
-			
-
-		
+				
 			groupLocTrip.setTime(t);
 			groupLocTrip.setInfoItem(data);
 			
