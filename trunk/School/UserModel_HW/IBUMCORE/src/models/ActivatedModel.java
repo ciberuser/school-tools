@@ -25,127 +25,102 @@ public class ActivatedModel {
 			
 			// Step 1: load the info-beads from the Eclipse work folder
 			URL[] urls;
-			URL filePath = new URL(" file:/C:/LocalSVN/trunk/School/UserModel_HW/IBUMCORE/bin/..//bin/infobeadCollection/");
+			URL filePath = new URL(" file:/C:/LOCALSVN2/IBUMCORE/bin/..//bin/infobeadCollection/");
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
-			Class<?> cls_11 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
-			InfoBead UserTemperature_11= (InfoBead)cls_11.newInstance();
-			UserTemperature_11.setInfoBeadId("UserTemperature_11");
-			UserTemperature_11.setInfobeadModelId("UM1");
+			Class<?> cls_0 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
+			InfoBead UserTemperature_0= (InfoBead)cls_0.newInstance();
+			UserTemperature_0.setInfoBeadId("UserTemperature_0");
+			UserTemperature_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_12 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_12= (InfoBead)cls_12.newInstance();
-			UserPhysicalLocation_12.setInfoBeadId("UserPhysicalLocation_12");
-			UserPhysicalLocation_12.setInfobeadModelId("UM1");
+			Class<?> cls_1 = Class.forName("infobeadCollection.userSelectionToBuy", true, classLoader);
+			InfoBead userSelectionToBuy_1= (InfoBead)cls_1.newInstance();
+			userSelectionToBuy_1.setInfoBeadId("userSelectionToBuy_1");
+			userSelectionToBuy_1.setInfobeadModelId("UM1");
 
-			Class<?> cls_13 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
-			InfoBead UserPhysicalCondition_13= (InfoBead)cls_13.newInstance();
-			UserPhysicalCondition_13.setInfoBeadId("UserPhysicalCondition_13");
-			UserPhysicalCondition_13.setInfobeadModelId("UM1");
+			Class<?> cls_2 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_2= (InfoBead)cls_2.newInstance();
+			UserPhysicalLocation_2.setInfoBeadId("UserPhysicalLocation_2");
+			UserPhysicalLocation_2.setInfobeadModelId("UM1");
 
-			Class<?> cls_14 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_14= (InfoBead)cls_14.newInstance();
-			UserNearCoffeeShop_14.setInfoBeadId("UserNearCoffeeShop_14");
-			UserNearCoffeeShop_14.setInfobeadModelId("UM1");
+			Class<?> cls_3 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
+			InfoBead UserPhysicalCondition_3= (InfoBead)cls_3.newInstance();
+			UserPhysicalCondition_3.setInfoBeadId("UserPhysicalCondition_3");
+			UserPhysicalCondition_3.setInfobeadModelId("UM1");
 
-			Class<?> cls_15 = Class.forName("infobeadCollection.UserCoffeePrefernces", true, classLoader);
-			InfoBead UserCoffeePrefernces_15= (InfoBead)cls_15.newInstance();
-			UserCoffeePrefernces_15.setInfoBeadId("UserCoffeePrefernces_15");
-			UserCoffeePrefernces_15.setInfobeadModelId("UM1");
+			Class<?> cls_4 = Class.forName("infobeadCollection.userNeedForHotDrink", true, classLoader);
+			InfoBead userNeedForHotDrink_4= (InfoBead)cls_4.newInstance();
+			userNeedForHotDrink_4.setInfoBeadId("userNeedForHotDrink_4");
+			userNeedForHotDrink_4.setInfobeadModelId("UM1");
 
-			Class<?> cls_16 = Class.forName("infobeadCollection.userNeedForHotDrink", true, classLoader);
-			InfoBead userNeedForHotDrink_16= (InfoBead)cls_16.newInstance();
-			userNeedForHotDrink_16.setInfoBeadId("userNeedForHotDrink_16");
-			userNeedForHotDrink_16.setInfobeadModelId("UM1");
+			Class<?> cls_5 = Class.forName("infobeadCollection.userNeedForColdDrink", true, classLoader);
+			InfoBead userNeedForColdDrink_5= (InfoBead)cls_5.newInstance();
+			userNeedForColdDrink_5.setInfoBeadId("userNeedForColdDrink_5");
+			userNeedForColdDrink_5.setInfobeadModelId("UM1");
 
-			Class<?> cls_17 = Class.forName("infobeadCollection.userNeedForColdDrink", true, classLoader);
-			InfoBead userNeedForColdDrink_17= (InfoBead)cls_17.newInstance();
-			userNeedForColdDrink_17.setInfoBeadId("userNeedForColdDrink_17");
-			userNeedForColdDrink_17.setInfobeadModelId("UM1");
+			Class<?> cls_6 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
+			InfoBead UserNearCoffeeShop_6= (InfoBead)cls_6.newInstance();
+			UserNearCoffeeShop_6.setInfoBeadId("UserNearCoffeeShop_6");
+			UserNearCoffeeShop_6.setInfobeadModelId("UM1");
 
-			Class<?> cls_18 = Class.forName("infobeadCollection.userCupSizePref", true, classLoader);
-			InfoBead userCupSizePref_18= (InfoBead)cls_18.newInstance();
-			userCupSizePref_18.setInfoBeadId("userCupSizePref_18");
-			userCupSizePref_18.setInfobeadModelId("UM1");
+			Class<?> cls_7 = Class.forName("infobeadCollection.userMilkTypePref", true, classLoader);
+			InfoBead userMilkTypePref_7= (InfoBead)cls_7.newInstance();
+			userMilkTypePref_7.setInfoBeadId("userMilkTypePref_7");
+			userMilkTypePref_7.setInfobeadModelId("UM1");
 
-			Class<?> cls_19 = Class.forName("infobeadCollection.userMilkTypePref", true, classLoader);
-			InfoBead userMilkTypePref_19= (InfoBead)cls_19.newInstance();
-			userMilkTypePref_19.setInfoBeadId("userMilkTypePref_19");
-			userMilkTypePref_19.setInfobeadModelId("UM1");
+			Class<?> cls_8 = Class.forName("infobeadCollection.userCupSizePref", true, classLoader);
+			InfoBead userCupSizePref_8= (InfoBead)cls_8.newInstance();
+			userCupSizePref_8.setInfoBeadId("userCupSizePref_8");
+			userCupSizePref_8.setInfobeadModelId("UM1");
 
-			Class<?> cls_20 = Class.forName("infobeadCollection.userCoffeeBlendPref", true, classLoader);
-			InfoBead userCoffeeBlendPref_20= (InfoBead)cls_20.newInstance();
-			userCoffeeBlendPref_20.setInfoBeadId("userCoffeeBlendPref_20");
-			userCoffeeBlendPref_20.setInfobeadModelId("UM1");
+			Class<?> cls_9 = Class.forName("infobeadCollection.userCoffeeSelection", true, classLoader);
+			InfoBead userCoffeeSelection_9= (InfoBead)cls_9.newInstance();
+			userCoffeeSelection_9.setInfoBeadId("userCoffeeSelection_9");
+			userCoffeeSelection_9.setInfobeadModelId("UM1");
 
-			Class<?> cls_21 = Class.forName("infobeadCollection.userCoffeeSelection", true, classLoader);
-			InfoBead userCoffeeSelection_21= (InfoBead)cls_21.newInstance();
-			userCoffeeSelection_21.setInfoBeadId("userCoffeeSelection_21");
-			userCoffeeSelection_21.setInfobeadModelId("UM1");
+			Class<?> cls_10 = Class.forName("infobeadCollection.UserCoffeePrefernces", true, classLoader);
+			InfoBead UserCoffeePrefernces_10= (InfoBead)cls_10.newInstance();
+			UserCoffeePrefernces_10.setInfoBeadId("UserCoffeePrefernces_10");
+			UserCoffeePrefernces_10.setInfobeadModelId("UM1");
 
-			Class<?> cls_22 = Class.forName("infobeadCollection.userSelectionToBuy", true, classLoader);
-			InfoBead userSelectionToBuy_22= (InfoBead)cls_22.newInstance();
-			userSelectionToBuy_22.setInfoBeadId("userSelectionToBuy_22");
-			userSelectionToBuy_22.setInfobeadModelId("UM1");
+			Class<?> cls_11 = Class.forName("infobeadCollection.userCoffeeBlendPref", true, classLoader);
+			InfoBead userCoffeeBlendPref_11= (InfoBead)cls_11.newInstance();
+			userCoffeeBlendPref_11.setInfoBeadId("userCoffeeBlendPref_11");
+			userCoffeeBlendPref_11.setInfobeadModelId("UM1");
+
+			Class<?> cls_12 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
+			InfoBead GroupLocation_12= (InfoBead)cls_12.newInstance();
+			GroupLocation_12.setInfoBeadId("GroupLocation_12");
+			GroupLocation_12.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserTemperature_11.connect(UserPhysicalCondition_13);
-
-			UserPhysicalLocation_12.connect(UserPhysicalCondition_13);
-
-			UserPhysicalLocation_12.connect(UserNearCoffeeShop_14);
-
-			UserNearCoffeeShop_14.connect(UserCoffeePrefernces_15);
-
-			UserPhysicalCondition_13.connect(userNeedForHotDrink_16);
-
-			userNeedForHotDrink_16.connect(UserCoffeePrefernces_15);
-
-			UserPhysicalCondition_13.connect(userNeedForColdDrink_17);
-
-			userNeedForColdDrink_17.connect(UserCoffeePrefernces_15);
-
-			UserCoffeePrefernces_15.connect(userCupSizePref_18);
-
-			UserCoffeePrefernces_15.connect(userMilkTypePref_19);
-
-			UserCoffeePrefernces_15.connect(userCoffeeBlendPref_20);
-
-			userCupSizePref_18.connect(userCoffeeSelection_21);
-
-			userMilkTypePref_19.connect(userCoffeeSelection_21);
-
-			userCoffeeBlendPref_20.connect(userCoffeeSelection_21);
-
-			UserCoffeePrefernces_15.connect(userCoffeeSelection_21);
-
-			userCoffeeSelection_21.connect(userSelectionToBuy_22);
-
 			//Step 3: Initialize info-beads
-			UserTemperature_11.initialize();
+			UserTemperature_0.initialize();
 
-			UserPhysicalLocation_12.initialize();
+			userSelectionToBuy_1.initialize();
 
-			UserPhysicalCondition_13.initialize();
+			UserPhysicalLocation_2.initialize();
 
-			UserNearCoffeeShop_14.initialize();
+			UserPhysicalCondition_3.initialize();
 
-			UserCoffeePrefernces_15.initialize();
+			userNeedForHotDrink_4.initialize();
 
-			userNeedForHotDrink_16.initialize();
+			userNeedForColdDrink_5.initialize();
 
-			userNeedForColdDrink_17.initialize();
+			UserNearCoffeeShop_6.initialize();
 
-			userCupSizePref_18.initialize();
+			userMilkTypePref_7.initialize();
 
-			userMilkTypePref_19.initialize();
+			userCupSizePref_8.initialize();
 
-			userCoffeeBlendPref_20.initialize();
+			userCoffeeSelection_9.initialize();
 
-			userCoffeeSelection_21.initialize();
+			UserCoffeePrefernces_10.initialize();
 
-			userSelectionToBuy_22.initialize();
+			userCoffeeBlendPref_11.initialize();
+
+			GroupLocation_12.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
