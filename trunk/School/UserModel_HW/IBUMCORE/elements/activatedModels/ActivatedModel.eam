@@ -13,4 +13,20 @@
     <infoBeads>UserCoffeePrefernces_10,UM1</infoBeads>
     <infoBeads>userCoffeeBlendPref_11,UM1</infoBeads>
     <infoBeads>GroupLocation_12,UM1</infoBeads>
+    <infoLinks>UserTemperature_0,UserPhysicalCondition_3</infoLinks>
+    <infoLinks>UserPhysicalLocation_2,UserPhysicalCondition_3</infoLinks>
+    <infoLinks>UserPhysicalCondition_3,userNeedForHotDrink_4</infoLinks>
+    <infoLinks>UserPhysicalCondition_3,userNeedForColdDrink_5</infoLinks>
+    <infoLinks>UserPhysicalLocation_2,UserNearCoffeeShop_6</infoLinks>
+    <infoLinks>userCupSizePref_8,userCoffeeSelection_9</infoLinks>
+    <infoLinks>userMilkTypePref_7,userCoffeeSelection_9</infoLinks>
+    <infoLinks>userCoffeeSelection_9,userSelectionToBuy_1</infoLinks>
+    <infoLinks>UserNearCoffeeShop_6,UserCoffeePrefernces_10</infoLinks>
+    <infoLinks>userNeedForColdDrink_5,UserCoffeePrefernces_10</infoLinks>
+    <infoLinks>userNeedForHotDrink_4,UserCoffeePrefernces_10</infoLinks>
+    <infoLinks>UserCoffeePrefernces_10,userMilkTypePref_7</infoLinks>
+    <infoLinks>UserCoffeePrefernces_10,userCupSizePref_8</infoLinks>
+    <infoLinks>UserCoffeePrefernces_10,userCoffeeSelection_9</infoLinks>
+    <infoLinks>UserCoffeePrefernces_10,userCoffeeBlendPref_11</infoLinks>
+    <infoLinks>userCoffeeBlendPref_11,userCoffeeSelection_9</infoLinks>
 </activatedModel>
