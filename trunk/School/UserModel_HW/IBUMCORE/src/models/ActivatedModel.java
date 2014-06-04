@@ -89,10 +89,15 @@ public class ActivatedModel {
 			userCoffeeBlendPref_11.setInfoBeadId("userCoffeeBlendPref_11");
 			userCoffeeBlendPref_11.setInfobeadModelId("UM1");
 
-			Class<?> cls_12 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_12= (InfoBead)cls_12.newInstance();
-			GroupLocation_12.setInfoBeadId("GroupLocation_12");
-			GroupLocation_12.setInfobeadModelId("UM1");
+			Class<?> cls_12 = Class.forName("infobeadCollection.groupMeal", true, classLoader);
+			InfoBead groupMeal_12= (InfoBead)cls_12.newInstance();
+			groupMeal_12.setInfoBeadId("groupMeal_12");
+			groupMeal_12.setInfobeadModelId("UM1");
+
+			Class<?> cls_13 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
+			InfoBead GroupLocation_13= (InfoBead)cls_13.newInstance();
+			GroupLocation_13.setInfoBeadId("GroupLocation_13");
+			GroupLocation_13.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
 			UserTemperature_0.connect(UserPhysicalCondition_3);
@@ -127,6 +132,8 @@ public class ActivatedModel {
 
 			userCoffeeBlendPref_11.connect(userCoffeeSelection_9);
 
+			GroupLocation_13.connect(groupMeal_12);
+
 			//Step 3: Initialize info-beads
 			UserTemperature_0.initialize();
 
@@ -152,7 +159,9 @@ public class ActivatedModel {
 
 			userCoffeeBlendPref_11.initialize();
 
-			GroupLocation_12.initialize();
+			groupMeal_12.initialize();
+
+			GroupLocation_13.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();

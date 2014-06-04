@@ -12,7 +12,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	
 
 	private static final long serialVersionUID = 1L;
-	
+	boolean isPartOfGoup= false; 
 	
 	public UserPhysicalLocation()
 	{
@@ -39,7 +39,11 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 	
 	public void GoTo(int x , int y)
 	{
+		if(!this.isPartOfGoup)
+		{
 		this.PrintMsg("user go to location x=" +x +" y= " +y);
+		}
+		
 		m_x_location =x;
 		m_y_location =y;
 	}
