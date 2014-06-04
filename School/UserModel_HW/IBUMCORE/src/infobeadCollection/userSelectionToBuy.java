@@ -15,7 +15,7 @@ public class userSelectionToBuy extends InfoBead   {
 		 
 		 userPreferences p = (userPreferences)data.getInfoItem().getInfoValue(); 
 		 
-		JOptionPane.showMessageDialog(null,p.IWant2Buy(),"but following items",JOptionPane.YES_NO_OPTION);
+		JOptionPane.showMessageDialog(null,p.IWant2Buy(),"buy following items",JOptionPane.YES_NO_OPTION);
 		 
 		
 		
