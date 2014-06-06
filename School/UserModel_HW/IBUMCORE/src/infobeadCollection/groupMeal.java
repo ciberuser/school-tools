@@ -1,6 +1,7 @@
 package infobeadCollection;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -17,8 +18,8 @@ public class groupMeal extends InfoBead{
 		
 
 		 
-
-		int numberOfUsers = (int)(data.getInfoItem().getInfoValue());
+		List<UserPersonalData> groupOfUsers =(List<UserPersonalData>)data.getInfoItem().getInfoValue();
+		int numberOfUsers = 	groupOfUsers.size();
 		
 		//int numberOfUsers = pool.getLargestPoolSize();
 		

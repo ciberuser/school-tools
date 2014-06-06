@@ -14,6 +14,9 @@ import java.util.Set;
 public class MusicSelector 
 {
 	
+	private static final int INDEX_TYPE	= 1;
+	private static final int INDEX_AGE = 0;
+	private static final int INDEX_SONG = 2;
 	
 	private static String songlistfilepath="src/infobeadCollection/song _list.txt";
 	public MusicSelector()
@@ -31,7 +34,14 @@ public class MusicSelector
 					{
 						//System.out.println(sCurrentLine);
 						String[] songdetails= sCurrentLine.split(";");
-						m_songlist.put(songdetails[0], songdetails[1]);
+						String Type = songdetails[INDEX_TYPE];
+						if (!m_songlist.containsKey(Type))
+						{
+							m_songlist.put(Type, new HashMap<String,String>());					
+						}
+						m_songlist.get(Type).put(songdetails[INDEX_AGE],songdetails[INDEX_SONG] );
+						
+			
 						//System.out.println("songdetails[0]= "+songdetails[0]+"songdetails[1] ="+songdetails[1]);
 					
 					}
@@ -51,21 +61,22 @@ public class MusicSelector
 		
 	}
 	
-	public String ChooseSong(int age)
+	public String ChooseSong(int age,String type)
 	{
 		int maxTries=m_songlist.size();
 		int count=0;
+		if(!m_songlist.containsKey(type)) return "this type is not in playlist";
 		while(count<maxTries){
 			count++;
 			
-			List<String> keys      = new ArrayList(m_songlist.keySet());
+			List<String> keys      = new ArrayList(m_songlist.get(type).keySet());
 			String       randomKey = keys.get( new Random().nextInt(keys.size()) );
 			String[] agerange= randomKey.split("-");
 			if (agerange.length>0)
 			{
 				if (age > Integer.parseInt(agerange[0]) && age< Integer.parseInt(agerange[1]))
 				{
-					return m_songlist.get(randomKey);
+					return m_songlist.get(type).get(randomKey);
 				}
 			}
 			
@@ -74,13 +85,13 @@ public class MusicSelector
 		return "";
 	}
 	
-	private HashMap<String,String> m_songlist= new HashMap<String,String>() ;
+	private HashMap<String,HashMap<String,String>> m_songlist= new HashMap<String,HashMap<String,String>>() ;
 	
 	
 	public static void main(String[] args) 
 	{
 		MusicSelector ms=new MusicSelector();
-		System.out.println("choose age 55 "+ms.ChooseSong(55));
+		System.out.println("choose age 55 "+ms.ChooseSong(15,"Dance"));
 		}
 	
 }
