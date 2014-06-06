@@ -3,6 +3,7 @@ package infobeadCollection;
 
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,15 +56,16 @@ public class GroupLocation extends InfoBead implements Runnable {
 		 
 		 // pool of user locations
 		 ExecutorService usersLocationThreadPool = Executors.newFixedThreadPool(Max);
-
+		 List<UserPersonalData> usersInGroup = new ArrayList<UserPersonalData>();
+		 
 	        for (int i = 0; i < groupSize; i++) 
 	          {
-	        	
-	        	UserPhysicalLocation singleUserThread = new UserPhysicalLocation();
-	            singleUserThread.isPartOfGoup = true;
-	            usersLocationThreadPool.execute(singleUserThread);
+	        		usersInGroup.add(new UserPersonalData());
+	        		UserPhysicalLocation singleUserThread = new UserPhysicalLocation();
+	        		singleUserThread.isPartOfGoup = true;
+	        		usersLocationThreadPool.execute(singleUserThread);
 	          }
-	        
+	        	
 	       
 	        
 	        
@@ -81,7 +83,7 @@ public class GroupLocation extends InfoBead implements Runnable {
 			data.setExplainInfo("users groop thread pool");
 			data.setInfoType("user location thread pool ");
 			data.setInfoUnits("Executors.newFixedThreadPool");
-			data.setInfoValue(poolSize);
+			data.setInfoValue(usersInGroup);
 			
 				
 			groupLocTrip.setTime(t);
