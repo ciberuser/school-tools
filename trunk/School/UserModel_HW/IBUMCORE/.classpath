@@ -31,5 +31,6 @@
 	<classpathentry kind="lib" path="poi-ooxml-3.8-20120326.jar"/>
 	<classpathentry kind="lib" path="poi-ooxml-schemas-3.8-20120326.jar"/>
 	<classpathentry kind="lib" path="poi-scratchpad-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="opencsv-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
