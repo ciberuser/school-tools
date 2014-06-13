@@ -18,7 +18,7 @@ public class MusicSelector
 	private static final int INDEX_AGE = 0;
 	private static final int INDEX_SONG = 2;
 	
-	private static String songlistfilepath="src/infobeadCollection/song _list.txt";
+	private static String songlistfilepath="src/infobeadCollection/song _list.csv";
 	public MusicSelector()
 	{
 		File f = new File(songlistfilepath);
@@ -33,7 +33,7 @@ public class MusicSelector
 					if (!sCurrentLine.isEmpty())
 					{
 						//System.out.println(sCurrentLine);
-						String[] songdetails= sCurrentLine.split(";");
+						String[] songdetails= sCurrentLine.split(",");
 						String Type = songdetails[INDEX_TYPE];
 						if (!m_songlist.containsKey(Type))
 						{
