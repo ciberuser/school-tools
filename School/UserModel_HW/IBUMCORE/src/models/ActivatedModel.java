@@ -29,23 +29,23 @@ public class ActivatedModel {
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
-			Class<?> cls_0 = Class.forName("infobeadCollection.GroupSongSelection", true, classLoader);
-			InfoBead GroupSongSelection_0= (InfoBead)cls_0.newInstance();
-			GroupSongSelection_0.setInfoBeadId("GroupSongSelection_0");
-			GroupSongSelection_0.setInfobeadModelId("GM3");
+			Class<?> cls_0 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
+			InfoBead GroupLocation_0= (InfoBead)cls_0.newInstance();
+			GroupLocation_0.setInfoBeadId("GroupLocation_0");
+			GroupLocation_0.setInfobeadModelId("GM3");
 
-			Class<?> cls_1 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_1= (InfoBead)cls_1.newInstance();
-			GroupLocation_1.setInfoBeadId("GroupLocation_1");
-			GroupLocation_1.setInfobeadModelId("GM3");
+			Class<?> cls_1 = Class.forName("infobeadCollection.groupWaiterSelection", true, classLoader);
+			InfoBead groupWaiterSelection_1= (InfoBead)cls_1.newInstance();
+			groupWaiterSelection_1.setInfoBeadId("groupWaiterSelection_1");
+			groupWaiterSelection_1.setInfobeadModelId("GM3");
 
 			//Step 2: Connect linked info-beads
-			GroupLocation_1.connect(GroupSongSelection_0);
+			GroupLocation_0.connect(groupWaiterSelection_1);
 
 			//Step 3: Initialize info-beads
-			GroupSongSelection_0.initialize();
+			GroupLocation_0.initialize();
 
-			GroupLocation_1.initialize();
+			groupWaiterSelection_1.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <activatedModel>
-    <infoBeads>UserTemperature_0,UM1</infoBeads>
-    <infoBeads>userSelectionToBuy_1,UM1</infoBeads>
-    <infoBeads>UserPhysicalLocation_2,UM1</infoBeads>
-    <infoBeads>UserPhysicalCondition_3,UM1</infoBeads>
-    <infoBeads>userNeedForHotDrink_4,UM1</infoBeads>
-    <infoBeads>userNeedForColdDrink_5,UM1</infoBeads>
-    <infoBeads>UserNearCoffeeShop_6,UM1</infoBeads>
-    <infoBeads>userMilkTypePref_7,UM1</infoBeads>
-    <infoBeads>userCupSizePref_8,UM1</infoBeads>
-    <infoBeads>userCoffeeSelection_9,UM1</infoBeads>
-    <infoBeads>UserCoffeePrefernces_10,UM1</infoBeads>
-    <infoBeads>userCoffeeBlendPref_11,UM1</infoBeads>
-    <infoBeads>groupMeal_12,UM1</infoBeads>
-    <infoBeads>GroupLocation_13,UM1</infoBeads>
-    <infoLinks>UserTemperature_0,UserPhysicalCondition_3</infoLinks>
-    <infoLinks>UserPhysicalLocation_2,UserPhysicalCondition_3</infoLinks>
-    <infoLinks>UserPhysicalCondition_3,userNeedForHotDrink_4</infoLinks>
-    <infoLinks>UserPhysicalCondition_3,userNeedForColdDrink_5</infoLinks>
-    <infoLinks>UserPhysicalLocation_2,UserNearCoffeeShop_6</infoLinks>
-    <infoLinks>userCupSizePref_8,userCoffeeSelection_9</infoLinks>
-    <infoLinks>userMilkTypePref_7,userCoffeeSelection_9</infoLinks>
-    <infoLinks>userCoffeeSelection_9,userSelectionToBuy_1</infoLinks>
-    <infoLinks>UserNearCoffeeShop_6,UserCoffeePrefernces_10</infoLinks>
-    <infoLinks>userNeedForColdDrink_5,UserCoffeePrefernces_10</infoLinks>
-    <infoLinks>userNeedForHotDrink_4,UserCoffeePrefernces_10</infoLinks>
-    <infoLinks>UserCoffeePrefernces_10,userMilkTypePref_7</infoLinks>
-    <infoLinks>UserCoffeePrefernces_10,userCupSizePref_8</infoLinks>
-    <infoLinks>UserCoffeePrefernces_10,userCoffeeSelection_9</infoLinks>
-    <infoLinks>UserCoffeePrefernces_10,userCoffeeBlendPref_11</infoLinks>
-    <infoLinks>userCoffeeBlendPref_11,userCoffeeSelection_9</infoLinks>
-    <infoLinks>GroupLocation_13,groupMeal_12</infoLinks>
+    <infoBeads>GroupLocation_0,GM3</infoBeads>
+    <infoBeads>groupWaiterSelection_1,GM3</infoBeads>
+    <infoLinks>GroupLocation_0,groupWaiterSelection_1</infoLinks>
 </activatedModel>
