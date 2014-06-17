@@ -48,11 +48,11 @@ public class groupWaiterSelection extends InfoBead {
 		
 		if(selected==m_staSelector.NOT_FOUND)
 		{
-			System.out.println("no Waiter found that know "+selectedType +" will call wailter that know english" );
+			System.out.println("no waiter found that know "+selectedType +" will call wailter that know english" );
 		}
 		else
 		{
-			System.out.println(selected+" know "+selectedType+" so will serve the group");
+			System.out.println(selected+" know "+selectedType+" so he will serve the group");
 		}
 				
 	}
