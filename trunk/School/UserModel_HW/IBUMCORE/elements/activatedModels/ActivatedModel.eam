@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <activatedModel>
-    <infoBeads>GroupLocation_0,GM3</infoBeads>
-    <infoBeads>groupWaiterSelection_1,GM3</infoBeads>
-    <infoLinks>GroupLocation_0,groupWaiterSelection_1</infoLinks>
+    <infoBeads>TourismAge_0,UM1</infoBeads>
+    <infoBeads>TourismDateOfBirth_1,UM1</infoBeads>
+    <infoBeads>TourismEmploymentDomain_2,UM1</infoBeads>
+    <infoBeads>TourismFavoriteSeason_3,UM1</infoBeads>
+    <infoBeads>TourismReligion_4,UM1</infoBeads>
+    <infoBeads>UserAlcoholRecommendation_5,UM1</infoBeads>
+    <infoBeads>UserUsingSodexoOrRestoPass_6,UM1</infoBeads>
+    <infoBeads>UsersSeasonalPrefs_7,UM1</infoBeads>
+    <infoBeads>UserReligionFoodConstrains_8,UM1</infoBeads>
+    <infoLinks>TourismDateOfBirth_1,TourismAge_0</infoLinks>
+    <infoLinks>TourismAge_0,UserAlcoholRecommendation_5</infoLinks>
+    <infoLinks>TourismEmploymentDomain_2,UserUsingSodexoOrRestoPass_6</infoLinks>
+    <infoLinks>TourismFavoriteSeason_3,UsersSeasonalPrefs_7</infoLinks>
+    <infoLinks>TourismReligion_4,UserReligionFoodConstrains_8</infoLinks>
 </activatedModel>
