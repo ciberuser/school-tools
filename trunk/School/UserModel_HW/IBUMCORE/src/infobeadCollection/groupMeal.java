@@ -11,6 +11,9 @@ import javax.swing.JOptionPane;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
+// this class recommends a group of users (threads pool), a group meal
+// depending on the group size and hour of the day 
+// this class uses the groupMealSuggestion class to recommend the group. 
 public class groupMeal extends InfoBead{
 
 	@Override

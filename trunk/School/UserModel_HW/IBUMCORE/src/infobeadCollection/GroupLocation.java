@@ -14,6 +14,9 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.InfoItem;
 import genericInfoBead.Triplet;
 
+// this class generates a pool of users, entering together to the coffee shop
+// all together
+// it pushes the data for the usage of the rest of the grroup models
 public class GroupLocation extends InfoBead implements Runnable {
 	
 	/**
