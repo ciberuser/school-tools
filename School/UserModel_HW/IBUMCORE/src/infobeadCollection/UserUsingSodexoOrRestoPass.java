@@ -3,6 +3,9 @@ package infobeadCollection;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
+
+// this info bead is using the data from reused info bead 'TourismEmploymentDomain"
+// it checks for the possibility that the user owns a restaurant magnetic card
 public class UserUsingSodexoOrRestoPass extends InfoBead {
 
 	@Override

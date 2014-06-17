@@ -4,6 +4,8 @@ import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
 // this class is using the input from another group info bead- TourismAge
+// If age is > 18, tell the waitress bring the alcoholic bevs. menu
+
 public class UserAlcoholRecommendation extends InfoBead {
 
 	@Override
