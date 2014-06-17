@@ -3,6 +3,7 @@ package infobeadCollection;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,6 +63,17 @@ public class StaffSelector {
 			}
 		}
 		return NOT_FOUND;
+	}
+	
+	public String[] GetAllWaiters()
+	{
+		
+		List<String> staff_names = new ArrayList<>();
+		for (String[] line :  m_staffObj)
+		{
+			staff_names.add(line[INDEX_NAME]);
+		}
+		return staff_names.toArray(new String[0]);
 	}
 	
 	
