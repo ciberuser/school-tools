@@ -3,6 +3,8 @@ package infobeadCollection;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
+// this class uses the information from the reused infobead 'TourismReligion'
+// It returns the relevant menu by checking the users religous background
 public class UserReligionFoodConstrains extends InfoBead {
 
 	@Override

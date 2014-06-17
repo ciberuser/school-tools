@@ -3,6 +3,8 @@ package infobeadCollection;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
+// this class uses the information from the TourismFavoriteSeason to recommend
+// for certain seasonal dishesh to the user 
 public class UsersSeasonalPrefs extends InfoBead {
 
 	@Override
