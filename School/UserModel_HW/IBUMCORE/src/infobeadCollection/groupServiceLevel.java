@@ -6,6 +6,11 @@ import java.util.List;
 import genericInfoBead.InfoBead;
 import genericInfoBead.Triplet;
 
+
+// this info bead class recommends to the coffee shop manager what service level
+// this specific group should get, depndingg on its size and time of the day
+// this class uses the 'groupServiceLevelSuggestion' class for making
+// the recommendation
 public class groupServiceLevel extends InfoBead
 
 {
