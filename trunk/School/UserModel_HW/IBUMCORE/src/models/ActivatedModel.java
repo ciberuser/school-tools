@@ -144,10 +144,35 @@ public class ActivatedModel {
 			GroupLocation_26.setInfoBeadId("GroupLocation_26");
 			GroupLocation_26.setInfobeadModelId("GM15");
 
-			Class<?> cls_27 = Class.forName("infobeadCollection.groupWaiterRequest", true, classLoader);
-			InfoBead groupWaiterRequest_27= (InfoBead)cls_27.newInstance();
-			groupWaiterRequest_27.setInfoBeadId("groupWaiterRequest_27");
-			groupWaiterRequest_27.setInfobeadModelId("GM15");
+			Class<?> cls_27 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_27= (InfoBead)cls_27.newInstance();
+			UserPhysicalLocation_27.setInfoBeadId("UserPhysicalLocation_27");
+			UserPhysicalLocation_27.setInfobeadModelId("UM32");
+
+			Class<?> cls_28 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_28= (InfoBead)cls_28.newInstance();
+			UserPhysicalLocation_28.setInfoBeadId("UserPhysicalLocation_28");
+			UserPhysicalLocation_28.setInfobeadModelId("UM32");
+
+			Class<?> cls_29 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_29= (InfoBead)cls_29.newInstance();
+			UserPhysicalLocation_29.setInfoBeadId("UserPhysicalLocation_29");
+			UserPhysicalLocation_29.setInfobeadModelId("UM32");
+
+			Class<?> cls_30 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
+			InfoBead UserNearCoffeeShop_30= (InfoBead)cls_30.newInstance();
+			UserNearCoffeeShop_30.setInfoBeadId("UserNearCoffeeShop_30");
+			UserNearCoffeeShop_30.setInfobeadModelId("UM32");
+
+			Class<?> cls_31 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
+			InfoBead GroupLocation_31= (InfoBead)cls_31.newInstance();
+			GroupLocation_31.setInfoBeadId("GroupLocation_31");
+			GroupLocation_31.setInfobeadModelId("GM15");
+
+			Class<?> cls_32 = Class.forName("infobeadCollection.groupServiceLevel", true, classLoader);
+			InfoBead groupServiceLevel_32= (InfoBead)cls_32.newInstance();
+			groupServiceLevel_32.setInfoBeadId("groupServiceLevel_32");
+			groupServiceLevel_32.setInfobeadModelId("GM15");
 
 			//Step 2: Connect linked info-beads
 			UserPhysicalLocation_4.connect(UserNearCoffeeShop_7);
@@ -186,9 +211,15 @@ public class ActivatedModel {
 
 			GroupLocation_24.connect(groupWaiterSelection_25);
 
-			UserNearCoffeeShop_23.connect(GroupLocation_26);
+			UserPhysicalLocation_27.connect(UserNearCoffeeShop_30);
 
-			GroupLocation_26.connect(groupWaiterRequest_27);
+			UserPhysicalLocation_28.connect(UserNearCoffeeShop_30);
+
+			UserPhysicalLocation_29.connect(UserNearCoffeeShop_30);
+
+			UserNearCoffeeShop_30.connect(GroupLocation_31);
+
+			GroupLocation_31.connect(groupServiceLevel_32);
 
 			//Step 3: Initialize info-beads
 			UserPhysicalLocation_4.initialize();
@@ -237,7 +268,17 @@ public class ActivatedModel {
 
 			GroupLocation_26.initialize();
 
-			groupWaiterRequest_27.initialize();
+			UserPhysicalLocation_27.initialize();
+
+			UserPhysicalLocation_28.initialize();
+
+			UserPhysicalLocation_29.initialize();
+
+			UserNearCoffeeShop_30.initialize();
+
+			GroupLocation_31.initialize();
+
+			groupServiceLevel_32.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
