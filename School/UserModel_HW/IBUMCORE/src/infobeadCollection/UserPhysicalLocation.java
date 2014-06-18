@@ -68,7 +68,7 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		for (int ix =120, iy=120; ix>0 ; ix-=10,iy-=10 )
 		{
 			try {
-					Thread.sleep(500);
+					
 					GoTo(ix, iy);
 					SendLocationTreplet();
 			}
@@ -93,11 +93,11 @@ public class UserPhysicalLocation extends InfoBead implements Runnable{
 		tripletloc.setTime(t);
 		pushData(tripletloc);
 	
-		if (m_x_location==100 && m_x_location==100)
+		if (m_x_location==20 && m_x_location==20)
 		{
 			try
 			{
-				Thread.sleep(30000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {	e.printStackTrace();}
 		}
 	}

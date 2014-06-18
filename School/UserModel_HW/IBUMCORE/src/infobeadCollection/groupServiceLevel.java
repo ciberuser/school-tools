@@ -32,7 +32,7 @@ public class groupServiceLevel extends InfoBead
 		groupServiceLevelSuggestion ls = new groupServiceLevelSuggestion();
 		
 		String suggestedServiceLevel = ls.getSuggestion(numberOfUsers, time).toString();
-		
+
 		System.out.println("System suggest service level to the group: " + suggestedServiceLevel);
 		
 	}

@@ -11,8 +11,8 @@ import genericInfoBead.Triplet;
 
 public class UserNearCoffeeShop extends InfoBead {
 
-	public static final int COFFEE_SHOP_X_LOCATION = 100;
-	public static final int COFFEE_SHOP_Y_LOCATION = 100;
+	public static final int COFFEE_SHOP_X_LOCATION = 20;
+	public static final int COFFEE_SHOP_Y_LOCATION = 20;
 	
 	public static final String TRIPLET_ID ="user_near_coffee_shop";
 	
@@ -36,7 +36,7 @@ public class UserNearCoffeeShop extends InfoBead {
 				//PrintMsg("got user location:"+loc.toString());
 					
 				
-				try {Thread.sleep(1500);} catch (InterruptedException e) {}
+				//try {Thread.sleep(1500);} catch (InterruptedException e) {}
 				Triplet tripletNearCoffee = new Triplet(TRIPLET_ID);
 				Time t = new Time(System.currentTimeMillis());
 				InfoItem pushdata = new InfoItem();
