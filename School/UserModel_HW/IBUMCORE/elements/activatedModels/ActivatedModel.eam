@@ -23,7 +23,12 @@
     <infoBeads>GroupLocation_24,GM15</infoBeads>
     <infoBeads>groupWaiterSelection_25,GM15</infoBeads>
     <infoBeads>GroupLocation_26,GM15</infoBeads>
-    <infoBeads>groupWaiterRequest_27,GM15</infoBeads>
+    <infoBeads>UserPhysicalLocation_27,UM32</infoBeads>
+    <infoBeads>UserPhysicalLocation_28,UM32</infoBeads>
+    <infoBeads>UserPhysicalLocation_29,UM32</infoBeads>
+    <infoBeads>UserNearCoffeeShop_30,UM32</infoBeads>
+    <infoBeads>GroupLocation_31,GM15</infoBeads>
+    <infoBeads>groupServiceLevel_32,GM15</infoBeads>
     <infoLinks>UserPhysicalLocation_4,UserNearCoffeeShop_7</infoLinks>
     <infoLinks>UserPhysicalLocation_5,UserNearCoffeeShop_7</infoLinks>
     <infoLinks>UserPhysicalLocation_6,UserNearCoffeeShop_7</infoLinks>
@@ -42,6 +47,9 @@
     <infoLinks>UserPhysicalLocation_22,UserNearCoffeeShop_23</infoLinks>
     <infoLinks>UserNearCoffeeShop_19,GroupLocation_24</infoLinks>
     <infoLinks>GroupLocation_24,groupWaiterSelection_25</infoLinks>
-    <infoLinks>UserNearCoffeeShop_23,GroupLocation_26</infoLinks>
-    <infoLinks>GroupLocation_26,groupWaiterRequest_27</infoLinks>
+    <infoLinks>UserPhysicalLocation_27,UserNearCoffeeShop_30</infoLinks>
+    <infoLinks>UserPhysicalLocation_28,UserNearCoffeeShop_30</infoLinks>
+    <infoLinks>UserPhysicalLocation_29,UserNearCoffeeShop_30</infoLinks>
+    <infoLinks>UserNearCoffeeShop_30,GroupLocation_31</infoLinks>
+    <infoLinks>GroupLocation_31,groupServiceLevel_32</infoLinks>
 </activatedModel>
