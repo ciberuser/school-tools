@@ -29,256 +29,123 @@ public class ActivatedModel {
 			urls = new URL[]{filePath};
 			URLClassLoader classLoader = new URLClassLoader (urls, this.getClass().getClassLoader());
 			
-			Class<?> cls_4 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_4= (InfoBead)cls_4.newInstance();
-			UserPhysicalLocation_4.setInfoBeadId("UserPhysicalLocation_4");
-			UserPhysicalLocation_4.setInfobeadModelId("UM18");
+			Class<?> cls_0 = Class.forName("infobeadCollection.UserTemperature", true, classLoader);
+			InfoBead UserTemperature_0= (InfoBead)cls_0.newInstance();
+			UserTemperature_0.setInfoBeadId("UserTemperature_0");
+			UserTemperature_0.setInfobeadModelId("UM1");
 
-			Class<?> cls_5 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_5= (InfoBead)cls_5.newInstance();
-			UserPhysicalLocation_5.setInfoBeadId("UserPhysicalLocation_5");
-			UserPhysicalLocation_5.setInfobeadModelId("UM18");
+			Class<?> cls_1 = Class.forName("infobeadCollection.userSelectionToBuy", true, classLoader);
+			InfoBead userSelectionToBuy_1= (InfoBead)cls_1.newInstance();
+			userSelectionToBuy_1.setInfoBeadId("userSelectionToBuy_1");
+			userSelectionToBuy_1.setInfobeadModelId("UM1");
 
-			Class<?> cls_6 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_6= (InfoBead)cls_6.newInstance();
-			UserPhysicalLocation_6.setInfoBeadId("UserPhysicalLocation_6");
-			UserPhysicalLocation_6.setInfobeadModelId("UM18");
+			Class<?> cls_2 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
+			InfoBead UserPhysicalLocation_2= (InfoBead)cls_2.newInstance();
+			UserPhysicalLocation_2.setInfoBeadId("UserPhysicalLocation_2");
+			UserPhysicalLocation_2.setInfobeadModelId("UM1");
 
-			Class<?> cls_7 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_7= (InfoBead)cls_7.newInstance();
-			UserNearCoffeeShop_7.setInfoBeadId("UserNearCoffeeShop_7");
-			UserNearCoffeeShop_7.setInfobeadModelId("UM18");
+			Class<?> cls_3 = Class.forName("infobeadCollection.UserPhysicalCondition", true, classLoader);
+			InfoBead UserPhysicalCondition_3= (InfoBead)cls_3.newInstance();
+			UserPhysicalCondition_3.setInfoBeadId("UserPhysicalCondition_3");
+			UserPhysicalCondition_3.setInfobeadModelId("UM1");
 
-			Class<?> cls_8 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_8= (InfoBead)cls_8.newInstance();
-			GroupLocation_8.setInfoBeadId("GroupLocation_8");
-			GroupLocation_8.setInfobeadModelId("GM15");
+			Class<?> cls_4 = Class.forName("infobeadCollection.userNeedForHotDrink", true, classLoader);
+			InfoBead userNeedForHotDrink_4= (InfoBead)cls_4.newInstance();
+			userNeedForHotDrink_4.setInfoBeadId("userNeedForHotDrink_4");
+			userNeedForHotDrink_4.setInfobeadModelId("UM1");
 
-			Class<?> cls_9 = Class.forName("infobeadCollection.GroupSongSelection", true, classLoader);
-			InfoBead GroupSongSelection_9= (InfoBead)cls_9.newInstance();
-			GroupSongSelection_9.setInfoBeadId("GroupSongSelection_9");
-			GroupSongSelection_9.setInfobeadModelId("GM15");
+			Class<?> cls_5 = Class.forName("infobeadCollection.userNeedForColdDrink", true, classLoader);
+			InfoBead userNeedForColdDrink_5= (InfoBead)cls_5.newInstance();
+			userNeedForColdDrink_5.setInfoBeadId("userNeedForColdDrink_5");
+			userNeedForColdDrink_5.setInfobeadModelId("UM1");
 
-			Class<?> cls_10 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_10= (InfoBead)cls_10.newInstance();
-			UserPhysicalLocation_10.setInfoBeadId("UserPhysicalLocation_10");
-			UserPhysicalLocation_10.setInfobeadModelId("UM23");
+			Class<?> cls_6 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
+			InfoBead UserNearCoffeeShop_6= (InfoBead)cls_6.newInstance();
+			UserNearCoffeeShop_6.setInfoBeadId("UserNearCoffeeShop_6");
+			UserNearCoffeeShop_6.setInfobeadModelId("UM1");
 
-			Class<?> cls_11 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_11= (InfoBead)cls_11.newInstance();
-			UserPhysicalLocation_11.setInfoBeadId("UserPhysicalLocation_11");
-			UserPhysicalLocation_11.setInfobeadModelId("UM23");
+			Class<?> cls_7 = Class.forName("infobeadCollection.userMilkTypePref", true, classLoader);
+			InfoBead userMilkTypePref_7= (InfoBead)cls_7.newInstance();
+			userMilkTypePref_7.setInfoBeadId("userMilkTypePref_7");
+			userMilkTypePref_7.setInfobeadModelId("UM1");
 
-			Class<?> cls_12 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_12= (InfoBead)cls_12.newInstance();
-			UserPhysicalLocation_12.setInfoBeadId("UserPhysicalLocation_12");
-			UserPhysicalLocation_12.setInfobeadModelId("UM23");
+			Class<?> cls_8 = Class.forName("infobeadCollection.userCupSizePref", true, classLoader);
+			InfoBead userCupSizePref_8= (InfoBead)cls_8.newInstance();
+			userCupSizePref_8.setInfoBeadId("userCupSizePref_8");
+			userCupSizePref_8.setInfobeadModelId("UM1");
 
-			Class<?> cls_13 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_13= (InfoBead)cls_13.newInstance();
-			UserNearCoffeeShop_13.setInfoBeadId("UserNearCoffeeShop_13");
-			UserNearCoffeeShop_13.setInfobeadModelId("UM23");
+			Class<?> cls_9 = Class.forName("infobeadCollection.userCoffeeSelection", true, classLoader);
+			InfoBead userCoffeeSelection_9= (InfoBead)cls_9.newInstance();
+			userCoffeeSelection_9.setInfoBeadId("userCoffeeSelection_9");
+			userCoffeeSelection_9.setInfobeadModelId("UM1");
 
-			Class<?> cls_14 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_14= (InfoBead)cls_14.newInstance();
-			GroupLocation_14.setInfoBeadId("GroupLocation_14");
-			GroupLocation_14.setInfobeadModelId("GM15");
+			Class<?> cls_10 = Class.forName("infobeadCollection.UserCoffeePrefernces", true, classLoader);
+			InfoBead UserCoffeePrefernces_10= (InfoBead)cls_10.newInstance();
+			UserCoffeePrefernces_10.setInfoBeadId("UserCoffeePrefernces_10");
+			UserCoffeePrefernces_10.setInfobeadModelId("UM1");
 
-			Class<?> cls_15 = Class.forName("infobeadCollection.groupMeal", true, classLoader);
-			InfoBead groupMeal_15= (InfoBead)cls_15.newInstance();
-			groupMeal_15.setInfoBeadId("groupMeal_15");
-			groupMeal_15.setInfobeadModelId("GM15");
-
-			Class<?> cls_16 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_16= (InfoBead)cls_16.newInstance();
-			UserPhysicalLocation_16.setInfoBeadId("UserPhysicalLocation_16");
-			UserPhysicalLocation_16.setInfobeadModelId("UM26");
-
-			Class<?> cls_17 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_17= (InfoBead)cls_17.newInstance();
-			UserPhysicalLocation_17.setInfoBeadId("UserPhysicalLocation_17");
-			UserPhysicalLocation_17.setInfobeadModelId("UM26");
-
-			Class<?> cls_18 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_18= (InfoBead)cls_18.newInstance();
-			UserPhysicalLocation_18.setInfoBeadId("UserPhysicalLocation_18");
-			UserPhysicalLocation_18.setInfobeadModelId("UM26");
-
-			Class<?> cls_19 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_19= (InfoBead)cls_19.newInstance();
-			UserNearCoffeeShop_19.setInfoBeadId("UserNearCoffeeShop_19");
-			UserNearCoffeeShop_19.setInfobeadModelId("UM26");
-
-			Class<?> cls_20 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_20= (InfoBead)cls_20.newInstance();
-			UserPhysicalLocation_20.setInfoBeadId("UserPhysicalLocation_20");
-			UserPhysicalLocation_20.setInfobeadModelId("UM29");
-
-			Class<?> cls_21 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_21= (InfoBead)cls_21.newInstance();
-			UserPhysicalLocation_21.setInfoBeadId("UserPhysicalLocation_21");
-			UserPhysicalLocation_21.setInfobeadModelId("UM29");
-
-			Class<?> cls_22 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_22= (InfoBead)cls_22.newInstance();
-			UserPhysicalLocation_22.setInfoBeadId("UserPhysicalLocation_22");
-			UserPhysicalLocation_22.setInfobeadModelId("UM29");
-
-			Class<?> cls_23 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_23= (InfoBead)cls_23.newInstance();
-			UserNearCoffeeShop_23.setInfoBeadId("UserNearCoffeeShop_23");
-			UserNearCoffeeShop_23.setInfobeadModelId("UM29");
-
-			Class<?> cls_24 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_24= (InfoBead)cls_24.newInstance();
-			GroupLocation_24.setInfoBeadId("GroupLocation_24");
-			GroupLocation_24.setInfobeadModelId("GM15");
-
-			Class<?> cls_25 = Class.forName("infobeadCollection.groupWaiterSelection", true, classLoader);
-			InfoBead groupWaiterSelection_25= (InfoBead)cls_25.newInstance();
-			groupWaiterSelection_25.setInfoBeadId("groupWaiterSelection_25");
-			groupWaiterSelection_25.setInfobeadModelId("GM15");
-
-			Class<?> cls_26 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_26= (InfoBead)cls_26.newInstance();
-			GroupLocation_26.setInfoBeadId("GroupLocation_26");
-			GroupLocation_26.setInfobeadModelId("GM15");
-
-			Class<?> cls_27 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_27= (InfoBead)cls_27.newInstance();
-			UserPhysicalLocation_27.setInfoBeadId("UserPhysicalLocation_27");
-			UserPhysicalLocation_27.setInfobeadModelId("UM32");
-
-			Class<?> cls_28 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_28= (InfoBead)cls_28.newInstance();
-			UserPhysicalLocation_28.setInfoBeadId("UserPhysicalLocation_28");
-			UserPhysicalLocation_28.setInfobeadModelId("UM32");
-
-			Class<?> cls_29 = Class.forName("infobeadCollection.UserPhysicalLocation", true, classLoader);
-			InfoBead UserPhysicalLocation_29= (InfoBead)cls_29.newInstance();
-			UserPhysicalLocation_29.setInfoBeadId("UserPhysicalLocation_29");
-			UserPhysicalLocation_29.setInfobeadModelId("UM32");
-
-			Class<?> cls_30 = Class.forName("infobeadCollection.UserNearCoffeeShop", true, classLoader);
-			InfoBead UserNearCoffeeShop_30= (InfoBead)cls_30.newInstance();
-			UserNearCoffeeShop_30.setInfoBeadId("UserNearCoffeeShop_30");
-			UserNearCoffeeShop_30.setInfobeadModelId("UM32");
-
-			Class<?> cls_31 = Class.forName("infobeadCollection.GroupLocation", true, classLoader);
-			InfoBead GroupLocation_31= (InfoBead)cls_31.newInstance();
-			GroupLocation_31.setInfoBeadId("GroupLocation_31");
-			GroupLocation_31.setInfobeadModelId("GM15");
-
-			Class<?> cls_32 = Class.forName("infobeadCollection.groupServiceLevel", true, classLoader);
-			InfoBead groupServiceLevel_32= (InfoBead)cls_32.newInstance();
-			groupServiceLevel_32.setInfoBeadId("groupServiceLevel_32");
-			groupServiceLevel_32.setInfobeadModelId("GM15");
+			Class<?> cls_11 = Class.forName("infobeadCollection.userCoffeeBlendPref", true, classLoader);
+			InfoBead userCoffeeBlendPref_11= (InfoBead)cls_11.newInstance();
+			userCoffeeBlendPref_11.setInfoBeadId("userCoffeeBlendPref_11");
+			userCoffeeBlendPref_11.setInfobeadModelId("UM1");
 
 			//Step 2: Connect linked info-beads
-			UserPhysicalLocation_4.connect(UserNearCoffeeShop_7);
+			UserTemperature_0.connect(UserPhysicalCondition_3);
 
-			UserPhysicalLocation_5.connect(UserNearCoffeeShop_7);
+			UserPhysicalLocation_2.connect(UserPhysicalCondition_3);
 
-			UserPhysicalLocation_6.connect(UserNearCoffeeShop_7);
+			UserPhysicalCondition_3.connect(userNeedForHotDrink_4);
 
-			UserNearCoffeeShop_7.connect(GroupLocation_8);
+			UserPhysicalCondition_3.connect(userNeedForColdDrink_5);
 
-			GroupLocation_8.connect(GroupSongSelection_9);
+			UserPhysicalLocation_2.connect(UserNearCoffeeShop_6);
 
-			UserPhysicalLocation_10.connect(UserNearCoffeeShop_13);
+			userCupSizePref_8.connect(userCoffeeSelection_9);
 
-			UserPhysicalLocation_11.connect(UserNearCoffeeShop_13);
+			userMilkTypePref_7.connect(userCoffeeSelection_9);
 
-			UserPhysicalLocation_12.connect(UserNearCoffeeShop_13);
+			userCoffeeSelection_9.connect(userSelectionToBuy_1);
 
-			UserNearCoffeeShop_13.connect(GroupLocation_14);
+			UserNearCoffeeShop_6.connect(UserCoffeePrefernces_10);
 
-			GroupLocation_14.connect(groupMeal_15);
+			userNeedForColdDrink_5.connect(UserCoffeePrefernces_10);
 
-			UserPhysicalLocation_16.connect(UserNearCoffeeShop_19);
+			userNeedForHotDrink_4.connect(UserCoffeePrefernces_10);
 
-			UserPhysicalLocation_17.connect(UserNearCoffeeShop_19);
+			UserCoffeePrefernces_10.connect(userMilkTypePref_7);
 
-			UserPhysicalLocation_18.connect(UserNearCoffeeShop_19);
+			UserCoffeePrefernces_10.connect(userCupSizePref_8);
 
-			UserPhysicalLocation_20.connect(UserNearCoffeeShop_23);
+			UserCoffeePrefernces_10.connect(userCoffeeSelection_9);
 
-			UserPhysicalLocation_21.connect(UserNearCoffeeShop_23);
+			UserCoffeePrefernces_10.connect(userCoffeeBlendPref_11);
 
-			UserPhysicalLocation_22.connect(UserNearCoffeeShop_23);
-
-			UserNearCoffeeShop_19.connect(GroupLocation_24);
-
-			GroupLocation_24.connect(groupWaiterSelection_25);
-
-			UserPhysicalLocation_27.connect(UserNearCoffeeShop_30);
-
-			UserPhysicalLocation_28.connect(UserNearCoffeeShop_30);
-
-			UserPhysicalLocation_29.connect(UserNearCoffeeShop_30);
-
-			UserNearCoffeeShop_30.connect(GroupLocation_31);
-
-			GroupLocation_31.connect(groupServiceLevel_32);
+			userCoffeeBlendPref_11.connect(userCoffeeSelection_9);
 
 			//Step 3: Initialize info-beads
-			UserPhysicalLocation_4.initialize();
+			UserTemperature_0.initialize();
 
-			UserPhysicalLocation_5.initialize();
+			userSelectionToBuy_1.initialize();
 
-			UserPhysicalLocation_6.initialize();
+			UserPhysicalLocation_2.initialize();
 
-			UserNearCoffeeShop_7.initialize();
+			UserPhysicalCondition_3.initialize();
 
-			GroupLocation_8.initialize();
+			userNeedForHotDrink_4.initialize();
 
-			GroupSongSelection_9.initialize();
+			userNeedForColdDrink_5.initialize();
 
-			UserPhysicalLocation_10.initialize();
+			UserNearCoffeeShop_6.initialize();
 
-			UserPhysicalLocation_11.initialize();
+			userMilkTypePref_7.initialize();
 
-			UserPhysicalLocation_12.initialize();
+			userCupSizePref_8.initialize();
 
-			UserNearCoffeeShop_13.initialize();
+			userCoffeeSelection_9.initialize();
 
-			GroupLocation_14.initialize();
+			UserCoffeePrefernces_10.initialize();
 
-			groupMeal_15.initialize();
-
-			UserPhysicalLocation_16.initialize();
-
-			UserPhysicalLocation_17.initialize();
-
-			UserPhysicalLocation_18.initialize();
-
-			UserNearCoffeeShop_19.initialize();
-
-			UserPhysicalLocation_20.initialize();
-
-			UserPhysicalLocation_21.initialize();
-
-			UserPhysicalLocation_22.initialize();
-
-			UserNearCoffeeShop_23.initialize();
-
-			GroupLocation_24.initialize();
-
-			groupWaiterSelection_25.initialize();
-
-			GroupLocation_26.initialize();
-
-			UserPhysicalLocation_27.initialize();
-
-			UserPhysicalLocation_28.initialize();
-
-			UserPhysicalLocation_29.initialize();
-
-			UserNearCoffeeShop_30.initialize();
-
-			GroupLocation_31.initialize();
-
-			groupServiceLevel_32.initialize();
+			userCoffeeBlendPref_11.initialize();
 
 		} catch (Exception e) {
 			e.printStackTrace();
