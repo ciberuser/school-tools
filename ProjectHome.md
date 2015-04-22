@@ -1,0 +1,1 @@
+all the project for student creation (lib and exe)
